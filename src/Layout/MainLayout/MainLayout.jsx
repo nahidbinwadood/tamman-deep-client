@@ -5,13 +5,13 @@ import Footer from '../../Shared/Footer';
 const MainLayout = () => {
   return (
     <>
-      <nav>
+      <nav className='font-linik'>
         <Navbar />
       </nav>
-      <main>
+      <main className='font-linik'>
         <Outlet />
       </main>
-      <footer>
+      <footer className='font-linik'>
         <Footer />
       </footer>
     </>
