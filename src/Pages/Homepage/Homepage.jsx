@@ -1,3 +1,4 @@
+import CtaSection from './Sections/CtaSection';
 import Growth from './Sections/Growth';
 import Hero from './Sections/Hero';
 import HowItWorks from './Sections/HowItWorks';
@@ -14,6 +15,7 @@ const Homepage = () => {
       <PowerfulPlatform />
       <ReviewSection />
       <PlansSection />
+      <CtaSection />
     </div>
   );
 };
