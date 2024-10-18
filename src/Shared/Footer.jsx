@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
-import logo from '../assets/images/logo.svg';
+import { Link, useLocation } from 'react-router-dom';
+import logoWhite from '../assets/images/logo.svg';
+import logoBlack from '../assets/images/logo-black.png';
 import {
   FooterSponsor1,
   FooterSponsor2,
@@ -15,6 +16,7 @@ import {
   SubmitFormSvg,
 } from './../Components/SvgContainer';
 const Footer = () => {
+  const isHomepage = useLocation().pathname;
   const sponsors = [
     { logo: <FooterSponsor1 /> },
     { logo: <FooterSponsor2 /> },
@@ -29,23 +31,29 @@ const Footer = () => {
     { logo: <FooterSponsor11 /> },
   ];
   return (
-    <div className="bg-[#111518] text-white">
+    <div
+      className={`${
+        isHomepage == '/'
+          ? 'bg-[#111518] text-white'
+          : 'bg-gradient-to-b from-[rgba(17,109,255,0.05)] to-[rgba(35,192,182,0.05)]'
+      } `}
+    >
       <div>
         <div className="container mx-auto pt-5">
           <div className="-ml-8 pb-3">
-            <img src={logo} alt="" />
+            <img src={`${isHomepage=="/" ? logoWhite :logoBlack}`} alt="" />
           </div>
           <div>
             <p className="text-xl font-medium">
               Stay tuned for latest exclusive deals and updates
             </p>
-            <p className="text-white/90 pt-5">Join our mailing list today!</p>
+            <p className={`${isHomepage=="/" ? "text-white/90" :"text-textColor"}  pt-5`}>Join our mailing list today!</p>
           </div>
           <div className="pt-5">
             <form action="">
               <div className="relative w-[870px]">
                 <input
-                  className="bg-[#454e57] w-full focus:outline-none rounded-lg py-3 px-5 placeholder:text-white pr-12"
+                  className={`${isHomepage=="/" ? "bg-[#454e57] placeholder:text-white" :"bg-white text-black"} w-full focus:outline-none rounded-lg py-3 px-5  pr-12`}
                   type="email"
                   placeholder="Email"
                 />
@@ -53,7 +61,7 @@ const Footer = () => {
                   type="submit"
                   className="absolute right-3 top-1/2 transform -translate-y-1/2"
                 >
-                  <SubmitFormSvg />
+                  <SubmitFormSvg dark={true} />
                 </button>
               </div>
             </form>
@@ -89,11 +97,11 @@ const Footer = () => {
         </div>
 
         <div className="w-full flex gap-2 items-center justify-center pb-5">
-          {sponsors?.map((sponsor,idx) => (
+          {sponsors?.map((sponsor, idx) => (
             <div key={idx}>{sponsor?.logo}</div>
           ))}
         </div>
-        <div className='text-center text-sm pb-5'>
+        <div className="text-center text-sm pb-5">
           <p>© 2024, Quick Link All Rights Reserved</p>
         </div>
       </div>
