@@ -8,7 +8,7 @@ import ReviewSection from './Sections/ReviewSection';
 
 const Homepage = () => {
   return (
-    <div>
+    <>
       <Hero />
       <Growth />
       <HowItWorks />
@@ -16,7 +16,7 @@ const Homepage = () => {
       <ReviewSection />
       <PlansSection />
       <CtaSection />
-    </div>
+    </>
   );
 };
 
