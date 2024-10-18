@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ['class'],
@@ -13,9 +14,14 @@ export default {
       fontFamily: {
         linik: ['Linik Sans', 'sans-serif'],
       },
+      backgroundImage: {
+        'gradient-text': 'linear-gradient(270deg, #116DFF 0%, #23C0B6 100%)',
+      },
       colors: {
         primaryColor: '#288DFF',
         textColor: '#5A5C5F',
+        // bgPrimary:"#111518",
+        bgSecondary: '#111518',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
