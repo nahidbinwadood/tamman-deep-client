@@ -54,8 +54,8 @@ const PlansSection = () => {
         }
       />
       <div className="pt-16 grid grid-cols-3 gap-8 container mx-auto ">
-        {cardsInfo?.map((card) => (
-          <PricingCard key={card?.price} card={card} />
+        {cardsInfo?.map((card,idx) => (
+          <PricingCard key={idx} card={card} />
         ))}
       </div>
     </div>

@@ -8,7 +8,7 @@ const MainLayout = () => {
       <nav className='font-linik'>
         <Navbar />
       </nav>
-      <main className='font-linik'>
+      <main className='font-linik min-h-[calc(100vh-808px)]'>
         <Outlet />
       </main>
       <footer className='font-linik'>

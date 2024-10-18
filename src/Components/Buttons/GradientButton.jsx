@@ -1,5 +1,5 @@
 // eslint-disable-next-line react/prop-types
-const GradientButton = ({ title }) => {
+const GradientButton = ({ title, prev, next,card }) => {
   const gradientStyle = {
     background:
       'var(--L---01, linear-gradient(270deg, #116DFF 0%, #23C0B6 100%))',
@@ -8,7 +8,7 @@ const GradientButton = ({ title }) => {
     WebkitTextFillColor: 'transparent',
   };
   return (
-    <button className="relative w-full py-4 rounded-lg overflow-hidden">
+    <button className={`relative  rounded-lg overflow-hidden flex items-center justify-center gap-3 ${card ? "px-12 py-3 w-fit" :"px-8 py-4 w-full"}`}>
       {/* Gradient border */}
       <span
         className="absolute inset-0 rounded-lg"
@@ -24,12 +24,15 @@ const GradientButton = ({ title }) => {
         }}
       />
       {/* Button text */}
+      {prev && prev}
       <span
         className="relative z-10 font-semibold text-lg"
         style={gradientStyle}
       >
         {title}
       </span>
+
+      {next && next}
     </button>
   );
 };

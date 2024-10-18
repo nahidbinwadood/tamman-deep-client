@@ -89,8 +89,8 @@ const Footer = () => {
         </div>
 
         <div className="w-full flex gap-2 items-center justify-center pb-5">
-          {sponsors?.map((sponsor) => (
-            <div key={sponsor}>{sponsor?.logo}</div>
+          {sponsors?.map((sponsor,idx) => (
+            <div key={idx}>{sponsor?.logo}</div>
           ))}
         </div>
         <div className='text-center text-sm pb-5'>
