@@ -1,24 +1,26 @@
 import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo-black.png';
-import { useState } from 'react';
 import { LuEye, LuEyeOff } from 'react-icons/lu';
-const Login = () => {
+import { useState } from 'react';
+import {
+  RegisterFacebookSvg,
+  RegisterGoogleSvg,
+} from '../../Components/SvgContainer';
+const Register = () => {
   const [show, setShow] = useState(false);
   return (
     <div className="  font-linik ">
-      <div className="flex items-center justify-center h-full min-h-[calc(100vh-72px)]">
-        <div className="bg-white shadow-lg rounded-lg px-8 py-12 min-w-[525px]">
+      <div className="flex items-center justify-center h-full min-h-[calc(100vh-72px)] ">
+        <div className="bg-white shadow-lg rounded-lg px-8 pt-4 pb-12 min-w-[525px] mt-10">
           <div className="pb-8 w-full flex items-center justify-center -ml-9">
             <img src={logo} alt="" />
           </div>
           <div className="w-full text-center space-y-3">
-            <h2 className="font-linik text-3xl font-bold">
-              Log in to your One Tap account
-            </h2>
+            <h2 className="font-linik text-3xl font-bold">Join our platform</h2>
             <p className="text-lg text-textColor">
-              Haven’t Signed Up yet?{' '}
-              <Link to="/register" className="underline pl-[2px]">
-                Sign Up here
+              Already have an account?
+              <Link to="/login" className="underline pl-[2px]">
+                Login here
               </Link>
             </p>
           </div>
@@ -26,10 +28,22 @@ const Login = () => {
             <form action="" className="space-y-5">
               <div className="flex flex-col gap-2">
                 <label className="text-[#3D4A5C] font-medium" htmlFor="email">
+                  Name
+                </label>
+                <input
+                  placeholder="Enter Name"
+                  className="w-full focus:outline-none border border-black/50 px-5 py-3 rounded-md"
+                  type="text"
+                  name="name"
+                  id="name"
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-[#3D4A5C] font-medium" htmlFor="email">
                   Email address
                 </label>
                 <input
-                  placeholder="Enter Email"
+                  placeholder="Enter Email Address"
                   className="w-full focus:outline-none border border-black/50 px-5 py-3 rounded-md"
                   type="email"
                   name="email"
@@ -93,8 +107,36 @@ const Login = () => {
                   type="submit"
                   className="w-full bg-primaryColor px-12 font-semibold text-lg py-3 rounded-lg text-white  hover:text-primaryColor hover:bg-transparent border border-primaryColor transition duration-300"
                 >
-                  Log In
+                  Register
                 </button>
+              </div>
+              <div className="flex items-center gap-2 py-2">
+                <div className="w-full border-t border-[#57626933]" />
+                <p className="text-[#111518] text-nowrap">Or Sign Up with</p>
+                <div className="w-full border-t border-[#57626933]" />
+                <div></div>
+              </div>
+              <div className="relative border border-b rounded-lg text-lg w-full text-center py-3 ">
+                <button>Sign Up with Facebook</button>
+                <div className="absolute top-1/2 left-8 -translate-x-1/2 -translate-y-1/2">
+                  <RegisterFacebookSvg />
+                </div>
+              </div>
+              <div className="relative border border-b rounded-lg text-lg w-full text-center py-3">
+                <button>Sign Up with Google</button>
+                <div className="absolute top-1/2 left-8 -translate-x-1/2 -translate-y-1/2">
+                  <RegisterGoogleSvg />
+                </div>
+              </div>
+              <div>
+                <p className="text-center text-lg">
+                  By continuing, you agree to our{' '}
+                  <Link className="text-primaryColor">T&Cs</Link> , as well as
+                  our{' '}
+                  <Link className="text-primaryColor underline">
+                    Privacy <br /> Policy.
+                  </Link>
+                </p>
               </div>
             </form>
           </div>
@@ -120,4 +162,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
