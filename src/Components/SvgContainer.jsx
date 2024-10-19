@@ -1028,6 +1028,37 @@ export function FilterSvg() {
     </svg>
   );
 }
+export function FilterLightSvg() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="20"
+      viewBox="0 0 22 20"
+      fill="none"
+    >
+      <path
+        d="M1.5 14H4M4 14C4 15.6569 5.34315 17 7 17C8.65685 17 10 15.6569 10 14C10 12.3431 8.65685 11 7 11C5.34315 11 4 12.3431 4 14ZM18 6H20.5M18 6C18 7.65685 16.6569 9 15 9C13.3431 9 12 7.65685 12 6C12 4.34315 13.3431 3 15 3C16.6569 3 18 4.34315 18 6ZM13 14H20.5M1.5 6H9"
+        stroke="url(#paint0_linear_4527_3851)"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <defs>
+        <linearGradient
+          id="paint0_linear_4527_3851"
+          x1="20.5"
+          y1="10"
+          x2="1.5"
+          y2="10"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#ffffff" />
+          <stop offset="1" stopColor="#ffffff" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
 export function DotSvg() {
   return (
     <svg
@@ -1049,6 +1080,32 @@ export function DotSvg() {
         >
           <stop stopColor="#116DFF" />
           <stop offset="1" stopColor="#23C0B6" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+export function DotLightSvg() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="8"
+      height="8"
+      viewBox="0 0 8 8"
+      fill="none"
+    >
+      <circle cx="4" cy="4" r="4" fill="url(#paint0_linear_4527_3859)" />
+      <defs>
+        <linearGradient
+          id="paint0_linear_4527_3859"
+          x1="8"
+          y1="4"
+          x2="0"
+          y2="4"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#fff" />
+          <stop offset="1" stopColor="#fff" />
         </linearGradient>
       </defs>
     </svg>

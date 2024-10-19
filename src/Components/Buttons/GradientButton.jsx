@@ -1,17 +1,24 @@
+import { useState } from 'react';
+
 // eslint-disable-next-line react/prop-types
-const GradientButton = ({ title, prev, next,card }) => {
-  const gradientStyle = {
-    background:
-      'var(--L---01, linear-gradient(270deg, #116DFF 0%, #23C0B6 100%))',
-    backgroundClip: 'text',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-  };
+const GradientButton = ({ title, prev, prevLight, next, nextLight, card }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <button className={`relative  rounded-lg overflow-hidden flex items-center justify-center gap-3 ${card ? "px-12 py-3 w-fit" :"px-8 py-4 w-full"}`}>
+    <button
+      className={`relative rounded-lg overflow-hidden flex items-center justify-center gap-3 ${
+        card
+          ? 'px-12 py-3 w-fit hover:bg-primaryColor duration-300 transition-all'
+          : 'px-8 py-4 w-full hover:bg-primaryColor duration-300 transition-all'
+      }`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       {/* Gradient border */}
       <span
-        className="absolute inset-0 rounded-lg"
+        className={`absolute inset-0 rounded-lg transition-all duration-300 ${
+          isHovered ? 'opacity-0' : 'opacity-100'
+        }`}
         style={{
           background:
             'var(--L---01, linear-gradient(270deg, #116DFF 0%, #23C0B6 100%))',
@@ -24,15 +31,32 @@ const GradientButton = ({ title, prev, next,card }) => {
         }}
       />
       {/* Button text */}
-      {prev && prev}
-      <span
-        className="relative z-10 font-semibold text-lg"
-        style={gradientStyle}
-      >
-        {title}
-      </span>
 
-      {next && next}
+      {isHovered ? prevLight : prev}
+
+      {/* show Text */}
+      {!isHovered ? (
+        <span
+          className={`relative z-10 font-semibold text-lg transition-all duration-300 ${
+            isHovered ? 'text-white' : 'bg-clip-text text-transparent'
+          }`}
+          style={{
+            backgroundImage: !isHovered
+              ? 'linear-gradient(270deg, #116DFF 0%, #23C0B6 100%)'
+              : '',
+            WebkitTextFillColor: 'transparent',
+          }}
+        >
+          {title}
+        </span>
+      ) : (
+        <span
+          className={`relative z-10 text-white font-semibold text-lg transition-all duration-300`}
+        >
+          {title}
+        </span>
+      )}
+      {isHovered ? nextLight : next}
     </button>
   );
 };

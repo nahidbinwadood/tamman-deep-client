@@ -1,7 +1,9 @@
 import {
   AndroidSvg,
   AppleSvg,
+  DotLightSvg,
   DotSvg,
+  FilterLightSvg,
   FilterSvg,
   HammerSvg,
   MobileSvg,
@@ -77,11 +79,19 @@ const Shop = () => {
         {/* filters */}
         <div className="mt-16 w-full flex items-center justify-between">
           <div>
-            <GradientButton title={'Show filters'} prev={<FilterSvg />} />
+            <GradientButton
+              title={'Show filters'}
+              prev={<FilterSvg />}
+              prevLight={<FilterLightSvg />}
+            />
           </div>
           <div className="flex items-center gap-5">
             <p className="text-nowrap">Sort by:</p>
-            <GradientButton title={'Best Selling'} next={<DotSvg />} />
+            <GradientButton
+              title={'Best Selling'}
+              next={<DotSvg />}
+              nextLight={<DotLightSvg />}
+            />
           </div>
         </div>
 
