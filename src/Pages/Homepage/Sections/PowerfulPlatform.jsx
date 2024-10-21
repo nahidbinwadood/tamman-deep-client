@@ -51,8 +51,8 @@ const PowerfulPlatform = () => {
       <div className="container mx-auto">
         <TitleSection
           title={'Features'}
-          header={'The blocks of a p'}
-          highlightedHeader={'owerful platform'}
+          header={'The blocks of a '}
+          highlightedHeader={'powerful platform'}
           description={
             'Connect with your network using V1CE business cards, phone cases, and QR codes. Experience the ecofriendly revolution in networking.'
           }
