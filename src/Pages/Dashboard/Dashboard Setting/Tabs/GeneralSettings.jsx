@@ -1,9 +1,12 @@
+
+
 const GeneralSettings = () => {
-    const handleSubmit=(e)=>{
-        e.preventDefault();
-    }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
-    <div className="px-20 py-12 flex items-center justify-between">
+    <div className="px-20 py-12 flex justify-between">
       <h2 className="text-xl font-semibold">Account settings:</h2>
       <div className="border border-borderColor rounded-xl p-6 min-w-[525px]">
         <form
@@ -56,7 +59,7 @@ const GeneralSettings = () => {
           </div>
           <div className="w-full border-t border-borderColor my-3" />
           <div className="w-full flex justify-end">
-            <button className="bg-primaryColor text-white border border-primaryColor px-10 py-3.5 rounded-xl text-lg font-medium hover:bg-transparent hover:text-primaryColor transition duration-300">
+            <button className="bg-primaryColor text-white border border-primaryColor px-10 py-3 rounded-xl text-lg font-medium hover:bg-transparent hover:text-primaryColor transition duration-300">
               Save
             </button>
           </div>
