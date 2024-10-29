@@ -60,11 +60,11 @@ const DashboardLayout = () => {
                   to={link?.path}
                   className={({ isActive }) =>
                     `text-lg flex items-center gap-2 rounded-[16px] py-3 px-6 ${
-                      isActive ? 'font-medium bg-primaryColor text-white' : ''
+                      isActive ? 'font-medium bg-[#EAF4FF] text-[#288DFF]' : ''
                     }`
                   }
                 >
-                  {currentPath === link?.path ? link.svgLight : link?.svg}
+                  {link?.svg}
                   {/* {link?.svg} */}
                   <p>{link?.title}</p>
                 </NavLink>
@@ -114,7 +114,7 @@ const DashboardLayout = () => {
         </div>
 
         {/* dashboard body */}
-        <div className="bg-[#fafafa] h-full rounded-md p-5">
+        <div className="bg-[#E8F1FD] h-full rounded-md p-5">
           <Outlet />
         </div>
       </div>

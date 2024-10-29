@@ -21,6 +21,7 @@ export default {
         primaryColor: '#288DFF',
         textColor: '#5A5C5F',
         textLight: '#404A60',
+        backgroundLight: '#EAF4FF',
         textDark: '#222E48',
         // bgPrimary:"#111518",
         bgSecondary: '#111518',
