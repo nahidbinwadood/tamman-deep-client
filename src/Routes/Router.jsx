@@ -9,6 +9,8 @@ import DashboardHome from '../Pages/Dashboard/Dashboard Home/DashboardHome';
 import DashboardProfiles from '../Pages/Dashboard/Dashboard Profiles/DashboardProfiles';
 import DashboardContacts from '../Pages/Dashboard/Dashboard Contacts/DashboardContacts';
 import DashboardSetting from '../Pages/Dashboard/Dashboard Setting/DashboardSetting';
+import ContactCardAction from '@/Pages/Actions/ContactCardAction';
+import Actions from '@/Pages/Actions/Actions';
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +49,17 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/setting',
         element: <DashboardSetting />,
+      },
+    ],
+  },
+  // actions
+  {
+    path: '/actions',
+    element: <Actions />,
+    children: [
+      {
+        path: '/actions/contact-card',
+        element: <ContactCardAction />,
       },
     ],
   },

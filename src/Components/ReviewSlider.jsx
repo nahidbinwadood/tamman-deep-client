@@ -10,7 +10,7 @@ const ReviewSlider = () => {
       authorName: 'Mily Ramson',
       type: 'Satisfied Customer',
       description:
-        'Lorem ipsum dolor sit amet consectetur. Est pellentesque pellentesque rhoncus vitae augue. Purus eleifend hac phasellus diam mi gravida velit. Semper adipiscing leo ut lectus enim. Nisi sit pellentesque penatibus ac.',
+        'Lorem ipsum dolor sit amett consectetur. Est pellentesque pellentesque rhoncus vitae augue. Purus eleifend hac phasellus diam mi gravida velit. Semper adipiscing leo ut lectus enim. Nisi sit pellentesque penatibus ac.',
     },
     {
       authorName: 'Ederson Smith',
