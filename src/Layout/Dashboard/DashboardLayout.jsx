@@ -89,7 +89,7 @@ const DashboardLayout = () => {
             <div className="size-12 rounded-full overflow-hidden">
               <img
                 className="h-full w-full object-cover"
-                src="https://s3-alpha-sig.figma.com/img/32a3/660a/ae4134169130626f5a6ff03cd06719fb?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=G19EXbymZ~t8A8oXE2ZKdFfQOl7W3DOxY~CioPmS6zPJoAHcQBuyLC4gglnLmej1sK5lbG6ykQDoGdoYltmwv~2kPVdyU42Z6G68HJBG3Ggt2p64WBbIOmmx4tbjTwQ1AW~9x1FjJBu7HPF2U~PipBhqUvDBmAm2jW~uzZgxT6P0cNCqwiourF6rUmWB-WWphHdqvZ8J3nLoPdLnH3FJ4dttQvAyOpFydmw11tiVFQhgz9dJwpqpo1iobCBbuLimc72zx0t9CBS6ISur2WfhSJRQCBUeVNEmPhnuZhN944kawoc1dHXBX~NgRHISyszKK6yYIZX74XD4~GCRQ9U0iQ__"
+                src="https://i.ibb.co.com/sq2jwtC/ae4134169130626f5a6ff03cd06719fb.png"
                 alt=""
               />
             </div>
