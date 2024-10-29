@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 function Cube({className}) {
   return (
     <svg
@@ -49,5 +50,10 @@ function Cube({className}) {
     </svg>
   );
 }
+
+
+Cube.propTypes = {
+    className: PropTypes.string
+  }
 
 export default Cube;
