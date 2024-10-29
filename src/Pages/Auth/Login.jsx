@@ -7,7 +7,7 @@ const Login = () => {
   return (
     <div className="  font-linik ">
       <div className="flex items-center justify-center h-full min-h-[calc(100vh-72px)]">
-        <div className="bg-white shadow-lg rounded-lg px-8 py-12 min-w-[525px]">
+        <div className="bg-white/90 shadow-lg rounded-lg px-8 py-12 min-w-[525px]">
           <div className="pb-8 w-full flex items-center justify-center -ml-9">
             <img src={logo} alt="" />
           </div>
