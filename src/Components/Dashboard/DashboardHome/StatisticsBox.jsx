@@ -1,4 +1,5 @@
 
+import PropTypes from "prop-types";
 
 function StatisticsBox({Icon, title, quantity}) {
   return (
@@ -10,6 +11,12 @@ function StatisticsBox({Icon, title, quantity}) {
       <h2 className="text-textDark font-bold text-4xl pt-4">{quantity}</h2>
     </div>
   );
+}
+
+StatisticsBox.propTypes = {
+    Icon: PropTypes.node,
+    title: PropTypes.string,
+    quantity: PropTypes.number
 }
 
 export default StatisticsBox;

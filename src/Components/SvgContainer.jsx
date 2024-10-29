@@ -1290,8 +1290,8 @@ export function DashboardProfileSvg() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="28"
-      height="28"
+      width="26"
+      height="26"
       viewBox="0 0 28 28"
       fill="none"
     >
@@ -1308,8 +1308,8 @@ export function DashboardProfileLightSvg() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="28"
-      height="28"
+      width="26"
+      height="26"
       viewBox="0 0 28 28"
       fill="none"
     >
@@ -1326,8 +1326,8 @@ export function DashboardContactSvg() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="28"
-      height="28"
+      width="26"
+      height="26"
       viewBox="0 0 28 28"
       fill="none"
     >
@@ -1358,8 +1358,8 @@ export function DashboardSettingsSvg() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="28"
-      height="28"
+      width="24"
+      height="24"
       viewBox="0 0 28 28"
       fill="none"
     >
