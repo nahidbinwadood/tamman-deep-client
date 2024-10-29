@@ -1,4 +1,5 @@
-import { AddImagePlusSvg, CameraSvg } from '@/Components/SvgContainer';
+import { AddImagePlusSvg, CameraSvg, UserSvg } from '@/Components/SvgContainer';
+import { TextField } from '@mui/material';
 import { useState } from 'react';
 
 const ContactCardAction = () => {
@@ -72,7 +73,46 @@ const ContactCardAction = () => {
             </div>
           </div>
           <div>
-            <h3 className='text-xl font-medium text-center mt-3'>Profile Image</h3>
+            <h3 className="text-xl font-medium text-center mt-3">
+              Profile Image
+            </h3>
+          </div>
+        </div>
+
+        {/* inputs */}
+        <div className="flex gap-4 mt-10">
+          <div className="flex-shrink-0 flex">
+            <UserSvg />
+          </div>
+          <div className="flex-1 space-y-5">
+            <TextField
+              label="First Name"
+              variant="outlined" // You can also use "filled" or "standard"
+              fullWidth
+            />
+            <TextField
+              label="Last Name"
+              variant="outlined" // You can also use "filled" or "standard"
+              fullWidth
+            />
+            <TextField
+              label="Company Name"
+              variant="outlined" // You can also use "filled" or "standard"
+              fullWidth
+            />
+            <TextField
+              label="Position"
+              variant="outlined" // You can also use "filled" or "standard"
+              fullWidth
+            />
+            <TextField
+              label="Position"
+              variant="outlined" // You can also use "filled" or "standard"
+              fullWidth
+            />
+            <div>
+              
+            </div>
           </div>
         </div>
       </form>
