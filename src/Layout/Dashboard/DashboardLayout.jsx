@@ -108,7 +108,7 @@ const DashboardLayout = () => {
               <NotificationSvg />
             </div>
             <Link to="/shop">
-              <PrimaryButton title={'Shop'} />
+              <PrimaryButton title={'Shop'} dashboardBtn={true} />
             </Link>
           </div>
         </div>

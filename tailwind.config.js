@@ -23,6 +23,8 @@ export default {
         textLight: '#404A60',
         backgroundLight: '#EAF4FF',
         textDark: '#222E48',
+        borderColor: '#5762693D',
+        textGray: '#3D4A5C',
         // bgPrimary:"#111518",
         bgSecondary: '#111518',
         background: 'hsl(var(--background))',
