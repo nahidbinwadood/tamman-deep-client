@@ -1,10 +1,38 @@
-import { AddImagePlusSvg, CameraSvg, UserSvg } from '@/Components/SvgContainer';
-import { TextField } from '@mui/material';
+import {
+  AddImagePlusSvg,
+  BuildingSvg,
+  CameraSvg,
+  EmailSvg,
+  PhoneSvg,
+  UserSvg,
+} from '@/Components/SvgContainer';
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from '@mui/material';
 import { useState } from 'react';
 
 const ContactCardAction = () => {
   const [coverPhoto, setCoverPhoto] = useState('');
   const [profilePhoto, setProfilePhoto] = useState('');
+  const [month, setMonth] = useState('');
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
 
   const handleCoverPhotoChange = (e) => {
     const file = e.target.files[0];
@@ -15,7 +43,7 @@ const ContactCardAction = () => {
     setProfilePhoto(URL.createObjectURL(file));
   };
   return (
-    <div className="flex items-center justify-center mx-auto max-w-[650px] f">
+    <div className="flex items-center justify-center mx-auto max-w-[650px] pb-20">
       <form action="" className="w-full">
         {/* image section */}
         <div>
@@ -105,14 +133,120 @@ const ContactCardAction = () => {
               variant="outlined" // You can also use "filled" or "standard"
               fullWidth
             />
+            <div className="flex items-center gap-4">
+              <div className="w-[55%]">
+                <FormControl fullWidth>
+                  <InputLabel id="month">Month</InputLabel>
+                  <Select labelId="month" id="month" label="Age">
+                    {months.map((monthName, index) => (
+                      <MenuItem key={index} value={monthName}>
+                        {monthName}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </div>
+              <div className="w-[15%]">
+                <TextField
+                  label="Day"
+                  variant="outlined" // You can also use "filled" or "standard"
+                  fullWidth
+                />
+              </div>
+              <div className="w-[30%]">
+                <TextField
+                  label="Year"
+                  variant="outlined" // You can also use "filled" or "standard"
+                  fullWidth
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex gap-4 mt-5">
+          <div className="flex flex-shrink-0">
+            <BuildingSvg />
+          </div>
+          <div className="flex-1 space-y-4">
             <TextField
-              label="Position"
+              label="Street 1"
               variant="outlined" // You can also use "filled" or "standard"
               fullWidth
             />
-            <div>
-              
-            </div>
+            <TextField
+              label="Street 2"
+              variant="outlined" // You can also use "filled" or "standard"
+              fullWidth
+            />
+            <TextField
+              label="Postal Code"
+              variant="outlined" // You can also use "filled" or "standard"
+              fullWidth
+            />
+            <TextField
+              label="City"
+              variant="outlined" // You can also use "filled" or "standard"
+              fullWidth
+            />
+            <TextField
+              label="Country"
+              variant="outlined" // You can also use "filled" or "standard"
+              fullWidth
+            />
+            <TextField
+              label="Postal Code Position"
+              variant="outlined" // You can also use "filled" or "standard"
+              fullWidth
+            />
+            <TextField
+              label="State"
+              variant="outlined" // You can also use "filled" or "standard"
+              fullWidth
+            />
+          </div>
+        </div>
+        <div className="flex gap-4 mt-5">
+          <div className="flex flex-shrink-0">
+            <PhoneSvg />
+          </div>
+          <div className="flex-1 space-y-4">
+            <TextField
+              label="Enter Your Number"
+              variant="outlined" // You can also use "filled" or "standard"
+              fullWidth
+            />
+            <TextField
+              label="Enter Your Office Number"
+              variant="outlined" // You can also use "filled" or "standard"
+              fullWidth
+            />
+          </div>
+        </div>
+        <div className="flex gap-4 mt-5">
+          <div className="flex flex-shrink-0">
+            <EmailSvg />
+          </div>
+          <div className="flex-1 space-y-4">
+            <TextField
+              label="Enter Your Mail"
+              variant="outlined" // You can also use "filled" or "standard"
+              fullWidth
+            />
+            <TextField
+              label="Enter Your Secondary Mail"
+              variant="outlined" // You can also use "filled" or "standard"
+              fullWidth
+            />
+            <TextField
+              label="Enter Your Website Link"
+              variant="outlined" // You can also use "filled" or "standard"
+              fullWidth
+            />
+            <TextField
+              label="Enter Your Secondary Website Link"
+              variant="outlined" // You can also use "filled" or "standard"
+              fullWidth
+            />
           </div>
         </div>
       </form>
