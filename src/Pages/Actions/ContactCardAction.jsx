@@ -6,33 +6,21 @@ import {
   PhoneSvg,
   UserSvg,
 } from '@/Components/SvgContainer';
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from '@mui/material';
+import { FormControl, InputLabel, MenuItem, TextField } from '@mui/material';
 import { useState } from 'react';
 
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/Components/ui/select';
 const ContactCardAction = () => {
   const [coverPhoto, setCoverPhoto] = useState('');
   const [profilePhoto, setProfilePhoto] = useState('');
-  const [month, setMonth] = useState('');
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
 
   const handleCoverPhotoChange = (e) => {
     const file = e.target.files[0];
@@ -135,7 +123,7 @@ const ContactCardAction = () => {
             />
             <div className="flex items-center gap-4">
               <div className="w-[55%]">
-                <FormControl fullWidth>
+                {/* <FormControl fullWidth>
                   <InputLabel id="month">Month</InputLabel>
                   <Select labelId="month" id="month" label="Age">
                     {months.map((monthName, index) => (
@@ -144,7 +132,29 @@ const ContactCardAction = () => {
                       </MenuItem>
                     ))}
                   </Select>
-                </FormControl>
+                </FormControl> */}
+                <Select>
+                  <SelectTrigger className="w-full h-14 border-black/30 text-base text-textGray">
+                    <SelectValue placeholder="Month" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Months</SelectLabel>
+                      <SelectItem value="January">January</SelectItem>
+                      <SelectItem value="February">February</SelectItem>
+                      <SelectItem value="March">March</SelectItem>
+                      <SelectItem value="April">April</SelectItem>
+                      <SelectItem value="May">May</SelectItem>
+                      <SelectItem value="June">June</SelectItem>
+                      <SelectItem value="July">July</SelectItem>
+                      <SelectItem value="August">August</SelectItem>
+                      <SelectItem value="September">September</SelectItem>
+                      <SelectItem value="October">October</SelectItem>
+                      <SelectItem value="November">November</SelectItem>
+                      <SelectItem value="December">December</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
               </div>
               <div className="w-[15%]">
                 <TextField
