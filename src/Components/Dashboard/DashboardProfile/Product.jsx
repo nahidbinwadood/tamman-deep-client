@@ -1,6 +1,6 @@
-import { Switch } from "@/Components/ui/switch";
-import { TiBusinessCard } from "react-icons/ti";
-import { TbEdit } from "react-icons/tb";
+import { Switch } from '@/Components/ui/switch';
+import { TbEdit } from 'react-icons/tb';
+import { TiBusinessCard } from 'react-icons/ti';
 
 function Product() {
   return (
@@ -14,7 +14,7 @@ function Product() {
         <h4>Contact Card #1</h4>
       </div>
       <div className="flex-1">
-        <Switch className={"data-[state=checked]:bg-primaryColor"} />
+        <Switch className={'data-[state=checked]:bg-primaryColor'} />
       </div>
       <div className="cursor-pointer">
         <TbEdit size={24} />

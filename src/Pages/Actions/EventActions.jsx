@@ -145,7 +145,13 @@ const EventActions = () => {
         </div>
         <div className="flex-1 space-y-5">
           <TextField label="Url" variant="outlined" fullWidth />
-          <TextField multiline rows={8} label="Description" variant="outlined" fullWidth />
+          <TextField
+            multiline
+            rows={8}
+            label="Description"
+            variant="outlined"
+            fullWidth
+          />
         </div>
       </div>
     </div>

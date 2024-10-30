@@ -6,10 +6,6 @@ import {
   UserSvg,
   WhatsAppSvg,
 } from '@/Components/SvgContainer';
-import { TextField } from '@mui/material';
-import { useState } from 'react';
-import { format } from 'date-fns';
-import { cn } from '@/lib/utils';
 import { Button } from '@/Components/ui/button';
 import { Calendar } from '@/Components/ui/calendar';
 import {
@@ -26,6 +22,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/Components/ui/select';
+import { cn } from '@/lib/utils';
+import { TextField } from '@mui/material';
+import { format } from 'date-fns';
+import { useState } from 'react';
 const BookingAction = () => {
   const [date, setDate] = useState();
   const [profilePhoto, setProfilePhoto] = useState('');

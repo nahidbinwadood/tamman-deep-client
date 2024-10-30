@@ -1,19 +1,19 @@
+import ActionCreate from '@/Components/Dashboard/DashboardProfile/ActionCreate';
+import CommonAction from '@/Components/Dashboard/DashboardProfile/CommonAction';
+import Product from '@/Components/Dashboard/DashboardProfile/Product';
+import Share from '@/Components/Dashboard/DashboardProfile/Share';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/Components/ui/select";
-import { HiOutlineBars3 } from "react-icons/hi2";
-import { BsGrid } from "react-icons/bs";
-import { IoIosSearch } from "react-icons/io";
-import { MdOutlineQrCodeScanner, MdSort } from "react-icons/md";
-import CommonAction from "@/Components/Dashboard/DashboardProfile/CommonAction";
-import { RiListUnordered } from "react-icons/ri";
-import Product from "@/Components/Dashboard/DashboardProfile/Product";
-import Share from "@/Components/Dashboard/DashboardProfile/Share";
-import ActionCreate from "@/Components/Dashboard/DashboardProfile/ActionCreate";
+} from '@/Components/ui/select';
+import { BsGrid } from 'react-icons/bs';
+import { HiOutlineBars3 } from 'react-icons/hi2';
+import { IoIosSearch } from 'react-icons/io';
+import { MdOutlineQrCodeScanner, MdSort } from 'react-icons/md';
+import { RiListUnordered } from 'react-icons/ri';
 
 const layout = [
   { icon: <BsGrid />, id: 2 },
@@ -71,17 +71,20 @@ const DashboardProfiles = () => {
       </div>
       <div className="grid grid-cols-12 gap-6">
         <div className="col-span-4 p-5 rounded-xl flex flex-col gap-4 border bg-white">
-            <ActionCreate></ActionCreate>
-            <CommonAction Icon={RiListUnordered } title={'Your Actions'}></CommonAction>
-            <Share></Share>
+          <ActionCreate></ActionCreate>
+          <CommonAction
+            Icon={RiListUnordered}
+            title={'Your Actions'}
+          ></CommonAction>
+          <Share></Share>
         </div>
         <div className="col-span-8 p-5 rounded-xl border bg-white">
-            <h4 className="font-normal text-textDark pb-4 ">List of Items</h4>
-            <div className="space-y-3">
-                <Product></Product>
-                <Product></Product>
-                <Product></Product>
-            </div>
+          <h4 className="font-normal text-textDark pb-4 ">List of Items</h4>
+          <div className="space-y-3">
+            <Product></Product>
+            <Product></Product>
+            <Product></Product>
+          </div>
         </div>
       </div>
     </div>

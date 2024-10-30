@@ -5,23 +5,30 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import CommonAction from "./CommonAction";
-import {  HiPlusCircle } from "react-icons/hi2";
-import ActionTab from "./ActionTab";
-
+} from '@/Components/ui/dialog';
+import { HiPlusCircle } from 'react-icons/hi2';
+import ActionTab from './ActionTab';
+import CommonAction from './CommonAction';
 
 function ActionCreate() {
   return (
     <Dialog className={''}>
       <DialogTrigger>
-      <CommonAction Icon={HiPlusCircle} title={'Create Action'}></CommonAction>
+        <CommonAction
+          Icon={HiPlusCircle}
+          title={'Create Action'}
+        ></CommonAction>
       </DialogTrigger>
-      <DialogContent className={'max-w-5xl p-8 rounded-md  h-[80%] overflow-hidden '}>
+      <DialogContent
+        className={'max-w-5xl p-8 rounded-md  h-[80%] overflow-hidden '}
+      >
         <DialogHeader>
-          <DialogTitle ><p className="text-4xl text-center font-semibold text-textDark pb-8 border-gray-100 border-b-2">Create New Action</p></DialogTitle>
-          <DialogDescription>
-          </DialogDescription>
+          <DialogTitle>
+            <p className="text-4xl text-center font-semibold text-textDark pb-8 border-gray-100 border-b-2">
+              Create New Action
+            </p>
+          </DialogTitle>
+          <DialogDescription></DialogDescription>
           <div className="pt-4">
             <ActionTab></ActionTab>
           </div>
