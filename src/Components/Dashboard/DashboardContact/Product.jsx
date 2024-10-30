@@ -1,8 +1,6 @@
-import React from 'react'
-import ProfileImg from '../../../assets/images/contact-profile.png'
-import ccard from '../../../assets/images/c-card.svg'
-import { TiBusinessCard } from 'react-icons/ti'
 
+import ProfileImg from '../../../assets/images/contact-profile.png'
+import { TiBusinessCard } from 'react-icons/ti'
 function Product() {
   return (
     <div className='flex items-center border transition-all duration-200 text-textColor hover:text-white justify-between bg-white hover:bg-gradient-to-tl from-[#116DFF] to-[#23C0B6] p-6 rounded-[8px]  '>
