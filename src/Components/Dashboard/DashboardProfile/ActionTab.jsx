@@ -1,36 +1,32 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function ActionTab() {
-  const [category, setCategory] = useState('improvingBranding');
+  const [category, setCategory] = useState('communication');
   const [data, setData] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const actions = [
     {
       id: 1,
-      name: 'Improve Branding',
-      category: 'improvingBranding',
+      name: 'Communication',
+      category: 'communication',
     },
     {
       id: 2,
-      name: 'Streamline Scheduling',
-      category: 'streamlineScheduling',
+      name: 'Profile & Identity',
+      category: 'profile-and-identity',
     },
     {
       id: 3,
-      name: 'Gather Leads',
-      category: 'gatherLeads',
+      name: 'Business Tools',
+      category: 'business-tools',
     },
     {
       id: 4,
-      name: 'Improve Sales',
-      category: 'improveSales',
-    },
-    {
-      id: 5,
-      name: 'Quick Actions',
-      category: 'quickActions',
+      name: 'Utilities',
+      category: 'utilities',
     },
   ];
 
@@ -72,10 +68,10 @@ function ActionTab() {
           </h4>
         ))}
       </div>
-      <div className="col-span-8 px-6  space-y-6 h-[540px] overflow-hidden overflow-y-scroll scrollbar-hidden">
+      <div className="col-span-8 px-6  space-y-6 h-[560px] overflow-hidden overflow-y-scroll scrollbar-hidden">
         {data.map((actions) => (
-          <div className="flex cursor-pointer items-top gap-2" key={actions.id}>
-            <div className="w-3/12 overflow-hidden rounded-lg">
+          <div className="flex cursor-pointer items-top gap-5" key={actions.id}>
+            <div className="w-4/12 h-56 overflow-hidden rounded-lg">
               <img
                 className="w-full h-full object-cover"
                 src={actions.image}
@@ -86,18 +82,18 @@ function ActionTab() {
               <h3 className="text-2xl font-semibold text-textDark pb-4">
                 {actions.title}
               </h3>
-              <p className="text-sm font-medium ">{actions.description}</p>
+              <p className="text-sm font-medium h-24">{actions.description}</p>
 
               <div className="pt-4 flex justify-end">
-                <button className="px-4 py-2 rounded-md text-textGray bg-blue-400/80">
+                <Link to={actions?.path} className="px-4 py-2 rounded-md  bg-primaryColor text-white border border-primaryColor hover:text-primaryColor hover:bg-transparent transition duration-300">
                   + Create
-                </button>
+                </Link>
               </div>
             </div>
           </div>
         ))}
       </div>
- 
+
     </div>
   );
 }

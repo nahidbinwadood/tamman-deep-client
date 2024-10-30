@@ -1,177 +1,122 @@
 [
-    {
-        "id": 1,
-        "category": "improvingBranding",
-        "title": "Brand Identity Guide",
-        "description": "A comprehensive guide that delves into the essential elements of creating a strong brand identity. This guide covers everything from understanding your target audience to defining your brand’s core values, mission, and visual elements. It provides actionable insights to help businesses develop a cohesive brand image that resonates with customers and stands out in a competitive market.",
-        "image": "https://images.unsplash.com/photo-1728149828599-aeec502b36b8?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 2,
-        "category": "improvingBranding",
-        "title": "Logo Design Principles",
-        "description": "Key principles for designing effective logos that convey a brand's essence and message. This resource explores various design techniques, color psychology, and the importance of simplicity in logo design. By understanding these principles, designers can create logos that not only look great but also leave a lasting impression on potential customers, ultimately contributing to brand recognition and loyalty.",
-        "image": "https://images.unsplash.com/photo-1727887680237-c9b2d7eb9ef9?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 3,
-        "category": "improvingBranding",
-        "title": "Color Theory in Branding",
-        "description": "An in-depth exploration of how color influences brand perception and consumer behavior. This guide discusses the psychological effects of colors and how they can evoke emotions and associations. It provides examples of successful brands that have effectively used color to enhance their identity and offers practical tips on selecting the right color palette for your brand.",
-        "image": "https://plus.unsplash.com/premium_photo-1730035377830-947be38df331?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 4,
-        "category": "improvingBranding",
-        "title": "Brand Voice Guidelines",
-        "description": "Defining a consistent tone for your brand communications is crucial for building trust and recognition. This guide outlines how to create brand voice guidelines that reflect your brand's personality and resonate with your target audience. It includes tips on language, style, and messaging that can help unify all communications, from marketing materials to customer service interactions.",
-        "image": "https://images.unsplash.com/photo-1727293341907-5803c9874f10?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 5,
-        "category": "improvingBranding",
-        "title": "Visual Brand Assets",
-        "description": "Creating and managing visual brand elements such as logos, typography, and imagery is essential for maintaining brand consistency. This resource provides a step-by-step approach to developing a visual identity that aligns with your brand's values. It also discusses the importance of guidelines for using these assets across various platforms to ensure cohesive branding.",
-        "image": "https://images.unsplash.com/photo-1728149828599-aeec502b36b8?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 6,
-        "category": "streamlineScheduling",
-        "title": "Automated Calendar Tool",
-        "description": "This innovative tool automates scheduling tasks and efficiently manages appointments, allowing users to save valuable time. It integrates seamlessly with existing calendars, sending automatic reminders and updates to all participants. Users can easily find suitable meeting times, reducing the back-and-forth communication often associated with scheduling, and ultimately leading to more productive and organized workflows.",
-        "image": "https://images.unsplash.com/photo-1727887680237-c9b2d7eb9ef9?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 7,
-        "category": "streamlineScheduling",
-        "title": "Time Zone Converter",
-        "description": "Easily convert meeting times across different time zones with this intuitive converter. This tool simplifies the process of scheduling international meetings, allowing users to input their local time and automatically receive the corresponding time in other time zones. It’s particularly useful for businesses operating globally, ensuring that all participants are on the same page regarding meeting times.",
-        "image": "https://plus.unsplash.com/premium_photo-1730035377830-947be38df331?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 8,
-        "category": "streamlineScheduling",
-        "title": "Meeting Reminder App",
-        "description": "An app designed to send timely reminders for upcoming meetings, ensuring that users never miss an important appointment. With customizable notification settings, users can receive alerts via email or push notifications. The app also allows for easy rescheduling and integrates with popular calendar applications to keep everything organized in one place.",
-        "image": "https://images.unsplash.com/photo-1727293341907-5803c9874f10?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 9,
-        "category": "streamlineScheduling",
-        "title": "Task Prioritization Tool",
-        "description": "A powerful tool designed to help individuals and teams prioritize their tasks effectively. By categorizing tasks based on urgency and importance, users can focus on what truly matters. The tool offers visual aids and customizable criteria for prioritization, enabling users to optimize their productivity and manage their time more efficiently, ensuring deadlines are met.",
-        "image": "https://images.unsplash.com/photo-1728149828599-aeec502b36b8?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 10,
-        "category": "streamlineScheduling",
-        "title": "Team Availability Tracker",
-        "description": "Track team members' availability for meetings and projects with this easy-to-use tracker. The tool allows team members to update their availability in real-time, making it simple to schedule meetings when everyone is free. This transparency fosters better collaboration and helps teams plan effectively, reducing conflicts and ensuring efficient use of time.",
-        "image": "https://images.unsplash.com/photo-1727887680237-c9b2d7eb9ef9?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 11,
-        "category": "gatherLeads",
-        "title": "Lead Generation Software",
-        "description": "This software is designed to capture and manage potential customer leads effectively. It streamlines the lead generation process, integrating with various marketing channels to gather data from multiple sources. Users can track interactions and nurture leads through targeted campaigns, ensuring that no opportunity is missed and increasing conversion rates significantly.",
-        "image": "https://plus.unsplash.com/premium_photo-1730035377830-947be38df331?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 12,
-        "category": "gatherLeads",
-        "title": "Email List Builder",
-        "description": "A comprehensive tool for creating and managing your email list efficiently. This software allows users to segment their audience, craft personalized messages, and automate email campaigns. With advanced analytics, users can track engagement metrics and optimize their strategies for better lead nurturing, making it easier to turn leads into loyal customers.",
-        "image": "https://images.unsplash.com/photo-1727293341907-5803c9874f10?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 13,
-        "category": "gatherLeads",
-        "title": "Webinar Registration System",
-        "description": "Capture leads through engaging webinars with this registration system. It allows users to create customizable registration pages, track attendee engagement, and follow up with participants after the event. This tool not only helps in lead generation but also provides valuable insights into audience interests and preferences, enabling more targeted marketing strategies.",
-        "image": "https://images.unsplash.com/photo-1728149828599-aeec502b36b8?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 14,
-        "category": "gatherLeads",
-        "title": "Social Media Lead Capture",
-        "description": "Capture leads from social media platforms effectively using this tool. It integrates with various social media channels to monitor interactions and gather data from potential customers. Users can create targeted campaigns that engage followers and convert them into leads, significantly enhancing the brand's online presence and marketing efforts.",
-        "image": "https://images.unsplash.com/photo-1727887680237-c9b2d7eb9ef9?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 15,
-        "category": "gatherLeads",
-        "title": "Landing Page Builder",
-        "description": "Create high-converting landing pages to gather leads with this user-friendly builder. It offers customizable templates and drag-and-drop functionality, allowing users to design pages that effectively capture visitor information. The tool includes A/B testing features and analytics to optimize landing page performance and increase conversion rates, ensuring effective lead generation.",
-        "image": "https://plus.unsplash.com/premium_photo-1730035377830-947be38df331?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 16,
-        "category": "improveSales",
-        "title": "Sales Analytics Dashboard",
-        "description": "A comprehensive dashboard designed to track sales performance and identify growth opportunities. This tool integrates data from various sources, providing real-time insights into sales metrics. Users can visualize trends, monitor team performance, and make data-driven decisions to enhance sales strategies, ultimately driving revenue growth and improving overall performance.",
-        "image": "https://images.unsplash.com/photo-1728149828599-aeec502b36b8?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 17,
-        "category": "improveSales",
-        "title": "CRM System",
-        "description": "A robust Customer Relationship Management (CRM) system designed to enhance sales processes and customer interactions. This system centralizes customer data, allowing teams to track interactions, manage leads, and automate follow-ups. With features like pipeline management and reporting, users can improve customer relationships and drive sales efficiency across the organization.",
-        "image": "https://images.unsplash.com/photo-1727887680237-c9b2d7eb9ef9?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 18,
-        "category": "improveSales",
-        "title": "Sales Training Program",
-        "description": "An extensive program designed to improve sales techniques and strategies through interactive training modules. This program covers essential skills such as negotiation, closing techniques, and effective communication. Participants will learn best practices and gain insights from industry experts, equipping them with the tools needed to enhance their sales performance and achieve targets.",
-        "image": "https://plus.unsplash.com/premium_photo-1730035377830-947be38df331?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 19,
-        "category": "improveSales",
-        "title": "Upsell and Cross-sell Techniques",
-        "description": "This resource outlines methods to increase revenue through effective upselling and cross-selling strategies. It provides practical examples and case studies of successful implementation in various industries. By understanding customer needs and behaviors, sales teams can enhance their offerings and boost sales performance significantly through these techniques.",
-        "image": "https://images.unsplash.com/photo-1728149828599-aeec502b36b8?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 20,
-        "category": "improveSales",
-        "title": "Sales Funnel Optimization",
-        "description": "A detailed guide on techniques to optimize the sales funnel for better conversion rates. This resource covers each stage of the funnel, from awareness to purchase, providing actionable strategies to identify bottlenecks and improve customer journey. By analyzing data and user behavior, businesses can refine their approach and maximize sales opportunities.",
-        "image": "https://images.unsplash.com/photo-1727887680237-c9b2d7eb9ef9?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 21,
-        "category": "quickActions",
-        "title": "One-Click Email Templates",
-        "description": "Pre-designed email templates that facilitate quick responses and outreach for various scenarios. These templates can be customized to suit individual needs, saving time and ensuring professionalism in communications. Users can choose from a variety of styles and tones, helping to streamline their email marketing efforts and enhance customer engagement.",
-        "image": "https://images.unsplash.com/photo-1727293341907-5803c9874f10?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 22,
-        "category": "quickActions",
-        "title": "Shortcut Keys Guide",
-        "description": "A comprehensive guide to using shortcut keys for faster work and improved productivity. This resource includes a list of essential keyboard shortcuts for various applications and operating systems. By mastering these shortcuts, users can navigate their software more efficiently, reducing the time spent on repetitive tasks and enhancing overall workflow.",
-        "image": "https://plus.unsplash.com/premium_photo-1730035377830-947be38df331?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 23,
-        "category": "quickActions",
-        "title": "Quick Feedback Forms",
-        "description": "Simple yet effective forms designed to gather quick feedback from users and customers. These forms can be customized to collect specific information, helping businesses understand customer satisfaction and areas for improvement. By streamlining the feedback process, companies can make data-driven decisions to enhance products and services.",
-        "image": "https://images.unsplash.com/photo-1728149828599-aeec502b36b8?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 24,
-        "category": "quickActions",
-        "title": "Instant Chat Support",
-        "description": "Set up instant chat support for quick customer assistance and engagement. This tool enables businesses to provide real-time support, helping customers with their inquiries and issues promptly. With customizable chat options and integration capabilities, companies can enhance their customer service experience and build stronger relationships with their clients.",
-        "image": "https://images.unsplash.com/photo-1727887680237-c9b2d7eb9ef9?w=500&auto=format&fit=crop&q=60"
-    },
-    {
-        "id": 25,
-        "category": "quickActions",
-        "title": "Task Automation Scripts",
-        "description": "Scripts designed to automate repetitive tasks quickly and efficiently, saving time and resources. Users can customize these scripts for various applications, enabling them to streamline workflows and reduce manual effort. By implementing automation, businesses can increase productivity and focus on more strategic initiatives, enhancing overall operational efficiency.",
-        "image": "https://plus.unsplash.com/premium_photo-1730035377830-947be38df331?w=500&auto=format&fit=crop&q=60"
-    }
+  {
+    "id": 1,
+    "category": "communication",
+    "title": "Email",
+    "path": "/actions/email",
+    "description": "Set this action to display your email contact information instantly when the card is scanned, allowing quick and easy email communication with your contacts.",
+    "image": "https://images.unsplash.com/photo-1603539240352-8f2cce3257c4?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "id": 2,
+    "category": "communication",
+    "title": "WhatsApp",
+    "path": "/actions/whatsapp",
+    "description": "Set this action to display your WhatsApp contact info upon scanning, enabling others to message you directly through WhatsApp for seamless communication.",
+    "image": "https://plus.unsplash.com/premium_photo-1684761949431-53b58936cf2c?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "id": 3,
+    "category": "communication",
+    "title": "SMS",
+    "path": "/actions/sms",
+    "description": "Set this action to prompt a pre-filled SMS message to your phone number when the card is scanned, making it easy for contacts to reach you via text.",
+    "image": "https://images.unsplash.com/photo-1646766677899-9c1750e28b0f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "id": 4,
+    "category": "communication",
+    "title": "Call",
+    "path": "/actions/call",
+    "description": "Set this action to instantly display your phone number for a quick call when the card is scanned, providing an easy way for contacts to reach you directly by phone.",
+    "image": "https://images.unsplash.com/photo-1523966211575-eb4a01e7dd51?q=80&w=2020&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "id": 5,
+    "category": "profile-and-identity",
+    "title": "Contact Card",
+    "path": "/actions/contact-card",
+    "description": "Set this action to show a digital contact card, including your essential details like phone number, email, and address, enabling contacts to save your info quickly.",
+    "image": "https://images.unsplash.com/photo-1590935217281-8f102120d683?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "id": 6,
+    "category": "profile-and-identity",
+    "title": "About Me",
+    "path": "/actions/about-me",
+    "description": "Set this action to share a brief biography or personal information when the card is scanned, providing contacts with a quick overview of who you are and what you do.",
+    "image": "https://plus.unsplash.com/premium_photo-1663931932648-cf5545116c35?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "id": 7,
+    "category": "profile-and-identity",
+    "title": "Social Builder",
+    "path": "/actions/social-builder",
+    "description": "Set this action to link all your social media profiles in one place, enabling others to connect with you across multiple platforms from a single scan.",
+    "image": "https://images.unsplash.com/photo-1517292987719-0369a794ec0f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "id": 8,
+    "category": "profile-and-identity",
+    "title": "Profile",
+    "path": "/actions/profile",
+    "description": "Set this action to display your professional profile or resume details, giving contacts an immediate snapshot of your career, skills, and accomplishments.",
+    "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "id": 9,
+    "category": "business-tools",
+    "title": "Product Catalogue",
+    "path": "/actions/product-catalogue",
+    "description": "Set this action to showcase a catalog of your products or services when the card is scanned, allowing contacts to view what you offer at a glance.",
+    "image": "https://plus.unsplash.com/premium_photo-1676559916183-d4033c0b51ed?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "id": 10,
+    "category": "business-tools",
+    "title": "Booking",
+    "path": "/actions/booking",
+    "description": "Set this action to provide a link to your scheduling or booking page, making it easy for contacts to arrange meetings or appointments with you.",
+    "image": "https://images.unsplash.com/photo-1587573088697-b4fa10460683?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "id": 11,
+    "category": "business-tools",
+    "title": "PayPal",
+    "path": "/actions/paypal",
+    "description": "Set this action to display your PayPal link for quick payments, making it convenient for others to pay you directly upon scanning the card.",
+    "image": "https://images.unsplash.com/photo-1641350625112-3b1d73c71418?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "id": 12,
+    "category": "utilities",
+    "title": "Link Tree",
+    "path": "/actions/link-tree",
+    "description": "Set this action to share a customizable link tree, offering multiple links in one place so contacts can easily access different resources or profiles.",
+    "image": "https://images.unsplash.com/photo-1642049671748-2e35cdb11c2c?q=80&w=2012&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "id": 13,
+    "category": "utilities",
+    "title": "URL",
+    "path": "/actions/url",
+    "description": "Set this action to display a specific URL when scanned, guiding contacts to any webpage or resource of your choosing for easy access.",
+    "image": "https://images.unsplash.com/photo-1617854818583-09e7f077a156?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "id": 14,
+    "category": "utilities",
+    "title": "Date Trigger",
+    "path": "/actions/date-trigger",
+    "description": "Set this action to trigger a reminder or important event notification, allowing you to share key dates or milestones with your contacts.",
+    "image": "https://images.unsplash.com/photo-1611302457661-d24c21494f2a?q=80&w=2153&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "id": 15,
+    "category": "utilities",
+    "title": "Event",
+    "path": "/actions/event",
+    "description": "Set this action to display details about an upcoming event, including time, location, and RSVP information, so contacts can easily join or save it to their calendar.",
+    "image": "https://plus.unsplash.com/premium_photo-1661315459644-18297c559777?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  }
 ]

@@ -186,7 +186,7 @@ const BookingAction = () => {
                   <div
                     onClick={() => setActiveTab(tab?.title)}
                     key={tab?.title}
-                    className={`relative flex cursor-pointer items-center justify-center w-1/3 p-4 border border-primaryColor rounded-lg ${
+                    className={`relative flex cursor-pointer items-center justify-center w-1/3 p-4 border rounded-lg ${
                       activeTab === tab?.title
                         ? 'border-primaryColor'
                         : 'border-[#E6EBEF]'
