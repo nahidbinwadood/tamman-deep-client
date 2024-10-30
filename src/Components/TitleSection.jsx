@@ -5,7 +5,7 @@ const TitleSection = ({ title, header, highlightedHeader, description }) => {
       <h3 className="font-bold text-textColor">{title && title}</h3>
       <h2 className="text-3xl font-bold pt-4">
         {header && header}
-        <span className="text-transparent bg-clip-text bg-gradient-to-l from-[#116DFF] to-[#23C0B6] font-linik-sans font-bold leading-[132%] tracking-[-0.48px]">
+        <span className="text-transparent bg-clip-text bg-gradient-to-l from-[#116DFF] to-[#23C0B6] font-inter font-bold leading-[132%] tracking-[-0.48px]">
           {highlightedHeader && highlightedHeader}
         </span>
       </h2>

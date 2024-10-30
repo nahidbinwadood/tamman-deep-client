@@ -9,14 +9,14 @@ import {
 const Register = () => {
   const [show, setShow] = useState(false);
   return (
-    <div className="  font-linik ">
+    <div className="  font-inter ">
       <div className="flex items-center justify-center h-full min-h-[calc(100vh-72px)] ">
         <div className="bg-white shadow-lg rounded-lg px-8 pt-4 pb-12 min-w-[525px] mt-10">
           <div className="pb-8 w-full flex items-center justify-center -ml-9">
             <img src={logo} alt="" />
           </div>
           <div className="w-full text-center space-y-3">
-            <h2 className="font-linik text-3xl font-bold">Join our platform</h2>
+            <h2 className="font-inter text-3xl font-bold">Join our platform</h2>
             <p className="text-lg text-textColor">
               Already have an account?
               <Link to="/login" className="underline pl-[2px]">

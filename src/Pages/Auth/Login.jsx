@@ -5,14 +5,14 @@ import { LuEye, LuEyeOff } from 'react-icons/lu';
 const Login = () => {
   const [show, setShow] = useState(false);
   return (
-    <div className="  font-linik ">
+    <div className="  font-inter ">
       <div className="flex items-center justify-center h-full min-h-[calc(100vh-72px)]">
         <div className="bg-white/90 shadow-lg rounded-lg px-8 py-12 min-w-[526px]">
           <div className="pb-8 w-full flex items-center justify-center -ml-9">
             <img src={logo} alt="" />
           </div>
           <div className="w-full text-center space-y-3">
-            <h2 className="font-linik text-3xl font-bold">
+            <h2 className="font-inter text-3xl font-bold">
               Log in to your One Tap account
             </h2>
             <p className="text-lg text-textColor">
