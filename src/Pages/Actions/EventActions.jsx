@@ -5,13 +5,13 @@ import {
   ShareSvg,
   UserSvg,
 } from '@/Components/SvgContainer';
-import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
+import { Button } from '@/Components/ui/button';
+import { Calendar } from '@/Components/ui/calendar';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
+} from '@/Components/ui/popover';
 import {
   Select,
   SelectContent,
@@ -145,7 +145,13 @@ const EventActions = () => {
         </div>
         <div className="flex-1 space-y-5">
           <TextField label="Url" variant="outlined" fullWidth />
-          <TextField multiline rows={8} label="Description" variant="outlined" fullWidth />
+          <TextField
+            multiline
+            rows={8}
+            label="Description"
+            variant="outlined"
+            fullWidth
+          />
         </div>
       </div>
     </div>

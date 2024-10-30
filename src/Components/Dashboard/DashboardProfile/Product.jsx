@@ -1,6 +1,6 @@
-import { Switch } from "@/Components/ui/switch";
-import { TiBusinessCard } from "react-icons/ti";
-import { TbEdit } from "react-icons/tb";
+import { Switch } from '@/Components/ui/switch';
+import { TbEdit } from 'react-icons/tb';
+import { TiBusinessCard } from 'react-icons/ti';
 
 function Product() {
   return (

@@ -20,7 +20,7 @@ import EmailActions from '@/Pages/Actions/EmailActions';
 import WhatsAppActions from '@/Pages/Actions/WhatsAppActions';
 import SmsActions from '@/Pages/Actions/SmsActions';
 import ProductCatalogue from '@/Pages/Actions/ProductCatalogue';
-import LinkTreeActions from '@/Pages/Actions/LinktreeActions';
+import LinkTreeActions from '@/Pages/Actions/LinkTreeActions';
 import PaypalAction from '@/Pages/Actions/PaypalAction';
 import AboutmeActions from '@/Pages/Actions/AboutmeActions';
 import CallActions from '@/Pages/Actions/CallActions';

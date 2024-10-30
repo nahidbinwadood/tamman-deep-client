@@ -5,17 +5,18 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import CommonAction from "./CommonAction";
-import { RiLinkM, RiMessage2Line, RiShareForwardLine } from "react-icons/ri";
-import { MdContentCopy, MdOutlineMailOutline } from "react-icons/md";
+} from '@/Components/ui/dialog';
+import { MdContentCopy, MdOutlineMailOutline } from 'react-icons/md';
+import { RiLinkM, RiMessage2Line, RiShareForwardLine } from 'react-icons/ri';
+import CommonAction from './CommonAction';
 
 function Share() {
   return (
     <Dialog>
       <DialogTrigger>
-        <CommonAction Icon={RiShareForwardLine} title={"Share"}></CommonAction>
+        <CommonAction Icon={RiShareForwardLine} title={'Share'}></CommonAction>
       </DialogTrigger>
+
       <DialogContent className={"max-w-2xl font-inter"}>
         <DialogHeader>
           <DialogTitle></DialogTitle>
@@ -46,7 +47,7 @@ function Share() {
                   <MdOutlineMailOutline size={22} />
                 </button>
                 <h4 className="font-medium text-textColor">
-                  Add to apple wallet{" "}
+                  Add to apple wallet{' '}
                 </h4>
               </div>
               <div className="px-4 cursor-pointer py-1.5 rounded-lg border">
@@ -67,7 +68,7 @@ function Share() {
                   <MdOutlineMailOutline size={22} />
                 </button>
                 <h4 className="font-medium text-textColor">
-                  Add to apple wallet{" "}
+                  Add to apple wallet{' '}
                 </h4>
               </div>
               <div className="px-4 cursor-pointer py-1.5 rounded-lg border">
@@ -98,7 +99,9 @@ function Share() {
               </button>
             </div>
 
-            <h4  className=" px-4 font-medium text-primaryColor py-2 absolute top-10 left-20  rounded-md bg-backgroundLight">Pro</h4>
+            <h4 className=" px-4 font-medium text-primaryColor py-2 absolute top-10 left-20  rounded-md bg-backgroundLight">
+              Pro
+            </h4>
           </div>
         </div>
       </DialogContent>
