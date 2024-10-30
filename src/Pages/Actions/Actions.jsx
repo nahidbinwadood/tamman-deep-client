@@ -4,7 +4,7 @@ import { Link, Outlet } from 'react-router-dom';
 const Actions = () => {
   return (
     <>
-      <div className="shadow-md font-linik">
+      <div className="shadow-md font-inter">
         {/* navbar */}
         <div className="py-6 flex items-center justify-between container mx-auto">
           <Link to='/dashboard/profiles' className="flex items-center gap-3 cursor-pointer text-[#212A30]">
@@ -22,7 +22,7 @@ const Actions = () => {
         </div>
       </div>
 
-      <div className="mt-8 container mx-auto font-linik">
+      <div className="mt-8 container mx-auto font-inter">
         <Outlet />
       </div>
     </>

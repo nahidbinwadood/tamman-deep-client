@@ -5,13 +5,13 @@ import Footer from '../../Shared/Footer';
 const MainLayout = () => {
   return (
     <>
-      <nav className='font-linik'>
+      <nav className='font-inter'>
         <Navbar />
       </nav>
-      <main className='font-linik min-h-[calc(100vh-808px)]'>
+      <main className='font-inter min-h-[calc(100vh-808px)]'>
         <Outlet />
       </main>
-      <footer className='font-linik'>
+      <footer className='font-inter'>
         <Footer />
       </footer>
     </>

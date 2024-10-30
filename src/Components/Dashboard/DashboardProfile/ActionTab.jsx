@@ -68,11 +68,11 @@ const actions = [
   
 
   return (
-    <div className="grid grid-cols-12 h-full divide-gray-100  divide-x-2 gap-6">
+    <div className="grid grid-cols-12 font-inter h-full divide-gray-100  divide-x-2 gap-6">
 
         <div className="col-span-4 space-y-2">
           {
-            actions?.map( (category, index) => <h4 onClick={() => handleTab(category?.category, index)} className={`px-4 py-2 text-center font-medium ${activeIndex === index ? 'bg-[#e3eff1] text-primaryColor ' : 'bg-white'} cursor-pointer  border-gray-200 rounded-md bg-white border`} key={category.id}>{category.name}</h4>)
+            actions?.map( (category, index) => <h4 onClick={() => handleTab(category?.category, index)} className={`px-4 py-2 text-center text-lg font-semibold ${activeIndex === index ? 'bg-[#e3eff1] text-primaryColor ' : 'bg-white'} cursor-pointer  border-gray-200 rounded-md bg-white border`} key={category.id}>{category.name}</h4>)
           }
         </div>
         <div className="col-span-8 px-6  space-y-6 h-[540px] overflow-hidden overflow-y-scroll scrollbar-hidden">
