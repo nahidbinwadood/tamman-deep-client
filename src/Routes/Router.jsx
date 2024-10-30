@@ -15,6 +15,12 @@ import SocialBuilderAction from '@/Pages/Actions/SocialBuilderAction';
 import ProfileAction from '@/Pages/Actions/ProfileAction';
 import BookingAction from '@/Pages/Actions/BookingAction';
 import DateTriggerAction from '@/Pages/Actions/DateTriggerAction';
+import EventActions from '@/Pages/Actions/EventActions';
+import EmailActions from '@/Pages/Actions/EmailActions';
+import WhatsAppActions from '@/Pages/Actions/WhatsAppActions';
+import SmsActions from '@/Pages/Actions/SmsActions';
+import ProductCatalogue from '@/Pages/Actions/ProductCatalogue';
+import LinkTreeActions from '@/Pages/Actions/LinktreeActions';
 
 export const router = createBrowserRouter([
   {
@@ -80,6 +86,30 @@ export const router = createBrowserRouter([
       {
         path: '/actions/date-trigger',
         element: <DateTriggerAction />,
+      },
+      {
+        path: '/actions/event',
+        element: <EventActions />,
+      },
+      {
+        path: '/actions/email',
+        element: <EmailActions />,
+      },
+      {
+        path: '/actions/whatsapp',
+        element: <WhatsAppActions />,
+      },
+      {
+        path: '/actions/sms',
+        element: <SmsActions />,
+      },
+      {
+        path: '/actions/product-catalogue',
+        element: <ProductCatalogue />,
+      },
+      {
+        path: '/actions/link-tree',
+        element: <LinkTreeActions />,
       },
     ],
   },

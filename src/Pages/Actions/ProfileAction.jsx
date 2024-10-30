@@ -3,8 +3,6 @@ import {
   AlignContentSvg,
   UserSvg,
 } from '@/Components/SvgContainer';
-import { TextField } from '@mui/material';
-import { useState } from 'react';
 import {
   Select,
   SelectContent,
@@ -14,6 +12,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/Components/ui/select';
+import { TextField } from '@mui/material';
+import { useState } from 'react';
 const ProfileAction = () => {
   const [profilePhoto, setProfilePhoto] = useState('');
 
@@ -69,26 +69,10 @@ const ProfileAction = () => {
               <UserSvg />
             </div>
             <div className="flex-1 space-y-5">
-              <TextField
-                label="Name"
-                variant="outlined" // You can also use "filled" or "standard"
-                fullWidth
-              />
-              <TextField
-                label="Title"
-                variant="outlined" // You can also use "filled" or "standard"
-                fullWidth
-              />
-              <TextField
-                label="About"
-                variant="outlined" // You can also use "filled" or "standard"
-                fullWidth
-              />
-              <TextField
-                label="Location"
-                variant="outlined" // You can also use "filled" or "standard"
-                fullWidth
-              />
+              <TextField label="Name" variant="outlined" fullWidth />
+              <TextField label="Title" variant="outlined" fullWidth />
+              <TextField label="About" variant="outlined" fullWidth />
+              <TextField label="Location" variant="outlined" fullWidth />
             </div>
           </div>
           <div className="flex gap-4 mt-5">

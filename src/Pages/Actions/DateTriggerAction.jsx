@@ -1,4 +1,4 @@
-import { CalendarSvg } from '@/Components/SvgContainer';
+import { CalendarSvg, CalendarWithTimeSvg } from '@/Components/SvgContainer';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import {
@@ -52,7 +52,7 @@ const DateTriggerAction = () => {
       </div>
       <div className="flex gap-4 mt-10 w-full">
         <div className="flex-shrink-0 flex">
-          <CalendarSvg />
+          <CalendarWithTimeSvg />
         </div>
         <div className="flex-1 space-y-5">
           <Select>

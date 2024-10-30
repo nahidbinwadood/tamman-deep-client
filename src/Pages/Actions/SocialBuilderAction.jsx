@@ -56,21 +56,9 @@ const SocialBuilderAction = () => {
             <UserSvg />
           </div>
           <div className="flex-1 space-y-5">
-            <TextField
-              label="Name"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
-            <TextField
-              label="Title"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
-            <TextField
-              label="About"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
+            <TextField label="Name" variant="outlined" fullWidth />
+            <TextField label="Title" variant="outlined" fullWidth />
+            <TextField label="About" variant="outlined" fullWidth />
           </div>
         </div>
         <div className="flex gap-4 mt-5">
@@ -78,36 +66,12 @@ const SocialBuilderAction = () => {
             <ShareSvg />
           </div>
           <div className="flex-1 space-y-5">
-            <TextField
-              label="Social Link - 01"
-              variant="outlined"
-              fullWidth
-            />
-            <TextField
-              label="Social Link - 02"
-              variant="outlined"
-              fullWidth
-            />
-            <TextField
-              label="Social Link - 03"
-              variant="outlined"
-              fullWidth
-            />
-            <TextField
-              label="Social Link - 04"
-              variant="outlined"
-              fullWidth
-            />
-            <TextField
-              label="Social Link - 05"
-              variant="outlined"
-              fullWidth
-            />
-            <TextField
-              label="Social Link - 06"
-              variant="outlined"
-              fullWidth
-            />
+            <TextField label="Social Link - 01" variant="outlined" fullWidth />
+            <TextField label="Social Link - 02" variant="outlined" fullWidth />
+            <TextField label="Social Link - 03" variant="outlined" fullWidth />
+            <TextField label="Social Link - 04" variant="outlined" fullWidth />
+            <TextField label="Social Link - 05" variant="outlined" fullWidth />
+            <TextField label="Social Link - 06" variant="outlined" fullWidth />
           </div>
         </div>
       </form>

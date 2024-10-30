@@ -101,26 +101,10 @@ const ContactCardAction = () => {
             <UserSvg />
           </div>
           <div className="flex-1 space-y-5">
-            <TextField
-              label="First Name"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
-            <TextField
-              label="Last Name"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
-            <TextField
-              label="Company Name"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
-            <TextField
-              label="Position"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
+            <TextField label="First Name" variant="outlined" fullWidth />
+            <TextField label="Last Name" variant="outlined" fullWidth />
+            <TextField label="Company Name" variant="outlined" fullWidth />
+            <TextField label="Position" variant="outlined" fullWidth />
             <div className="flex items-center gap-4">
               <div className="w-[55%]">
                 {/* <FormControl fullWidth>
@@ -157,18 +141,10 @@ const ContactCardAction = () => {
                 </Select>
               </div>
               <div className="w-[15%]">
-                <TextField
-                  label="Day"
-                  variant="outlined" // You can also use "filled" or "standard"
-                  fullWidth
-                />
+                <TextField label="Day" variant="outlined" fullWidth />
               </div>
               <div className="w-[30%]">
-                <TextField
-                  label="Year"
-                  variant="outlined" // You can also use "filled" or "standard"
-                  fullWidth
-                />
+                <TextField label="Year" variant="outlined" fullWidth />
               </div>
             </div>
           </div>
@@ -178,41 +154,17 @@ const ContactCardAction = () => {
             <BuildingSvg />
           </div>
           <div className="flex-1 space-y-4">
-            <TextField
-              label="Street 1"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
-            <TextField
-              label="Street 2"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
-            <TextField
-              label="Postal Code"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
-            <TextField
-              label="City"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
-            <TextField
-              label="Country"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
+            <TextField label="Street 1" variant="outlined" fullWidth />
+            <TextField label="Street 2" variant="outlined" fullWidth />
+            <TextField label="Postal Code" variant="outlined" fullWidth />
+            <TextField label="City" variant="outlined" fullWidth />
+            <TextField label="Country" variant="outlined" fullWidth />
             <TextField
               label="Postal Code Position"
-              variant="outlined" // You can also use "filled" or "standard"
+              variant="outlined"
               fullWidth
             />
-            <TextField
-              label="State"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
+            <TextField label="State" variant="outlined" fullWidth />
           </div>
         </div>
         <div className="flex gap-4 mt-5">
@@ -220,14 +172,10 @@ const ContactCardAction = () => {
             <PhoneSvg />
           </div>
           <div className="flex-1 space-y-4">
-            <TextField
-              label="Enter Your Number"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
+            <TextField label="Enter Your Number" variant="outlined" fullWidth />
             <TextField
               label="Enter Your Office Number"
-              variant="outlined" // You can also use "filled" or "standard"
+              variant="outlined"
               fullWidth
             />
           </div>
@@ -237,24 +185,20 @@ const ContactCardAction = () => {
             <EmailSvg />
           </div>
           <div className="flex-1 space-y-4">
-            <TextField
-              label="Enter Your Mail"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
+            <TextField label="Enter Your Mail" variant="outlined" fullWidth />
             <TextField
               label="Enter Your Secondary Mail"
-              variant="outlined" // You can also use "filled" or "standard"
+              variant="outlined"
               fullWidth
             />
             <TextField
               label="Enter Your Website Link"
-              variant="outlined" // You can also use "filled" or "standard"
+              variant="outlined"
               fullWidth
             />
             <TextField
               label="Enter Your Secondary Website Link"
-              variant="outlined" // You can also use "filled" or "standard"
+              variant="outlined"
               fullWidth
             />
           </div>
