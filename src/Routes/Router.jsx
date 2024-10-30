@@ -21,6 +21,10 @@ import WhatsAppActions from '@/Pages/Actions/WhatsAppActions';
 import SmsActions from '@/Pages/Actions/SmsActions';
 import ProductCatalogue from '@/Pages/Actions/ProductCatalogue';
 import LinkTreeActions from '@/Pages/Actions/LinktreeActions';
+import PaypalAction from '@/Pages/Actions/PaypalAction';
+import AboutmeActions from '@/Pages/Actions/AboutmeActions';
+import CallActions from '@/Pages/Actions/CallActions';
+import UrlActions from '@/Pages/Actions/UrlActions';
 
 export const router = createBrowserRouter([
   {
@@ -110,6 +114,22 @@ export const router = createBrowserRouter([
       {
         path: '/actions/link-tree',
         element: <LinkTreeActions />,
+      },
+      {
+        path: '/actions/paypal',
+        element: <PaypalAction />,
+      },
+      {
+        path: '/actions/about-me',
+        element: <AboutmeActions />,
+      },
+      {
+        path: '/actions/call',
+        element: <CallActions />,
+      },
+      {
+        path: '/actions/url',
+        element: <UrlActions />,
       },
     ],
   },
