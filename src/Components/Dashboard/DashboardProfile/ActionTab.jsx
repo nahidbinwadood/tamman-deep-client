@@ -85,7 +85,13 @@ const actions = [
              <div className="flex-1">
               <h3 className="text-2xl font-semibold text-textDark pb-4">{actions.title}</h3>
               <p className="text-sm font-medium ">{actions.description}</p>
+
+              <div className="pt-4 flex justify-end">
+                <button className="px-4 py-2 rounded-md text-textGray bg-blue-400/80">+ Create</button>
+              </div>
              </div>
+
+             
 
 
               </div>)
