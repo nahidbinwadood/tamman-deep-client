@@ -6,33 +6,21 @@ import {
   PhoneSvg,
   UserSvg,
 } from '@/Components/SvgContainer';
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from '@mui/material';
+import { TextField } from '@mui/material';
 import { useState } from 'react';
 
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/Components/ui/select';
 const ContactCardAction = () => {
   const [coverPhoto, setCoverPhoto] = useState('');
   const [profilePhoto, setProfilePhoto] = useState('');
-  const [month, setMonth] = useState('');
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
 
   const handleCoverPhotoChange = (e) => {
     const file = e.target.files[0];
@@ -113,29 +101,13 @@ const ContactCardAction = () => {
             <UserSvg />
           </div>
           <div className="flex-1 space-y-5">
-            <TextField
-              label="First Name"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
-            <TextField
-              label="Last Name"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
-            <TextField
-              label="Company Name"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
-            <TextField
-              label="Position"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
+            <TextField label="First Name" variant="outlined" fullWidth />
+            <TextField label="Last Name" variant="outlined" fullWidth />
+            <TextField label="Company Name" variant="outlined" fullWidth />
+            <TextField label="Position" variant="outlined" fullWidth />
             <div className="flex items-center gap-4">
               <div className="w-[55%]">
-                <FormControl fullWidth>
+                {/* <FormControl fullWidth>
                   <InputLabel id="month">Month</InputLabel>
                   <Select labelId="month" id="month" label="Age">
                     {months.map((monthName, index) => (
@@ -144,21 +116,35 @@ const ContactCardAction = () => {
                       </MenuItem>
                     ))}
                   </Select>
-                </FormControl>
+                </FormControl> */}
+                <Select>
+                  <SelectTrigger className="w-full h-14 border-black/30 text-base text-textGray">
+                    <SelectValue placeholder="Month" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Months</SelectLabel>
+                      <SelectItem value="January">January</SelectItem>
+                      <SelectItem value="February">February</SelectItem>
+                      <SelectItem value="March">March</SelectItem>
+                      <SelectItem value="April">April</SelectItem>
+                      <SelectItem value="May">May</SelectItem>
+                      <SelectItem value="June">June</SelectItem>
+                      <SelectItem value="July">July</SelectItem>
+                      <SelectItem value="August">August</SelectItem>
+                      <SelectItem value="September">September</SelectItem>
+                      <SelectItem value="October">October</SelectItem>
+                      <SelectItem value="November">November</SelectItem>
+                      <SelectItem value="December">December</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
               </div>
               <div className="w-[15%]">
-                <TextField
-                  label="Day"
-                  variant="outlined" // You can also use "filled" or "standard"
-                  fullWidth
-                />
+                <TextField label="Day" variant="outlined" fullWidth />
               </div>
               <div className="w-[30%]">
-                <TextField
-                  label="Year"
-                  variant="outlined" // You can also use "filled" or "standard"
-                  fullWidth
-                />
+                <TextField label="Year" variant="outlined" fullWidth />
               </div>
             </div>
           </div>
@@ -168,41 +154,17 @@ const ContactCardAction = () => {
             <BuildingSvg />
           </div>
           <div className="flex-1 space-y-4">
-            <TextField
-              label="Street 1"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
-            <TextField
-              label="Street 2"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
-            <TextField
-              label="Postal Code"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
-            <TextField
-              label="City"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
-            <TextField
-              label="Country"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
+            <TextField label="Street 1" variant="outlined" fullWidth />
+            <TextField label="Street 2" variant="outlined" fullWidth />
+            <TextField label="Postal Code" variant="outlined" fullWidth />
+            <TextField label="City" variant="outlined" fullWidth />
+            <TextField label="Country" variant="outlined" fullWidth />
             <TextField
               label="Postal Code Position"
-              variant="outlined" // You can also use "filled" or "standard"
+              variant="outlined"
               fullWidth
             />
-            <TextField
-              label="State"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
+            <TextField label="State" variant="outlined" fullWidth />
           </div>
         </div>
         <div className="flex gap-4 mt-5">
@@ -210,14 +172,10 @@ const ContactCardAction = () => {
             <PhoneSvg />
           </div>
           <div className="flex-1 space-y-4">
-            <TextField
-              label="Enter Your Number"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
+            <TextField label="Enter Your Number" variant="outlined" fullWidth />
             <TextField
               label="Enter Your Office Number"
-              variant="outlined" // You can also use "filled" or "standard"
+              variant="outlined"
               fullWidth
             />
           </div>
@@ -227,24 +185,20 @@ const ContactCardAction = () => {
             <EmailSvg />
           </div>
           <div className="flex-1 space-y-4">
-            <TextField
-              label="Enter Your Mail"
-              variant="outlined" // You can also use "filled" or "standard"
-              fullWidth
-            />
+            <TextField label="Enter Your Mail" variant="outlined" fullWidth />
             <TextField
               label="Enter Your Secondary Mail"
-              variant="outlined" // You can also use "filled" or "standard"
+              variant="outlined"
               fullWidth
             />
             <TextField
               label="Enter Your Website Link"
-              variant="outlined" // You can also use "filled" or "standard"
+              variant="outlined"
               fullWidth
             />
             <TextField
               label="Enter Your Secondary Website Link"
-              variant="outlined" // You can also use "filled" or "standard"
+              variant="outlined"
               fullWidth
             />
           </div>
