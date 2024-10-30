@@ -11,6 +11,10 @@ import DashboardContacts from '../Pages/Dashboard/Dashboard Contacts/DashboardCo
 import DashboardSetting from '../Pages/Dashboard/Dashboard Setting/DashboardSetting';
 import ContactCardAction from '@/Pages/Actions/ContactCardAction';
 import Actions from '@/Pages/Actions/Actions';
+import SocialBuilderAction from '@/Pages/Actions/SocialBuilderAction';
+import ProfileAction from '@/Pages/Actions/ProfileAction';
+import BookingAction from '@/Pages/Actions/BookingAction';
+import DateTriggerAction from '@/Pages/Actions/DateTriggerAction';
 
 export const router = createBrowserRouter([
   {
@@ -60,6 +64,22 @@ export const router = createBrowserRouter([
       {
         path: '/actions/contact-card',
         element: <ContactCardAction />,
+      },
+      {
+        path: '/actions/social-builder',
+        element: <SocialBuilderAction />,
+      },
+      {
+        path: '/actions/profile',
+        element: <ProfileAction />,
+      },
+      {
+        path: '/actions/booking',
+        element: <BookingAction />,
+      },
+      {
+        path: '/actions/date-trigger',
+        element: <DateTriggerAction />,
       },
     ],
   },
