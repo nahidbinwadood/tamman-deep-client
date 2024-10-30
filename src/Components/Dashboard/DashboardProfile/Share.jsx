@@ -39,7 +39,6 @@ function Share() {
               <MdContentCopy size={22} />
             </button>
           </div>
-
           <div className=" pt-4 px-10">
             <div className="flex items-center gap-4">
               <div className="flex cursor-pointer flex-1 justify-center px-4 py-1.5 rounded-lg border-2 items-center gap-2">
