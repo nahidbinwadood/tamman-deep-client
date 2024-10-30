@@ -4,7 +4,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/Components/ui/select";
 import { HiOutlineBars3 } from "react-icons/hi2";
 import { BsGrid } from "react-icons/bs";
 import { IoIosSearch } from "react-icons/io";
