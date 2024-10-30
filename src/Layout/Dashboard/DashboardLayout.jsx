@@ -42,9 +42,9 @@ const DashboardLayout = () => {
   ];
   //const currentPath = useLocation().pathname;
   return (
-    <div className="flex w-full max-h-[100vh] !font-linik">
-      {/* sidebar */}
 
+    <div className="flex w-full font-inter max-h-[100vh] ">
+      {/* sidebar */}
       <div className="w-[20%] max-h-[100vh] p-8">
         <div className="w-full -ml-9 ">
           <Link to="/">

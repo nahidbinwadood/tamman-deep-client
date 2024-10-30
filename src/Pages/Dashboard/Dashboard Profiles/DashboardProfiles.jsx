@@ -17,7 +17,7 @@ import { RiListUnordered } from 'react-icons/ri';
 
 const layout = [
   { icon: <BsGrid />, id: 2 },
-  { icon: <HiOutlineBars3 />, id: 1 },
+  { icon: <HiOutlineBars3  />, id: 1 },
 ];
 
 const DashboardProfiles = () => {
@@ -27,10 +27,10 @@ const DashboardProfiles = () => {
         {/* left */}
         <div className="flex items-center gap-3">
           <Select>
-            <SelectTrigger className="w-[120px] text-textColor py-[22px] bg-white">
+            <SelectTrigger className="w-[120px] font-inter text-textColor py-[22px] bg-white">
               <SelectValue placeholder="Filter" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className={'font-inter'}>
               <SelectItem value="lower">Lower</SelectItem>
               <SelectItem value="=Higher">Higher</SelectItem>
               <SelectItem value="medium">Medium</SelectItem>

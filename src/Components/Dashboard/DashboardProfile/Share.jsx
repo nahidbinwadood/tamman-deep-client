@@ -16,7 +16,8 @@ function Share() {
       <DialogTrigger>
         <CommonAction Icon={RiShareForwardLine} title={'Share'}></CommonAction>
       </DialogTrigger>
-      <DialogContent className={'max-w-2xl'}>
+
+      <DialogContent className={"max-w-2xl font-inter"}>
         <DialogHeader>
           <DialogTitle></DialogTitle>
           <DialogDescription></DialogDescription>

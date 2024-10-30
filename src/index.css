@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -77,39 +79,5 @@
 .scrollbar-hidden {
   -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
   scrollbar-width: none; /* Hide scrollbar for Firefox */
-}
-
- 
-
-/* Regular */
-@font-face {
-  font-family: 'Linik Sans';
-  src:url('./assets/fonts/LinikSans-Regular.ttf') format('truetype');
-  font-weight: 400; /* Regular */
-  font-style: normal;
-}
-
-/* Medium */
-@font-face {
-  font-family: 'Linik Sans';
-  src: url('./assets/fonts/LinikSans-Medium.ttf') format('truetype');
-  font-weight: 500; /* Medium */
-  font-style: normal;
-}
-
-/* SemiBold */
-@font-face {
-  font-family: 'Linik Sans';
-  src: url('./assets/fonts/LinikSans-SemiBold.ttf') format('truetype');
-  font-weight: 600; /* SemiBold */
-  font-style: normal;
-}
-
-/* Bold */
-@font-face {
-  font-family: 'Linik Sans';
-  src: url('./assets/fonts/LinikSans-Bold.ttf') format('truetype');
-  font-weight: 700; /* Bold */
-  font-style: normal;
 }
 

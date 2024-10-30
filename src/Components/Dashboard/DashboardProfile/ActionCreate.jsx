@@ -14,14 +14,9 @@ function ActionCreate() {
   return (
     <Dialog className={''}>
       <DialogTrigger>
-        <CommonAction
-          Icon={HiPlusCircle}
-          title={'Create Action'}
-        ></CommonAction>
+      <CommonAction isCreateAction={true} Icon={HiPlusCircle} title={'Create Action'}></CommonAction>
       </DialogTrigger>
-      <DialogContent
-        className={'max-w-5xl p-8 rounded-md  h-[80%] overflow-hidden '}
-      >
+      <DialogContent className={'max-w-5xl font-inter p-8 rounded-md  h-[80%] overflow-hidden '}>
         <DialogHeader>
           <DialogTitle>
             <p className="text-4xl text-center font-semibold text-textDark pb-8 border-gray-100 border-b-2">

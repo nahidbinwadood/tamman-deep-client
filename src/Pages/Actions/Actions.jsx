@@ -11,7 +11,7 @@ const Actions = () => {
   };
   return (
     <>
-      <div className="shadow-md font-linik">
+      <div className="shadow-md font-inter">
         {/* navbar */}
         <div className="py-6 flex items-center justify-between container mx-auto">
           <Link
@@ -38,7 +38,7 @@ const Actions = () => {
         </div>
       </div>
 
-      <div className="mt-8 container mx-auto font-linik">
+      <div className="mt-8 container mx-auto font-inter">
         <Outlet />
       </div>
     </>

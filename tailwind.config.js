@@ -12,7 +12,7 @@ export default {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
-        linik: ['Linik Sans', 'sans-serif'],
+        inter: ['Inter', 'serif'],
       },
       backgroundImage: {
         'gradient-text': 'linear-gradient(270deg, #116DFF 0%, #23C0B6 100%)',
