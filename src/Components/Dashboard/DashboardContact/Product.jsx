@@ -10,7 +10,7 @@ function Product() {
         </div>
         <div className='flex items-center gap-2'>
             <TiBusinessCard />
-            <p className=' '>Contact Card #1</p>
+            <p >Contact Card #1</p>
         </div>
     </div>
   )
