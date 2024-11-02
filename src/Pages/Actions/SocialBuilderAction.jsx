@@ -12,7 +12,7 @@ const SocialBuilderAction = () => {
   };
   return (
     <div className="flex items-center justify-center mx-auto max-w-[650px] pb-20">
-      <form action="" className="w-full">
+      <form action="" className="w-full p-8 rounded-2xl bg-white shadow-lg">
         {/* image section */}
         <div>
           <div className="w-full flex items-center justify-center relative">

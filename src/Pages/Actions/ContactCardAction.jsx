@@ -32,7 +32,7 @@ const ContactCardAction = () => {
   };
   return (
     <div className="flex items-center justify-center mx-auto max-w-[650px] pb-20">
-      <form action="" className="w-full">
+      <form action="" className="w-full p-8 rounded-2xl bg-white shadow-lg">
         {/* image section */}
         <div>
           <div className="h-56 bg-[#D2E3FC] rounded-xl relative">

@@ -21,8 +21,8 @@ import { useState } from 'react';
 const DateTriggerAction = () => {
   const [date, setDate] = useState();
   return (
-    <div className="flex flex-col items-center max-w-[600px] mx-auto">
-      <div className="flex gap-4 mt-10 w-full">
+    <div className="flex flex-col items-center max-w-[600px] mx-auto w-full p-8 rounded-2xl bg-white shadow-lg ">
+      <div className="flex gap-4 mt-5 w-full">
         <div className="flex-shrink-0 flex">
           <CalendarSvg />
         </div>

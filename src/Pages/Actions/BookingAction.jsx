@@ -53,7 +53,7 @@ const BookingAction = () => {
   return (
     <div className="flex   justify-center">
       <div className="flex items-center justify-center mx-auto max-w-[650px] pb-20">
-        <form action="" className="w-full">
+        <form action="" className="w-full p-8 rounded-2xl bg-white shadow-lg">
           {/* image section */}
           <div>
             <div className="w-full flex items-center justify-center relative">
@@ -221,7 +221,7 @@ const BookingAction = () => {
           </div>
         </form>
       </div>
-      <div className="flex mt-60 h-fit flex-col gap-10 items-center justify-center mx-auto min-w-[450px] py-10 rounded-[24px] bg-gradient-to-l from-[rgba(17,109,255,0.05)] to-[rgba(35,192,182,0.05)]">
+      <div className="flex mt-60 h-fit flex-col gap-10 items-center justify-center mx-auto min-w-[450px] py-10   rounded-xl bg-gradient-to-t from-[rgba(35,192,182,0.80)] to-[rgba(17,109,255,0.80)] text-white">
         <div className="pt-10">
           <h4 className="text-xl font-semibold">Live Preview</h4>
         </div>
@@ -235,7 +235,7 @@ const BookingAction = () => {
           </div>
           <div className="text-center mt-6">
             <h3 className="font-semibold text-2xl">John Doea</h3>
-            <p className="mt-3 text-textGray w-4/5 mx-auto">
+            <p className="mt-3 text-white w-4/5 mx-auto">
               Hey I am a product designer at toto company. Where I make things
               happen
             </p>

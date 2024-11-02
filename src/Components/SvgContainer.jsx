@@ -1464,7 +1464,7 @@ export function InfoSvg() {
   );
 }
 
-export function BackButtonSvg() {
+export function BackButtonSvg({light}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1478,7 +1478,7 @@ export function BackButtonSvg() {
       <path d="M5 12L11 6L5 12Z" fill="#288DFF" />
       <path
         d="M5 12H19M5 12L11 18M5 12L11 6"
-        stroke="#288DFF"
+        stroke={light ? "white" : "#288DFF"}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

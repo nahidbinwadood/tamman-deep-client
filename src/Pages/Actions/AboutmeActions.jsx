@@ -11,7 +11,7 @@ const AboutmeActions = () => {
     setProfilePhoto(URL.createObjectURL(file));
   };
   return (
-    <div className="flex flex-col items-center max-w-[600px] mx-auto mb-20">
+    <div className="flex flex-col items-center max-w-[600px] mx-auto mb-20 w-full p-8 rounded-2xl bg-white shadow-lg">
       {/* image section */}
       <div>
         <div className="w-full flex items-center justify-center relative">
