@@ -1393,7 +1393,7 @@ export function DashboardSettingsLightSvg() {
     >
       <path
         d="M14 17.5C15.933 17.5 17.5 15.933 17.5 14C17.5 12.067 15.933 10.5 14 10.5C12.067 10.5 10.5 12.067 10.5 14C10.5 15.933 12.067 17.5 14 17.5Z"
-        stroke="#288DFF"
+        stroke="white"
         strokeWidth="2"
         strokeMiterlimit="10"
         strokeLinecap="round"

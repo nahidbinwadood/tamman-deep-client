@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import logo from '../../assets/images/logo-black.png';
 import {
   DashboardContactLightSvg,
@@ -40,9 +40,8 @@ const DashboardLayout = () => {
       svgLight: <DashboardSettingsLightSvg />,
     },
   ];
-  //const currentPath = useLocation().pathname;
+  const currentPath = useLocation().pathname;
   return (
-
     <div className="flex w-full font-inter max-h-[100vh] ">
       {/* sidebar */}
       <div className="w-[20%] max-h-[100vh] p-8">
@@ -60,12 +59,13 @@ const DashboardLayout = () => {
                   to={link?.path}
                   className={({ isActive }) =>
                     `text-lg flex items-center gap-2 rounded-[16px] py-3 px-6 ${
-                      isActive ? 'font-medium bg-[#EAF4FF] text-[#288DFF]' : ''
+                      isActive
+                        ? 'font-medium bg-gradient-to-r from-blue-600 to-teal-400 text-[#fff]'
+                        : ''
                     }`
                   }
                 >
-                  {link?.svg}
-                  {/* {link?.svg} */}
+                  {currentPath == link?.path ? link?.svgLight : link?.svg}
                   <p>{link?.title}</p>
                 </NavLink>
               </li>

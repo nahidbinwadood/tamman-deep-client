@@ -55,8 +55,8 @@ const DashboardHome = () => {
               </div>
               <h4 className="text-textColor font-medium">Step 1 to 6</h4>
             </div>
-     
-              <h3 className="text-textDark font-medium text-lg ">
+
+              <h3 className="text-textDark font-medium text-lg pb-2">
                 Edit Profile Details
               </h3>
               <Link to={'/'} className="text-lg font-medium text-primaryColor">Visit</Link>

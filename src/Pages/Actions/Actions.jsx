@@ -11,9 +11,9 @@ const Actions = () => {
   };
   return (
     <>
-      <div className="shadow-md font-inter">
+      <div className="shadow-md font-inter bg-gradient-to-l from-[#116DFF] to-[#23C0B6] rounded-lg">
         {/* navbar */}
-        <div className="py-6 flex items-center justify-between container mx-auto">
+        <div className="py-6 flex items-center justify-between container mx-auto ">
           <Link
             to="/dashboard/profiles"
             className="flex items-center gap-3 cursor-pointer text-[#212A30]"
@@ -25,12 +25,12 @@ const Actions = () => {
             <button onClick={()=>{
               navigate('/dashboard/profiles')
               toast.success("Action Activated!");
-            }} className="px-10 py-3 border-2 border-primaryColor rounded-lg text-primaryColor font-semibold text-lg transition-all duration-500 hover:text-white hover:bg-primaryColor">
+            }} className="px-10 py-3 rounded-lg bg-transparent text-white border border-white font-semibold text-lg transition-all duration-500">
               Assign Action
             </button>
             <button
               onClick={handleSave}
-              className="px-10 py-3 bg-primaryColor text-white border-2 border-primaryColor rounded-lg  font-semibold text-lg"
+              className="px-10 py-3 bg-white text-primaryColor border-2 border-primaryColor rounded-lg  font-semibold text-lg"
             >
               Save
             </button>
