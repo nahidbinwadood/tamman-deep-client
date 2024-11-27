@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo-black.png';
 import { LuEye, LuEyeOff } from 'react-icons/lu';
 import { useState } from 'react';
@@ -6,8 +6,42 @@ import {
   RegisterFacebookSvg,
   RegisterGoogleSvg,
 } from '../../Components/SvgContainer';
+import { useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import useAxiosPublic from '@/Hooks/useAxiosPublic';
+import toast from 'react-hot-toast';
+import useAuth from '@/Hooks/useAuth';
+import { BeatLoader } from 'react-spinners';
 const Register = () => {
   const [show, setShow] = useState(false);
+  const axiosPublic = useAxiosPublic();
+  const { loading, setLoading } = useAuth();
+  const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
+  const registerMutation = useMutation({
+    mutationFn: async (data) => {
+      const response = await axiosPublic.post('api/register', data);
+      return response.data;
+    },
+    onSuccess: (data) => {
+      setLoading(false);
+      console.log(data);
+      if (data.status == 'success') {
+        toast.success('Account Created Successfully');
+        navigate('/login');
+      }
+    },
+    onError: (error) => {
+      setLoading(false);
+      toast.error(error.message);
+    },
+  });
+
+  const onSubmit = (data) => {
+    // Send the form data to the server
+    setLoading(true);
+    registerMutation.mutate(data);
+  };
   return (
     <div className="  font-inter ">
       <div className="flex items-center justify-center h-full min-h-[calc(100vh-72px)] ">
@@ -25,12 +59,17 @@ const Register = () => {
             </p>
           </div>
           <div className="mt-10">
-            <form action="" className="space-y-5">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              action=""
+              className="space-y-5"
+            >
               <div className="flex flex-col gap-2">
                 <label className="text-[#3D4A5C] font-medium" htmlFor="email">
                   Name
                 </label>
                 <input
+                  {...register('name', { required: true })}
                   placeholder="Enter Name"
                   className="w-full focus:outline-none border border-black/50 px-5 py-3 rounded-md"
                   type="text"
@@ -43,6 +82,7 @@ const Register = () => {
                   Email address
                 </label>
                 <input
+                  {...register('email', { required: true })}
                   placeholder="Enter Email Address"
                   className="w-full focus:outline-none border border-black/50 px-5 py-3 rounded-md"
                   type="email"
@@ -59,6 +99,7 @@ const Register = () => {
                 </label>
                 <div className="relative">
                   <input
+                    {...register('password', { required: true })}
                     placeholder="Enter Password"
                     className="w-full focus:outline-none border border-black/50 px-5 py-3 rounded-md"
                     type={!show ? 'password' : 'text'}
@@ -78,36 +119,25 @@ const Register = () => {
                   )}
                 </div>
               </div>
-              <div className="flex items-center justify-between">
-                <div className="flex gap-3 items-center">
-                  <input
-                    className="size-4"
-                    type="checkbox"
-                    name=""
-                    id="remember"
-                  />
-                  <label
-                    className="text-[#212A30] font-medium cursor-pointer"
-                    htmlFor="remember"
-                  >
-                    Remember me
-                  </label>
-                </div>
-                <div>
-                  <Link
-                    className="text-primaryColor font-medium"
-                    to="/forgot-password"
-                  >
-                    Forgot your password?
-                  </Link>
-                </div>
-              </div>
+
               <div className="pt-3">
                 <button
                   type="submit"
-                  className="w-full bg-primaryColor px-12 font-semibold text-lg py-3 rounded-lg text-white  hover:text-primaryColor hover:bg-transparent border border-primaryColor transition duration-300"
+                  className={`w-full bg-primaryColor px-12 font-semibold text-lg py-3 rounded-lg text-white  hover:text-primaryColor border border-primaryColor transition duration-300 ${
+                    loading ? 'hover:bg-primaryColor' : 'hover:bg-transparent'
+                  }`}
                 >
-                  Register
+                  {loading ? (
+                    <BeatLoader
+                      color={'#ffffff'}
+                      loading={loading}
+                      size={8}
+                      aria-label="Loading Spinner"
+                      data-testid="loader"
+                    />
+                  ) : (
+                    'Sign Up'
+                  )}
                 </button>
               </div>
               <div className="flex items-center gap-2 py-2">

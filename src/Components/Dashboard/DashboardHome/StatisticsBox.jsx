@@ -1,9 +1,8 @@
+/* eslint-disable react/prop-types */
 
-import PropTypes from "prop-types";
-
-function StatisticsBox({Icon, title, quantity}) {
+function StatisticsBox({ Icon, title, quantity }) {
   return (
-    <div  className="w-full  bg-gradient-to-tl from-[#116DFF] to-[#23C0B6] p-6 rounded-xl border">
+    <div className="w-full  bg-gradient-to-tl from-[#116DFF] to-[#23C0B6] p-6 rounded-xl border">
       <div className="p-3 w-fit r ">
         <Icon className={'size-10 text-teal-300'}></Icon>
       </div>
@@ -11,12 +10,6 @@ function StatisticsBox({Icon, title, quantity}) {
       <h2 className="text-white font-bold text-4xl pt-4">{quantity}</h2>
     </div>
   );
-}
-
-StatisticsBox.propTypes = {
-    Icon: PropTypes.node,
-    title: PropTypes.string,
-    quantity: PropTypes.number
 }
 
 export default StatisticsBox;

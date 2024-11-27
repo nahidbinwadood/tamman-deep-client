@@ -1,9 +1,7 @@
+/* eslint-disable react/prop-types */
+import Arrow from '../CustomIcon/Arrow';
 
-import Arrow from "../CustomIcon/Arrow";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-
-
+import { Link } from 'react-router-dom';
 
 function ResoucesLink({ title, Icon }) {
   return (
@@ -21,8 +19,4 @@ function ResoucesLink({ title, Icon }) {
   );
 }
 
-ResoucesLink.propTypes = {
-  title: PropTypes.string,
-  Icon: PropTypes.node
-};
 export default ResoucesLink;
