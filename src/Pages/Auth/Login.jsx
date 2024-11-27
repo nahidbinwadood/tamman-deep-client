@@ -9,7 +9,6 @@ import { BeatLoader } from 'react-spinners';
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
-
 const Login = () => {
   const { setUser, loading, setLoading } = useAuth();
   const axiosPublic = useAxiosPublic();
@@ -41,13 +40,9 @@ const Login = () => {
 
   //send the login post request:
   const onSubmit = (data) => {
-    console.log(data);
     setLoading(true);
-    const info = {
-      email: 'mdrobin@gmail.com',
-      password: '12345678',
-    };
-    mutation.mutate(info);
+
+    mutation.mutate(data);
   };
 
   return (

@@ -140,19 +140,19 @@ const Register = () => {
                   )}
                 </button>
               </div>
-              <div className="flex items-center gap-2 py-2">
+              <div className=" items-center gap-2 py-2 hidden">
                 <div className="w-full border-t border-[#57626933]" />
                 <p className="text-[#111518] text-nowrap">Or Sign Up with</p>
                 <div className="w-full border-t border-[#57626933]" />
                 <div></div>
               </div>
-              <div className="relative border border-b rounded-lg text-lg w-full text-center py-3 ">
+              <div className="relative border border-b rounded-lg text-lg w-full text-center py-3  hidden">
                 <button>Sign Up with Facebook</button>
                 <div className="absolute top-1/2 left-8 -translate-x-1/2 -translate-y-1/2">
                   <RegisterFacebookSvg />
                 </div>
               </div>
-              <div className="relative border border-b rounded-lg text-lg w-full text-center py-3">
+              <div className="relative border border-b rounded-lg text-lg w-full text-center py-3 hidden">
                 <button>Sign Up with Google</button>
                 <div className="absolute top-1/2 left-8 -translate-x-1/2 -translate-y-1/2">
                   <RegisterGoogleSvg />

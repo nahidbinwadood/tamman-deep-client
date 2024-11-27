@@ -25,6 +25,7 @@ import PaypalAction from '@/Pages/Actions/PaypalAction';
 import AboutmeActions from '@/Pages/Actions/AboutmeActions';
 import CallActions from '@/Pages/Actions/CallActions';
 import UrlActions from '@/Pages/Actions/UrlActions';
+import ForgotPassword from '@/Pages/Auth/ForgotPassword';
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,8 @@ export const router = createBrowserRouter([
   },
   { path: '/login', element: <Login /> },
   { path: '/register', element: <Register /> },
+  { path: '/forgot-password', element: <ForgotPassword /> },
+ 
   {
     path: '/dashboard',
     element: <DashboardLayout />,
