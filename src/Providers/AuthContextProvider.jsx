@@ -9,6 +9,8 @@ const AuthContextProvider = ({ children }) => {
 
   const [loading, setLoading] = useState(false);
 
+  console.log(user);
+
   const allValues = { user, setUser, loading, setLoading };
   return (
     <AuthContext.Provider value={allValues}>{children}</AuthContext.Provider>
