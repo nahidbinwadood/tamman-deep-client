@@ -1,4 +1,10 @@
-import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import logo from '../../assets/images/logo-black.png';
 import {
   DashboardContactLightSvg,
@@ -13,6 +19,8 @@ import {
 } from '../../Components/SvgContainer';
 import { DashboardProfileSvg } from './../../Components/SvgContainer';
 import PrimaryButton from './../../Components/Buttons/PrimaryButton';
+import useAxiosPublic from '@/Hooks/useAxiosPublic';
+import useAuth from '@/Hooks/useAuth';
 const DashboardLayout = () => {
   const dashboardNavLinks = [
     {
@@ -41,6 +49,30 @@ const DashboardLayout = () => {
     },
   ];
   const currentPath = useLocation().pathname;
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
+  const { setUser, setLoading,userName } = useAuth();
+
+  //functions:
+  function clearToken() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+  }
+  const handleLogout = async () => {
+    try {
+      const { data } = await axiosPublic('/api/logout');
+      setLoading(true);
+      if (data.status === 'success') {
+        clearToken();
+        setUser(null);
+        setLoading(false);
+        navigate('/login');
+      }
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+    }
+  };
   return (
     <div className="flex w-full font-inter overflow-hidden min-h-screen max-h-screen">
       {/* sidebar */}
@@ -50,8 +82,8 @@ const DashboardLayout = () => {
             <img src={logo} alt="" />
           </Link>
         </div>
-        <div className="border-t border-dashed border-[#5D69F44D] my-6 " />
-        <div className="flex flex-col justify-between flex-grow">
+        <div className="border-t border-dashed border-[#5D69F44D] my-6  " />
+        <div className="flex flex-col justify-between h-full flex-grow">
           <ul className="space-y-2">
             {dashboardNavLinks?.map((link) => (
               <li key={link?.title}>
@@ -73,7 +105,10 @@ const DashboardLayout = () => {
           </ul>
           <ul>
             <li>
-              <button className="flex gap-2 items-center py-3 px-6">
+              <button
+                onClick={handleLogout}
+                className="flex gap-2 items-center py-3 px-6"
+              >
                 <LogoutSvg />
                 <p>Log Out</p>
               </button>
@@ -96,7 +131,7 @@ const DashboardLayout = () => {
             <div>
               <h3 className="text-lg text-[#3D464F]">
                 Welcome back,{' '}
-                <span className="font-medium text-[#111518]">Hawkins</span>
+                <span className="font-medium text-[#111518]">{userName}</span>
               </h3>
               <p className="text-sm text-[#3D464F]">
                 Happy to see you again on your dashboard.

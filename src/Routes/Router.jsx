@@ -26,6 +26,7 @@ import AboutmeActions from '@/Pages/Actions/AboutmeActions';
 import CallActions from '@/Pages/Actions/CallActions';
 import UrlActions from '@/Pages/Actions/UrlActions';
 import ForgotPassword from '@/Pages/Auth/ForgotPassword';
+import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
   {
@@ -46,93 +47,173 @@ export const router = createBrowserRouter([
   { path: '/login', element: <Login /> },
   { path: '/register', element: <Register /> },
   { path: '/forgot-password', element: <ForgotPassword /> },
- 
+
   {
     path: '/dashboard',
     element: <DashboardLayout />,
     children: [
       {
         path: '/dashboard/home',
-        element: <DashboardHome />,
+        element: (
+          <PrivateRoute>
+            <DashboardHome />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/dashboard/profiles',
-        element: <DashboardProfiles />,
+        element: (
+          <PrivateRoute>
+            <DashboardProfiles />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/dashboard/contacts',
-        element: <DashboardContacts />,
+        element: (
+          <PrivateRoute>
+            <DashboardContacts />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/dashboard/setting',
-        element: <DashboardSetting />,
+        element: (
+          <PrivateRoute>
+            <DashboardSetting />
+          </PrivateRoute>
+        ),
       },
     ],
   },
   // actions
   {
     path: '/actions',
-    element: <Actions />,
+    element: (
+      <PrivateRoute>
+        <Actions />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: '/actions/contact-card',
-        element: <ContactCardAction />,
+        element: (
+          <PrivateRoute>
+            <ContactCardAction />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/actions/social-builder',
-        element: <SocialBuilderAction />,
+        element: (
+          <PrivateRoute>
+            <SocialBuilderAction />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/actions/profile',
-        element: <ProfileAction />,
+        element: (
+          <PrivateRoute>
+            <ProfileAction />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/actions/booking',
-        element: <BookingAction />,
+        element: (
+          <PrivateRoute>
+            <BookingAction />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/actions/date-trigger',
-        element: <DateTriggerAction />,
+        element: (
+          <PrivateRoute>
+            <DateTriggerAction />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/actions/event',
-        element: <EventActions />,
+        element: (
+          <PrivateRoute>
+            <EventActions />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/actions/email',
-        element: <EmailActions />,
+        element: (
+          <PrivateRoute>
+            <EmailActions />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/actions/whatsapp',
-        element: <WhatsAppActions />,
+        element: (
+          <PrivateRoute>
+            <WhatsAppActions />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/actions/sms',
-        element: <SmsActions />,
+        element: (
+          <PrivateRoute>
+            <SmsActions />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/actions/product-catalogue',
-        element: <ProductCatalogue />,
+        element: (
+          <PrivateRoute>
+            <ProductCatalogue />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/actions/link-tree',
-        element: <LinkTreeActions />,
+        element: (
+          <PrivateRoute>
+            <LinkTreeActions />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/actions/paypal',
-        element: <PaypalAction />,
+        element: (
+          <PrivateRoute>
+            <PaypalAction />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/actions/about-me',
-        element: <AboutmeActions />,
+        element: (
+          <PrivateRoute>
+            <AboutmeActions />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/actions/call',
-        element: <CallActions />,
+        element: (
+          <PrivateRoute>
+            <CallActions />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/actions/url',
-        element: <UrlActions />,
+        element: (
+          <PrivateRoute>
+            <UrlActions />
+          </PrivateRoute>
+        ),
       },
     ],
   },

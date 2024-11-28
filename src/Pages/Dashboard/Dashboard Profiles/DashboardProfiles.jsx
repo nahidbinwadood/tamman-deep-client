@@ -9,6 +9,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/Components/ui/select';
+import useAxiosPublic from '@/Hooks/useAxiosPublic';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import { BsGrid } from 'react-icons/bs';
 import { HiOutlineBars3 } from 'react-icons/hi2';
 import { IoIosSearch } from 'react-icons/io';
@@ -17,10 +20,25 @@ import { RiListUnordered } from 'react-icons/ri';
 
 const layout = [
   { icon: <BsGrid />, id: 2 },
-  { icon: <HiOutlineBars3  />, id: 1 },
+  { icon: <HiOutlineBars3 />, id: 1 },
 ];
 
 const DashboardProfiles = () => {
+  const axiosPublic = useAxiosPublic();
+
+  const { data: allActions = [],refetch  } = useQuery({
+    queryKey: 'allActions',
+    queryFn: async () => {
+      const { data } = await axiosPublic('/api/action/show');
+      return data?.data?.product_types;
+    },
+    staleTime: 1000 * 60 * 5,
+    retry: 1,
+  });
+useEffect(()=>{
+  refetch()
+},[refetch])
+  console.log(allActions);
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
@@ -71,7 +89,7 @@ const DashboardProfiles = () => {
       </div>
       <div className="grid grid-cols-12 gap-6">
         <div className="col-span-4 p-5 rounded-xl flex flex-col gap-4 border bg-white">
-          <ActionCreate></ActionCreate>
+          <ActionCreate refetch={refetch}></ActionCreate>
           <CommonAction
             Icon={RiListUnordered}
             title={'Your Actions'}
@@ -79,7 +97,9 @@ const DashboardProfiles = () => {
           <Share></Share>
         </div>
         <div className="col-span-8 p-5 rounded-xl border bg-white">
-          <h4 className="font-normal text-textDark pb-4 ">List of Items</h4>
+          <h4 className="font-normal text-textDark pb-4 ">
+            List of Items {allActions[0]?.data.length}
+          </h4>
           <div className="space-y-3">
             <Product></Product>
             <Product></Product>

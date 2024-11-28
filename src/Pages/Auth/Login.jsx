@@ -10,7 +10,7 @@ import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 const Login = () => {
-  const { setUser, loading, setLoading } = useAuth();
+  const { loading, setLoading } = useAuth();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
@@ -28,7 +28,6 @@ const Login = () => {
 
         const res = await axiosPublic('/api/check');
         if (res.status === 200) {
-          setUser(res.data.user);
           localStorage.setItem('username', res?.data?.user?.name);
           navigate('/dashboard/home');
         }
