@@ -53,6 +53,7 @@ const ChangePass = ({ info }) => {
           new_password: data?.new_password,
           new_password_confirmation: data?.new_password_confirmation,
         };
+
         changePassMutation.mutate(updatedInfo);
       } else {
         toast.error('Passwords do not match!');

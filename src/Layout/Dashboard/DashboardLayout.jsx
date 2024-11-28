@@ -42,16 +42,16 @@ const DashboardLayout = () => {
   ];
   const currentPath = useLocation().pathname;
   return (
-    <div className="flex w-full font-inter max-h-[100vh] ">
+    <div className="flex w-full font-inter overflow-hidden min-h-screen max-h-screen">
       {/* sidebar */}
-      <div className="w-[20%] max-h-[100vh] p-8">
+      <div className="w-[20%] min-h-screen max-h-screen p-8 h-full flex flex-col">
         <div className="w-full -ml-9 ">
           <Link to="/">
             <img src={logo} alt="" />
           </Link>
         </div>
-        <div className="border-t border-dashed border-[#5D69F44D] my-6" />
-        <div className="flex flex-col justify-between h-full">
+        <div className="border-t border-dashed border-[#5D69F44D] my-6 " />
+        <div className="flex flex-col justify-between flex-grow">
           <ul className="space-y-2">
             {dashboardNavLinks?.map((link) => (
               <li key={link?.title}>
@@ -82,7 +82,7 @@ const DashboardLayout = () => {
         </div>
       </div>
 
-      <div className="w-full h-[100vh]">
+      <div className="w-[calc(100%-20%)] min-h-screen max-h-screen">
         {/* dashboard header */}
         <div className="w-full py-8 px-6 flex items-center justify-between">
           <div className="flex items-center gap-4">
@@ -114,7 +114,7 @@ const DashboardLayout = () => {
         </div>
 
         {/* dashboard body */}
-        <div className="bg-[#E8F1FD] h-full rounded-md p-5 !font-linik">
+        <div className="bg-[#E8F1FD] h-full rounded-md p-5 !font-linik min-h-[100%-126px] overflow-y-auto max-h-[100%-126px]">
           <Outlet />
         </div>
       </div>

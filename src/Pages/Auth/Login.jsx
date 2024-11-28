@@ -23,17 +23,22 @@ const Login = () => {
       return response.data;
     },
     onSuccess: async (data) => {
-      console.log(data.user);
       if (data.status === 'success') {
-        setUser(data?.user);
         localStorage.setItem('token', data?.token);
-        navigate('/dashboard/home');
+
+        const res = await axiosPublic('/api/check');
+        if (res.status === 200) {
+          setUser(res.data.user);
+          localStorage.setItem('username', res?.data?.user?.name);
+          navigate('/dashboard/home');
+        }
       }
       toast.success('Login successful');
       setLoading(false);
     },
     onError: (error) => {
-      console.log('login failed', error);
+      toast.error('Invalid Email or Password');
+      console.log(error);
       setLoading(false);
     },
   });
