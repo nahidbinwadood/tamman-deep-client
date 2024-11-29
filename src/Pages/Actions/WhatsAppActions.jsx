@@ -1,7 +1,7 @@
 import { BackButtonSvg, PhoneSvg, UserSvg } from '@/Components/SvgContainer';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { TextField } from '@mui/material';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { ImSpinner9 } from 'react-icons/im';
@@ -10,6 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const WhatsAppActions = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const axiosPublic = useAxiosPublic();
   const [formData, setFormData] = useState({
     type: 'whats-app',
@@ -26,6 +27,7 @@ const WhatsAppActions = () => {
 
   //submit data on db:
   const emailAction = useMutation({
+    mutationKey: ['action', 'whats-app'],
     mutationFn: async (data) => {
       const response = await axiosPublic.post('/api/action/store', data);
       return response.data;
@@ -34,6 +36,7 @@ const WhatsAppActions = () => {
       console.log(data);
       if (data.status == 'success') {
         setLoading(false);
+        queryClient.invalidateQueries(['allActions'])
         navigate('/dashboard/profiles');
         toast.success('Your action has been created successfully!');
       }

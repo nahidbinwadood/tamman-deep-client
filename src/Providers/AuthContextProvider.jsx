@@ -22,7 +22,6 @@ const AuthContextProvider = ({ children }) => {
           setUser(data?.user);
           setLoading(false);
         } catch (err) {
-          setLoading(false);
           console.log(err);
         }
       };
@@ -30,6 +29,7 @@ const AuthContextProvider = ({ children }) => {
     }
   }, [axiosPublic, token]);
 
+  console.log(user);
   const allValues = { user, setUser, loading, setLoading, userName };
   return (
     <AuthContext.Provider value={allValues}>{children}</AuthContext.Provider>

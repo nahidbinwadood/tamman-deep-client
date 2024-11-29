@@ -1,7 +1,7 @@
 import { BackButtonSvg, EmailSvg, UserSvg } from '@/Components/SvgContainer';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { TextField } from '@mui/material';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
@@ -11,6 +11,7 @@ const EmailActions = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
+  const queryClient = useQueryClient();
   const [formData, setFormData] = useState({
     type: 'Email',
     name: '',
@@ -27,6 +28,7 @@ const EmailActions = () => {
 
   //submit data on db:
   const emailAction = useMutation({
+    mutationKey: ['action', 'email'],
     mutationFn: async (data) => {
       const response = await axiosPublic.post('/api/action/store', data);
       return response.data;
@@ -34,6 +36,7 @@ const EmailActions = () => {
     onSuccess: (data) => {
       if (data.status == 'success') {
         setLoading(false);
+        queryClient.invalidateQueries(['allActions']);
         navigate('/dashboard/profiles');
         toast.success('Your action has been created successfully!');
       }
@@ -75,6 +78,7 @@ const EmailActions = () => {
               Assign Action
             </button>
             <button
+              disabled={loading}
               onClick={handleSave}
               className="px-10 py-3 h-14 w-36 flex items-center justify-center bg-white text-primaryColor border-2 border-primaryColor rounded-lg  font-semibold text-lg"
             >

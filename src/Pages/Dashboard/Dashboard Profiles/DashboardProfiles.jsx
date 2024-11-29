@@ -11,7 +11,6 @@ import {
 } from '@/Components/ui/select';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
 import { BsGrid } from 'react-icons/bs';
 import { HiOutlineBars3 } from 'react-icons/hi2';
 import { IoIosSearch } from 'react-icons/io';
@@ -26,18 +25,22 @@ const layout = [
 const DashboardProfiles = () => {
   const axiosPublic = useAxiosPublic();
 
-  const { data: allActions = [],refetch  } = useQuery({
-    queryKey: 'allActions',
+  const {
+    data: allActions = [],
+    isLoading,
+    isFetching,
+  } = useQuery({
+    queryKey: ['allActions'],
     queryFn: async () => {
       const { data } = await axiosPublic('/api/action/show');
       return data?.data?.product_types;
     },
-    staleTime: 1000 * 60 * 5,
-    retry: 1,
   });
-useEffect(()=>{
-  refetch()
-},[refetch])
+
+  if (isLoading ) {
+    return <div className='h-full w-full flex items-center justify-center'>Loading from page.... </div>;
+  }
+
   console.log(allActions);
   return (
     <div className="flex flex-col gap-6">
@@ -89,7 +92,7 @@ useEffect(()=>{
       </div>
       <div className="grid grid-cols-12 gap-6">
         <div className="col-span-4 p-5 rounded-xl flex flex-col gap-4 border bg-white">
-          <ActionCreate refetch={refetch}></ActionCreate>
+          <ActionCreate></ActionCreate>
           <CommonAction
             Icon={RiListUnordered}
             title={'Your Actions'}
