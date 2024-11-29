@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function ActionTab() {
+function ActionTab({ setOpen }) {
   const [category, setCategory] = useState('communication');
   const [data, setData] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -85,7 +86,11 @@ function ActionTab() {
               <p className="text-sm font-medium h-24">{actions.description}</p>
 
               <div className="pt-4 flex justify-end">
-                <Link to={actions?.path} className="px-4 py-2 rounded-md  bg-primaryColor text-white border border-primaryColor hover:text-primaryColor hover:bg-transparent transition duration-300">
+                <Link
+                  onClick={() => setOpen(false)}
+                  to={actions?.path}
+                  className="px-4 py-2 rounded-md  bg-primaryColor text-white border border-primaryColor hover:text-primaryColor hover:bg-transparent transition duration-300"
+                >
                   + Create
                 </Link>
               </div>
@@ -93,7 +98,6 @@ function ActionTab() {
           </div>
         ))}
       </div>
-
     </div>
   );
 }

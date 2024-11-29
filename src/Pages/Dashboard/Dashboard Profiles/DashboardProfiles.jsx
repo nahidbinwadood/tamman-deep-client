@@ -1,35 +1,43 @@
-import ActionCreate from '@/Components/Dashboard/DashboardProfile/ActionCreate';
 import CommonAction from '@/Components/Dashboard/DashboardProfile/CommonAction';
-import Product from '@/Components/Dashboard/DashboardProfile/Product';
-import Share from '@/Components/Dashboard/DashboardProfile/Share';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/Components/ui/select';
+import DashboardProfileHeader from '@/Components/Dashboard/DashboardProfile/DashboardProfileHeader';
+import TabContents from '@/Components/Dashboard/DashboardProfile/TabContents';
+import ActionShareModal from '@/Components/Modals/ActionShareModal';
+import CreateActionModal from '@/Components/Modals/CreateActionModal';
+import Modal from '@/Components/Modals/Modal';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
-import { BsGrid } from 'react-icons/bs';
-import { HiOutlineBars3 } from 'react-icons/hi2';
-import { IoIosSearch } from 'react-icons/io';
-import { MdOutlineQrCodeScanner, MdSort } from 'react-icons/md';
+import { useState } from 'react';
+import { FaAddressCard } from 'react-icons/fa6';
+import { HiPlusCircle } from 'react-icons/hi2';
+import { MdContentCopy } from 'react-icons/md';
 import { RiListUnordered } from 'react-icons/ri';
-
-const layout = [
-  { icon: <BsGrid />, id: 2 },
-  { icon: <HiOutlineBars3 />, id: 1 },
-];
 
 const DashboardProfiles = () => {
   const axiosPublic = useAxiosPublic();
+  const [open, setOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('My Cards');
 
-  const {
-    data: allActions = [],
-    isLoading,
-    isFetching,
-  } = useQuery({
+  const allTabs = [
+    {
+      title: 'My Cards',
+      Icon: FaAddressCard,
+    },
+    {
+      title: 'Create Action',
+      Icon: HiPlusCircle,
+    },
+    {
+      title: 'Your Actions',
+      Icon: RiListUnordered,
+    },
+    {
+      title: 'Share',
+      Icon: MdContentCopy,
+    },
+  ];
+
+  //fetching data from Db:
+  const { data: allActions = [], isLoading } = useQuery({
     queryKey: ['allActions'],
     queryFn: async () => {
       const { data } = await axiosPublic('/api/action/show');
@@ -37,79 +45,53 @@ const DashboardProfiles = () => {
     },
   });
 
-  if (isLoading ) {
-    return <div className='h-full w-full flex items-center justify-center'>Loading from page.... </div>;
+  //if Loading:
+
+  if (isLoading) {
+    return (
+      <div className="h-full w-full flex items-center justify-center">
+        Loading from page....{' '}
+      </div>
+    );
   }
 
-  console.log(allActions);
+
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-center justify-between">
-        {/* left */}
-        <div className="flex items-center gap-3">
-          <Select>
-            <SelectTrigger className="w-[120px] font-inter text-textColor py-[22px] bg-white">
-              <SelectValue placeholder="Filter" />
-            </SelectTrigger>
-            <SelectContent className={'font-inter'}>
-              <SelectItem value="lower">Lower</SelectItem>
-              <SelectItem value="=Higher">Higher</SelectItem>
-              <SelectItem value="medium">Medium</SelectItem>
-            </SelectContent>
-          </Select>
-          <div className="flex items-center gap-3">
-            {layout.map((icon) => (
-              <div
-                key={icon.id}
-                className="px-4 cursor-pointer py-3.5 rounded-md border bg-white "
-              >
-                {icon.icon}
-              </div>
-            ))}
-          </div>
-        </div>
-        {/* right */}
-        <div className="flex items-center gap-3">
-          <div className="px-4 cursor-pointer py-3 rounded-md border bg-white flex items-center gap-4">
-            <IoIosSearch size={26} />
-            <input
-              className="w-full bg-inherit focus:outline-none text-sm text-textColor h-full "
-              type="text"
-              placeholder="Search"
-              name=""
-              id=""
-            />
-          </div>
-          <div className="px-4 cursor-pointer text-textColor py-3 border rounded-md bg-white flex items-center gap-3">
-            <MdSort size={24} />
-            <h4 className="text-sm font-medium text-textColor ">Sort</h4>
-          </div>
-          <div className="px-4 cursor-pointer text-textColor py-3 border rounded-md bg-white flex items-center gap-3">
-            <MdOutlineQrCodeScanner size={22} />
-            <h4 className="text-sm font-medium text-textColor ">Scan</h4>
-          </div>
-        </div>
-      </div>
+      {/* header */}
+      <DashboardProfileHeader />
+
+      {/* body */}
       <div className="grid grid-cols-12 gap-6">
-        <div className="col-span-4 p-5 rounded-xl flex flex-col gap-4 border bg-white">
-          <ActionCreate></ActionCreate>
-          <CommonAction
-            Icon={RiListUnordered}
-            title={'Your Actions'}
-          ></CommonAction>
-          <Share></Share>
+        {/* Left Section */}
+        <div className="col-span-4 p-5 h-fit rounded-xl flex flex-col gap-4 border bg-white">
+          {allTabs?.map((tab) => (
+            <CommonAction
+              key={tab?.title}
+              tab={tab}
+              setOpen={setOpen}
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+            />
+          ))}
         </div>
-        <div className="col-span-8 p-5 rounded-xl border bg-white">
-          <h4 className="font-normal text-textDark pb-4 ">
-            List of Items {allActions[0]?.data.length}
-          </h4>
-          <div className="space-y-3">
-            <Product></Product>
-            <Product></Product>
-            <Product></Product>
-          </div>
-        </div>
+
+        {/* Right Section */}
+        <TabContents activeTab={activeTab} allActions={allActions} />
       </div>
+
+      {/* Modals */}
+
+      {activeTab == 'Create Action' && (
+        <Modal open={open} setOpen={setOpen} setActiveTab={setActiveTab}>
+          <CreateActionModal setOpen={setOpen} />
+        </Modal>
+      )}
+      {activeTab == 'Share' && (
+        <Modal open={open} setOpen={setOpen} setActiveTab={setActiveTab}>
+          <ActionShareModal setOpen={setOpen} />
+        </Modal>
+      )}
     </div>
   );
 };

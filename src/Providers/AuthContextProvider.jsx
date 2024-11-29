@@ -29,7 +29,6 @@ const AuthContextProvider = ({ children }) => {
     }
   }, [axiosPublic, token]);
 
-  console.log(user);
   const allValues = { user, setUser, loading, setLoading, userName };
   return (
     <AuthContext.Provider value={allValues}>{children}</AuthContext.Provider>

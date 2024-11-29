@@ -51,7 +51,7 @@ const DashboardLayout = () => {
   const currentPath = useLocation().pathname;
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
-  const { setUser, setLoading,userName } = useAuth();
+  const { setUser, setLoading, userName } = useAuth();
 
   //functions:
   function clearToken() {
@@ -149,7 +149,7 @@ const DashboardLayout = () => {
         </div>
 
         {/* dashboard body */}
-        <div className="bg-[#E8F1FD] h-full rounded-md p-5 !font-linik min-h-[100%-126px] overflow-y-auto max-h-[100%-126px]">
+        <div className="bg-[#E8F1FD] h-full rounded-md p-5 !font-linik min-h-[100%-126px] overflow-y-auto max-h-[100%-126px] ">
           <Outlet />
         </div>
       </div>
