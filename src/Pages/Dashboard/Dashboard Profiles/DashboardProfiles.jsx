@@ -1,6 +1,7 @@
 import CommonAction from '@/Components/Dashboard/DashboardProfile/CommonAction';
 import DashboardProfileHeader from '@/Components/Dashboard/DashboardProfile/DashboardProfileHeader';
 import TabContents from '@/Components/Dashboard/DashboardProfile/TabContents';
+import Loader from '@/Components/Loaders/Loader';
 import ActionShareModal from '@/Components/Modals/ActionShareModal';
 import CreateActionModal from '@/Components/Modals/CreateActionModal';
 import Modal from '@/Components/Modals/Modal';
@@ -49,12 +50,11 @@ const DashboardProfiles = () => {
 
   if (isLoading) {
     return (
-      <div className="h-full w-full flex items-center justify-center">
-        Loading from page....{' '}
+      <div className="h-[70vh] w-full flex items-center justify-center">
+        <Loader />
       </div>
     );
   }
-
 
   return (
     <div className="flex flex-col gap-6">
