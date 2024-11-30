@@ -1,11 +1,6 @@
-import {
-  CatalogueSvg,
-  HamburgerSvg,
-  PhoneSvg,
-  UserSvg,
-} from '@/Components/SvgContainer';
+import { CatalogueSvg, PhoneSvg, UserSvg } from '@/Components/SvgContainer';
 import { TextField } from '@mui/material';
-import { AddImagePlusSvg, BackButtonSvg } from '@/Components/SvgContainer';
+import { BackButtonSvg } from '@/Components/SvgContainer';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
@@ -14,7 +9,6 @@ import { ImSpinner9 } from 'react-icons/im';
 import { Link, useNavigate } from 'react-router-dom';
 
 const ProductCatalogue = () => {
-  const [profilePhoto, setProfilePhoto] = useState('');
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(false);
   const axiosPublic = useAxiosPublic();
