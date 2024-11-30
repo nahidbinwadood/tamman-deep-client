@@ -18,7 +18,7 @@ function Product({ item }) {
       </div>
       <div className="flex-1">
         <Switch
-          checked={item?.status=='active'}
+          checked={isChecked}
           onCheckedChange={()=>setIsChecked(!isChecked)}
           className={'data-[state=checked]:bg-[#23C0B6]'}
         />
