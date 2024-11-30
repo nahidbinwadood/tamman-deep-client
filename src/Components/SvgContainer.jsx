@@ -1463,7 +1463,6 @@ export function InfoSvg() {
     </svg>
   );
 }
-
 export function BackButtonSvg({light}) {
   return (
     <svg
