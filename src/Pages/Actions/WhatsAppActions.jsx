@@ -2,13 +2,14 @@ import { BackButtonSvg, PhoneSvg, UserSvg } from '@/Components/SvgContainer';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { TextField } from '@mui/material';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { ImSpinner9 } from 'react-icons/im';
 import { Link, useNavigate } from 'react-router-dom';
 
 const WhatsAppActions = () => {
   const [loading, setLoading] = useState(false);
+  const [active, setActive] = useState(false);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const axiosPublic = useAxiosPublic();
@@ -17,6 +18,7 @@ const WhatsAppActions = () => {
     name: '',
     number: '',
     description: '',
+    status: 'inactive',
   });
 
   ///handle form Data:
@@ -36,7 +38,7 @@ const WhatsAppActions = () => {
       console.log(data);
       if (data.status == 'success') {
         setLoading(false);
-        queryClient.invalidateQueries(['allActions'])
+        queryClient.invalidateQueries(['allActions']);
         navigate('/dashboard/profiles');
         toast.success('Your action has been created successfully!');
       }
@@ -48,11 +50,25 @@ const WhatsAppActions = () => {
     },
   });
 
+  //functions:
   const handleSave = () => {
     setLoading(true);
     emailAction.mutate(formData);
     // navigate to profile page
   };
+
+  //useEffect:
+  useEffect(() => {
+    if (
+      formData.name.length > 0 &&
+      formData.number.length > 0 &&
+      formData.description.length > 0
+    ) {
+      setActive(true);
+    } else {
+      setActive(false);
+    }
+  }, [formData]);
 
   return (
     <>
@@ -79,8 +95,11 @@ const WhatsAppActions = () => {
               Assign Action
             </button>
             <button
+              disabled={!active}
               onClick={handleSave}
-              className="px-10 py-3 h-14 w-36 flex items-center justify-center bg-white text-primaryColor border-2 border-primaryColor rounded-lg  font-semibold text-lg"
+              className={`px-10 py-3 h-14 w-36 flex items-center justify-center bg-white text-primaryColor border-2 border-primaryColor rounded-lg  font-semibold text-lg ${
+                !active ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'
+              }`}
             >
               {loading ? (
                 <ImSpinner9 className="animate-spin size-5" />
@@ -130,7 +149,7 @@ const WhatsAppActions = () => {
                   label="Description"
                   variant="outlined"
                   fullWidth
-                  name='description'
+                  name="description"
                   value={formData?.description}
                   onChange={handleChange}
                 />

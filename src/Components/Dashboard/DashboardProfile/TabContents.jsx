@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import ActionShow from './ActionShow';
 import Product from './Product';
 
 const TabContents = ({ activeTab, allActions }) => {
@@ -7,43 +8,27 @@ const TabContents = ({ activeTab, allActions }) => {
       id: 1,
       cardSerial: 1,
       userType: 'Premium',
-      status:"active"
-    },
-    {
-      id: 2,
-      cardSerial: 2,
-      userType: 'Premium',
-      status:"inactive"
-    },
-    {
-      id: 3,
-      cardSerial: 3,
-      userType: 'Premium',
-      status:"inactive"
+      status: 'active',
     },
   ];
 
-  const actions = allActions.map((action) => ({
-    type: action.name,
-    data: action.data.flatMap((item) => item.data), // Flatten the data into a single array
-  }));
-  const data = actions?.flatMap((item) => item.data);
 
-  console.log(data);
+
+  console.log(allActions);
   return (
     <div className="col-span-8 p-5 rounded-xl border bg-white h-fit">
       <h4 className="font-normal text-textDark pb-4 ">
-        List of {activeTab == 'My Cards' ? 'Cards' : 'Actions'}
+        List of {activeTab == `My Cards` ? `Cards ( ${cards.length} )` : `Actions ( ${allActions.length} )`}
       </h4>
 
       <div className="space-y-3">
         {activeTab == 'My Cards'
-          ? cards?.map((item, index) => <Product key={index} item={item} />) || (
-              <p>No items found</p>
-            )
-          : data?.map((item, index) => <Product key={index} item={item} />) || (
-              <p>No items found</p>
-            )}
+          ? cards?.map((item, index) => (
+              <Product key={index} item={item} />
+            )) || <p>No items found</p>
+          : allActions?.map((item, index) => (
+              <ActionShow key={index} item={item} />
+            )) || <p>No items found</p>}
       </div>
     </div>
   );

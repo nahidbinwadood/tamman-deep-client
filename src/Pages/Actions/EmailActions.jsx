@@ -2,13 +2,14 @@ import { BackButtonSvg, EmailSvg, UserSvg } from '@/Components/SvgContainer';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { TextField } from '@mui/material';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { ImSpinner9 } from 'react-icons/im';
 
 const EmailActions = () => {
   const [loading, setLoading] = useState(false);
+  const [active, setActive] = useState(false);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
   const queryClient = useQueryClient();
@@ -18,6 +19,7 @@ const EmailActions = () => {
     email: '',
     subject: '',
     description: '',
+    status: 'inactive',
   });
 
   ///handle form Data:
@@ -53,6 +55,20 @@ const EmailActions = () => {
     emailAction.mutate(formData);
     // navigate to profile page
   };
+
+  //useEffect:
+  useEffect(() => {
+    if (
+      formData.name.length > 0 &&
+      formData.email.length > 0 &&
+      formData.subject.length > 0 &&
+      formData.description.length > 0
+    ) {
+      setActive(true);
+    } else {
+      setActive(false);
+    }
+  }, [formData]);
   return (
     <>
       <div className="shadow-md font-inter bg-gradient-to-l from-[#116DFF] to-[#23C0B6]">
@@ -78,9 +94,11 @@ const EmailActions = () => {
               Assign Action
             </button>
             <button
-              disabled={loading}
+              disabled={!active}
               onClick={handleSave}
-              className="px-10 py-3 h-14 w-36 flex items-center justify-center bg-white text-primaryColor border-2 border-primaryColor rounded-lg  font-semibold text-lg"
+              className={`px-10 py-3 h-14 w-36 flex items-center justify-center bg-white text-primaryColor border-2 border-primaryColor rounded-lg  font-semibold text-lg ${
+                !active ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'
+              }`}
             >
               {loading ? (
                 <ImSpinner9 className="animate-spin size-5" />
