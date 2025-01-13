@@ -15,7 +15,8 @@ const TabContents = ({ activeTab, allActions }) => {
   const [activeItemId, setActiveItemId] = useState(null);
 
   const handleToggle = (itemId) => {
-    setActiveItemId(activeItemId === itemId ? null : itemId);
+    // Set the active item ID, deactivate all others
+    setActiveItemId(itemId);
   };
   return (
     <div className="col-span-8 p-5 rounded-xl border bg-white h-fit">

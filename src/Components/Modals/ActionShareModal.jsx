@@ -3,7 +3,11 @@ import { RiLinkM, RiMessage2Line } from 'react-icons/ri';
 import { DialogContent } from '@/Components/ui/dialog';
 import { MdContentCopy, MdOutlineMailOutline } from 'react-icons/md';
 
-const ActionShareModal = ({ setOpen }) => {
+const ActionShareModal = ({ setOpen,qrCode }) => {
+  console.log(`${import.meta.env.VITE_API_URL}/${qrCode}`);
+
+  const qrCodeImage=`${import.meta.env.VITE_API_URL}/${qrCode}`
+
   return (
     <DialogContent className={'max-w-2xl font-inter'}>
       <div className="w-full p-8 ">
@@ -69,7 +73,7 @@ const ActionShareModal = ({ setOpen }) => {
 
         <div className="flex relative justify-center pt-8 flex-col items-center">
           <div className="w-[200px]">
-            <img src="https://i.imghippo.com/files/Op4816nHo.png" alt="" />
+            <img src={`${qrCodeImage? qrCodeImage :"https://i.imghippo.com/files/Op4816nHo.png"}`} alt="" />
           </div>
           <div className="flex items-center gap-6 pt-6">
             <button

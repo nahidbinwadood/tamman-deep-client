@@ -42,7 +42,7 @@ const DashboardProfiles = () => {
     queryKey: ['allActions'],
     queryFn: async () => {
       const { data } = await axiosPublic('/api/action/show');
-      return data?.data?.product_types;
+      return data?.data;
     },
   });
 
@@ -77,7 +77,10 @@ const DashboardProfiles = () => {
         </div>
 
         {/* Right Section */}
-        <TabContents activeTab={activeTab} allActions={allActions} />
+        <TabContents
+          activeTab={activeTab}
+          allActions={allActions?.product_types}
+        />
       </div>
 
       {/* Modals */}
@@ -89,7 +92,7 @@ const DashboardProfiles = () => {
       )}
       {activeTab == 'Share' && (
         <Modal open={open} setOpen={setOpen} setActiveTab={setActiveTab}>
-          <ActionShareModal setOpen={setOpen} />
+          <ActionShareModal setOpen={setOpen} qrCode={allActions?.qrcode} />
         </Modal>
       )}
     </div>
