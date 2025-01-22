@@ -25,9 +25,7 @@ import toast from 'react-hot-toast';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ImSpinner9 } from 'react-icons/im';
-import { IoCall } from 'react-icons/io5';
-import { FaMessage } from 'react-icons/fa6';
-import { IoMdMail } from 'react-icons/io';
+import ContactPreview from '@/Components/LivePreview/ContactPreview';
 
 const ContactCardAction = () => {
   //states:
@@ -98,6 +96,7 @@ const ContactCardAction = () => {
     }
   };
 
+  console.log(formData);
   //save the data on db:
   const contactCardMutation = useMutation({
     mutationKey: ['action', 'contactCard'],
@@ -356,19 +355,19 @@ const ContactCardAction = () => {
             </div>
             <div className="flex-1 space-y-4">
               <TextField
-                label="Enter Your Number"
-                variant="outlined"
-                fullWidth
-                name="number"
-                value={formData?.number}
-                onChange={handleChange}
-              />
-              <TextField
                 label="Enter Your Office Number"
                 variant="outlined"
                 fullWidth
                 name="officeNumber"
                 value={formData?.officeNumber}
+                onChange={handleChange}
+              />
+              <TextField
+                label="Enter Your Number"
+                variant="outlined"
+                fullWidth
+                name="number"
+                value={formData?.number}
                 onChange={handleChange}
               />
             </div>
@@ -400,137 +399,7 @@ const ContactCardAction = () => {
 
         {/* live preview */}
 
-        <div className="w-[450px] font-inter rounded-xl overflow-hidden shadow-xl h-fit">
-          {/* img */}
-          <div>
-            <div className="h-56 bg-[#D2E3FC] rounded-xl relative">
-              <div className="h-56 w-full absolute inset-0 top-0 left-0">
-                <img
-                  className="w-full h-full object-cover rounded-t-xl"
-                  src="https://app.v1ce.co.uk/uploads/users/191509/images/191509_6783ec8fbc646.jpeg"
-                  alt="Cover"
-                />
-              </div>
-            </div>
-            <div className="w-full flex items-center justify-center relative">
-              <div className="size-32 -mt-16 z-10 relative">
-                <img
-                  className="h-full w-full object-cover rounded-full"
-                  src="https://app.v1ce.co.uk/uploads/users/191509/images/191509_6783ec8fbc646.jpeg"
-                  alt="Profile"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* information */}
-          <div className="space-y-5 mt-5 mb-10 px-6">
-            {/* title */}
-            <div className="text-center space-y-2">
-              <h4 className=" text-2xl font-semibold text-[#555]">
-                Tamandeep Kobar
-              </h4>
-
-              {/* position */}
-              <div className="w-full flex items-center justify-center gap-2 text-[#555]">
-                <p>Company Name</p>
-                <p>|</p>
-                <p>Position</p>
-              </div>
-            </div>
-
-            {/* actions */}
-            <div className="w-full flex items-center justify-center gap-5">
-              <Link
-                to="tel: +441276474643"
-                className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] px-6 py-3 rounded-md"
-              >
-                <IoCall className="text-white size-5" />
-              </Link>
-              <Link
-                to="sms: +441276474643"
-                className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] px-6 py-3 rounded-md"
-              >
-                <FaMessage className="text-white size-5" />
-              </Link>
-              <Link
-                to="sms: +441276474643"
-                className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] px-6 py-3 rounded-md"
-              >
-                <IoMdMail className="text-white size-5" />
-              </Link>
-            </div>
-
-            {/* contact */}
-            <div className="space-y-4">
-              {/* office */}
-              <div className="bg-[#efefef] p-5 rounded-md w-full flex items-center justify-between">
-                <div className="space-y-2">
-                  <p className="text-primaryColor">Office</p>
-                  <p className="text-[#555] font-medium">+441276474643</p>
-                </div>
-                <div className="flex items-center gap-4 justify-center">
-                  <Link
-                    to="tel: +441276474643"
-                    className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] size-8 flex items-center justify-center rounded-md"
-                  >
-                    <IoCall className="text-white size-4" />
-                  </Link>
-                  <Link
-                    to="sms: +441276474643"
-                    className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] size-8 flex items-center justify-center rounded-md"
-                  >
-                    <FaMessage className="text-white size-4" />
-                  </Link>
-                </div>
-              </div>
-
-              {/* personal */}
-              <div className="bg-[#efefef] p-5 rounded-md w-full flex items-center justify-between">
-                <div className="space-y-2">
-                  <p className="text-primaryColor">Personal</p>
-                  <p className="text-[#555] font-medium">+441276474643</p>
-                </div>
-                <div className="flex items-center gap-4 justify-center">
-                  <Link
-                    to="tel: +441276474643"
-                    className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] size-8 flex items-center justify-center rounded-md"
-                  >
-                    <IoCall className="text-white size-4" />
-                  </Link>
-                  <Link
-                    to="sms: +441276474643"
-                    className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] size-8 flex items-center justify-center rounded-md"
-                  >
-                    <FaMessage className="text-white size-4" />
-                  </Link>
-                </div>
-              </div>
-
-              {/* email */}
-              <div className="bg-[#efefef] p-5 rounded-md w-full flex items-center justify-between">
-                <div className="space-y-2">
-                  <p className="text-primaryColor">Email</p>
-                  <p className="text-[#555] font-medium">info@TechVise.co.uk</p>
-                </div>
-                <div className="flex items-center gap-4 justify-center">
-                  <Link
-                    to="mailto: info@TechVise.co.uk"
-                    className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] size-8 flex items-center justify-center rounded-md"
-                  >
-                    <IoMdMail className="text-white size-4" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* save button */}
-
-            <div>
-              <Link className='bg-gradient-to-l from-[#116DFF] to-[#23C0B6]  w-full block text-white text-center py-3 rounded-md font-medium'>Add to Contact</Link>
-            </div>
-          </div>
-        </div>
+        <ContactPreview formData={formData} />
       </div>
     </>
   );
