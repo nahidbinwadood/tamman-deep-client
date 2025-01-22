@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Switch } from '@/Components/ui/switch';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { LuEye } from 'react-icons/lu';
@@ -18,6 +18,7 @@ const ActionShow = ({ item, isActive, onToggle }) => {
       try {
         const response = await axiosPublic(`/api/action/status/${id}`);
         toast.success('Status updated successfully!', { id: toastId }); // Replace loading with success
+        console.log(response?.data);
         return response.data;
       } catch (error) {
         toast.error('Failed to update status!', { id: toastId }); // Replace loading with error

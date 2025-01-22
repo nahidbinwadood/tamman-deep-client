@@ -18,6 +18,8 @@ const TabContents = ({ activeTab, allActions }) => {
     // Set the active item ID, deactivate all others
     setActiveItemId(itemId);
   };
+
+  console.log(allActions);
   return (
     <div className="col-span-8 p-5 rounded-xl border bg-white h-fit">
       <h4 className="font-normal text-textDark pb-4 ">

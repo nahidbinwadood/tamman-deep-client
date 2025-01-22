@@ -25,6 +25,9 @@ import toast from 'react-hot-toast';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ImSpinner9 } from 'react-icons/im';
+import { IoCall } from 'react-icons/io5';
+import { FaMessage } from 'react-icons/fa6';
+import { IoMdMail } from 'react-icons/io';
 
 const ContactCardAction = () => {
   //states:
@@ -36,26 +39,17 @@ const ContactCardAction = () => {
     type: 'contact-card',
     image: '',
     cover_image: '',
-    firstName: '',
-    lastName: '',
+    fullName: '',
     companyName: '',
     position: '',
-    month: '',
-    day: '',
-    year: '',
-    street1: '',
-    street2: '',
-    postalCode: '',
-    city: '',
-    country: '',
-    postalCodePosition: '',
-    state: '',
+    // month: '',
+    // day: '',
+    // year: '',
+    address: '',
     number: '',
     officeNumber: '',
     mail: '',
-    secondaryMail: '',
     website: '',
-    secondaryWebsite: '',
     status: 'inactive',
   });
 
@@ -109,7 +103,7 @@ const ContactCardAction = () => {
     mutationKey: ['action', 'contactCard'],
     mutationFn: async (data) => {
       const response = await axiosPublic.post('/api/action/store', data, {
-        headers: { 'Content-Type': 'multipart/form-data'},
+        headers: { 'Content-Type': 'multipart/form-data' },
       });
       return response.data;
     },
@@ -130,8 +124,9 @@ const ContactCardAction = () => {
   });
   const handleSave = () => {
     console.log(formData);
+
     setLoading(true);
-    contactCardMutation.mutate(formData);
+    //contactCardMutation.mutate(formData);
     // navigate to profile page
   };
 
@@ -191,8 +186,8 @@ const ContactCardAction = () => {
       </div>
 
       {/* action body */}
-      <div className="flex items-center justify-center mx-auto max-w-[650px] pb-20">
-        <form className="w-full p-8 rounded-2xl bg-white shadow-lg">
+      <div className="flex gap-12 justify-center mx-auto w-full py-20">
+        <form className="w-full p-8 rounded-2xl bg-white shadow-lg max-w-[650px]">
           {/* image section */}
           <div>
             <div className="h-56 bg-[#D2E3FC] rounded-xl relative">
@@ -266,19 +261,11 @@ const ContactCardAction = () => {
             </div>
             <div className="flex-1 space-y-5">
               <TextField
-                label="First Name"
+                label="Full Name"
                 variant="outlined"
                 fullWidth
-                name="firstName"
-                value={formData?.firstName}
-                onChange={handleChange}
-              />
-              <TextField
-                label="Last Name"
-                variant="outlined"
-                fullWidth
-                name="lastName"
-                value={formData?.lastName}
+                name="fullName"
+                value={formData?.fullName}
                 onChange={handleChange}
               />
               <TextField
@@ -297,7 +284,7 @@ const ContactCardAction = () => {
                 value={formData?.position}
                 onChange={handleChange}
               />
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 hidden">
                 <div className="w-[55%]">
                   <Select
                     onValueChange={handleMonthChange}
@@ -354,59 +341,11 @@ const ContactCardAction = () => {
             </div>
             <div className="flex-1 space-y-4">
               <TextField
-                label="Street 1"
+                label="Address"
                 variant="outlined"
                 fullWidth
-                name="street1"
-                value={formData?.street1}
-                onChange={handleChange}
-              />
-              <TextField
-                label="Street 2"
-                variant="outlined"
-                fullWidth
-                name="street2"
-                value={formData?.street2}
-                onChange={handleChange}
-              />
-              <TextField
-                label="Postal Code"
-                variant="outlined"
-                fullWidth
-                name="postalCode"
-                value={formData?.postalCode}
-                onChange={handleChange}
-              />
-              <TextField
-                label="City"
-                variant="outlined"
-                fullWidth
-                name="city"
-                value={formData?.city}
-                onChange={handleChange}
-              />
-              <TextField
-                label="Country"
-                variant="outlined"
-                fullWidth
-                name="country"
-                value={formData?.country}
-                onChange={handleChange}
-              />
-              <TextField
-                label="Postal Code Position"
-                variant="outlined"
-                fullWidth
-                name="postalCodePosition"
-                value={formData?.postalCodePosition}
-                onChange={handleChange}
-              />
-              <TextField
-                label="State"
-                variant="outlined"
-                fullWidth
-                name="state"
-                value={formData?.state}
+                name="address"
+                value={formData?.address}
                 onChange={handleChange}
               />
             </div>
@@ -448,14 +387,6 @@ const ContactCardAction = () => {
                 onChange={handleChange}
               />
               <TextField
-                label="Enter Your Secondary Mail"
-                variant="outlined"
-                fullWidth
-                name="secondaryMail"
-                value={formData?.secondaryMail}
-                onChange={handleChange}
-              />
-              <TextField
                 label="Enter Your Website Link"
                 variant="outlined"
                 fullWidth
@@ -463,19 +394,144 @@ const ContactCardAction = () => {
                 value={formData?.website}
                 onChange={handleChange}
               />
-              <TextField
-                label="Enter Your Secondary Website Link"
-                variant="outlined"
-                fullWidth
-                name="secondaryWebsite"
-                value={formData?.secondaryWebsite}
-                onChange={handleChange}
-              />
             </div>
           </div>
         </form>
+
+        {/* live preview */}
+
+        <div className="w-[450px] font-inter rounded-xl overflow-hidden shadow-xl h-fit">
+          {/* img */}
+          <div>
+            <div className="h-56 bg-[#D2E3FC] rounded-xl relative">
+              <div className="h-56 w-full absolute inset-0 top-0 left-0">
+                <img
+                  className="w-full h-full object-cover rounded-t-xl"
+                  src="https://app.v1ce.co.uk/uploads/users/191509/images/191509_6783ec8fbc646.jpeg"
+                  alt="Cover"
+                />
+              </div>
+            </div>
+            <div className="w-full flex items-center justify-center relative">
+              <div className="size-32 -mt-16 z-10 relative">
+                <img
+                  className="h-full w-full object-cover rounded-full"
+                  src="https://app.v1ce.co.uk/uploads/users/191509/images/191509_6783ec8fbc646.jpeg"
+                  alt="Profile"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* information */}
+          <div className="space-y-5 mt-5 mb-10 px-6">
+            {/* title */}
+            <div className="text-center space-y-2">
+              <h4 className=" text-2xl font-semibold text-[#555]">
+                Tamandeep Kobar
+              </h4>
+
+              {/* position */}
+              <div className="w-full flex items-center justify-center gap-2 text-[#555]">
+                <p>Company Name</p>
+                <p>|</p>
+                <p>Position</p>
+              </div>
+            </div>
+
+            {/* actions */}
+            <div className="w-full flex items-center justify-center gap-5">
+              <Link
+                to="tel: +441276474643"
+                className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] px-6 py-3 rounded-md"
+              >
+                <IoCall className="text-white size-5" />
+              </Link>
+              <Link
+                to="sms: +441276474643"
+                className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] px-6 py-3 rounded-md"
+              >
+                <FaMessage className="text-white size-5" />
+              </Link>
+              <Link
+                to="sms: +441276474643"
+                className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] px-6 py-3 rounded-md"
+              >
+                <IoMdMail className="text-white size-5" />
+              </Link>
+            </div>
+
+            {/* contact */}
+            <div className="space-y-4">
+              {/* office */}
+              <div className="bg-[#efefef] p-5 rounded-md w-full flex items-center justify-between">
+                <div className="space-y-2">
+                  <p className="text-primaryColor">Office</p>
+                  <p className="text-[#555] font-medium">+441276474643</p>
+                </div>
+                <div className="flex items-center gap-4 justify-center">
+                  <Link
+                    to="tel: +441276474643"
+                    className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] size-8 flex items-center justify-center rounded-md"
+                  >
+                    <IoCall className="text-white size-4" />
+                  </Link>
+                  <Link
+                    to="sms: +441276474643"
+                    className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] size-8 flex items-center justify-center rounded-md"
+                  >
+                    <FaMessage className="text-white size-4" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* personal */}
+              <div className="bg-[#efefef] p-5 rounded-md w-full flex items-center justify-between">
+                <div className="space-y-2">
+                  <p className="text-primaryColor">Personal</p>
+                  <p className="text-[#555] font-medium">+441276474643</p>
+                </div>
+                <div className="flex items-center gap-4 justify-center">
+                  <Link
+                    to="tel: +441276474643"
+                    className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] size-8 flex items-center justify-center rounded-md"
+                  >
+                    <IoCall className="text-white size-4" />
+                  </Link>
+                  <Link
+                    to="sms: +441276474643"
+                    className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] size-8 flex items-center justify-center rounded-md"
+                  >
+                    <FaMessage className="text-white size-4" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* email */}
+              <div className="bg-[#efefef] p-5 rounded-md w-full flex items-center justify-between">
+                <div className="space-y-2">
+                  <p className="text-primaryColor">Email</p>
+                  <p className="text-[#555] font-medium">info@TechVise.co.uk</p>
+                </div>
+                <div className="flex items-center gap-4 justify-center">
+                  <Link
+                    to="mailto: info@TechVise.co.uk"
+                    className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] size-8 flex items-center justify-center rounded-md"
+                  >
+                    <IoMdMail className="text-white size-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* save button */}
+
+            <div>
+              <Link className='bg-gradient-to-l from-[#116DFF] to-[#23C0B6]  w-full block text-white text-center py-3 rounded-md font-medium'>Add to Contact</Link>
+            </div>
+          </div>
+        </div>
       </div>
-       
     </>
   );
 };
