@@ -7,31 +7,67 @@ import profileImg from '../../assets/images/profile.png';
 import coverImg from '../../assets/images/cover-bg.webp';
 const ContactPreview = ({ formData }) => {
   const handleSaveContact = () => {
-    // Create vCard format string
+    // Create a more detailed vCard format string
     const vcard = [
       'BEGIN:VCARD',
       'VERSION:3.0',
       `FN:${formData.fullName}`,
-      `TEL;TYPE=CELL:${formData.officeNumber}`,
-      `EMAIL:${formData.mail}`,
+      `N:${formData.fullName.split(' ').slice(-1)[0]};${formData.fullName
+        .split(' ')
+        .slice(0, -1)
+        .join(' ')};;;`,
+      `ORG:${formData.companyName}`,
+      `TITLE:${formData.position}`,
+      `TEL;type=WORK:${formData.officeNumber}`,
+      `TEL;type=CELL:${formData.number}`,
+      `EMAIL;type=WORK:${formData.mail}`,
+      `ADR;type=WORK:;;${formData.address};;;;`,
+      `URL:${formData.website}`,
       'END:VCARD',
-    ].join('\n');
+    ].join('\r\n');
 
-    // Create blob and download link
-    const blob = new Blob([vcard], { type: 'text/vcard' });
+    // Create blob with correct MIME type and encoding
+    const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
     const url = window.URL.createObjectURL(blob);
 
-    // Create temporary link and trigger download
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', `${formData.fullName}.vcf`);
-    document.body.appendChild(link);
-    link.click();
+    // Check if device is mobile
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      // For mobile devices, try to use the native sharing functionality
+      if (navigator.share) {
+        const file = new File([blob], `${formData.fullName}.vcf`, {
+          type: 'text/vcard',
+        });
+        navigator
+          .share({
+            files: [file],
+            title: `Contact: ${formData.fullName}`,
+          })
+          .catch(() => {
+            // Fallback to direct download if sharing fails
+            window.location.href = url;
+          });
+      } else {
+        // Fallback for mobile browsers that don't support sharing
+        window.location.href = url;
+      }
+    } else {
+      // For desktop, use traditional download approach
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `${formData.fullName}.vcf`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
 
     // Cleanup
-    document.body.removeChild(link);
-    window.URL.revokeObjectURL(url);
+    setTimeout(() => {
+      window.URL.revokeObjectURL(url);
+    }, 100);
   };
+
   return (
     <div className="w-[450px] font-inter rounded-xl overflow-hidden shadow-xl h-fit">
       {/* img */}
@@ -206,7 +242,7 @@ const ContactPreview = ({ formData }) => {
         <div>
           <button
             onClick={handleSaveContact}
-            className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6]  w-full block text-white text-center py-3 rounded-md font-medium"
+            className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] w-full block text-white text-center py-3 rounded-md font-medium"
           >
             Add to Contact
           </button>
