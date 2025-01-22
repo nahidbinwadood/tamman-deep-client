@@ -3,8 +3,8 @@ import { FaEarthAfrica, FaMessage } from 'react-icons/fa6';
 import { IoMdMail } from 'react-icons/io';
 import { IoCall, IoLocationSharp } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
-import profileImg from '../../assets/images/profile.png';
-import coverImg from '../../assets/images/cover-bg.webp';
+import profileImg from '@/assets/images/profile.png';
+import coverImg from '@/assets/images/cover-bg.webp';
 const ContactPreview = ({ formData }) => {
   const handleSaveContact = () => {
     // Create a more detailed vCard format string

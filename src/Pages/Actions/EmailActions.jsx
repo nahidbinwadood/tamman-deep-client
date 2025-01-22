@@ -1,4 +1,9 @@
-import { BackButtonSvg, EmailSvg, UserSvg } from '@/Components/SvgContainer';
+import {
+  AddImagePlusSvg,
+  BackButtonSvg,
+  EmailSvg,
+  UserSvg,
+} from '@/Components/SvgContainer';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { TextField } from '@mui/material';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -6,7 +11,8 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { ImSpinner9 } from 'react-icons/im';
-
+import profile from '@/assets/images/profile.png';
+import EmailPreview from '@/Components/LivePreview/EmailPreview';
 const EmailActions = () => {
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(false);
@@ -15,10 +21,9 @@ const EmailActions = () => {
   const queryClient = useQueryClient();
   const [formData, setFormData] = useState({
     type: 'Email',
+    image: '',
     name: '',
     email: '',
-    subject: '',
-    description: '',
     status: 'inactive',
   });
 
@@ -52,23 +57,33 @@ const EmailActions = () => {
 
   const handleSave = () => {
     setLoading(true);
-    emailAction.mutate(formData);
+    console.log(formData);
+    // emailAction.mutate(formData);
     // navigate to profile page
   };
 
   //useEffect:
   useEffect(() => {
-    if (
-      formData.name.length > 0 &&
-      formData.email.length > 0 &&
-      formData.subject.length > 0 &&
-      formData.description.length > 0
-    ) {
+    if (formData.name.length > 0 && formData.email.length > 0) {
       setActive(true);
     } else {
       setActive(false);
     }
   }, [formData]);
+
+  const [profilePhoto, setProfilePhoto] = useState('');
+  const handleProfilePhotoChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const objectUrl = URL.createObjectURL(file);
+      setProfilePhoto(objectUrl);
+
+      setFormData((prev) => ({
+        ...prev,
+        image: file, // Store the file directly
+      }));
+    }
+  };
   return (
     <>
       <div className="shadow-md font-inter bg-gradient-to-l from-[#116DFF] to-[#23C0B6]">
@@ -111,59 +126,78 @@ const EmailActions = () => {
       </div>
 
       {/* outlet */}
-      <div className="pt-8 pb-8 font-inter bg-[#f3f8fe] min-h-[calc(100vh-104px)]">
-        <div className="container mx-auto">
-          <div className="flex flex-col items-center max-w-[600px] mx-auto mb-20 w-full p-8 rounded-2xl bg-white shadow-lg">
-            <div className="flex gap-4 mt-10 w-full">
-              <div className="flex-shrink-0 flex">
-                <UserSvg />
-              </div>
-              <div className="flex-1 space-y-5">
-                <TextField
-                  label="Enter Your Name"
-                  variant="outlined"
-                  fullWidth
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
+      <div className="font-inter bg-[#f3f8fe] min-h-[calc(100vh-104px)] flex gap-12 justify-center mx-auto w-full py-20">
+        <div className="flex flex-col items-center h-fit w-[600px] p-8 rounded-2xl bg-white shadow-lg">
+          <div>
+            <div className="w-full flex items-center justify-center relative">
+              <div className="size-40 z-10 relative">
+                <img
+                  className="h-full w-full object-cover rounded-full"
+                  src={
+                    formData?.image
+                      ? URL.createObjectURL(formData.image)
+                      : profilePhoto || profile
+                  }
+                  alt="Profile"
                 />
+                <label
+                  htmlFor="profilePicture"
+                  className="absolute bottom-5 right-0 cursor-pointer"
+                >
+                  <input
+                    onChange={handleProfilePhotoChange}
+                    className="hidden"
+                    type="file"
+                    name="profilePicture"
+                    id="profilePicture"
+                  />
+                  <div className="bg-primaryColor rounded-full size-8 flex items-center justify-center">
+                    <AddImagePlusSvg />
+                  </div>
+                </label>
               </div>
             </div>
-            <div className="flex gap-4 mt-10 w-full">
-              <div className="flex-shrink-0 flex">
-                <EmailSvg />
-              </div>
-              <div className="flex-1 space-y-5">
-                <TextField
-                  label="Enter Your Mail"
-                  variant="outlined"
-                  fullWidth
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                />
-                <TextField
-                  label="Subject"
-                  variant="outlined"
-                  fullWidth
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                />
-                <TextField
-                  multiline
-                  rows={8}
-                  label="Description"
-                  variant="outlined"
-                  fullWidth
-                  name="description"
-                  value={formData.description}
-                  onChange={handleChange}
-                />
-              </div>
+            <div>
+              <h3 className="text-xl font-medium text-center mt-3">
+                Profile Image
+              </h3>
+            </div>
+          </div>
+          <div className="flex gap-4 mt-10 w-full">
+            <div className="flex-shrink-0 flex">
+              <UserSvg />
+            </div>
+            <div className="flex-1 space-y-5">
+              <TextField
+                label="Enter Your Name"
+                variant="outlined"
+                fullWidth
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className="flex gap-4 mt-10 w-full">
+            <div className="flex-shrink-0 flex">
+              <EmailSvg />
+            </div>
+            <div className="flex-1 space-y-5">
+              <TextField
+                label="Enter Your Mail"
+                variant="outlined"
+                fullWidth
+                type='email'
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
             </div>
           </div>
         </div>
+
+        {/* preview */}
+        <EmailPreview formData={formData} />
       </div>
     </>
   );

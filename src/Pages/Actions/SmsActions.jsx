@@ -17,7 +17,6 @@ const SmsActions = () => {
     type: 'sms',
     name: '',
     number: '',
-    description: '',
     status: 'inactive',
   });
 
@@ -57,11 +56,7 @@ const SmsActions = () => {
 
   //useEffect:
   useEffect(() => {
-    if (
-      formData.name.length > 0 &&
-      formData.number.length > 0 &&
-      formData.description.length > 0
-    ) {
+    if (formData.name.length > 0 && formData.number.length > 0) {
       setActive(true);
     } else {
       setActive(false);
@@ -138,16 +133,6 @@ const SmsActions = () => {
                   fullWidth
                   name="number"
                   value={formData.number}
-                  onChange={handleChange}
-                />
-                <TextField
-                  multiline
-                  rows={8}
-                  label="Description"
-                  variant="outlined"
-                  fullWidth
-                  name="description"
-                  value={formData.description}
                   onChange={handleChange}
                 />
               </div>
