@@ -4,8 +4,34 @@ import { IoMdMail } from 'react-icons/io';
 import { IoCall, IoLocationSharp } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import profileImg from '../../assets/images/profile.png';
-
+import coverImg from '../../assets/images/cover-bg.webp';
 const ContactPreview = ({ formData }) => {
+  const handleSaveContact = () => {
+    // Create vCard format string
+    const vcard = [
+      'BEGIN:VCARD',
+      'VERSION:3.0',
+      `FN:${formData.fullName}`,
+      `TEL;TYPE=CELL:${formData.officeNumber}`,
+      `EMAIL:${formData.mail}`,
+      'END:VCARD',
+    ].join('\n');
+
+    // Create blob and download link
+    const blob = new Blob([vcard], { type: 'text/vcard' });
+    const url = window.URL.createObjectURL(blob);
+
+    // Create temporary link and trigger download
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `${formData.fullName}.vcf`);
+    document.body.appendChild(link);
+    link.click();
+
+    // Cleanup
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  };
   return (
     <div className="w-[450px] font-inter rounded-xl overflow-hidden shadow-xl h-fit">
       {/* img */}
@@ -17,7 +43,7 @@ const ContactPreview = ({ formData }) => {
               src={
                 formData?.cover_image
                   ? URL.createObjectURL(formData.cover_image)
-                  : profileImg
+                  : coverImg
               }
               alt="Cover"
             />
@@ -67,19 +93,19 @@ const ContactPreview = ({ formData }) => {
         {/* actions */}
         <div className="w-full flex items-center justify-center gap-5">
           <Link
-            to="tel: +441276474643"
+            to={`tel: ${formData?.officeNumber}`}
             className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] px-6 py-3 rounded-md"
           >
             <IoCall className="text-white size-5" />
           </Link>
           <Link
-            to="sms: +441276474643"
+            to={`sms: ${formData?.officeNumber}`}
             className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] px-6 py-3 rounded-md"
           >
             <FaMessage className="text-white size-5" />
           </Link>
           <Link
-            to="sms: +441276474643"
+            to={`mailto: ${formData?.mail}`}
             className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] px-6 py-3 rounded-md"
           >
             <IoMdMail className="text-white size-5" />
@@ -178,9 +204,12 @@ const ContactPreview = ({ formData }) => {
         {/* save button */}
 
         <div>
-          <Link className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6]  w-full block text-white text-center py-3 rounded-md font-medium">
+          <button
+            onClick={handleSaveContact}
+            className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6]  w-full block text-white text-center py-3 rounded-md font-medium"
+          >
             Add to Contact
-          </Link>
+          </button>
         </div>
       </div>
     </div>
