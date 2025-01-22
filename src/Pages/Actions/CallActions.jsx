@@ -1,4 +1,9 @@
-import { BackButtonSvg, PhoneSvg } from '@/Components/SvgContainer';
+import CallPreview from '@/Components/LivePreview/CallPreview';
+import {
+  AddImagePlusSvg,
+  BackButtonSvg,
+  PhoneSvg,
+} from '@/Components/SvgContainer';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { TextField } from '@mui/material';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -6,6 +11,7 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { ImSpinner9 } from 'react-icons/im';
 import { Link, useNavigate } from 'react-router-dom';
+import profile from '@/assets/images/profile.png';
 
 const CallActions = () => {
   const [loading, setLoading] = useState(false);
@@ -54,7 +60,7 @@ const CallActions = () => {
   };
   const handleSave = () => {
     setLoading(true);
-    callMutation.mutate(formData);
+    // callMutation.mutate(formData);
   };
 
   //useEffect:
@@ -65,6 +71,20 @@ const CallActions = () => {
       setActive(false);
     }
   }, [formData]);
+
+  const [profilePhoto, setProfilePhoto] = useState('');
+  const handleProfilePhotoChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const objectUrl = URL.createObjectURL(file);
+      setProfilePhoto(objectUrl);
+
+      setFormData((prev) => ({
+        ...prev,
+        image: file, // Store the file directly
+      }));
+    }
+  };
 
   return (
     <>
@@ -108,26 +128,63 @@ const CallActions = () => {
       </div>
 
       {/* outlet */}
-      <div className="pt-8 pb-8 font-inter bg-[#f3f8fe] min-h-[calc(100vh-104px)]">
-        <div className="container mx-auto">
-          <div className="flex flex-col items-center max-w-[600px] mx-auto mb-20 w-full p-8 rounded-2xl bg-white shadow-lg">
-            <div className="flex items-center gap-4 mt-10 w-full">
-              <div className="flex-shrink-0 flex">
-                <PhoneSvg />
-              </div>
-              <div className="flex-1 space-y-5">
-                <TextField
-                  name="number"
-                  onChange={handleChange}
-                  value={formData.number || ''}
-                  label="+880"
-                  variant="outlined"
-                  fullWidth
+      <div className="font-inter bg-[#f3f8fe] min-h-[calc(100vh-104px)] flex gap-12 justify-center mx-auto w-full py-20">
+        <div className="flex flex-col items-center h-fit w-[600px] p-8 rounded-2xl bg-white shadow-lg">
+          <div>
+            <div className="w-full flex items-center justify-center relative">
+              <div className="size-40 z-10 relative">
+                <img
+                  className="h-full w-full object-cover rounded-full"
+                  src={
+                    formData?.image
+                      ? URL.createObjectURL(formData.image)
+                      : profilePhoto || profile
+                  }
+                  alt="Profile"
                 />
+                <label
+                  htmlFor="profilePicture"
+                  className="absolute bottom-5 right-0 cursor-pointer"
+                >
+                  <input
+                    onChange={handleProfilePhotoChange}
+                    className="hidden"
+                    type="file"
+                    name="profilePicture"
+                    id="profilePicture"
+                  />
+                  <div className="bg-primaryColor rounded-full size-8 flex items-center justify-center">
+                    <AddImagePlusSvg />
+                  </div>
+                </label>
               </div>
+            </div>
+            <div>
+              <h3 className="text-xl font-medium text-center mt-3">
+                Profile Image
+              </h3>
+            </div>
+          </div>
+          <div className="flex items-center gap-4 mt-10 w-full">
+            <div className="flex-shrink-0 flex">
+              <PhoneSvg />
+            </div>
+            <div className="flex-1 space-y-5">
+              <TextField
+                name="number"
+                onChange={handleChange}
+                value={formData.number || ''}
+                label="Number"
+                type="number"
+                variant="outlined"
+                fullWidth
+              />
             </div>
           </div>
         </div>
+
+        {/* preview */}
+        <CallPreview formData={formData} />
       </div>
     </>
   );

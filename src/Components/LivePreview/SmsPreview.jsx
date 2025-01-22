@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom';
 import profileImg from '@/assets/images/profile.png';
-import whatsAppBg from '../../assets/images/wp.png';
 import { IoMdMail } from 'react-icons/io';
-const WhatsAppPreview = ({ formData }) => {
+import { SmsPreviewSvg } from '../SvgContainer/SvgContainer';
+
+const SmsPreview = ({ formData }) => {
   return (
     <div className="w-[450px] font-inter rounded-xl overflow-hidden shadow-xl h-fit bg-gradient-to-l from-[#116DFF] to-[#23C0B6] py-10">
       {/* img */}
@@ -34,11 +35,7 @@ const WhatsAppPreview = ({ formData }) => {
           {/* logo */}
           <div className="w-full flex items-center justify-center py-2">
             <div className="size-20">
-              <img
-                className="h-full w-full object-cover"
-                src={whatsAppBg}
-                alt=""
-              />
+              <SmsPreviewSvg />
             </div>
           </div>
         </div>
@@ -48,9 +45,9 @@ const WhatsAppPreview = ({ formData }) => {
           {/* email */}
           <div className="bg-[#efefef] p-5 rounded-md w-full flex items-center justify-between">
             <div className="space-y-2 overflow-hidden">
-              <p className="text-primaryColor">Whats App</p>
+              <p className="text-primaryColor"> Sms Number</p>
               <p className="text-[#555] font-medium w-full max-w-[300px]">
-                {formData?.number ? formData?.number : 'Enter WhatsApp Number'}
+                {formData?.number ? formData?.number : 'Enter Sms Number'}
               </p>
             </div>
             <div className="flex items-center gap-4 justify-center">
@@ -61,7 +58,7 @@ const WhatsAppPreview = ({ formData }) => {
           </div>
           <div>
             <Link
-              to={`https://wa.me/${formData?.number}`}
+              to={`sms: ${formData?.number}`}
               className="bg-[#efefef] text-primaryColor w-full block text-center py-3 rounded-md font-medium"
             >
               Contact Me
@@ -73,4 +70,4 @@ const WhatsAppPreview = ({ formData }) => {
   );
 };
 
-export default WhatsAppPreview;
+export default SmsPreview;

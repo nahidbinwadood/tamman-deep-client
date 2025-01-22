@@ -135,7 +135,7 @@ const ContactPreview = ({ formData }) => {
             <IoCall className="text-white size-5" />
           </Link>
           <Link
-            to={`sms: ${formData?.officeNumber}`}
+            wd
             className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] px-6 py-3 rounded-md"
           >
             <FaMessage className="text-white size-5" />
@@ -210,7 +210,7 @@ const ContactPreview = ({ formData }) => {
             </div>
             <div className="flex items-center gap-4 justify-center">
               <Link
-                to="mailto: info@TechVise.co.uk"
+                to={`mailto: ${formData?.mail}`}
                 className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] size-8 flex items-center justify-center rounded-md"
               >
                 <IoMdMail className="text-white size-4" />
