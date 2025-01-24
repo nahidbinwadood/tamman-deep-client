@@ -3,6 +3,7 @@ import Navbar from '../../Shared/Navbar';
 import Footer from '../../Shared/Footer';
 import { useState, useEffect } from 'react';
 import Preloader from '@/Components/Loaders/Preloader';
+import CartDrawer from '@/Components/Drawer/CartDrawer';
 
 const MainLayout = () => {
   const [loading, setLoading] = useState(true);
@@ -35,6 +36,9 @@ const MainLayout = () => {
       <footer className="font-inter">
         <Footer />
       </footer>
+
+      {/* drawer */}
+      <CartDrawer />
     </>
   );
 };
