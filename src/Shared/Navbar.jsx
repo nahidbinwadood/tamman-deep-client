@@ -43,7 +43,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="absolute h-[88px] w-full bg-transparent top-0 left-0">
+      <div className="fixed h-[88px] w-full bg-transparent top-0 left-0">
         <div className="container mx-auto w-full flex items-center justify-between">
           {/* Logo */}
           <div className="h-full -ml-8">
@@ -68,9 +68,9 @@ const Navbar = () => {
           {/* Action Icons */}
           <div className="flex items-center gap-6">
             {/* Search Icon */}
-            <div className="cursor-pointer">
+            {/* <div className="cursor-pointer">
               {isHomepage === '/' ? <SearchSvg /> : <SearchSvg light={true} />}
-            </div>
+            </div> */}
 
             {/* Cart Icon */}
             <div

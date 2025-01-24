@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 
 import { useEffect } from 'react';
+import { CrossButtonSvg } from '../SvgContainer/SvgContainer';
+import CartItem from '../Cart/CartItem';
 
 const CartDrawer = ({ showCart, setShowCart }) => {
   useEffect(() => {
@@ -23,24 +25,33 @@ const CartDrawer = ({ showCart, setShowCart }) => {
 
       {/* Drawer */}
       <div
-        className={`fixed top-0 right-0 w-80 z-50 min-h-[100vh] bg-primaryColor transform transition-transform duration-500 ${
+        className={`fixed top-0 right-0 w-96 z-50 min-h-[100vh] shadow-lg bg-[#F5F5F7] transform transition-transform duration-500 font-inter ${
           showCart ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         {/* Drawer Header */}
-        <div className="p-4 flex justify-between items-center">
-          <h2 className="text-xl font-bold text-white">Your Cart</h2>
+        <div className="p-4 flex justify-between items-center border-b ">
+          <div className="flex items-center gap-4">
+            <h2 className="text-xl font-bold">Cart </h2>
+            <div className="size-2 rounded-full bg-black"></div>
+
+            {/* count */}
+            <div className="font-medium">0</div>
+          </div>
+
+          {/* cross btn */}
           <button
+            className="size-8 bg-[#E9E9EB] rounded-full flex items-center justify-center"
             onClick={() => setShowCart(false)}
-            className="text-white text-3xl"
           >
-            &times;
+            <CrossButtonSvg />
           </button>
         </div>
 
         {/* Drawer Content */}
         <div className="p-4">
-          <p className="text-white">Cart items go here...</p>
+          {/* cart  item */}
+          <CartItem />
         </div>
       </div>
     </>
