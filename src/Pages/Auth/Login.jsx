@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo-black.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LuEye, LuEyeOff } from 'react-icons/lu';
 import useAuth from '@/Hooks/useAuth';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
@@ -11,6 +11,7 @@ import toast from 'react-hot-toast';
 
 const Login = () => {
   const { loading, setLoading } = useAuth();
+  const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
@@ -48,6 +49,13 @@ const Login = () => {
 
     mutation.mutate(data);
   };
+
+  useEffect(() => {
+    // Redirect if the user is logged in
+    if (user) {
+      navigate('/dashboard/home', { replace: true });
+    }
+  }, [user, navigate]);
 
   return (
     <div className="  font-inter ">

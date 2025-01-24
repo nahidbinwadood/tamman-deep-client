@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, ScrollRestoration } from 'react-router-dom';
 import Navbar from '../../Shared/Navbar';
 import Footer from '../../Shared/Footer';
 import { useState, useEffect } from 'react';
@@ -25,6 +25,7 @@ const MainLayout = () => {
 
   return (
     <>
+      <ScrollRestoration />
       <nav className="font-inter">
         <Navbar />
       </nav>

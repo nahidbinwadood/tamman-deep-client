@@ -39,8 +39,13 @@ const Register = () => {
 
   const onSubmit = (data) => {
     // Send the form data to the server
-    setLoading(true);
-    registerMutation.mutate(data);
+
+    if (data.password.length < 8) {
+      toast.error('Password Length Must be more than 8 characters');
+    } else {
+      setLoading(true);
+      registerMutation.mutate(data);
+    }
   };
   return (
     <div className="  font-inter ">
