@@ -152,7 +152,7 @@ const Checkout = () => {
             </h4>
             <div className="w-full flex items-center justify-between text-xl font-semibold ">
               <h4>Total</h4>
-              <p>$ {totalPrice}</p>
+              <p>$ {parseFloat(totalPrice).toFixed(2)}</p>
             </div>
           </div>
         </div>

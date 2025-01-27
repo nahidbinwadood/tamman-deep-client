@@ -19,7 +19,9 @@ const CheckoutCard = ({ item }) => {
         <div className="flex justify-between w-full">
           <div className="space-y-2">
             <div className="space-y-1">
-              <h5>One Tap Card</h5>
+              <h5>
+                One Tap Card <span className="font-semibold">x {item?.quantity}</span>
+              </h5>
               <div className="text-black/40">
                 <p>Style: Minimal</p>
                 <p>Color: Black</p>
