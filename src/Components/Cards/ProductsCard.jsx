@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 const ProductsCard = ({ product }) => {
   const { image, price } = product;
   const { cartItems, setCartItems } = useAuth();
-
+console.log(product);
   const handleCart = (product) => {
     const alreadyExist = cartItems?.find((item) => item?.id == product.id);
     if (alreadyExist) {

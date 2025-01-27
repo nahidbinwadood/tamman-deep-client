@@ -10,6 +10,7 @@ import ProductsCard from './../../Components/Cards/ProductsCard';
 import InfoSection from '@/Components/Shop/InfoSection';
 import ShopFilters from '@/Components/Shop/ShopFilters';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
+import useAuth from '@/Hooks/useAuth';
 
 const Shop = () => {
   const allInfo = [
@@ -47,6 +48,9 @@ const Shop = () => {
       return data?.data;
     },
   });
+
+  const { user } = useAuth();
+  console.log(user);
 
   return (
     <div className="mt-[88px]">

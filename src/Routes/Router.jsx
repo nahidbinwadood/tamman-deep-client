@@ -27,6 +27,7 @@ import CallActions from '@/Pages/Actions/CallActions';
 import UrlActions from '@/Pages/Actions/UrlActions';
 import ForgotPassword from '@/Pages/Auth/ForgotPassword';
 import PrivateRoute from './PrivateRoute';
+import Checkout from '@/Pages/Checkout/Checkout';
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
       {
         path: '/shop',
         element: <Shop />,
+      },
+      {
+        path: '/checkout',
+        element: <Checkout />,
       },
     ],
   },

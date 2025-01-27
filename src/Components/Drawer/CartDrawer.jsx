@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { CrossButtonSvg } from '../SvgContainer/SvgContainer';
 import CartItem from '../Cart/CartItem';
 import useAuth from '@/Hooks/useAuth';
+import { Link } from 'react-router-dom';
 
 const CartDrawer = ({ showCart, setShowCart }) => {
   const { cartItems } = useAuth();
@@ -58,33 +59,57 @@ const CartDrawer = ({ showCart, setShowCart }) => {
           </div>
 
           {/* Drawer Content */}
-          <div
-            style={{ height: 'calc(100vh - 65px)' }}
-            className="flex flex-col justify-between"
-          >
-            {/* Cart Items */}
-            <div className="p-4 overflow-y-auto flex flex-col gap-3">
-              {cartItems?.map((item) => (
-                <CartItem key={item?.id} item={item} />
-              ))}
-            </div>
+          <div style={{ height: 'calc(100vh - 65px)' }}>
+            {cartItems?.length > 0 ? (
+              <div
+                style={{ height: 'calc(100vh - 65px)' }}
+                className="flex flex-col justify-between"
+              >
+                {/* Cart Items */}
+                <div className="p-4 overflow-y-auto flex flex-col gap-3">
+                  {cartItems?.map((item) => (
+                    <CartItem key={item?.id} item={item} />
+                  ))}
+                </div>
 
-            {/* Checkout Button */}
-            <div className="bg-white px-5 py-8 space-y-4">
-              <div className="w-full flex items-center justify-between font-semibold text-lg font-inter">
-                <h4>Subtotal</h4>
-                <p>$ {totalPrice.toFixed(2)}</p>
-              </div>
+                {/* Checkout Button */}
+                <div className="bg-white px-5 py-8 space-y-4">
+                  <div className="w-full flex items-center justify-between font-semibold text-lg font-inter">
+                    <h4>Subtotal</h4>
+                    <p>$ {totalPrice.toFixed(2)}</p>
+                  </div>
 
-              {/* proceed to checkout button */}
-              <div>
-                <button className="w-full bg-primaryColor flex items-center gap-2 justify-center py-3 rounded-md font-medium text-white">
-                  Checkout
-                  <span className="size-2 rounded-full bg-white inline-block"></span>
-                  <span>${totalPrice.toFixed(2)}</span>
-                </button>
+                  {/* proceed to checkout button */}
+                  <div>
+                    <Link
+                      onClick={() => setShowCart(false)}
+                      to="/checkout"
+                      className="w-full bg-primaryColor flex items-center gap-2 justify-center py-3 rounded-md font-medium text-white"
+                    >
+                      Checkout
+                      <span className="size-2 rounded-full bg-white inline-block"></span>
+                      <span>${totalPrice.toFixed(2)}</span>
+                    </Link>
+                  </div>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="flex justify-center flex-col gap-4 h-full items-center text-lg font-medium">
+                <h2 className="text-2xl">Your cart is empty.</h2>
+                <div>
+                  <h4 className="text-lg">
+                    Buy Your Digital Card
+                    <Link
+                      onClick={() => setShowCart(false)}
+                      to="/shop"
+                      className="text-primaryColor px-2 py-2 underline"
+                    >
+                      From here
+                    </Link>
+                  </h4>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -61,7 +61,8 @@ const Navbar = () => {
             ? 'bg-[#111618] shadow-lg'
             : 'bg-transparent '
         } ${
-          isScrolled && currentLocation == '/shop'
+          (isScrolled && currentLocation == '/shop') ||
+          currentLocation == '/checkout'
             ? 'bg-white shadow-lg'
             : 'bg-transparent '
         }`}
