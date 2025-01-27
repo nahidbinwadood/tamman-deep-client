@@ -3,8 +3,15 @@
 import { useEffect } from 'react';
 import { CrossButtonSvg } from '../SvgContainer/SvgContainer';
 import CartItem from '../Cart/CartItem';
+import useAuth from '@/Hooks/useAuth';
 
 const CartDrawer = ({ showCart, setShowCart }) => {
+  const { cartItems } = useAuth();
+
+  const totalPrice = cartItems?.reduce((acc, item) => {
+    return acc + parseFloat(item?.totalPrice);
+  }, 0);
+
   useEffect(() => {
     if (showCart) {
       document.body.style.overflow = 'hidden';
@@ -38,7 +45,7 @@ const CartDrawer = ({ showCart, setShowCart }) => {
               <div className="size-2 rounded-full bg-black"></div>
 
               {/* count */}
-              <div className="font-medium">0</div>
+              <div className="font-medium">{cartItems?.length}</div>
             </div>
 
             {/* Cross Button */}
@@ -57,15 +64,16 @@ const CartDrawer = ({ showCart, setShowCart }) => {
           >
             {/* Cart Items */}
             <div className="p-4 overflow-y-auto flex flex-col gap-3">
-              <CartItem />
-              <CartItem />
+              {cartItems?.map((item) => (
+                <CartItem key={item?.id} item={item} />
+              ))}
             </div>
 
             {/* Checkout Button */}
             <div className="bg-white px-5 py-8 space-y-4">
               <div className="w-full flex items-center justify-between font-semibold text-lg font-inter">
                 <h4>Subtotal</h4>
-                <p>$30.99</p>
+                <p>$ {totalPrice.toFixed(2)}</p>
               </div>
 
               {/* proceed to checkout button */}
@@ -73,7 +81,7 @@ const CartDrawer = ({ showCart, setShowCart }) => {
                 <button className="w-full bg-primaryColor flex items-center gap-2 justify-center py-3 rounded-md font-medium text-white">
                   Checkout
                   <span className="size-2 rounded-full bg-white inline-block"></span>
-                  <span>$30.99</span>
+                  <span>${totalPrice.toFixed(2)}</span>
                 </button>
               </div>
             </div>

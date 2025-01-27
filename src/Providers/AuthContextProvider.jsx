@@ -1,15 +1,17 @@
 /* eslint-disable react-refresh/only-export-components */
 
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
+import useLocalStorage from '@/Hooks/useLocalStorage';
 import { createContext, useEffect, useState } from 'react';
 export const AuthContext = createContext(null);
 
 // eslint-disable-next-line react/prop-types
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
   const userName = localStorage.getItem('username');
   const axiosPublic = useAxiosPublic();
-  const [loading, setLoading] = useState(false);
 
   const token = localStorage.getItem('token');
 
@@ -29,7 +31,15 @@ const AuthContextProvider = ({ children }) => {
     }
   }, [axiosPublic, token]);
 
-  const allValues = { user, setUser, loading, setLoading, userName };
+  const allValues = {
+    user,
+    setUser,
+    loading,
+    setLoading,
+    userName,
+    cartItems,
+    setCartItems,
+  };
   return (
     <AuthContext.Provider value={allValues}>{children}</AuthContext.Provider>
   );

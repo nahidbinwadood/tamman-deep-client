@@ -1,24 +1,47 @@
-import cardImg from '@/assets/images/cart-card-1.png';
+/* eslint-disable react/prop-types */
+import useAuth from '@/Hooks/useAuth';
 import { DeleteSvg, MinusSvg, PlusSvg } from '../SvgContainer/SvgContainer';
-import { useState } from 'react';
 
-const CartItem = () => {
-  const [count, setCount] = useState(1);
-  const basePrice = 15;
-  const totalPrice = basePrice * count;
+const CartItem = ({ item }) => {
+  const { cartItems, setCartItems } = useAuth();
 
   const handleIncrement = () => {
-    setCount((prevCount) => Math.min(prevCount + 1, 10));
+    setCartItems((prev) => {
+      return prev.map((i) => {
+        const newQuantity = Math.min(i.quantity + 1, 10);
+        return item.id === i.id
+          ? { ...i, quantity: newQuantity, totalPrice: newQuantity * i.price }
+          : i;
+      });
+    });
   };
 
   const handleDecrement = () => {
-    setCount((prevCount) => Math.max(prevCount - 1, 0));
+    setCartItems((prev) => {
+      return prev.map((i) => {
+        const newQuantity = Math.max(i.quantity - 1, 0);
+        return item.id === i.id
+          ? { ...i, quantity: newQuantity, totalPrice: newQuantity * i.price }
+          : i;
+      });
+    });
+  };
+
+  const handleDelete = (itemId) => {
+    const updatedCartItems = cartItems?.filter((item) => item?.id != itemId);
+    setCartItems(updatedCartItems);
   };
   return (
     <div className="flex items-center gap-4 justify-between bg-white rounded-md p-4">
       {/* image */}
       <div className="flex-shrink-0">
-        <img src={cardImg} alt="" />
+        <div className="h-24">
+          <img
+            className="w-full h-full object-cover"
+            src={item?.image}
+            alt=""
+          />
+        </div>
       </div>
       {/* info */}
       <div className="space-y-5 w-full">
@@ -33,7 +56,10 @@ const CartItem = () => {
               </div>
             </div>
           </div>
-          <div className="cursor-pointer">
+          <div
+            onClick={() => handleDelete(item?.id)}
+            className="cursor-pointer"
+          >
             <DeleteSvg />
           </div>
         </div>
@@ -43,19 +69,19 @@ const CartItem = () => {
           {/* count */}
           <div className="border border-black/30 rounded-full flex items-center justify-center">
             <button
-              disabled={count === 1}
+              disabled={item?.quantity === 1}
               onClick={handleDecrement}
               className={`cursor-pointer px-2 ${
-                count === 0 ? 'cursor-not-allowed' : ''
+                item?.quantity === 0 ? 'cursor-not-allowed' : ''
               }`}
             >
               <MinusSvg />
             </button>
             <div className="px-3 border-x border-black/30 py-1 w-8 flex items-center justify-center text-sm">
-              {count}
+              {item?.quantity}
             </div>
             <button
-              disabled={count === 10}
+              disabled={item?.quantity === 10}
               onClick={handleIncrement}
               className="cursor-pointer px-2"
             >
@@ -66,8 +92,8 @@ const CartItem = () => {
           {/* price */}
           <div>
             <h5 className="normal-case font-medium text-black">
-              <span className="text-black/30 text-sm line-through">$20</span>$
-              {totalPrice.toFixed(2)}
+              {/* <span className="text-black/30 text-sm line-through">$20</span>$ */}
+              ${parseFloat(item.totalPrice).toFixed(2)}
             </h5>
           </div>
         </div>

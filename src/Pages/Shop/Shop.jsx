@@ -47,7 +47,7 @@ const Shop = () => {
       return data?.data;
     },
   });
-  console.log(allProducts);
+
   return (
     <div className="mt-[88px]">
       <div className="mt-40 container mx-auto">
@@ -60,7 +60,7 @@ const Shop = () => {
         <ShopFilters />
 
         {/* products card */}
-        <div className="my-10 grid grid-cols-3 gap-12 min-h-screen w-full">
+        <div className="my-10 grid grid-cols-4 gap-6 min-h-screen w-full">
           {isLoading ? (
             <div className=" ">loading ...</div>
           ) : (

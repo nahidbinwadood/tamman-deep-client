@@ -9,7 +9,7 @@ import CartDrawer from '@/Components/Drawer/CartDrawer';
 
 const Navbar = () => {
   const token = localStorage.getItem('token');
-  const { setUser, setLoading } = useAuth();
+  const { setUser, setLoading, cartItems } = useAuth();
 
   const currentLocation = useLocation().pathname;
   const [showLogin, setShowLogin] = useState(false);
@@ -99,7 +99,23 @@ const Navbar = () => {
               onClick={() => setShowCart(!showCart)}
               className="cursor-pointer"
             >
-              {currentLocation === '/' ? <CartSvg /> : <CartSvg light={true} />}
+              {currentLocation === '/' ? (
+                <div className="relative">
+                  <CartSvg />
+                  {/* count */}
+                  <div className="absolute -bottom-4 -right-2 bg-primaryColor text-white size-6 flex items-center justify-center rounded-full text-xs">
+                    {cartItems.length}
+                  </div>
+                </div>
+              ) : (
+                <div className="relative">
+                  <CartSvg light={true} />
+                  {/* count */}
+                  <div className="absolute -bottom-4 -right-2 bg-primaryColor text-white size-6 flex items-center justify-center rounded-full text-xs">
+                    {cartItems.length}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Profile Icon */}
