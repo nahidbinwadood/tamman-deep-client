@@ -16,7 +16,10 @@ createRoot(document.getElementById('root')).render(
       <StrictMode>
         <Toaster />
         <RouterProvider router={router} />
-        <ReactQueryDevtools initialIsOpen={false} />
+        <ReactQueryDevtools
+          initialIsOpen={false}
+          buttonPosition={'bottom-left'}
+        />
       </StrictMode>
     </AuthContextProvider>
   </QueryClientProvider>

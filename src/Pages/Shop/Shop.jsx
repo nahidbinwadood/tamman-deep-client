@@ -1,46 +1,17 @@
+import { useQuery } from '@tanstack/react-query';
 import {
   AndroidSvg,
   AppleSvg,
-  DotLightSvg,
-  DotSvg,
-  FilterLightSvg,
-  FilterSvg,
   HammerSvg,
   MobileSvg,
   SmileSvg,
 } from '../../Components/SvgContainer';
-import GradientButton from '../../Components/Buttons/GradientButton';
-import card from '../../assets/images/card-ez.png';
 import ProductsCard from './../../Components/Cards/ProductsCard';
+import InfoSection from '@/Components/Shop/InfoSection';
+import ShopFilters from '@/Components/Shop/ShopFilters';
+import useAxiosPublic from '@/Hooks/useAxiosPublic';
 
 const Shop = () => {
-  const allProducts = [
-    {
-      image: card,
-      title: 'Tapt Black',
-      price: 5500,
-    },
-    {
-      image: card,
-      title: 'Tapt Black',
-      price: 5500,
-    },
-    {
-      image: card,
-      title: 'Tapt Black',
-      price: 5500,
-    },
-    {
-      image: card,
-      title: 'Tapt Black',
-      price: 5500,
-    },
-    {
-      image: card,
-      title: 'Tapt Black',
-      price: 5500,
-    },
-  ];
   const allInfo = [
     {
       img: [{ logo: <SmileSvg /> }],
@@ -67,7 +38,16 @@ const Shop = () => {
       border: false,
     },
   ];
+  const axiosPublic = useAxiosPublic();
 
+  const { data: allProducts = [], isLoading } = useQuery({
+    queryKey: ['allProducts'],
+    queryFn: async () => {
+      const { data } = await axiosPublic('/api/card');
+      return data?.data;
+    },
+  });
+  console.log(allProducts);
   return (
     <div className="mt-[88px]">
       <div className="mt-40 container mx-auto">
@@ -77,68 +57,21 @@ const Shop = () => {
         </div>
 
         {/* filters */}
-        <div className="mt-16 w-full flex items-center justify-between">
-          <div>
-            <GradientButton
-              title={'Show filters'}
-              prev={<FilterSvg />}
-              prevLight={<FilterLightSvg />}
-            />
-          </div>
-          <div className="flex items-center gap-5">
-            <p className="text-nowrap">Sort by:</p>
-            <GradientButton
-              title={'Best Selling'}
-              next={<DotSvg />}
-              nextLight={<DotLightSvg />}
-            />
-          </div>
-        </div>
+        <ShopFilters />
 
         {/* products card */}
-        <div className="my-10 grid grid-cols-3 gap-12">
-          {allProducts?.map((product, idx) => (
-            <ProductsCard product={product} key={idx} />
-          ))}
-        </div>
-
-        {/* Recently Viewed */}
-        <div className="pt-40 pb-20">
-          <div>
-            <h2 className="text-4xl font-bold">Recently Viewed</h2>
-          </div>
-
-          {/* viewed card */}
-          <div className="mt-10 grid grid-cols-3 gap-12">
-            {[...allProducts].slice(0, 2)?.map((product, idx) => (
+        <div className="my-10 grid grid-cols-3 gap-12 min-h-screen w-full">
+          {isLoading ? (
+            <div className=" ">loading ...</div>
+          ) : (
+            allProducts?.map((product, idx) => (
               <ProductsCard product={product} key={idx} />
-            ))}
-          </div>
+            ))
+          )}
         </div>
       </div>
       {/* Info Section */}
-      <div className="bg-[#F5F6F7]">
-        <div className="container mx-auto flex items-center justify-evenly py-10">
-          {allInfo?.map((info, idx) => (
-            <div
-              key={idx}
-              className={`flex flex-1 gap-4 ${
-                info?.border ? 'border-r' : ''
-              } border-[#57626966] pl-5`}
-            >
-              <div className="flex gap-3">
-                {info?.img?.map((icon, idx) => (
-                  <span key={idx}>{icon?.logo}</span>
-                ))}
-              </div>
-              <div>
-                <h4 className="text-lg font-bold">{info?.title}</h4>
-                <p className="text-textColor w-[60%]">{info?.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <InfoSection allInfo={allInfo} />
     </div>
   );
 };

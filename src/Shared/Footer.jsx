@@ -16,7 +16,7 @@ import {
   SubmitFormSvg,
 } from './../Components/SvgContainer';
 const Footer = () => {
-  const isHomepage = useLocation().pathname;
+  const currentLocation = useLocation().pathname;
   const sponsors = [
     { logo: <FooterSponsor1 /> },
     { logo: <FooterSponsor2 /> },
@@ -33,7 +33,7 @@ const Footer = () => {
   return (
     <div
       className={`${
-        isHomepage == '/'
+        currentLocation == '/'
           ? 'bg-[#111518] text-white'
           : 'bg-gradient-to-b from-[rgba(17,109,255,0.05)] to-[rgba(35,192,182,0.05)]'
       } `}
@@ -41,19 +41,32 @@ const Footer = () => {
       <div>
         <div className="container mx-auto pt-5">
           <div className="-ml-8 pb-3">
-            <img src={`${isHomepage=="/" ? logoWhite :logoBlack}`} alt="" />
+            <img
+              src={`${currentLocation == '/' ? logoWhite : logoBlack}`}
+              alt=""
+            />
           </div>
           <div>
             <p className="text-xl font-medium">
               Stay tuned for latest exclusive deals and updates
             </p>
-            <p className={`${isHomepage=="/" ? "text-white/90" :"text-textColor"}  pt-5`}>Join our mailing list today!</p>
+            <p
+              className={`${
+                currentLocation == '/' ? 'text-white/90' : 'text-textColor'
+              }  pt-5`}
+            >
+              Join our mailing list today!
+            </p>
           </div>
           <div className="pt-5">
             <form action="">
               <div className="relative w-[870px]">
                 <input
-                  className={`${isHomepage=="/" ? "bg-[#454e57] placeholder:text-white" :"bg-white text-black"} w-full focus:outline-none rounded-lg py-3 px-5  pr-12`}
+                  className={`${
+                    currentLocation == '/'
+                      ? 'bg-[#454e57] placeholder:text-white'
+                      : 'bg-white text-black'
+                  } w-full focus:outline-none rounded-lg py-3 px-5  pr-12`}
                   type="email"
                   placeholder="Email"
                 />
@@ -61,7 +74,7 @@ const Footer = () => {
                   type="submit"
                   className="absolute right-3 top-1/2 transform -translate-y-1/2"
                 >
-                  <SubmitFormSvg dark={true} />
+                  <SubmitFormSvg dark={currentLocation == '/shop'} />
                 </button>
               </div>
             </form>

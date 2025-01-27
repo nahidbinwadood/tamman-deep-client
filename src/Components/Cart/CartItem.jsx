@@ -1,13 +1,6 @@
 import cardImg from '@/assets/images/cart-card-1.png';
 import { DeleteSvg, MinusSvg, PlusSvg } from '../SvgContainer/SvgContainer';
 import { useState } from 'react';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../ui/select';
 
 const CartItem = () => {
   const [count, setCount] = useState(1);
@@ -50,7 +43,7 @@ const CartItem = () => {
           {/* count */}
           <div className="border border-black/30 rounded-full flex items-center justify-center">
             <button
-              disabled={count === 0}
+              disabled={count === 1}
               onClick={handleDecrement}
               className={`cursor-pointer px-2 ${
                 count === 0 ? 'cursor-not-allowed' : ''
@@ -78,18 +71,6 @@ const CartItem = () => {
             </h5>
           </div>
         </div>
-
-        {/* choice */}
-        <Select>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Color" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="Black">Black</SelectItem>
-            <SelectItem value="Red">Red</SelectItem>
-            <SelectItem value="Yellow">Yellow</SelectItem>
-          </SelectContent>
-        </Select>
       </div>
     </div>
   );

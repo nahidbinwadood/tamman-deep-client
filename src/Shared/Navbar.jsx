@@ -1,7 +1,7 @@
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import logoWhite from '../assets/images/logo.svg';
 import logoBlack from '../assets/images/logo-black.png';
-import { CartSvg, ProfileSvg, SearchSvg } from './../Components/SvgContainer';
+import { CartSvg, ProfileSvg } from './../Components/SvgContainer';
 import { useEffect, useState } from 'react';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import useAuth from '@/Hooks/useAuth';
@@ -16,7 +16,6 @@ const Navbar = () => {
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
-  console.log(currentLocation);
   const [showCart, setShowCart] = useState(false); // State to control Cart Drawer visibility
 
   // Clear token utility function
@@ -57,13 +56,13 @@ const Navbar = () => {
   return (
     <div>
       <div
-        className={`fixed h-[100px] w-full bg-transparent top-0 left-0 z-50  transition-all duration-300 ${
+        className={`fixed h-[100px] w-full top-0 left-0 z-40  transition-all duration-300 ${
           isScrolled && currentLocation == '/'
-            ? 'bg-[#0f1d27] shadow-lg'
+            ? 'bg-[#111618] shadow-lg'
             : 'bg-transparent '
         } ${
           isScrolled && currentLocation == '/shop'
-            ? 'bg-[#fff] shadow-lg'
+            ? 'bg-white shadow-lg'
             : 'bg-transparent '
         }`}
       >
