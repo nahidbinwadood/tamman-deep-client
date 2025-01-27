@@ -2,7 +2,7 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import logoWhite from '../assets/images/logo.svg';
 import logoBlack from '../assets/images/logo-black.png';
 import { CartSvg, ProfileSvg, SearchSvg } from './../Components/SvgContainer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import useAuth from '@/Hooks/useAuth';
 import CartDrawer from '@/Components/Drawer/CartDrawer';
@@ -11,11 +11,12 @@ const Navbar = () => {
   const token = localStorage.getItem('token');
   const { setUser, setLoading } = useAuth();
 
-  const isHomepage = useLocation().pathname;
+  const currentLocation = useLocation().pathname;
   const [showLogin, setShowLogin] = useState(false);
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
+  console.log(currentLocation);
   const [showCart, setShowCart] = useState(false); // State to control Cart Drawer visibility
 
   // Clear token utility function
@@ -40,16 +41,38 @@ const Navbar = () => {
       console.error(err);
     }
   };
+  const [isScrolled, setIsScrolled] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 88); // Check if scrolled past 88px
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
     <div>
-      <div className="fixed h-[88px] w-full bg-transparent top-0 left-0">
+      <div
+        className={`fixed h-[100px] w-full bg-transparent top-0 left-0 z-50  transition-all duration-300 ${
+          isScrolled && currentLocation == '/'
+            ? 'bg-[#0f1d27] shadow-lg'
+            : 'bg-transparent '
+        } ${
+          isScrolled && currentLocation == '/shop'
+            ? 'bg-[#fff] shadow-lg'
+            : 'bg-transparent '
+        }`}
+      >
         <div className="container mx-auto w-full flex items-center justify-between">
           {/* Logo */}
           <div className="h-full -ml-8">
             <Link to="/">
               <img
-                src={isHomepage === '/' ? logoWhite : logoBlack}
+                src={currentLocation === '/' ? logoWhite : logoBlack}
                 alt="Logo"
               />
             </Link>
@@ -58,7 +81,7 @@ const Navbar = () => {
           {/* Navigation Links */}
           <div
             className={`${
-              isHomepage === '/' ? 'text-white' : 'text-black'
+              currentLocation === '/' ? 'text-white' : 'text-black'
             } space-x-6`}
           >
             <NavLink to="/">Home</NavLink>
@@ -69,7 +92,7 @@ const Navbar = () => {
           <div className="flex items-center gap-6">
             {/* Search Icon */}
             {/* <div className="cursor-pointer">
-              {isHomepage === '/' ? <SearchSvg /> : <SearchSvg light={true} />}
+              {currentLocation === '/' ? <SearchSvg /> : <SearchSvg light={true} />}
             </div> */}
 
             {/* Cart Icon */}
@@ -77,7 +100,7 @@ const Navbar = () => {
               onClick={() => setShowCart(!showCart)}
               className="cursor-pointer"
             >
-              {isHomepage === '/' ? <CartSvg /> : <CartSvg light={true} />}
+              {currentLocation === '/' ? <CartSvg /> : <CartSvg light={true} />}
             </div>
 
             {/* Profile Icon */}
@@ -85,7 +108,7 @@ const Navbar = () => {
               onClick={() => setShowLogin(!showLogin)}
               className="cursor-pointer relative"
             >
-              {isHomepage === '/' ? (
+              {currentLocation === '/' ? (
                 <ProfileSvg />
               ) : (
                 <ProfileSvg light={true} />
