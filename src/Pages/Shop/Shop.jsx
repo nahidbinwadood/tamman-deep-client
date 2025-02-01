@@ -10,7 +10,6 @@ import ProductsCard from './../../Components/Cards/ProductsCard';
 import InfoSection from '@/Components/Shop/InfoSection';
 import ShopFilters from '@/Components/Shop/ShopFilters';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
-import useAuth from '@/Hooks/useAuth';
 
 const Shop = () => {
   const allInfo = [
@@ -49,9 +48,6 @@ const Shop = () => {
     },
   });
 
-  const { user } = useAuth();
-  console.log(user);
-
   return (
     <div className="mt-[88px]">
       <div className="mt-40 container mx-auto">
@@ -64,12 +60,12 @@ const Shop = () => {
         <ShopFilters />
 
         {/* products card */}
-        <div className="my-10 grid grid-cols-4 gap-6 min-h-screen w-full">
+        <div className="my-10 grid grid-cols-4 gap-6 w-full">
           {isLoading ? (
             <div className=" ">loading ...</div>
           ) : (
-            allProducts?.map((product, idx) => (
-              <ProductsCard product={product} key={idx} />
+            allProducts?.map((product) => (
+              <ProductsCard product={product} key={product?.id} />
             ))
           )}
         </div>

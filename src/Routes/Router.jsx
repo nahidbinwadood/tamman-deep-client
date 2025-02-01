@@ -43,11 +43,15 @@ export const router = createBrowserRouter([
         path: '/shop',
         element: <Shop />,
       },
-      {
-        path: '/checkout',
-        element: <Checkout />,
-      },
     ],
+  },
+  {
+    path: '/checkout',
+    element: (
+      <PrivateRoute>
+        <Checkout />
+      </PrivateRoute>
+    ),
   },
   { path: '/login', element: <Login /> },
   { path: '/register', element: <Register /> },

@@ -1,13 +1,16 @@
 /* eslint-disable react/prop-types */
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { CrossButtonSvg } from '../SvgContainer/SvgContainer';
 import CartItem from '../Cart/CartItem';
 import useAuth from '@/Hooks/useAuth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const CartDrawer = ({ showCart, setShowCart }) => {
-  const { cartItems } = useAuth();
+  const { cartItems, user } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const totalPrice = cartItems?.reduce((acc, item) => {
     return acc + parseFloat(item?.totalPrice);
@@ -20,6 +23,19 @@ const CartDrawer = ({ showCart, setShowCart }) => {
       document.body.style.overflow = 'auto';
     }
   }, [showCart]);
+
+  // handlers:
+  const handleCheckout = async () => {
+    if (user) {
+      setLoading(true);
+
+      navigate('/checkout');
+      setShowCart(false);
+    } else {
+      toast.error('Please Login First');
+      setShowCart(false);
+    }
+  };
 
   return (
     <>
@@ -67,8 +83,8 @@ const CartDrawer = ({ showCart, setShowCart }) => {
               >
                 {/* Cart Items */}
                 <div className="p-4 overflow-y-auto flex flex-col gap-3">
-                  {cartItems?.map((item) => (
-                    <CartItem key={item?.id} item={item} />
+                  {cartItems?.map((item, index) => (
+                    <CartItem key={index} item={item} />
                   ))}
                 </div>
 
@@ -80,17 +96,18 @@ const CartDrawer = ({ showCart, setShowCart }) => {
                   </div>
 
                   {/* proceed to checkout button */}
-                  <div>
-                    <Link
-                      onClick={() => setShowCart(false)}
-                      to="/checkout"
-                      className="w-full bg-primaryColor flex items-center gap-2 justify-center py-3 rounded-md font-medium text-white"
-                    >
-                      Checkout
-                      <span className="size-2 rounded-full bg-white inline-block"></span>
-                      <span>${totalPrice.toFixed(2)}</span>
-                    </Link>
-                  </div>
+                  <button
+                    disabled={loading}
+                    onClick={handleCheckout}
+                    to="/checkout"
+                    className={`w-full bg-primaryColor flex items-center gap-2 justify-center py-3 rounded-md font-medium text-white cursor-pointer ${
+                      loading ? 'cursor-not-allowed' : ''
+                    }`}
+                  >
+                    Checkout
+                    <span className="size-2 rounded-full bg-white inline-block"></span>
+                    <span>${totalPrice.toFixed(2)}</span>
+                  </button>
                 </div>
               </div>
             ) : (

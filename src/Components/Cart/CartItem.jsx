@@ -9,7 +9,7 @@ const CartItem = ({ item }) => {
     setCartItems((prev) => {
       return prev.map((i) => {
         const newQuantity = Math.min(i.quantity + 1, 10);
-        return item.id === i.id
+        return item.color_id === i.color_id
           ? { ...i, quantity: newQuantity, totalPrice: newQuantity * i.price }
           : i;
       });
@@ -20,15 +20,17 @@ const CartItem = ({ item }) => {
     setCartItems((prev) => {
       return prev.map((i) => {
         const newQuantity = Math.max(i.quantity - 1, 0);
-        return item.id === i.id
+        return item.color_id === i.color_id
           ? { ...i, quantity: newQuantity, totalPrice: newQuantity * i.price }
           : i;
       });
     });
   };
 
-  const handleDelete = (itemId) => {
-    const updatedCartItems = cartItems?.filter((item) => item?.id != itemId);
+  const handleDelete = (color_id) => {
+    const updatedCartItems = cartItems?.filter(
+      (item) => item?.color_id != color_id
+    );
     setCartItems(updatedCartItems);
   };
   return (
@@ -51,13 +53,15 @@ const CartItem = ({ item }) => {
             <div className="space-y-1">
               <h5>One Tap Card</h5>
               <div className="text-black/40">
-                <p>Style: Minimal</p>
-                <p>Color: Black</p>
+                {/* <p>Style: Minimal</p> */}
+                <p>
+                  Color: <span className="capitalize">{item?.color}</span>
+                </p>
               </div>
             </div>
           </div>
           <div
-            onClick={() => handleDelete(item?.id)}
+            onClick={() => handleDelete(item?.color_id)}
             className="cursor-pointer"
           >
             <DeleteSvg />
