@@ -86,7 +86,7 @@ const ProductsCard = ({ product }) => {
     <div className="bg-[#fbfbfb] border border-black/50 rounded-lg group overflow-hidden">
       <div className="h-[300px] w-full overflow-hidden">
         <img
-          className="h-full w-full object-cover rounded-lg group-hover:scale-105 transition-all duration-300"
+          className="h-full w-full object-cover group-hover:scale-105 transition-all duration-300"
           src={image}
           alt=""
         />
