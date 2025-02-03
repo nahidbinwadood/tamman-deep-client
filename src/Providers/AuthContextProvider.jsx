@@ -8,18 +8,19 @@ export const AuthContext = createContext(null);
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [cartItems, setCartItems] = useState(null);
+  const [cartLength, setCartLength] = useState(null);
   const userName = localStorage.getItem('username');
   const axiosPublic = useAxiosPublic();
 
   const token = localStorage.getItem('token');
-
   useEffect(() => {
     if (token) {
       setLoading(true);
       const userData = async () => {
         try {
           const { data } = await axiosPublic('/api/check');
+          const response = await axiosPublic('/api/cart');
+          setCartLength(response?.data?.data?.length);
           setUser(data?.user);
           setLoading(false);
         } catch (err) {
@@ -36,8 +37,8 @@ const AuthContextProvider = ({ children }) => {
     loading,
     setLoading,
     userName,
-    cartItems,
-    setCartItems,
+    cartLength,
+    setCartLength,
   };
   return (
     <AuthContext.Provider value={allValues}>{children}</AuthContext.Provider>

@@ -11,7 +11,7 @@ import useAuth from '@/Hooks/useAuth';
 import toast from 'react-hot-toast';
 
 const CartDrawer = ({ showCart, setShowCart }) => {
-  const { user, setCartItems } = useAuth();
+  const { user, setCartLength } = useAuth();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
@@ -26,7 +26,7 @@ const CartDrawer = ({ showCart, setShowCart }) => {
     queryFn: fetchCartItems,
     onSuccess: (data) => {
       console.log(data?.length);
-      setCartItems(data?.length);
+      setCartLength(data?.length);
     },
   });
 
@@ -35,7 +35,7 @@ const CartDrawer = ({ showCart, setShowCart }) => {
     return acc + parseFloat(item?.product_price) * item?.quantity;
   }, 0);
 
-  console.log(totalPrice);
+  // console.log(totalPrice);
   useEffect(() => {
     if (showCart) {
       document.body.style.overflow = 'hidden';
@@ -46,7 +46,7 @@ const CartDrawer = ({ showCart, setShowCart }) => {
 
   // handlers:
 
-  const handleCheckout = async () => {
+  const handleCheckout = () => {
     if (user) {
       setLoading(true);
       navigate('/checkout');

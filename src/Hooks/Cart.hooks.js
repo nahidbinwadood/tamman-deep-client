@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useAxiosPublic from './useAxiosPublic';
 import toast from 'react-hot-toast';
+import useAuth from './useAuth';
 
 //update product quantity
 export function useCartQuantity() {
@@ -37,6 +38,7 @@ export function useCartQuantity() {
 export function useCartDelete() {
   const axiosPublic = useAxiosPublic();
   const queryClient = useQueryClient();
+  const { setCartLength } = useAuth();
   const deleteCartFunction = async (item_id) => {
     const response = await axiosPublic.post('/api/cart/delete', item_id);
     return response?.data;
@@ -51,6 +53,7 @@ export function useCartDelete() {
       queryClient.setQueryData(['allCartItems'], (oldData) => {
         return oldData?.filter((item) => item?.id != newData?.item_id);
       });
+      setCartLength(queryClient.getQueryData(['allCartItems'])?.length);
       return { prevCarts };
     },
     onError: (err, newData, context) => {
@@ -59,4 +62,3 @@ export function useCartDelete() {
     },
   });
 }
-

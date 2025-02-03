@@ -9,7 +9,7 @@ import CartDrawer from '@/Components/Drawer/CartDrawer';
 
 const Navbar = () => {
   const token = localStorage.getItem('token');
-  const { setUser, setLoading, cartItems } = useAuth();
+  const { setUser, setLoading, cartLength } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
@@ -54,7 +54,7 @@ const Navbar = () => {
   return (
     <div>
       <div
-        className={`fixed h-[100px] w-full top-0 left-0 z-40 transition-all duration-300
+        className={`fixed h-[100px] w-full top-0 left-0 z-40 transition-all
           ${isScrolled && isDarkMode ? 'bg-black shadow-lg' : 'bg-transparent'}
           ${
             (isScrolled && location.pathname === '/shop') ||
@@ -87,9 +87,9 @@ const Navbar = () => {
               className="cursor-pointer relative"
             >
               <CartSvg light={!isDarkMode} />
-              {cartItems?.length > 0 && (
+              {cartLength > 0 && (
                 <div className="absolute -bottom-4 -right-2 bg-primaryColor text-white size-6 flex items-center justify-center rounded-full text-xs">
-                  {cartItems.length}
+                  {cartLength}
                 </div>
               )}
             </div>

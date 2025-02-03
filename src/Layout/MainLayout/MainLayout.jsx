@@ -4,25 +4,27 @@ import Footer from '../../Shared/Footer';
 import { useState, useEffect } from 'react';
 import Preloader from '@/Components/Loaders/Preloader';
 import CartDrawer from '@/Components/Drawer/CartDrawer';
+import useAuth from '@/Hooks/useAuth';
 
 const MainLayout = () => {
-  const [loading, setLoading] = useState(true);
+  const { loading } = useAuth();
+  const [loadingScreen, setLoadingScreen] = useState(true);
 
   useEffect(() => {
     // Check if the preloader flag is already set in sessionStorage
     const hasVisitedBefore = sessionStorage.getItem('hasVisitedBefore');
 
     if (hasVisitedBefore) {
-      setLoading(false); // Skip the preloader if the flag exists
+      setLoadingScreen(false); // Skip the preloader if the flag exists
     } else {
       setTimeout(() => {
-        setLoading(false); // Hide the preloader after 4 seconds
+        setLoadingScreen(false); // Hide the preloader after 4 seconds
         sessionStorage.setItem('hasVisitedBefore', 'true'); // Set flag in sessionStorage
       }, 4000);
     }
   }, []);
 
-  if (loading) return <Preloader />; // Show preloader while loading
+  if (loadingScreen || loading) return <Preloader />; // Show preloader while loading
 
   return (
     <>

@@ -17,8 +17,8 @@ import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const ProductsCard = ({ product }) => {
-  // console.log(product);
-  const { user } = useAuth();
+  console.log(product);
+  const { user, setCartLength } = useAuth();
   const { image, price } = product;
   const [color, setColor] = useState();
   const navigate = useNavigate();
@@ -41,7 +41,6 @@ const ProductsCard = ({ product }) => {
         const isExist = oldData?.some(
           (item) => item?.color_id == newData?.color_id
         );
-        console.log(isExist);
         if (isExist) {
           toast.error('Product already added to cart with this color');
         } else {
@@ -49,6 +48,8 @@ const ProductsCard = ({ product }) => {
           return [...oldData, newData];
         }
       });
+      setCartLength(queryClient.getQueryData(['allCartItems'])?.length);
+
       return { prevCarts };
     },
     onError: (err, newData, context) => {
@@ -69,13 +70,14 @@ const ProductsCard = ({ product }) => {
       } else {
         const productInfo = {
           id: product?.id,
+          name: product?.name,
           image: product?.image,
           color_name: color,
+          product_price: product?.price,
           color_id: product?.colors.find((c) => c?.name == color)?.id,
           quantity: 1,
         };
         addToCartMutation.mutate(productInfo);
-        console.log(productInfo);
       }
     }
   };
