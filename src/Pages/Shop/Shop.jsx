@@ -10,8 +10,12 @@ import ProductsCard from './../../Components/Cards/ProductsCard';
 import InfoSection from '@/Components/Shop/InfoSection';
 import ShopFilters from '@/Components/Shop/ShopFilters';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
+import useAuth from '@/Hooks/useAuth';
+import Loader from '@/Components/Loaders/Loader';
 
 const Shop = () => {
+  const { user } = useAuth();
+  console.log(user);
   const allInfo = [
     {
       img: [{ logo: <SmileSvg /> }],
@@ -60,15 +64,17 @@ const Shop = () => {
         <ShopFilters />
 
         {/* products card */}
-        <div className="my-10 grid grid-cols-4 gap-6 w-full">
-          {isLoading ? (
-            <div className=" ">loading ...</div>
-          ) : (
-            allProducts?.map((product) => (
+        {isLoading ? (
+          <div className="h-[70vh] flex items-center justify-center pb-20">
+            <Loader />
+          </div>
+        ) : (
+          <div className="my-10 grid grid-cols-4 gap-6 w-full">
+            {allProducts?.map((product) => (
               <ProductsCard product={product} key={product?.id} />
-            ))
-          )}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
       {/* Info Section */}
       <InfoSection allInfo={allInfo} />

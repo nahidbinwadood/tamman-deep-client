@@ -9,6 +9,8 @@ import toast from 'react-hot-toast';
 
 const CartDrawer = ({ showCart, setShowCart }) => {
   const { cartItems, user } = useAuth();
+
+  console.log(user);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 

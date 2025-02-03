@@ -9,7 +9,7 @@ import CartDrawer from '@/Components/Drawer/CartDrawer';
 
 const Navbar = () => {
   const token = localStorage.getItem('token');
-  const { user, setUser, setLoading, cartItems } = useAuth();
+  const { setUser, setLoading, cartItems } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
@@ -56,7 +56,12 @@ const Navbar = () => {
       <div
         className={`fixed h-[100px] w-full top-0 left-0 z-40 transition-all duration-300
           ${isScrolled && isDarkMode ? 'bg-black shadow-lg' : 'bg-transparent'}
-          ${(isScrolled && location.pathname === '/shop') || location.pathname === '/checkout' ? 'bg-white shadow-lg' : ''}`}
+          ${
+            (isScrolled && location.pathname === '/shop') ||
+            location.pathname === '/checkout'
+              ? 'bg-white shadow-lg'
+              : ''
+          }`}
       >
         <div className="container mx-auto w-full flex items-center justify-between">
           {/* Logo */}
@@ -67,7 +72,9 @@ const Navbar = () => {
           </div>
 
           {/* Navigation Links */}
-          <div className={`${isDarkMode ? 'text-white' : 'text-black'} space-x-6`}>
+          <div
+            className={`${isDarkMode ? 'text-white' : 'text-black'} space-x-6`}
+          >
             <NavLink to="/">Home</NavLink>
             <NavLink to="/shop">Shop</NavLink>
           </div>
@@ -75,7 +82,10 @@ const Navbar = () => {
           {/* Action Icons */}
           <div className="flex items-center gap-6">
             {/* Cart Icon */}
-            <div onClick={() => setShowCart((prev) => !prev)} className="cursor-pointer relative">
+            <div
+              onClick={() => setShowCart((prev) => !prev)}
+              className="cursor-pointer relative"
+            >
               <CartSvg light={!isDarkMode} />
               {cartItems?.length > 0 && (
                 <div className="absolute -bottom-4 -right-2 bg-primaryColor text-white size-6 flex items-center justify-center rounded-full text-xs">
@@ -85,22 +95,34 @@ const Navbar = () => {
             </div>
 
             {/* Profile Icon */}
-            <div onClick={() => setShowLogin((prev) => !prev)} className="cursor-pointer relative">
+            <div
+              onClick={() => setShowLogin((prev) => !prev)}
+              className="cursor-pointer relative"
+            >
               <ProfileSvg light={!isDarkMode} />
               {showLogin && (
                 <div className="bg-white px-6 py-4 font-medium rounded-md shadow-lg absolute mt-2 flex flex-col justify-center gap-2 text-center text-nowrap">
                   {token ? (
                     <>
-                      <Link to="/dashboard/home" className="text-sm border-b pb-2 border-black/50">
+                      <Link
+                        to="/dashboard/home"
+                        className="text-sm border-b pb-2 border-black/50"
+                      >
                         Dashboard
                       </Link>
-                      <div onClick={handleLogout} className="text-sm cursor-pointer">
+                      <div
+                        onClick={handleLogout}
+                        className="text-sm cursor-pointer"
+                      >
                         Log Out
                       </div>
                     </>
                   ) : (
                     <>
-                      <Link to="/login" className="text-sm pb-2 border-b border-black/50">
+                      <Link
+                        to="/login"
+                        className="text-sm pb-2 border-b border-black/50"
+                      >
                         Login
                       </Link>
                       <Link to="/shop" className="text-sm pt-2">

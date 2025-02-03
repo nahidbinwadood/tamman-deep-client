@@ -21,7 +21,7 @@ const AuthContextProvider = ({ children }) => {
       const userData = async () => {
         try {
           const { data } = await axiosPublic('/api/check');
-          setUser(data?.data);
+          setUser(data?.user);
           setLoading(false);
         } catch (err) {
           console.log(err);

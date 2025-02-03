@@ -29,7 +29,8 @@ const Login = () => {
 
         const res = await axiosPublic('/api/check');
         if (res.status === 200) {
-          localStorage.setItem('username', res?.data?.data?.name);
+          console.log(res?.data?.user?.name);
+          localStorage.setItem('username', res?.data?.user?.name);
           navigate('/dashboard/home');
         }
       }

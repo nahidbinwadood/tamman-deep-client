@@ -41,7 +41,7 @@ const DashboardProfiles = () => {
   const { data: allActions = [], isLoading } = useQuery({
     queryKey: ['allActions'],
     queryFn: async () => {
-      const { data } = await axiosPublic('/api/action/show');
+      const { data } = await axiosPublic('/api/action/status/2');
       return data?.data;
     },
   });
