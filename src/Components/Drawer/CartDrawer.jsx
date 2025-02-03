@@ -3,21 +3,39 @@
 import { useEffect, useState } from 'react';
 import { CrossButtonSvg } from '../SvgContainer/SvgContainer';
 import CartItem from '../Cart/CartItem';
-import useAuth from '@/Hooks/useAuth';
+// import useAuth from '@/Hooks/useAuth';
 import { Link, useNavigate } from 'react-router-dom';
+import useAxiosPublic from '@/Hooks/useAxiosPublic';
+import { useQuery } from '@tanstack/react-query';
+import useAuth from '@/Hooks/useAuth';
 import toast from 'react-hot-toast';
 
 const CartDrawer = ({ showCart, setShowCart }) => {
-  const { cartItems, user } = useAuth();
-
-  console.log(user);
+  const { user, setCartItems } = useAuth();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
-  const totalPrice = cartItems?.reduce((acc, item) => {
-    return acc + parseFloat(item?.totalPrice);
+  const fetchCartItems = async () => {
+    const response = await axiosPublic('/api/cart');
+    return response?.data?.data;
+  };
+
+  const { data: allCartItems = [] } = useQuery({
+    queryKey: ['allCartItems'],
+    queryFn: fetchCartItems,
+    onSuccess: (data) => {
+      console.log(data?.length);
+      setCartItems(data?.length);
+    },
+  });
+
+  console.log(allCartItems);
+  const totalPrice = allCartItems?.reduce((acc, item) => {
+    return acc + parseFloat(item?.product_price) * item?.quantity;
   }, 0);
 
+  console.log(totalPrice);
   useEffect(() => {
     if (showCart) {
       document.body.style.overflow = 'hidden';
@@ -27,10 +45,10 @@ const CartDrawer = ({ showCart, setShowCart }) => {
   }, [showCart]);
 
   // handlers:
+
   const handleCheckout = async () => {
     if (user) {
       setLoading(true);
-
       navigate('/checkout');
       setShowCart(false);
     } else {
@@ -64,7 +82,7 @@ const CartDrawer = ({ showCart, setShowCart }) => {
               <div className="size-2 rounded-full bg-black"></div>
 
               {/* count */}
-              <div className="font-medium">{cartItems?.length}</div>
+              <div className="font-medium">{allCartItems?.length}</div>
             </div>
 
             {/* Cross Button */}
@@ -78,14 +96,14 @@ const CartDrawer = ({ showCart, setShowCart }) => {
 
           {/* Drawer Content */}
           <div style={{ height: 'calc(100vh - 65px)' }}>
-            {cartItems?.length > 0 ? (
+            {allCartItems?.length > 0 ? (
               <div
                 style={{ height: 'calc(100vh - 65px)' }}
                 className="flex flex-col justify-between"
               >
                 {/* Cart Items */}
                 <div className="p-4 overflow-y-auto flex flex-col gap-3">
-                  {cartItems?.map((item, index) => (
+                  {allCartItems?.map((item, index) => (
                     <CartItem key={index} item={item} />
                   ))}
                 </div>
@@ -102,9 +120,7 @@ const CartDrawer = ({ showCart, setShowCart }) => {
                     disabled={loading}
                     onClick={handleCheckout}
                     to="/checkout"
-                    className={`w-full bg-primaryColor flex items-center gap-2 justify-center py-3 rounded-md font-medium text-white cursor-pointer ${
-                      loading ? 'cursor-not-allowed' : ''
-                    }`}
+                    className={`w-full bg-primaryColor flex items-center gap-2 justify-center py-3 rounded-md font-medium text-white cursor-pointer  `}
                   >
                     Checkout
                     <span className="size-2 rounded-full bg-white inline-block"></span>

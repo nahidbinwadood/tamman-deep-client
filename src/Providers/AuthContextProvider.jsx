@@ -1,7 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
-import useLocalStorage from '@/Hooks/useLocalStorage';
 import { createContext, useEffect, useState } from 'react';
 export const AuthContext = createContext(null);
 
@@ -9,7 +8,7 @@ export const AuthContext = createContext(null);
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
+  const [cartItems, setCartItems] = useState(null);
   const userName = localStorage.getItem('username');
   const axiosPublic = useAxiosPublic();
 

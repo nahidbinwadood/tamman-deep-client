@@ -12,38 +12,72 @@ import {
   SelectValue,
 } from '../ui/select';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useAxiosPublic from '@/Hooks/useAxiosPublic';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const ProductsCard = ({ product }) => {
+  // console.log(product);
+  const { user } = useAuth();
   const { image, price } = product;
-  const { cartItems, setCartItems } = useAuth();
   const [color, setColor] = useState();
+  const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
+  const queryClient = useQueryClient();
 
+  // axios function:
+  const addToCart = async (data) => {
+    const response = await axiosPublic.post('/api/cart/create', data);
+    return response?.data;
+  };
+
+  //mutation function:
+  const addToCartMutation = useMutation({
+    mutationFn: addToCart,
+    onMutate: async (newData) => {
+      await queryClient.cancelQueries({ queryKey: ['allCartItems'] });
+      const prevCarts = queryClient.getQueryData(['allCartItems']);
+      queryClient.setQueryData(['allCartItems'], (oldData) => {
+        const isExist = oldData?.some(
+          (item) => item?.color_id == newData?.color_id
+        );
+        console.log(isExist);
+        if (isExist) {
+          toast.error('Product already added to cart with this color');
+        } else {
+          toast.success('Product added to cart');
+          return [...oldData, newData];
+        }
+      });
+      return { prevCarts };
+    },
+    onError: (err, newData, context) => {
+      queryClient.setQueryData(['allCartItems'], context.prevCarts);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['allCartItems'] });
+    },
+  });
   const handleCart = (product) => {
-    if (!color) {
-      return toast.error('Select a color first');
+    // checking if user is logged in
+    if (!user) {
+      toast.error('Please Login First !');
+      navigate('/login');
+    } else {
+      if (!color) {
+        return toast.error('Select a color first');
+      } else {
+        const productInfo = {
+          id: product?.id,
+          image: product?.image,
+          color_name: color,
+          color_id: product?.colors.find((c) => c?.name == color)?.id,
+          quantity: 1,
+        };
+        addToCartMutation.mutate(productInfo);
+        console.log(productInfo);
+      }
     }
-
-    // Check if the product with the same color already exists
-    const alreadyExist = cartItems?.some(
-      (item) => item.id === product.id && item.color === color
-    );
-
-    if (alreadyExist) {
-      return toast.error('Product with this color already exists in your cart');
-    }
-
-    // Add product with the selected color
-    setCartItems((prev) => [
-      ...prev,
-      {
-        ...product,
-        quantity: 1,
-        totalPrice: product.price,
-        color,
-        color_id: product?.colors?.find((i) => i.name === color)?.id,
-      },
-    ]);
-    toast.success('Product added to your cart');
   };
 
   return (
@@ -59,7 +93,7 @@ const ProductsCard = ({ product }) => {
       {/* description */}
       <div className="px-5 py-6">
         <div className="space-y-2 h-24">
-          <h4 className="font-semibold text-2xl">Bamboo NFC Business Cards</h4>
+          <h4 className="font-semibold text-2xl">{product?.name}</h4>
           <p>The last business card you&lsquo;ll ever need.</p>
         </div>
         <div className="flex  items-center gap-2 mt-5">

@@ -10,12 +10,9 @@ import ProductsCard from './../../Components/Cards/ProductsCard';
 import InfoSection from '@/Components/Shop/InfoSection';
 import ShopFilters from '@/Components/Shop/ShopFilters';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
-import useAuth from '@/Hooks/useAuth';
 import Loader from '@/Components/Loaders/Loader';
 
 const Shop = () => {
-  const { user } = useAuth();
-  console.log(user);
   const allInfo = [
     {
       img: [{ logo: <SmileSvg /> }],
