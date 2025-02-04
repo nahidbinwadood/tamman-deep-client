@@ -103,8 +103,8 @@ const CartDrawer = ({ showCart, setShowCart }) => {
               >
                 {/* Cart Items */}
                 <div className="p-4 overflow-y-auto flex flex-col gap-3">
-                  {allCartItems?.map((item, index) => (
-                    <CartItem key={index} item={item} />
+                  {allCartItems?.map((item) => (
+                    <CartItem key={item?.id} item={item} />
                   ))}
                 </div>
 

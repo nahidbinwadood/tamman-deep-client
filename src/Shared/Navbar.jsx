@@ -52,9 +52,9 @@ const Navbar = () => {
   }, [location.pathname]);
 
   return (
-    <div>
+    <div className="">
       <div
-        className={`fixed h-[100px] w-full top-0 left-0 z-40 transition-all
+        className={`fixed h-[100px] w-full top-0 left-0 z-40  topbar
           ${isScrolled && isDarkMode ? 'bg-black shadow-lg' : 'bg-transparent'}
           ${
             (isScrolled && location.pathname === '/shop') ||

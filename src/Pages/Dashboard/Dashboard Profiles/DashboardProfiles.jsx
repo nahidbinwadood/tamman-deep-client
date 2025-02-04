@@ -2,7 +2,6 @@ import CommonAction from '@/Components/Dashboard/DashboardProfile/CommonAction';
 import DashboardProfileHeader from '@/Components/Dashboard/DashboardProfile/DashboardProfileHeader';
 import TabContents from '@/Components/Dashboard/DashboardProfile/TabContents';
 import Loader from '@/Components/Loaders/Loader';
-import ActionShareModal from '@/Components/Modals/ActionShareModal';
 import CreateActionModal from '@/Components/Modals/CreateActionModal';
 import Modal from '@/Components/Modals/Modal';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
@@ -16,6 +15,7 @@ import { RiListUnordered } from 'react-icons/ri';
 const DashboardProfiles = () => {
   const axiosPublic = useAxiosPublic();
   const [open, setOpen] = useState(false);
+
   const [activeTab, setActiveTab] = useState('My Cards');
 
   const allTabs = [
@@ -37,11 +37,10 @@ const DashboardProfiles = () => {
     },
   ];
 
-  //fetching data from Db:
-  const { data: allActions = [], isLoading } = useQuery({
-    queryKey: ['allActions'],
+  const { data: allCards = [], isLoading } = useQuery({
+    queryKey: ['allCards'],
     queryFn: async () => {
-      const { data } = await axiosPublic('/api/action/status/2');
+      const { data } = await axiosPublic('/api/user/card');
       return data?.data;
     },
   });
@@ -77,10 +76,7 @@ const DashboardProfiles = () => {
         </div>
 
         {/* Right Section */}
-        <TabContents
-          activeTab={activeTab}
-          allActions={allActions?.product_types}
-        />
+        <TabContents allCards={allCards} activeTab={activeTab} />
       </div>
 
       {/* Modals */}
@@ -92,7 +88,7 @@ const DashboardProfiles = () => {
       )}
       {activeTab == 'Share' && (
         <Modal open={open} setOpen={setOpen} setActiveTab={setActiveTab}>
-          <ActionShareModal setOpen={setOpen} qrCode={allActions?.qrcode} />
+          {/* <ActionShareModal setOpen={setOpen} qrCode={allActions?.qrcode} /> */}
         </Modal>
       )}
     </div>

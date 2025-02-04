@@ -1,11 +1,63 @@
 /* eslint-disable react/prop-types */
 import { Switch } from '@/Components/ui/switch';
-import { useState } from 'react';
-import { TbEdit } from 'react-icons/tb';
+import useAuth from '@/Hooks/useAuth';
+import useAxiosPublic from '@/Hooks/useAxiosPublic';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 import { TiBusinessCard } from 'react-icons/ti';
 
 function Product({ item }) {
-  const [isChecked, setIsChecked] = useState(true);
+  const { setActiveCard } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const queryClient = useQueryClient();
+  const updateActiveCardFunction = async (item) => {
+    const response = await axiosPublic.post(`/api/user/card/status`, item);
+    return response?.data;
+  };
+
+  const activeCardMutation = useMutation({
+    mutationKey: 'activeCard',
+    mutationFn: updateActiveCardFunction,
+    onMutate: async (updatedItem) => {
+      await queryClient.cancelQueries(['allCards']);
+
+      const previousCards = queryClient.getQueryData(['allCards']);
+
+      // Optimistically update the UI so only one card is active at a time
+      queryClient.setQueryData(['allCards'], (oldData) => {
+        if (!oldData) return [];
+
+        return oldData.map((card) => ({
+          ...card,
+          status: card.id === updatedItem.item_id ? 1 : 0, // Activate only the selected card
+        }));
+      });
+      toast.success('Card Activation Successful');
+
+      return { previousCards };
+    },
+    onError: (err, updatedItem, context) => {
+      toast.error(err.message);
+
+      // Rollback to previous state if error occurs
+      if (context?.previousCards) {
+        queryClient.setQueryData(['allCards'], context.previousCards);
+      }
+    },
+    onSuccess: async() => {
+      setActiveCard(item);
+     await queryClient.invalidateQueries(['allCards']); // Ensure fresh data after mutation
+      await queryClient.invalidateQueries(['allActions']);
+      // Ensure fresh data after mutation
+    },
+  });
+
+  const handleUpdateActiveCard = (item) => {
+    const data = {
+      item_id: item?.id,
+    };
+    activeCardMutation.mutate(data);
+  };
   return (
     <div className="border  p-4 group  font-inter hover:text-white transition duration-200 hover:bg-gradient-to-tl text-textColor from-[#116DFF] to-[#23C0B6] justify-between rounded-lg bg-white flex items-center ">
       <div className="flex flex-1 items-center gap-4">
@@ -14,18 +66,16 @@ function Product({ item }) {
       </div>
       <div className="flex flex-1 tex-sm items-center gap-2">
         <TiBusinessCard size={24} />
-        <h4>Contact Card #1</h4>
+        <h4>{item?.card_name}</h4>
       </div>
       <div className="flex-1">
         <Switch
-          checked={isChecked}
-          onCheckedChange={()=>setIsChecked(!isChecked)}
+          checked={item?.status == 1}
+          onCheckedChange={() => handleUpdateActiveCard(item)}
           className={'data-[state=checked]:bg-[#23C0B6]'}
         />
       </div>
-      <div className="cursor-pointer">
-        <TbEdit size={24} />
-      </div>
+      <div className="cursor-pointer">{/* <TbEdit size={24} /> */}</div>
     </div>
   );
 }

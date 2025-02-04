@@ -31,7 +31,7 @@ const Login = () => {
         if (res.status === 200) {
           console.log(res?.data?.user?.name);
           localStorage.setItem('username', res?.data?.user?.name);
-          navigate('/dashboard/home');
+          navigate('/');
         }
       }
       toast.success('Login successful');

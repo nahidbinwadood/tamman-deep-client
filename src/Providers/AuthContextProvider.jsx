@@ -9,6 +9,7 @@ const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [pauseAction, setPauseAction] = useState(false);
+  const [activeCard, setActiveCard] = useState(null);
   const [cartLength, setCartLength] = useState(null);
   const userName = localStorage.getItem('username');
   const axiosPublic = useAxiosPublic();
@@ -21,6 +22,10 @@ const AuthContextProvider = ({ children }) => {
         try {
           const { data } = await axiosPublic('/api/check');
           const response = await axiosPublic('/api/cart');
+          const allCardsData = await axiosPublic('/api/user/card');
+          setActiveCard(
+            allCardsData?.data?.data?.find((card) => card?.status == 1)
+          );
           setCartLength(response?.data?.data?.length);
           setUser(data?.user);
           setLoading(false);
@@ -42,6 +47,8 @@ const AuthContextProvider = ({ children }) => {
     setCartLength,
     pauseAction,
     setPauseAction,
+    activeCard,
+    setActiveCard,
   };
   return (
     <AuthContext.Provider value={allValues}>{children}</AuthContext.Provider>

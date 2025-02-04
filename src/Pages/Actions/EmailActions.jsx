@@ -13,7 +13,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ImSpinner9 } from 'react-icons/im';
 import profile from '@/assets/images/profile.png';
 import EmailPreview from '@/Components/LivePreview/EmailPreview';
+import useAuth from '@/Hooks/useAuth';
 const EmailActions = () => {
+  const { activeCard } = useAuth();
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(false);
   const navigate = useNavigate();
@@ -57,9 +59,13 @@ const EmailActions = () => {
 
   const handleSave = () => {
     setLoading(true);
-    console.log(formData);
-    // emailAction.mutate(formData);
+    const data = {
+      ...formData,
+      order_item_id: activeCard?.id,
+    };
+    emailAction.mutate(data);
     // navigate to profile page
+    // navigate('/dashboard/home');
   };
 
   //useEffect:
@@ -77,7 +83,6 @@ const EmailActions = () => {
     if (file) {
       const objectUrl = URL.createObjectURL(file);
       setProfilePhoto(objectUrl);
-
       setFormData((prev) => ({
         ...prev,
         image: file, // Store the file directly
@@ -187,7 +192,7 @@ const EmailActions = () => {
                 label="Enter Your Mail"
                 variant="outlined"
                 fullWidth
-                type='email'
+                type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}

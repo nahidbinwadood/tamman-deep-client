@@ -43,9 +43,9 @@ const Checkout = () => {
     }
   };
   return (
-    <div className="min-h-screen py-20 overflow-y-auto font-inter container mx-auto flex items-center justify-center gap-12">
+    <div className="min-h-screen py-20 font-inter container mx-auto flex items-center justify-center gap-12">
       {/* cart */}
-      <div>
+      <div className="overflow-y-auto">
         {/* title */}
         <div>
           <h4 className="text-2xl font-semibold">My Cart</h4>

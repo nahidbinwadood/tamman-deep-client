@@ -17,8 +17,7 @@ import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const ProductsCard = ({ product }) => {
-  const { setPauseAction } = useAuth();
-  // console.log(product);
+  console.log(product);
   const { user, setCartLength } = useAuth();
   const { image, price } = product;
   const [color, setColor] = useState();
@@ -36,7 +35,6 @@ const ProductsCard = ({ product }) => {
   const addToCartMutation = useMutation({
     mutationFn: addToCart,
     onMutate: async (newData) => {
-      setPauseAction(true);
       await queryClient.cancelQueries({ queryKey: ['allCartItems'] });
       const prevCarts = queryClient.getQueryData(['allCartItems']);
       queryClient.setQueryData(['allCartItems'], (oldData) => {
@@ -57,9 +55,8 @@ const ProductsCard = ({ product }) => {
     onError: (err, newData, context) => {
       queryClient.setQueryData(['allCartItems'], context.prevCarts);
     },
-    onSettled: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['allCartItems'] });
-      setPauseAction(false);
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['allCartItems'] });
     },
   });
   const handleCart = (product) => {
