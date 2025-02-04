@@ -8,6 +8,7 @@ export const AuthContext = createContext(null);
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [pauseAction, setPauseAction] = useState(false);
   const [cartLength, setCartLength] = useState(null);
   const userName = localStorage.getItem('username');
   const axiosPublic = useAxiosPublic();
@@ -39,6 +40,8 @@ const AuthContextProvider = ({ children }) => {
     userName,
     cartLength,
     setCartLength,
+    pauseAction,
+    setPauseAction,
   };
   return (
     <AuthContext.Provider value={allValues}>{children}</AuthContext.Provider>

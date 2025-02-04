@@ -1,9 +1,13 @@
 /* eslint-disable react/prop-types */
+import useAuth from '@/Hooks/useAuth';
 import { DeleteSvg, MinusSvg, PlusSvg } from '../SvgContainer/SvgContainer';
 import { useCartDelete, useCartQuantity } from '@/Hooks/Cart.hooks';
 
 const CartItem = ({ item }) => {
   //update cart quantity function:
+  const { pauseAction } = useAuth();
+  console.log(pauseAction);
+
   const { mutate: cartQuantityMutation } = useCartQuantity();
   const { mutate: cartDeleteMutation } = useCartDelete();
 
@@ -56,12 +60,13 @@ const CartItem = ({ item }) => {
               </div>
             </div>
           </div>
-          <div
+          <button
+            disabled={pauseAction}
             onClick={() => handleDelete(item?.id)}
             className="cursor-pointer"
           >
             <DeleteSvg />
-          </div>
+          </button>
         </div>
 
         {/* count */}
@@ -69,21 +74,28 @@ const CartItem = ({ item }) => {
           {/* count */}
           <div className="border border-black/30 rounded-full flex items-center justify-center">
             <button
-              disabled={item?.quantity === 1}
+              disabled={item?.quantity == 1 || pauseAction}
               onClick={() => handleDecrement(item)}
               className={`cursor-pointer px-2 ${
-                item?.quantity == 0 ? 'cursor-not-allowed' : ''
+                item?.quantity === 1 || pauseAction
+                  ? 'cursor-not-allowed opacity-50 pointer-events-none'
+                  : ''
               }`}
             >
               <MinusSvg />
             </button>
+
             <div className="px-3 border-x border-black/30 py-1 w-8 flex items-center justify-center text-sm">
               {item?.quantity}
             </div>
             <button
-              disabled={item?.quantity === 10}
+              disabled={item?.quantity == 10 || pauseAction}
               onClick={() => handleIncrement(item)}
-              className="cursor-pointer px-2"
+              className={`cursor-pointer px-2 ${
+                item?.quantity === 10 || pauseAction
+                  ? 'cursor-not-allowed opacity-50 pointer-events-none'
+                  : ''
+              }`}
             >
               <PlusSvg />
             </button>
@@ -93,7 +105,7 @@ const CartItem = ({ item }) => {
           <div>
             <h5 className="normal-case font-medium text-black">
               {/* <span className="text-black/30 text-sm line-through">$20</span>$ */}
-              ${(parseFloat(item?.product_price)*item?.quantity).toFixed(2)}
+              ${(parseFloat(item?.product_price) * item?.quantity).toFixed(2)}
             </h5>
           </div>
         </div>

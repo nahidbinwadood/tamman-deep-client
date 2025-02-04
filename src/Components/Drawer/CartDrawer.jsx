@@ -30,7 +30,7 @@ const CartDrawer = ({ showCart, setShowCart }) => {
     },
   });
 
-  console.log(allCartItems);
+  // console.log(allCartItems);
   const totalPrice = allCartItems?.reduce((acc, item) => {
     return acc + parseFloat(item?.product_price) * item?.quantity;
   }, 0);
