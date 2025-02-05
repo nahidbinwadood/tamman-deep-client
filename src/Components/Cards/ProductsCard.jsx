@@ -14,6 +14,7 @@ import {
 import { useState } from 'react';
 
 const ProductsCard = ({ product }) => {
+   
   const { image, price } = product;
   const { cartItems, setCartItems } = useAuth();
   const [color, setColor] = useState();
@@ -59,7 +60,7 @@ const ProductsCard = ({ product }) => {
       {/* description */}
       <div className="px-5 py-6">
         <div className="space-y-2 h-24">
-          <h4 className="font-semibold text-2xl">Bamboo NFC Business Cards</h4>
+          <h4 className="font-semibold text-2xl">{product?.name}</h4>
           <p>The last business card you&lsquo;ll ever need.</p>
         </div>
         <div className="flex  items-center gap-2 mt-5">

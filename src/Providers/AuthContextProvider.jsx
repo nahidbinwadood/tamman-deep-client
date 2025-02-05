@@ -8,6 +8,7 @@ export const AuthContext = createContext(null);
 // eslint-disable-next-line react/prop-types
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
   const userName = localStorage.getItem('username');
@@ -21,7 +22,8 @@ const AuthContextProvider = ({ children }) => {
       const userData = async () => {
         try {
           const { data } = await axiosPublic('/api/check');
-          setUser(data?.data);
+          setData(data);
+          setUser(data?.user);
           setLoading(false);
         } catch (err) {
           console.log(err);
@@ -32,6 +34,8 @@ const AuthContextProvider = ({ children }) => {
   }, [axiosPublic, token]);
 
   const allValues = {
+    data,
+    setData,
     user,
     setUser,
     loading,

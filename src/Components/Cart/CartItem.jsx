@@ -33,6 +33,7 @@ const CartItem = ({ item }) => {
     );
     setCartItems(updatedCartItems);
   };
+
   return (
     <div className="flex items-center gap-4 justify-between bg-white rounded-md p-4">
       {/* image */}
@@ -51,7 +52,7 @@ const CartItem = ({ item }) => {
         <div className="flex justify-between w-full">
           <div className="space-y-2">
             <div className="space-y-1">
-              <h5>One Tap Card</h5>
+              <h5>{item?.name}</h5>
               <div className="text-black/40">
                 {/* <p>Style: Minimal</p> */}
                 <p>
