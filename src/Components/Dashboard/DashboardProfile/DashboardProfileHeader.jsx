@@ -15,7 +15,7 @@ const DashboardProfileHeader = () => {
     { icon: <HiOutlineBars3 />, id: 1 },
   ];
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between hidden">
       {/* left */}
       <div className="flex items-center gap-3">
         <Select>

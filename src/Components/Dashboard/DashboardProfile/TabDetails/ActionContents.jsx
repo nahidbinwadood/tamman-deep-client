@@ -9,7 +9,11 @@ const ActionContents = () => {
   const axiosPublic = useAxiosPublic();
 
   // fetching data from Db:
-  const { data: allActions = [], isLoading } = useQuery({
+  const {
+    data: allActions = [],
+    isLoading,
+    isFetching,
+  } = useQuery({
     queryKey: ['allActions'],
     queryFn: async () => {
       const { data } = await axiosPublic(`api/action/show/${activeCard?.id}`);
@@ -18,9 +22,9 @@ const ActionContents = () => {
     enabled: !!activeCard?.id,
   });
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return (
-      <div className="h-[70vh] w-full flex items-center justify-center">
+      <div className="min-h-[50vh] col-span-8   flex items-center justify-center">
         <Loader />
       </div>
     );

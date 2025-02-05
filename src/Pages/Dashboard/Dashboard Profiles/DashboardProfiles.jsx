@@ -1,10 +1,8 @@
 import CommonAction from '@/Components/Dashboard/DashboardProfile/CommonAction';
-import DashboardProfileHeader from '@/Components/Dashboard/DashboardProfile/DashboardProfileHeader';
 import TabContents from '@/Components/Dashboard/DashboardProfile/TabContents';
- 
+
 import CreateActionModal from '@/Components/Modals/CreateActionModal';
 import Modal from '@/Components/Modals/Modal';
-
 
 import { useState } from 'react';
 import { FaAddressCard } from 'react-icons/fa6';
@@ -13,7 +11,6 @@ import { MdContentCopy } from 'react-icons/md';
 import { RiListUnordered } from 'react-icons/ri';
 
 const DashboardProfiles = () => {
-
   const [open, setOpen] = useState(false);
 
   const [activeTab, setActiveTab] = useState('My Cards');
@@ -37,22 +34,10 @@ const DashboardProfiles = () => {
     },
   ];
 
-
-
-  //if Loading:
-
-  // if (isLoading) {
-  //   return (
-  //     <div className="h-[70vh] w-full flex items-center justify-center">
-  //       <Loader />
-  //     </div>
-  //   );
-  // }
-
   return (
     <div className="flex flex-col gap-6">
       {/* header */}
-      <DashboardProfileHeader />
+      {/* <DashboardProfileHeader /> */}
 
       {/* body */}
       <div className="grid grid-cols-12 gap-6">
@@ -70,7 +55,7 @@ const DashboardProfiles = () => {
         </div>
 
         {/* Right Section */}
-        <TabContents   activeTab={activeTab} />
+        <TabContents activeTab={activeTab} />
       </div>
 
       {/* Modals */}

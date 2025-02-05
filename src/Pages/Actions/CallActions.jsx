@@ -12,11 +12,13 @@ import toast from 'react-hot-toast';
 import { ImSpinner9 } from 'react-icons/im';
 import { Link, useNavigate } from 'react-router-dom';
 import profile from '@/assets/images/profile.png';
+import useAuth from '@/Hooks/useAuth';
 
 const CallActions = () => {
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(false);
   const navigate = useNavigate();
+  const { activeCard } = useAuth();
   const queryClient = useQueryClient();
   const axiosPublic = useAxiosPublic();
   const [formData, setFormData] = useState({
@@ -28,7 +30,11 @@ const CallActions = () => {
   const callMutation = useMutation({
     mutationKey: ['action', 'call'],
     mutationFn: async (info) => {
-      const { data } = await axiosPublic.post('/api/action/store', info);
+      const { data } = await axiosPublic.post('/api/action/store', info, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       return data;
     },
     onSuccess: (data) => {
@@ -60,7 +66,11 @@ const CallActions = () => {
   };
   const handleSave = () => {
     setLoading(true);
-    // callMutation.mutate(formData);
+    const data = {
+      ...formData,
+      order_item_id: activeCard?.id,
+    };
+    callMutation.mutate(data);
   };
 
   //useEffect:

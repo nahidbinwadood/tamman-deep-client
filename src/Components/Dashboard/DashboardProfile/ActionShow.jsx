@@ -1,33 +1,54 @@
 /* eslint-disable react/prop-types */
 import { Switch } from '@/Components/ui/switch';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { LuEye } from 'react-icons/lu';
 import { TbEdit } from 'react-icons/tb';
 import { TiBusinessCard } from 'react-icons/ti';
 
-const ActionShow = ({ item, isActive, onToggle }) => {
+const ActionShow = ({ item }) => {
   const [show, setShow] = useState(false);
   const axiosPublic = useAxiosPublic();
+  const queryClient = useQueryClient();
 
   const updateActionMutation = useMutation({
+    mutationKey: 'updateAction',
     mutationFn: async (id) => {
-      const toastId = toast.loading('Updating status...'); // Show loading toast
+      // const toastId = toast.loading('Updating status...'); // Show loading toast
       try {
         const response = await axiosPublic(`/api/action/status/${id}`);
-        toast.success('Status updated successfully!', { id: toastId }); // Replace loading with success
+        // toast.success('Status updated successfully!', { id: toastId }); // Replace loading with success
         console.log(response?.data);
         return response.data;
       } catch (error) {
-        toast.error('Failed to update status!', { id: toastId }); // Replace loading with error
+        toast.error('Failed to update status!'); // Replace loading with error
         throw error;
       }
     },
-    onSuccess: () => {
-      // Notify parent about the toggle
-      onToggle(item.id);
+    onMutate: async (id) => {
+      await queryClient.cancelQueries({ queryKey: ['allActions'] });
+      const prevActions = queryClient.getQueryData(['allActions']);
+      queryClient.setQueryData(['allActions'], (oldData) => {
+        if (!oldData) return [];
+        return oldData.map((item) => {
+          return { ...item, active: item?.id == id ? 1 : 0 };
+        });
+      });
+      toast.success('Action Activation Successful');
+      return { prevActions };
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(['allActions']);
+    },
+    onError: (err, updatedItem, context) => {
+      toast.error(err.message);
+
+      // Rollback to previous state if error occurs
+      if (context?.prevActions) {
+        queryClient.setQueryData(['allActions'], context.prevActions);
+      }
     },
   });
 
@@ -47,7 +68,7 @@ const ActionShow = ({ item, isActive, onToggle }) => {
       </div>
       <div className="flex-1">
         <Switch
-          checked={isActive} // Controlled by parent
+          checked={item?.active == 1} // Controlled by parent
           onCheckedChange={() => {
             // onToggle(item.id);
             handleUpdateActiveAction(item?.id);

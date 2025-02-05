@@ -125,7 +125,7 @@ const ContactCardAction = () => {
     console.log(formData);
 
     setLoading(true);
-    //contactCardMutation.mutate(formData);
+     contactCardMutation.mutate(formData);
     // navigate to profile page
   };
 
@@ -283,7 +283,7 @@ const ContactCardAction = () => {
                 value={formData?.position}
                 onChange={handleChange}
               />
-              <div className="flex items-center gap-4 hidden">
+              <div className="  items-center gap-4 hidden">
                 <div className="w-[55%]">
                   <Select
                     onValueChange={handleMonthChange}

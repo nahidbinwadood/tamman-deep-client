@@ -13,12 +13,15 @@ import { ImSpinner9 } from 'react-icons/im';
 import { Link, useNavigate } from 'react-router-dom';
 import profile from '@/assets/images/profile.png';
 import WhatsAppPreview from '@/Components/LivePreview/WhatsAppPreview';
+import useAuth from '@/Hooks/useAuth';
+
 const WhatsAppActions = () => {
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(false);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const axiosPublic = useAxiosPublic();
+  const { activeCard } = useAuth();
   const [formData, setFormData] = useState({
     type: 'whats-app',
     name: '',
@@ -37,7 +40,9 @@ const WhatsAppActions = () => {
   const emailAction = useMutation({
     mutationKey: ['action', 'whats-app'],
     mutationFn: async (data) => {
-      const response = await axiosPublic.post('/api/action/store', data);
+      const response = await axiosPublic.post('/api/action/store', data, {
+        headers: { 'Content-Type': 'multipart/form-dataa' },
+      });
       return response.data;
     },
     onSuccess: (data) => {
@@ -59,7 +64,11 @@ const WhatsAppActions = () => {
   //functions:
   const handleSave = () => {
     setLoading(true);
-   // emailAction.mutate(formData);
+    const data = {
+      ...formData,
+      order_item_id: activeCard?.id,
+    };
+    emailAction.mutate(data);
     // navigate to profile page
   };
 
@@ -173,7 +182,7 @@ const WhatsAppActions = () => {
                 label="Enter Your Name"
                 variant="outlined"
                 fullWidth
-                type='text'
+                type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
@@ -186,10 +195,10 @@ const WhatsAppActions = () => {
             </div>
             <div className="flex-1 space-y-5">
               <TextField
-                 label="Enter Your Number"
+                label="Enter Your Number"
                 variant="outlined"
                 fullWidth
-                type='number'
+                type="number"
                 name="number"
                 value={formData.number}
                 onChange={handleChange}

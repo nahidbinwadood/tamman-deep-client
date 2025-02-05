@@ -1,6 +1,12 @@
 import profile from '@/assets/images/profile.png';
 import SmsPreview from '@/Components/LivePreview/SmsPreview';
-import { AddImagePlusSvg, BackButtonSvg, PhoneSvg, UserSvg } from '@/Components/SvgContainer';
+import {
+  AddImagePlusSvg,
+  BackButtonSvg,
+  PhoneSvg,
+  UserSvg,
+} from '@/Components/SvgContainer';
+import useAuth from '@/Hooks/useAuth';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { TextField } from '@mui/material';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -10,6 +16,7 @@ import { ImSpinner9 } from 'react-icons/im';
 import { Link, useNavigate } from 'react-router-dom';
 
 const SmsActions = () => {
+  const { activeCard } = useAuth();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [active, setActive] = useState(false);
@@ -31,7 +38,11 @@ const SmsActions = () => {
   //submit data on db:
   const emailAction = useMutation({
     mutationFn: async (data) => {
-      const response = await axiosPublic.post('/api/action/store', data);
+      const response = await axiosPublic.post('/api/action/store', data, {
+        headers: {
+          'Content-type': 'multipart/form-data',
+        },
+      });
       return response.data;
     },
     onSuccess: (data) => {
@@ -52,7 +63,11 @@ const SmsActions = () => {
 
   const handleSave = () => {
     setLoading(true);
-    emailAction.mutate(formData);
+    const data = {
+      ...formData,
+      order_item_id: activeCard?.id,
+    };
+    emailAction.mutate(data);
     // navigate to profile page
   };
 
@@ -178,7 +193,7 @@ const SmsActions = () => {
             <div className="flex-1 space-y-5">
               <TextField
                 label="Enter Your Number"
-                type='number'
+                type="number"
                 variant="outlined"
                 fullWidth
                 name="number"

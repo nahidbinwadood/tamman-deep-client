@@ -39,7 +39,11 @@ const EmailActions = () => {
   const emailAction = useMutation({
     mutationKey: ['action', 'email'],
     mutationFn: async (data) => {
-      const response = await axiosPublic.post('/api/action/store', data);
+      const response = await axiosPublic.post('/api/action/store', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       return response.data;
     },
     onSuccess: (data) => {
