@@ -10,7 +10,7 @@ import toast from 'react-hot-toast';
 
 const Navbar = () => {
   const token = localStorage.getItem('token');
-  const { setUser, setLoading, cartLength } = useAuth();
+  const { setUser, setLoading, cartLength, hasCard } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
@@ -52,12 +52,12 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [location.pathname]);
 
-  //handlerL
-  // const handleDashboard = () => {
-  //   if (!hasCard) {
-  //     toast.error('You must have a card to access your dashboard');
-  //   } else navigate('/dashboard/home');
-  // };
+  // handler
+  const handleDashboard = () => {
+    if (!hasCard) {
+      toast.error('You must have a card to access your dashboard');
+    } else navigate('/dashboard/home');
+  };
   return (
     <div className="">
       <div
@@ -111,10 +111,16 @@ const Navbar = () => {
                 <div className="bg-white px-6 py-4 font-medium rounded-md shadow-lg absolute mt-2 flex flex-col justify-center gap-2 text-center text-nowrap">
                   {token ? (
                     <>
-                      <Link to="/dashboard/home" className="text-sm border-b pb-2 border-black/50">
+                      <div
+                        onClick={handleDashboard}
+                        className="text-sm border-b pb-2 border-black/50"
+                      >
                         Dashboard
-                      </Link>
-                      <div onClick={handleLogout} className="text-sm cursor-pointer">
+                      </div>
+                      <div
+                        onClick={handleLogout}
+                        className="text-sm cursor-pointer"
+                      >
                         Log Out
                       </div>
                     </>

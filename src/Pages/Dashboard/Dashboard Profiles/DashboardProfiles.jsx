@@ -1,11 +1,11 @@
 import CommonAction from '@/Components/Dashboard/DashboardProfile/CommonAction';
 import DashboardProfileHeader from '@/Components/Dashboard/DashboardProfile/DashboardProfileHeader';
 import TabContents from '@/Components/Dashboard/DashboardProfile/TabContents';
-import Loader from '@/Components/Loaders/Loader';
+ 
 import CreateActionModal from '@/Components/Modals/CreateActionModal';
 import Modal from '@/Components/Modals/Modal';
-import useAxiosPublic from '@/Hooks/useAxiosPublic';
-import { useQuery } from '@tanstack/react-query';
+
+
 import { useState } from 'react';
 import { FaAddressCard } from 'react-icons/fa6';
 import { HiPlusCircle } from 'react-icons/hi2';
@@ -13,7 +13,7 @@ import { MdContentCopy } from 'react-icons/md';
 import { RiListUnordered } from 'react-icons/ri';
 
 const DashboardProfiles = () => {
-  const axiosPublic = useAxiosPublic();
+
   const [open, setOpen] = useState(false);
 
   const [activeTab, setActiveTab] = useState('My Cards');
@@ -37,23 +37,17 @@ const DashboardProfiles = () => {
     },
   ];
 
-  const { data: allCards = [], isLoading } = useQuery({
-    queryKey: ['allCards'],
-    queryFn: async () => {
-      const { data } = await axiosPublic('/api/user/card');
-      return data?.data;
-    },
-  });
+
 
   //if Loading:
 
-  if (isLoading) {
-    return (
-      <div className="h-[70vh] w-full flex items-center justify-center">
-        <Loader />
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="h-[70vh] w-full flex items-center justify-center">
+  //       <Loader />
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="flex flex-col gap-6">
@@ -76,7 +70,7 @@ const DashboardProfiles = () => {
         </div>
 
         {/* Right Section */}
-        <TabContents allCards={allCards} activeTab={activeTab} />
+        <TabContents   activeTab={activeTab} />
       </div>
 
       {/* Modals */}

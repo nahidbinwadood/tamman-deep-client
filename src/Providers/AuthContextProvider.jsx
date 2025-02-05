@@ -9,6 +9,7 @@ const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [hasCard, setHasCard] = useState(false);
   const [pauseAction, setPauseAction] = useState(false);
   const [activeCard, setActiveCard] = useState(null);
   const [cartLength, setCartLength] = useState(null);
@@ -22,6 +23,9 @@ const AuthContextProvider = ({ children }) => {
       const userData = async () => {
         try {
           const { data } = await axiosPublic('/api/check');
+          if (data?.has_order) {
+            setHasCard(true);
+          }
           const response = await axiosPublic('/api/cart');
           const allCardsData = await axiosPublic('/api/user/card');
           setActiveCard(
@@ -52,6 +56,8 @@ const AuthContextProvider = ({ children }) => {
     setPauseAction,
     activeCard,
     setActiveCard,
+    hasCard,
+    setHasCard,
   };
   return (
     <AuthContext.Provider value={allValues}>{children}</AuthContext.Provider>
