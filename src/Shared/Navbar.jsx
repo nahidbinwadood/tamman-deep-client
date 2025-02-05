@@ -10,8 +10,7 @@ import toast from 'react-hot-toast';
 
 const Navbar = () => {
   const token = localStorage.getItem('token');
-  const { data, setUser, setLoading, cartItems } = useAuth();
-  const hasCard = data?.has_order;
+  const { setUser, setLoading, cartLength } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
@@ -54,15 +53,15 @@ const Navbar = () => {
   }, [location.pathname]);
 
   //handlerL
-  const handleDashboard = () => {
-    if (!hasCard) {
-      toast.error('You must have a card to access your dashboard');
-    } else navigate('/dashboard/home');
-  };
+  // const handleDashboard = () => {
+  //   if (!hasCard) {
+  //     toast.error('You must have a card to access your dashboard');
+  //   } else navigate('/dashboard/home');
+  // };
   return (
-    <div>
+    <div className="">
       <div
-        className={`fixed h-[100px] w-full top-0 left-0 z-40 transition-all duration-300
+        className={`fixed h-[100px] w-full top-0 left-0 z-40  topbar
           ${isScrolled && isDarkMode ? 'bg-black shadow-lg' : 'bg-transparent'}
           ${
             (isScrolled && location.pathname === '/shop') ||
@@ -95,9 +94,9 @@ const Navbar = () => {
               className="cursor-pointer relative"
             >
               <CartSvg light={!isDarkMode} />
-              {cartItems?.length > 0 && (
+              {cartLength > 0 && (
                 <div className="absolute -bottom-4 -right-2 bg-primaryColor text-white size-6 flex items-center justify-center rounded-full text-xs">
-                  {cartItems.length}
+                  {cartLength}
                 </div>
               )}
             </div>
@@ -112,16 +111,10 @@ const Navbar = () => {
                 <div className="bg-white px-6 py-4 font-medium rounded-md shadow-lg absolute mt-2 flex flex-col justify-center gap-2 text-center text-nowrap">
                   {token ? (
                     <>
-                      <div
-                        onClick={handleDashboard}
-                        className="text-sm border-b pb-2 border-black/50"
-                      >
+                      <Link to="/dashboard/home" className="text-sm border-b pb-2 border-black/50">
                         Dashboard
-                      </div>
-                      <div
-                        onClick={handleLogout}
-                        className="text-sm cursor-pointer"
-                      >
+                      </Link>
+                      <div onClick={handleLogout} className="text-sm cursor-pointer">
                         Log Out
                       </div>
                     </>

@@ -1,44 +1,40 @@
 /* eslint-disable react/prop-types */
-import useAuth from '@/Hooks/useAuth';
 import { DeleteSvg, MinusSvg, PlusSvg } from '../SvgContainer/SvgContainer';
+import { useCartDelete, useCartQuantity } from '@/Hooks/Cart.hooks';
 
 const CartItem = ({ item }) => {
-  const { cartItems, setCartItems } = useAuth();
+  //update cart quantity function:
+  const { mutate: cartQuantityMutation } = useCartQuantity();
+  const { mutate: cartDeleteMutation } = useCartDelete();
 
-  const handleIncrement = () => {
-    setCartItems((prev) => {
-      return prev.map((i) => {
-        const newQuantity = Math.min(i.quantity + 1, 10);
-        return item.color_id === i.color_id
-          ? { ...i, quantity: newQuantity, totalPrice: newQuantity * i.price }
-          : i;
-      });
-    });
+  const handleIncrement = (item) => {
+    const data = {
+      item_id: item?.id,
+      quantity: item.quantity + 1,
+    };
+    cartQuantityMutation(data);
   };
 
-  const handleDecrement = () => {
-    setCartItems((prev) => {
-      return prev.map((i) => {
-        const newQuantity = Math.max(i.quantity - 1, 0);
-        return item.color_id === i.color_id
-          ? { ...i, quantity: newQuantity, totalPrice: newQuantity * i.price }
-          : i;
-      });
-    });
+  const handleDecrement = (item) => {
+    const data = {
+      item_id: item?.id,
+      quantity: item.quantity - 1,
+    };
+    cartQuantityMutation(data);
   };
 
-  const handleDelete = (color_id) => {
-    const updatedCartItems = cartItems?.filter(
-      (item) => item?.color_id != color_id
-    );
-    setCartItems(updatedCartItems);
+  const handleDelete = (item_id) => {
+    const data = {
+      item_id,
+    };
+    cartDeleteMutation(data);
   };
 
   return (
     <div className="flex items-center gap-4 justify-between bg-white rounded-md p-4">
       {/* image */}
       <div className="flex-shrink-0">
-        <div className="h-24">
+        <div className="h-24 w-24">
           <img
             className="w-full h-full object-cover"
             src={item?.image}
@@ -56,13 +52,13 @@ const CartItem = ({ item }) => {
               <div className="text-black/40">
                 {/* <p>Style: Minimal</p> */}
                 <p>
-                  Color: <span className="capitalize">{item?.color}</span>
+                  Color: <span className="capitalize">{item?.color_name}</span>
                 </p>
               </div>
             </div>
           </div>
           <div
-            onClick={() => handleDelete(item?.color_id)}
+            onClick={() => handleDelete(item?.id)}
             className="cursor-pointer"
           >
             <DeleteSvg />
@@ -75,9 +71,9 @@ const CartItem = ({ item }) => {
           <div className="border border-black/30 rounded-full flex items-center justify-center">
             <button
               disabled={item?.quantity === 1}
-              onClick={handleDecrement}
+              onClick={() => handleDecrement(item)}
               className={`cursor-pointer px-2 ${
-                item?.quantity === 0 ? 'cursor-not-allowed' : ''
+                item?.quantity == 0 ? 'cursor-not-allowed' : ''
               }`}
             >
               <MinusSvg />
@@ -87,7 +83,7 @@ const CartItem = ({ item }) => {
             </div>
             <button
               disabled={item?.quantity === 10}
-              onClick={handleIncrement}
+              onClick={() => handleIncrement(item)}
               className="cursor-pointer px-2"
             >
               <PlusSvg />
@@ -98,7 +94,7 @@ const CartItem = ({ item }) => {
           <div>
             <h5 className="normal-case font-medium text-black">
               {/* <span className="text-black/30 text-sm line-through">$20</span>$ */}
-              ${parseFloat(item.totalPrice).toFixed(2)}
+              ${(parseFloat(item?.product_price)*item?.quantity).toFixed(2)}
             </h5>
           </div>
         </div>

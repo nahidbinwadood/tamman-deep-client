@@ -12,46 +12,81 @@ import {
   SelectValue,
 } from '../ui/select';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useAxiosPublic from '@/Hooks/useAxiosPublic';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const ProductsCard = ({ product }) => {
-   
+  console.log(product);
+  const { user, setCartLength } = useAuth();
   const { image, price } = product;
-  const { cartItems, setCartItems } = useAuth();
   const [color, setColor] = useState();
+  const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
+  const queryClient = useQueryClient();
 
+  // axios function:
+  const addToCart = async (data) => {
+    const response = await axiosPublic.post('/api/cart/create', data);
+    return response?.data;
+  };
+
+  //mutation function:
+  const addToCartMutation = useMutation({
+    mutationFn: addToCart,
+    onMutate: async (newData) => {
+      await queryClient.cancelQueries({ queryKey: ['allCartItems'] });
+      const prevCarts = queryClient.getQueryData(['allCartItems']);
+      queryClient.setQueryData(['allCartItems'], (oldData) => {
+        const isExist = oldData?.some(
+          (item) => item?.color_id == newData?.color_id
+        );
+        if (isExist) {
+          toast.error('Product already added to cart with this color');
+        } else {
+          toast.success('Product added to cart');
+          return [...oldData, newData];
+        }
+      });
+      setCartLength(queryClient.getQueryData(['allCartItems'])?.length);
+
+      return { prevCarts };
+    },
+    onError: (err, newData, context) => {
+      queryClient.setQueryData(['allCartItems'], context.prevCarts);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['allCartItems'] });
+    },
+  });
   const handleCart = (product) => {
-    if (!color) {
-      return toast.error('Select a color first');
+    // checking if user is logged in
+    if (!user) {
+      toast.error('Please Login First !');
+      navigate('/login');
+    } else {
+      if (!color) {
+        return toast.error('Select a color first');
+      } else {
+        const productInfo = {
+          id: product?.id,
+          name: product?.name,
+          image: product?.image,
+          color_name: color,
+          product_price: product?.price,
+          color_id: product?.colors.find((c) => c?.name == color)?.id,
+          quantity: 1,
+        };
+        addToCartMutation.mutate(productInfo);
+      }
     }
-
-    // Check if the product with the same color already exists
-    const alreadyExist = cartItems?.some(
-      (item) => item.id === product.id && item.color === color
-    );
-
-    if (alreadyExist) {
-      return toast.error('Product with this color already exists in your cart');
-    }
-
-    // Add product with the selected color
-    setCartItems((prev) => [
-      ...prev,
-      {
-        ...product,
-        quantity: 1,
-        totalPrice: product.price,
-        color,
-        color_id: product?.colors?.find((i) => i.name === color)?.id,
-      },
-    ]);
-    toast.success('Product added to your cart');
   };
 
   return (
     <div className="bg-[#fbfbfb] border border-black/50 rounded-lg group overflow-hidden">
       <div className="h-[300px] w-full overflow-hidden">
         <img
-          className="h-full w-full object-cover rounded-lg group-hover:scale-105 transition-all duration-300"
+          className="h-full w-full object-cover group-hover:scale-105 transition-all duration-300"
           src={image}
           alt=""
         />

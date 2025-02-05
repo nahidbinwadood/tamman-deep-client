@@ -81,6 +81,13 @@
   scrollbar-width: none; /* Hide scrollbar for Firefox */
 }
 
+/* body[data-scroll-locked] {
+  padding-right: var(--removed-body-scroll-bar-size) !important;
+} */
+body[data-scroll-locked] .topbar {
+  /* margin-right: var(--removed-body-scroll-bar-size) !important; */
+  padding-right: var(--removed-body-scroll-bar-size) !important;
+}
 /* loader */
 .loader {
   width: fit-content;
