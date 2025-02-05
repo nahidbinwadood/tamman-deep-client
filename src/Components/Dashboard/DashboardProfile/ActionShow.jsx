@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Switch } from '@/Components/ui/switch';
+import useAuth from '@/Hooks/useAuth';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
@@ -11,14 +12,15 @@ import { TiBusinessCard } from 'react-icons/ti';
 const ActionShow = ({ item }) => {
   const [show, setShow] = useState(false);
   const axiosPublic = useAxiosPublic();
+  const { activeCard } = useAuth();
   const queryClient = useQueryClient();
 
   const updateActionMutation = useMutation({
     mutationKey: 'updateAction',
-    mutationFn: async (id) => {
+    mutationFn: async (data) => {
       // const toastId = toast.loading('Updating status...'); // Show loading toast
       try {
-        const response = await axiosPublic(`/api/action/status/${id}`);
+        const response = await axiosPublic.post(`/api/action/status`, data);
         // toast.success('Status updated successfully!', { id: toastId }); // Replace loading with success
         console.log(response?.data);
         return response.data;
@@ -27,13 +29,13 @@ const ActionShow = ({ item }) => {
         throw error;
       }
     },
-    onMutate: async (id) => {
+    onMutate: async (data) => {
       await queryClient.cancelQueries({ queryKey: ['allActions'] });
       const prevActions = queryClient.getQueryData(['allActions']);
       queryClient.setQueryData(['allActions'], (oldData) => {
         if (!oldData) return [];
         return oldData.map((item) => {
-          return { ...item, active: item?.id == id ? 1 : 0 };
+          return { ...item, active: item?.id == data?.data_id ? 1 : 0 };
         });
       });
       toast.success('Action Activation Successful');
@@ -52,8 +54,12 @@ const ActionShow = ({ item }) => {
     },
   });
 
-  const handleUpdateActiveAction = (id) => {
-    updateActionMutation.mutate(id);
+  const handleUpdateActiveAction = (item) => {
+    const data = {
+      order_item_id: activeCard?.id,
+      data_id: item?.id,
+    };
+    updateActionMutation.mutate(data);
   };
 
   return (
@@ -71,7 +77,7 @@ const ActionShow = ({ item }) => {
           checked={item?.active == 1} // Controlled by parent
           onCheckedChange={() => {
             // onToggle(item.id);
-            handleUpdateActiveAction(item?.id);
+            handleUpdateActiveAction(item);
           }}
           className="data-[state=checked]:bg-[#23C0B6]"
         />

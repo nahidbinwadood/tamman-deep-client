@@ -2,16 +2,36 @@
 import { RiLinkM, RiMessage2Line } from 'react-icons/ri';
 import { DialogContent } from '@/Components/ui/dialog';
 import { MdContentCopy, MdOutlineMailOutline } from 'react-icons/md';
+import useAuth from '@/Hooks/useAuth';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosPublic from '@/Hooks/useAxiosPublic';
+import Loader from '../Loaders/Loader';
 
-const ActionShareModal = ({ setOpen,qrCode }) => {
-  console.log(`${import.meta.env.VITE_API_URL}/${qrCode}`);
+const ActionShareModal = ({ setOpen }) => {
+  const { activeCard } = useAuth();
+  const axiosPublic = useAxiosPublic();
 
-  const qrCodeImage=`${import.meta.env.VITE_API_URL}/${qrCode}`
+  const qrCodeImage = `${import.meta.env.VITE_API_URL}/storage/${
+    activeCard?.qr_code
+  }`;
+
+  const getQrImage = async () => {
+    const { data } = await axiosPublic.get(`/storage/${activeCard?.qr_code}`);
+    return data;
+  };
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['qrCodeImage', activeCard?.qr_code],
+    queryFn: getQrImage,
+    enabled: !!activeCard?.qr_code,
+  });
+
+  console.log(data);
 
   return (
     <DialogContent className={'max-w-2xl font-inter'}>
       <div className="w-full p-8 ">
-        <div className="flex w-full items-center gap-4">
+        <div className="hidden w-full items-center gap-4">
           <div className="flex w-full items-center gap-4">
             <RiLinkM size={24} />
             <div className="w-full">
@@ -28,7 +48,7 @@ const ActionShareModal = ({ setOpen,qrCode }) => {
             <MdContentCopy size={22} />
           </button>
         </div>
-        <div className=" pt-4 px-10">
+        <div className=" pt-4 px-10 hidden">
           <div className="flex items-center gap-4">
             <div className="flex cursor-pointer flex-1 justify-center px-4 py-1.5 rounded-lg border-2 items-center gap-2">
               <button>
@@ -49,7 +69,7 @@ const ActionShareModal = ({ setOpen,qrCode }) => {
             </div>
           </div>
         </div>
-        <div className=" pt-4 px-10">
+        <div className=" pt-4 px-10 hidden">
           <div className="flex items-center gap-4">
             <div className="flex cursor-pointer flex-1 justify-center px-4 py-1.5 rounded-lg border-2 items-center gap-2">
               <button>
@@ -72,9 +92,22 @@ const ActionShareModal = ({ setOpen,qrCode }) => {
         </div>
 
         <div className="flex relative justify-center pt-8 flex-col items-center">
-          <div className="w-[200px]">
-            <img src={`${qrCodeImage? qrCodeImage :"https://i.imghippo.com/files/Op4816nHo.png"}`} alt="" />
-          </div>
+          {isLoading ? (
+            <div>
+              <Loader />
+            </div>
+          ) : (
+            <div className="w-[200px]">
+              <img
+                src={`${
+                  qrCodeImage
+                    ? qrCodeImage
+                    : 'https://i.imghippo.com/files/Op4816nHo.png'
+                }`}
+                alt=""
+              />
+            </div>
+          )}
           <div className="flex items-center gap-6 pt-6">
             <button
               onClick={() => setOpen(false)}

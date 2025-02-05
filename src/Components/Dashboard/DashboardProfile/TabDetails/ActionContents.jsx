@@ -9,11 +9,7 @@ const ActionContents = () => {
   const axiosPublic = useAxiosPublic();
 
   // fetching data from Db:
-  const {
-    data: allActions = [],
-    isLoading,
-    isFetching,
-  } = useQuery({
+  const { data: allActions = [], isLoading,isFetching } = useQuery({
     queryKey: ['allActions'],
     queryFn: async () => {
       const { data } = await axiosPublic(`api/action/show/${activeCard?.id}`);
