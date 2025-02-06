@@ -17,8 +17,7 @@ import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const ProductsCard = ({ product }) => {
-  console.log(product);
-  const { user, setCartLength } = useAuth();
+  const { user, setCartLength, setPauseAction } = useAuth();
   const { image, price } = product;
   const [color, setColor] = useState();
   const navigate = useNavigate();
@@ -35,6 +34,7 @@ const ProductsCard = ({ product }) => {
   const addToCartMutation = useMutation({
     mutationFn: addToCart,
     onMutate: async (newData) => {
+      setPauseAction(true);
       await queryClient.cancelQueries({ queryKey: ['allCartItems'] });
       const prevCarts = queryClient.getQueryData(['allCartItems']);
       queryClient.setQueryData(['allCartItems'], (oldData) => {
@@ -43,6 +43,7 @@ const ProductsCard = ({ product }) => {
         );
         if (isExist) {
           toast.error('Product already added to cart with this color');
+          return oldData
         } else {
           toast.success('Product added to cart');
           return [...oldData, newData];
@@ -55,8 +56,9 @@ const ProductsCard = ({ product }) => {
     onError: (err, newData, context) => {
       queryClient.setQueryData(['allCartItems'], context.prevCarts);
     },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ['allCartItems'] });
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['allCartItems'] });
+      setPauseAction(false);
     },
   });
   const handleCart = (product) => {

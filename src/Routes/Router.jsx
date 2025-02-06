@@ -28,6 +28,7 @@ import UrlActions from '@/Pages/Actions/UrlActions';
 import ForgotPassword from '@/Pages/Auth/ForgotPassword';
 import PrivateRoute from './PrivateRoute';
 import Checkout from '@/Pages/Checkout/Checkout';
+import EmailActionLivePreview from '@/Pages/ActionLivePreview/EmailActionLivePreview';
 
 export const router = createBrowserRouter([
   {
@@ -225,5 +226,11 @@ export const router = createBrowserRouter([
         ),
       },
     ],
+  },
+
+  //live preview:
+  {
+    path: `/:user/:unique_code/:action`,
+    element: <EmailActionLivePreview />,
   },
 ]);
