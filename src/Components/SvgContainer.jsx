@@ -1463,7 +1463,7 @@ export function InfoSvg() {
     </svg>
   );
 }
-export function BackButtonSvg({light}) {
+export function BackButtonSvg({ light }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1477,7 +1477,7 @@ export function BackButtonSvg({light}) {
       <path d="M5 12L11 6L5 12Z" fill="#288DFF" />
       <path
         d="M5 12H19M5 12L11 18M5 12L11 6"
-        stroke={light ? "white" : "#288DFF"}
+        stroke={light ? 'white' : '#288DFF'}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -1833,10 +1833,64 @@ export function HamburgerSvg() {
     </svg>
   );
 }
-export function UploadGallerySvg(){
-  return(
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-  <path d="M15 8H15.01M3 16L8 11C8.928 10.107 10.072 10.107 11 11L16 16M14 14L15 13C15.928 12.107 17.072 12.107 18 13L21 16M3 6C3 5.20435 3.31607 4.44129 3.87868 3.87868C4.44129 3.31607 5.20435 3 6 3H18C18.7956 3 19.5587 3.31607 20.1213 3.87868C20.6839 4.44129 21 5.20435 21 6V18C21 18.7956 20.6839 19.5587 20.1213 20.1213C19.5587 20.6839 18.7956 21 18 21H6C5.20435 21 4.44129 20.6839 3.87868 20.1213C3.31607 19.5587 3 18.7956 3 18V6Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-</svg>
-  )
+export function UploadGallerySvg() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <path
+        d="M15 8H15.01M3 16L8 11C8.928 10.107 10.072 10.107 11 11L16 16M14 14L15 13C15.928 12.107 17.072 12.107 18 13L21 16M3 6C3 5.20435 3.31607 4.44129 3.87868 3.87868C4.44129 3.31607 5.20435 3 6 3H18C18.7956 3 19.5587 3.31607 20.1213 3.87868C20.6839 4.44129 21 5.20435 21 6V18C21 18.7956 20.6839 19.5587 20.1213 20.1213C19.5587 20.6839 18.7956 21 18 21H6C5.20435 21 4.44129 20.6839 3.87868 20.1213C3.31607 19.5587 3 18.7956 3 18V6Z"
+        stroke="white"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+export function ColorsSvg() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M7.5 5.5H8.5V6.5H7.5V5.5ZM7.5 7.5H8.5V10.5H7.5V7.5ZM8 3C5.24 3 3 5.24 3 8C3 10.76 5.24 13 8 13C10.76 13 13 10.76 13 8C13 5.24 10.76 3 8 3ZM8 12C5.795 12 4 10.205 4 8C4 5.795 5.795 4 8 4C10.205 4 12 5.795 12 8C12 10.205 10.205 12 8 12Z"
+        fill="#82878E"
+      ></path>
+    </svg>
+  );
+}
+export function DefaultPersonSvg() {
+  return (
+    <svg
+      className="z-10"
+      width="76"
+      height="76"
+      viewBox="0 0 76 76"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle cx="38.3401" cy="37.898" r="37.6282" fill="#DBDDE0"></circle>
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M38.3401 26.5647C35.2105 26.5647 32.6734 29.1017 32.6734 32.2313C32.6734 35.3609 35.2105 37.898 38.3401 37.898C41.4697 37.898 44.0068 35.3609 44.0068 32.2313C44.0068 29.1017 41.4697 26.5647 38.3401 26.5647ZM29.8401 32.2313C29.8401 27.5369 33.6457 23.7313 38.3401 23.7313C43.0345 23.7313 46.8401 27.5369 46.8401 32.2313C46.8401 36.9257 43.0345 40.7313 38.3401 40.7313C33.6457 40.7313 29.8401 36.9257 29.8401 32.2313Z"
+        fill="white"
+      ></path>
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M29.3245 41.6323C31.7156 39.2412 34.9586 37.8979 38.3401 37.8979C41.7216 37.8979 44.9646 39.2412 47.3557 41.6323C49.7468 44.0234 51.0901 47.2664 51.0901 50.6479C51.0901 51.4304 50.4558 52.0646 49.6734 52.0646C48.891 52.0646 48.2568 51.4304 48.2568 50.6479C48.2568 48.0179 47.212 45.4955 45.3522 43.6358C43.4925 41.7761 40.9702 40.7313 38.3401 40.7313C35.71 40.7313 33.1877 41.7761 31.3279 43.6358C29.4682 45.4955 28.4234 48.0179 28.4234 50.6479C28.4234 51.4304 27.7892 52.0646 27.0068 52.0646C26.2244 52.0646 25.5901 51.4304 25.5901 50.6479C25.5901 47.2664 26.9334 44.0234 29.3245 41.6323Z"
+        fill="white"
+      ></path>
+    </svg>
+  );
 }
