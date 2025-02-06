@@ -16,6 +16,15 @@ const AuthContextProvider = ({ children }) => {
   const userName = localStorage.getItem('username');
   const axiosPublic = useAxiosPublic();
 
+  const allColors = [
+    '#116DFF',
+    '#23C0B6',
+    '#feaf84',
+    '#d9243d',
+    '#dd3918',
+    '#74b12f',
+  ];
+
   const token = localStorage.getItem('token');
   useEffect(() => {
     if (token) {
@@ -58,6 +67,7 @@ const AuthContextProvider = ({ children }) => {
     setActiveCard,
     hasCard,
     setHasCard,
+    allColors
   };
   return (
     <AuthContext.Provider value={allValues}>{children}</AuthContext.Provider>

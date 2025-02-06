@@ -1,4 +1,7 @@
+import CallPreview from '@/Components/LivePreview/CallPreview';
 import EmailPreview from '@/Components/LivePreview/EmailPreview';
+import SmsPreview from '@/Components/LivePreview/SmsPreview';
+import WhatsAppPreview from '@/Components/LivePreview/WhatsAppPreview';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
@@ -10,9 +13,6 @@ const ActionPreviewLive = () => {
 
   const [actionType, setActionType] = useState();
 
-
-  console.log(actionType);
-
   //   console.log(unique_code);
   const axiosPublic = useAxiosPublic();
 
@@ -20,18 +20,24 @@ const ActionPreviewLive = () => {
     queryKey: ['getActionData'],
     queryFn: async () => {
       const { data } = await axiosPublic(`/api/action/view/${unique_code}`);
-      setActionType(data?.data?.product_types[1]?.name);
-    //   return data?.data?.product_types[1]?.data[0]?.data;
-    //   return data?.data?.product_types[0]?.data[0]?.data;
-      return data?.data?.product_types;
+      setActionType(data?.name);
+      return data?.data;
     },
   });
 
-  console.log(getActionData);
+  console.log(actionType);
   return (
     <div className="min-h-screen flex items-center justify-center  ">
       {/* <h1>hello from qr code</h1> */}
-      <EmailPreview actionInfo={getActionData} isEditing={true} />
+      {actionType == 'email' ? (
+        <EmailPreview actionInfo={getActionData} />
+      ) : actionType == 'whats-app' ? (
+        <WhatsAppPreview actionInfo={getActionData} />
+      ) : actionType == 'sms' ? (
+        <SmsPreview actionInfo={getActionData} />
+      ) : actionType == 'call' ? (
+        <CallPreview actionInfo={getActionData} />
+      ) : null}
     </div>
   );
 };

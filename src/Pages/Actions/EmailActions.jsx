@@ -16,15 +16,7 @@ import profile from '@/assets/images/profile.png';
 import EmailPreview from '@/Components/LivePreview/EmailPreview';
 import useAuth from '@/Hooks/useAuth';
 const EmailActions = () => {
-  const { activeCard } = useAuth();
-  const allColors = [
-    '#116DFF',
-    '#23C0B6',
-    '#feaf84',
-    '#d9243d',
-    '#dd3918',
-    '#74b12f',
-  ];
+  const { activeCard, allColors } = useAuth();
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(false);
   const [activeBg, setActiveBg] = useState(allColors[0]);
@@ -32,7 +24,7 @@ const EmailActions = () => {
   const axiosPublic = useAxiosPublic();
   const queryClient = useQueryClient();
   const [formData, setFormData] = useState({
-    type: 'Email',
+    type: 'email',
     image: '',
     name: '',
     email: '',
@@ -93,7 +85,11 @@ const EmailActions = () => {
 
   //useEffect:
   useEffect(() => {
-    if (formData.name.length > 0 && formData.email.length > 0) {
+    if (
+      formData.name.length > 0 &&
+      formData.email.length > 0 &&
+      formData?.image
+    ) {
       setActive(true);
     } else {
       setActive(false);
@@ -130,11 +126,10 @@ const EmailActions = () => {
             <button
               onClick={() => {
                 navigate('/dashboard/profiles');
-                toast.success('Action Activated!');
               }}
               className="px-10 py-3 rounded-lg bg-transparent text-white border border-white font-semibold text-lg transition-all duration-500"
             >
-              Assign Action
+              Cancel
             </button>
             <button
               disabled={!active}
@@ -249,7 +244,7 @@ const EmailActions = () => {
         </div>
 
         {/* preview */}
-        <EmailPreview formData={formData} />
+        <EmailPreview formData={formData} isEditing={true} />
       </div>
     </>
   );

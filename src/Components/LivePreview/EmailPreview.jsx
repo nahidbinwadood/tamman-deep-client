@@ -1,34 +1,35 @@
 /* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom';
 import profileImg from '@/assets/images/profile.png';
-import gmailBg from '../../assets/images/gmail.webp';
-import { DefaultPersonSvg } from '../SvgContainer';
-const EmailPreview = ({ formData, actionInfo, isEditing }) => {
-  console.log(formData?.backgroundColor);
+const EmailPreview = ({ formData, isEditing, actionInfo }) => {
+  // console.log(formData?.backgroundColor);
   return (
     <div
-      style={{ backgroundColor: `${formData?.backgroundColor}` }}
+      style={{
+        backgroundColor: `${
+          actionInfo ? actionInfo?.backgroundColor : formData?.backgroundColor
+        }`,
+      }}
       className="min-w-[350px] max-w-[450px] font-inter rounded-xl overflow-hidden shadow-xl h-fit py-10"
     >
       {/* img */}
       <div>
         <div className="w-full flex items-center justify-center relative">
-          <div className="size-40 z-10 relative ">
-            {formData?.image ? (
-              <img
-                className="h-full w-full object-cover rounded-full"
-                src={
-                  formData?.image
-                    ? URL.createObjectURL(formData.image)
-                    : profileImg
-                }
-                alt="Profile"
-              />
-            ) : (
-              <div className="flex items-center justify-center h-full">
-                <DefaultPersonSvg />
-              </div>
-            )}
+          <div className="size-32 z-10 relative">
+            <img
+              className="h-full w-full object-cover rounded-full"
+              loading="lazy"
+              src={
+                actionInfo
+                  ? `${import.meta.env.VITE_API_URL}/storage/${
+                      actionInfo?.image
+                    }`
+                  : formData?.image
+                  ? URL.createObjectURL(formData.image)
+                  : profileImg
+              }
+              alt="Profile"
+            />
           </div>
         </div>
       </div>
@@ -38,7 +39,11 @@ const EmailPreview = ({ formData, actionInfo, isEditing }) => {
         {/* title */}
         <div className="text-center space-y-2">
           <h4 className=" text-2xl font-semibold text-[#fff]">
-            {formData?.name ? formData?.name : 'Enter Your Name'}
+            {actionInfo
+              ? actionInfo?.name
+              : formData?.name
+              ? formData?.name
+              : 'Enter Your Name'}
           </h4>
         </div>
 
@@ -49,7 +54,11 @@ const EmailPreview = ({ formData, actionInfo, isEditing }) => {
             <div className="space-y-2 overflow-hidden">
               <p className="text-primaryColor font-semibold">Email</p>
               <p className="text-[#555] font-medium w-full max-w-[300px]">
-                {formData?.email ? formData?.email : 'Enter Your Email'}
+                {actionInfo
+                  ? actionInfo?.email
+                  : formData?.email
+                  ? formData?.email
+                  : 'Enter Your Email'}
               </p>
             </div>
             {/* <div className="flex items-center gap-4 justify-center">
@@ -63,7 +72,7 @@ const EmailPreview = ({ formData, actionInfo, isEditing }) => {
           </div>
 
           <div>
-            {!isEditing ? (
+            {isEditing ? (
               <button
                 // to={`mailto:${formData?.email}`}
                 className="bg-[#efefef] text-primaryColor w-full block text-center py-3 rounded-md font-medium"
@@ -72,7 +81,7 @@ const EmailPreview = ({ formData, actionInfo, isEditing }) => {
               </button>
             ) : (
               <Link
-                to={`mailto:${formData?.email}`}
+                to={`mailto:${actionInfo?.email}`}
                 className="bg-[#efefef] text-primaryColor w-full block text-center py-3 rounded-md font-medium"
               >
                 Contact Me

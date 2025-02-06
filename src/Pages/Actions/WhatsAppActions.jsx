@@ -1,6 +1,7 @@
 import {
   AddImagePlusSvg,
   BackButtonSvg,
+  ColorsSvg,
   PhoneSvg,
   UserSvg,
 } from '@/Components/SvgContainer';
@@ -21,13 +22,15 @@ const WhatsAppActions = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const axiosPublic = useAxiosPublic();
-  const { activeCard } = useAuth();
+  const { activeCard, allColors } = useAuth();
+  const [activeBg, setActiveBg] = useState(allColors[0]);
   const [formData, setFormData] = useState({
     type: 'whats-app',
     name: '',
     image: '',
     number: '',
     status: 'inactive',
+    backgroundColor: activeBg,
   });
 
   ///handle form Data:
@@ -35,7 +38,13 @@ const WhatsAppActions = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-
+  const handleChangeColor = (color) => {
+    setActiveBg(color);
+    setFormData((prev) => ({
+      ...prev,
+      backgroundColor: color,
+    }));
+  };
   //submit data on db:
   const emailAction = useMutation({
     mutationKey: ['action', 'whats-app'],
@@ -66,15 +75,19 @@ const WhatsAppActions = () => {
     setLoading(true);
     const data = {
       ...formData,
+      backgroundColor: activeBg,
       order_item_id: activeCard?.id,
     };
     emailAction.mutate(data);
-    // navigate to profile page
   };
 
   //useEffect:
   useEffect(() => {
-    if (formData.name.length > 0 && formData.number.length > 0) {
+    if (
+      formData.name.length > 0 &&
+      formData.number.length > 0 &&
+      formData?.image
+    ) {
       setActive(true);
     } else {
       setActive(false);
@@ -112,11 +125,10 @@ const WhatsAppActions = () => {
             <button
               onClick={() => {
                 navigate('/dashboard/profiles');
-                toast.success('Action Activated!');
               }}
               className="px-10 py-3 rounded-lg bg-transparent text-white border border-white font-semibold text-lg transition-all duration-500"
             >
-              Assign Action
+              Cancel
             </button>
             <button
               disabled={!active}
@@ -137,7 +149,7 @@ const WhatsAppActions = () => {
 
       {/* outlet */}
       <div className="font-inter bg-[#f3f8fe] min-h-[calc(100vh-104px)] flex gap-12 justify-center mx-auto w-full py-20">
-        <div className="flex flex-col items-center h-fit w-[600px] p-8 rounded-2xl bg-white shadow-lg">
+        <div className="flex flex-col h-fit w-[600px] p-8 rounded-2xl bg-white shadow-lg">
           <div>
             <div className="w-full flex items-center justify-center relative">
               <div className="size-40 z-10 relative">
@@ -205,10 +217,33 @@ const WhatsAppActions = () => {
               />
             </div>
           </div>
+          {/* colors */}
+          <div className="mt-10">
+            <h3 className="text-lg font-semibold flex items-center gap-2">
+              Colors
+              <span>
+                <ColorsSvg />
+              </span>
+            </h3>
+
+            {/* all colors */}
+            <div className="flex items-center gap-3 mt-2">
+              {allColors?.map((color) => (
+                <div
+                  key={color}
+                  onClick={() => handleChangeColor(color)}
+                  style={{ backgroundColor: `${color}` }}
+                  className={`size-6 hover:scale-125 transition-all duration-300 rounded-full cursor-pointer ${
+                    activeBg == color ? 'scale-125 border' : 'scale-100'
+                  } `}
+                ></div>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* preview */}
-        <WhatsAppPreview formData={formData} />
+        <WhatsAppPreview formData={formData} isEditing={true} />
       </div>
     </>
   );
