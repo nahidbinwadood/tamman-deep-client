@@ -3,6 +3,7 @@ import {
   BackButtonSvg,
   BuildingSvg,
   CameraSvg,
+  ColorsSvg,
   EmailSvg,
   PhoneSvg,
   UserSvg,
@@ -26,11 +27,14 @@ import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ImSpinner9 } from 'react-icons/im';
 import ContactPreview from '@/Components/LivePreview/ContactPreview';
+import useAuth from '@/Hooks/useAuth';
 
 const ContactCardAction = () => {
   //states:
+  const { activeCard, allColors } = useAuth();
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(false);
+  const [activeBg, setActiveBg] = useState(allColors[0]);
   const axiosPublic = useAxiosPublic();
   const queryClient = useQueryClient();
   const [formData, setFormData] = useState({
@@ -49,6 +53,7 @@ const ContactCardAction = () => {
     mail: '',
     website: '',
     status: 'inactive',
+    backgroundColor: activeBg,
   });
 
   const [coverPhoto, setCoverPhoto] = useState('');
@@ -121,11 +126,21 @@ const ContactCardAction = () => {
       console.error(error);
     },
   });
+  const handleChangeColor = (color) => {
+    setActiveBg(color);
+    setFormData((prev) => ({
+      ...prev,
+      backgroundColor: color,
+    }));
+  };
   const handleSave = () => {
-    console.log(formData);
-
     setLoading(true);
-     contactCardMutation.mutate(formData);
+    const data = {
+      ...formData,
+      backgroundColor: activeBg,
+      order_item_id: activeCard?.id,
+    };
+    contactCardMutation.mutate(data);
     // navigate to profile page
   };
 
@@ -153,19 +168,16 @@ const ContactCardAction = () => {
             className="flex items-center gap-3 cursor-pointer text-[#212A30]"
           >
             <BackButtonSvg light={true} />
-            <span className="text-lg font-medium text-white">
-              Action Creation
-            </span>
+            <span className="text-lg font-medium text-white">Back</span>
           </Link>
           <div className="flex items-center gap-3">
             <button
               onClick={() => {
                 navigate('/dashboard/profiles');
-                toast.success('Action Activated!');
               }}
               className="px-10 py-3 rounded-lg bg-transparent text-white border border-white font-semibold text-lg transition-all duration-500"
             >
-              Assign Action
+              Cancel
             </button>
             <button
               disabled={!active}
@@ -197,7 +209,7 @@ const ContactCardAction = () => {
                     src={
                       formData?.cover_image
                         ? URL.createObjectURL(formData.cover_image)
-                        : coverPhoto
+                        : profilePhoto || profile
                     }
                     alt="Cover"
                   />
@@ -252,7 +264,29 @@ const ContactCardAction = () => {
               </h3>
             </div>
           </div>
+          {/* colors */}
+          <div className="mt-10">
+            <h3 className="text-lg font-semibold flex items-center gap-2">
+              Colors
+              <span>
+                <ColorsSvg />
+              </span>
+            </h3>
 
+            {/* all colors */}
+            <div className="flex items-center gap-3 mt-2">
+              {allColors?.map((color) => (
+                <div
+                  key={color}
+                  onClick={() => handleChangeColor(color)}
+                  style={{ backgroundColor: `${color}` }}
+                  className={`size-6 hover:scale-125 transition-all duration-300 rounded-full cursor-pointer ${
+                    activeBg == color ? 'scale-125 border' : 'scale-100'
+                  } `}
+                ></div>
+              ))}
+            </div>
+          </div>
           {/* inputs */}
           <div className="flex gap-4 mt-10">
             <div className="flex-shrink-0 flex">
@@ -358,6 +392,7 @@ const ContactCardAction = () => {
                 label="Enter Your Office Number"
                 variant="outlined"
                 fullWidth
+                type="number"
                 name="officeNumber"
                 value={formData?.officeNumber}
                 onChange={handleChange}
@@ -366,6 +401,7 @@ const ContactCardAction = () => {
                 label="Enter Your Number"
                 variant="outlined"
                 fullWidth
+                type="number"
                 name="number"
                 value={formData?.number}
                 onChange={handleChange}
@@ -399,7 +435,7 @@ const ContactCardAction = () => {
 
         {/* live preview */}
 
-        <ContactPreview formData={formData} />
+        <ContactPreview formData={formData} isEditing={true} />
       </div>
     </>
   );

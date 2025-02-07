@@ -17,7 +17,7 @@ const AuthContextProvider = ({ children }) => {
   const axiosPublic = useAxiosPublic();
 
   const allColors = [
-    '#116DFF',
+    '#7554c0',
     '#23C0B6',
     '#feaf84',
     '#d9243d',

@@ -117,9 +117,7 @@ const WhatsAppActions = () => {
             className="flex items-center gap-3 cursor-pointer text-[#212A30]"
           >
             <BackButtonSvg light={true} />
-            <span className="text-lg font-medium text-white">
-              Action Creation
-            </span>
+            <span className="text-lg font-medium text-white">Back</span>
           </Link>
           <div className="flex items-center gap-3">
             <button

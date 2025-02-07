@@ -5,8 +5,6 @@ import ActionShareModal from '@/Components/Modals/ActionShareModal';
 import CreateActionModal from '@/Components/Modals/CreateActionModal';
 import Modal from '@/Components/Modals/Modal';
 import useAuth from '@/Hooks/useAuth';
-import useAxiosPublic from '@/Hooks/useAxiosPublic';
-import { useQuery } from '@tanstack/react-query';
 
 import { useState } from 'react';
 import { FaAddressCard } from 'react-icons/fa6';
@@ -17,7 +15,6 @@ import { RiListUnordered } from 'react-icons/ri';
 const DashboardProfiles = () => {
   const [open, setOpen] = useState(false);
   const { activeCard } = useAuth();
-  const axiosPublic = useAxiosPublic();
   const [activeTab, setActiveTab] = useState('My Cards');
 
   const allTabs = [
@@ -38,20 +35,22 @@ const DashboardProfiles = () => {
       Icon: MdContentCopy,
     },
   ];
-  const getQrImage = async () => {
-    const { data } = await axiosPublic.get(`/storage/${activeCard?.qr_code}`);
-    return data;
-  };
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['qrCodeImage', activeCard?.qr_code],
-    queryFn: getQrImage,
-    enabled: !!activeCard?.qr_code,
-  });
+  // const getQrImage = async () => {
+  //   const { data } = await axiosPublic.get(`/storage/${activeCard?.qr_code}`);
+  //   return data;
+  // };
+  // const { data, isLoading, isFetching } = useQuery({
+  //   queryKey: ['qrCodeImage', activeCard?.qr_code],
+  //   queryFn: getQrImage,
+  //   enabled: !!activeCard?.qr_code,
+  // });
+
   const qrCodeImage = `${import.meta.env.VITE_API_URL}/storage/${
     activeCard?.qr_code
   }`;
 
-   
+  // console.log(data);
+
   return (
     <div className="flex flex-col gap-6">
       {/* header */}
@@ -87,8 +86,8 @@ const DashboardProfiles = () => {
         <Modal open={open} setOpen={setOpen} setActiveTab={setActiveTab}>
           <ActionShareModal
             setOpen={setOpen}
-            isLoading={isLoading}
-            isFetching={isFetching}
+            // isLoading={isLoading}
+            // isFetching={isFetching}
             qrCodeImage={qrCodeImage}
           />
         </Modal>

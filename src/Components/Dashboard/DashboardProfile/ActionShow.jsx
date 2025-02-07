@@ -70,7 +70,7 @@ const ActionShow = ({ item }) => {
   //handler functions:
   const handleEdit = (type) => {
     if (type === 'email') {
-      navigate(`/dashboard/email/${item?.id}`);
+      navigate(`/actions/email`);
     }
   };
 
@@ -92,8 +92,12 @@ const ActionShow = ({ item }) => {
       await queryClient.cancelQueries({ queryKey: ['allActions'] });
       const prevActions = queryClient.getQueryData(['allActions']);
       queryClient.setQueryData(['allActions'], (oldData) => {
-        return oldData?.filter((item) => item?.id !== newData?.id);
+        console.log(newData?.id);
+        return oldData?.filter(
+          (item) => item?.id !== parseInt(newData?.data_id)
+        );
       });
+      toast.success('Action deleted successfully');
       setOpen(false);
 
       return { prevActions };
@@ -107,7 +111,6 @@ const ActionShow = ({ item }) => {
     },
     onSettled: async () => {
       await queryClient.invalidateQueries({ queryKey: ['allActions'] });
-      toast.success('Action deleted successfully');
     },
   });
 
@@ -145,15 +148,17 @@ const ActionShow = ({ item }) => {
       </div>
 
       {/* Update Action */}
-      <div
-        onClick={() => handleDeleteClick(item?.id)}
-        className="cursor-pointer px-5"
-      >
-        <DeleteSvg />
-      </div>
-      <div className="cursor-pointer">
-        <div onClick={() => handleEdit(item?.type)}>
-          <TbEdit size={24} />
+      <div className="flex items-center gap-4">
+        <div
+          onClick={() => handleDeleteClick(item?.id)}
+          className="cursor-pointer  "
+        >
+          <DeleteSvg />
+        </div>
+        <div className="cursor-pointer">
+          <div onClick={() => handleEdit(item?.type)}>
+            <TbEdit size={24} />
+          </div>
         </div>
       </div>
 

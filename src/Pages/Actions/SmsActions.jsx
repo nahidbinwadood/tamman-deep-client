@@ -118,7 +118,7 @@ const SmsActions = () => {
           >
             <BackButtonSvg light={true} />
             <span className="text-lg font-medium text-white">
-              Action Creation
+              Back
             </span>
           </Link>
           <div className="flex items-center gap-3">

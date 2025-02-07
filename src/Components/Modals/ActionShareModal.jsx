@@ -34,14 +34,7 @@ const ActionShareModal = ({ setOpen, isLoading, isFetching, qrCodeImage }) => {
             </div>
           ) : (
             <div className="w-[200px]">
-              <img  
-                src={`${
-                  qrCodeImage
-                    ? qrCodeImage
-                    : 'https://i.imghippo.com/files/Op4816nHo.png'
-                }`}
-                alt=""
-              />
+              <img src={`${qrCodeImage ? qrCodeImage : ''}`} alt="" />
             </div>
           )}
           <div className="  items-center gap-6 pt-6 hidden">

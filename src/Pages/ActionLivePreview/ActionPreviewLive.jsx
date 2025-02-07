@@ -1,4 +1,5 @@
 import CallPreview from '@/Components/LivePreview/CallPreview';
+import ContactPreview from '@/Components/LivePreview/ContactPreview';
 import EmailPreview from '@/Components/LivePreview/EmailPreview';
 import SmsPreview from '@/Components/LivePreview/SmsPreview';
 import WhatsAppPreview from '@/Components/LivePreview/WhatsAppPreview';
@@ -37,6 +38,8 @@ const ActionPreviewLive = () => {
         <SmsPreview actionInfo={getActionData} />
       ) : actionType == 'call' ? (
         <CallPreview actionInfo={getActionData} />
+      ) : actionType == 'contact-card' ? (
+        <ContactPreview actionInfo={getActionData} />
       ) : null}
     </div>
   );
