@@ -39,11 +39,13 @@ const ProductsCard = ({ product }) => {
       const prevCarts = queryClient.getQueryData(['allCartItems']);
       queryClient.setQueryData(['allCartItems'], (oldData) => {
         const isExist = oldData?.some(
-          (item) => item?.color_id == newData?.color_id
+          (item) =>
+            item?.name === newData?.name && item?.color_id === newData?.color_id
         );
+
         if (isExist) {
           toast.error('Product already added to cart with this color');
-          return oldData
+          return oldData;
         } else {
           toast.success('Product added to cart');
           return [...oldData, newData];
@@ -74,10 +76,10 @@ const ProductsCard = ({ product }) => {
           id: product?.id,
           name: product?.name,
           image: product?.image,
-          color_name: color,
-          product_price: product?.price,
-          color_id: product?.colors.find((c) => c?.name == color)?.id,
           quantity: 1,
+          product_price: product?.price,
+          color_name: color,
+          color_id: product?.colors.find((c) => c?.name == color)?.id,
         };
         addToCartMutation.mutate(productInfo);
       }

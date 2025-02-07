@@ -9,6 +9,8 @@ import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 import useAuth from '@/Hooks/useAuth';
 import toast from 'react-hot-toast';
+import Loader from '../Loader/Loader';
+import { ImSpinner9 } from 'react-icons/im';
 
 const CartDrawer = ({ showCart, setShowCart }) => {
   const { user, setCartLength } = useAuth();
@@ -21,7 +23,7 @@ const CartDrawer = ({ showCart, setShowCart }) => {
     return response?.data?.data;
   };
 
-  const { data: allCartItems = [] } = useQuery({
+  const { data: allCartItems = [], isFetching } = useQuery({
     queryKey: ['allCartItems'],
     queryFn: fetchCartItems,
     onSuccess: (data) => {
@@ -95,57 +97,63 @@ const CartDrawer = ({ showCart, setShowCart }) => {
           </div>
 
           {/* Drawer Content */}
-          <div style={{ height: 'calc(100vh - 65px)' }}>
-            {allCartItems?.length > 0 ? (
-              <div
-                style={{ height: 'calc(100vh - 65px)' }}
-                className="flex flex-col justify-between"
-              >
-                {/* Cart Items */}
-                <div className="p-4 overflow-y-auto flex flex-col gap-3">
-                  {allCartItems?.map((item) => (
-                    <CartItem key={item?.id} item={item} />
-                  ))}
-                </div>
-
-                {/* Checkout Button */}
-                <div className="bg-white px-5 py-8 space-y-4">
-                  <div className="w-full flex items-center justify-between font-semibold text-lg font-inter">
-                    <h4>Subtotal</h4>
-                    <p>$ {totalPrice.toFixed(2)}</p>
+          {isFetching ? (
+            <div className='flex items-center justify-center' style={{ height: 'calc(100vh - 65px)' }}>
+              <ImSpinner9 className="animate-spin size-8" />
+            </div>
+          ) : (
+            <div style={{ height: 'calc(100vh - 65px)' }}>
+              {allCartItems?.length > 0 ? (
+                <div
+                  style={{ height: 'calc(100vh - 65px)' }}
+                  className="flex flex-col justify-between"
+                >
+                  {/* Cart Items */}
+                  <div className="p-4 overflow-y-auto flex flex-col gap-3">
+                    {allCartItems?.map((item) => (
+                      <CartItem key={item?.id} item={item} />
+                    ))}
                   </div>
 
-                  {/* proceed to checkout button */}
-                  <button
-                    disabled={loading}
-                    onClick={handleCheckout}
-                    to="/checkout"
-                    className={`w-full bg-primaryColor flex items-center gap-2 justify-center py-3 rounded-md font-medium text-white cursor-pointer  `}
-                  >
-                    Checkout
-                    <span className="size-2 rounded-full bg-white inline-block"></span>
-                    <span>${totalPrice.toFixed(2)}</span>
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div className="flex justify-center flex-col gap-4 h-full items-center text-lg font-medium">
-                <h2 className="text-2xl">Your cart is empty.</h2>
-                <div>
-                  <h4 className="text-lg">
-                    Buy Your Digital Card
-                    <Link
-                      onClick={() => setShowCart(false)}
-                      to="/shop"
-                      className="text-primaryColor px-2 py-2 underline"
+                  {/* Checkout Button */}
+                  <div className="bg-white px-5 py-8 space-y-4">
+                    <div className="w-full flex items-center justify-between font-semibold text-lg font-inter">
+                      <h4>Subtotal</h4>
+                      <p>$ {totalPrice.toFixed(2)}</p>
+                    </div>
+
+                    {/* proceed to checkout button */}
+                    <button
+                      disabled={loading}
+                      onClick={handleCheckout}
+                      to="/checkout"
+                      className={`w-full bg-primaryColor flex items-center gap-2 justify-center py-3 rounded-md font-medium text-white cursor-pointer  `}
                     >
-                      From here
-                    </Link>
-                  </h4>
+                      Checkout
+                      <span className="size-2 rounded-full bg-white inline-block"></span>
+                      <span>${totalPrice.toFixed(2)}</span>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
+              ) : (
+                <div className="flex justify-center flex-col gap-4 h-full items-center text-lg font-medium">
+                  <h2 className="text-2xl">Your cart is empty.</h2>
+                  <div>
+                    <h4 className="text-lg">
+                      Buy Your Digital Card
+                      <Link
+                        onClick={() => setShowCart(false)}
+                        to="/shop"
+                        className="text-primaryColor px-2 py-2 underline"
+                      >
+                        From here
+                      </Link>
+                    </h4>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </>
