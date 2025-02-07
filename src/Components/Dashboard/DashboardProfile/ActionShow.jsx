@@ -1,16 +1,21 @@
 /* eslint-disable react/prop-types */
+import DeleteModal from '@/Components/Modals/DeleteModal';
+import Modal from '@/Components/Modals/Modal';
+import { DeleteSvg } from '@/Components/SvgContainer';
 import { Switch } from '@/Components/ui/switch';
 import useAuth from '@/Hooks/useAuth';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { LuEye } from 'react-icons/lu';
 import { TbEdit } from 'react-icons/tb';
 import { TiBusinessCard } from 'react-icons/ti';
+import { useNavigate } from 'react-router-dom';
 
 const ActionShow = ({ item }) => {
-  const [show, setShow] = useState(false);
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState();
   const axiosPublic = useAxiosPublic();
   const { activeCard } = useAuth();
   const queryClient = useQueryClient();
@@ -62,6 +67,62 @@ const ActionShow = ({ item }) => {
     updateActionMutation.mutate(data);
   };
 
+  //handler functions:
+  const handleEdit = (type) => {
+    if (type === 'email') {
+      navigate(`/dashboard/email/${item?.id}`);
+    }
+  };
+
+  //delete action::
+  const deleteActionFunction = async (data) => {
+    try {
+      const response = await axiosPublic.post('/api/action/delete', data);
+      console.log(response?.data);
+      return response?.data;
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
+  const deleteActionMutation = useMutation({
+    mutationKey: ['deleteAction'],
+    mutationFn: deleteActionFunction,
+    onMutate: async (newData) => {
+      await queryClient.cancelQueries({ queryKey: ['allActions'] });
+      const prevActions = queryClient.getQueryData(['allActions']);
+      queryClient.setQueryData(['allActions'], (oldData) => {
+        return oldData?.filter((item) => item?.id !== newData?.id);
+      });
+      setOpen(false);
+
+      return { prevActions };
+    },
+    onError: (err, newData, context) => {
+      toast.error(err.message);
+      // Rollback to previous state if error occurs
+      if (context?.prevActions) {
+        queryClient.setQueryData(['allActions'], context.prevActions);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['allActions'] });
+      toast.success('Action deleted successfully');
+    },
+  });
+
+  const handleDeleteClick = (id) => {
+    setSelectedId(id);
+    setOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (selectedId) {
+      const data = { data_id: String(selectedId) };
+      deleteActionMutation.mutate(data);
+    }
+  };
+
   return (
     <div className="border p-4 group font-inter hover:text-white transition duration-200 hover:bg-gradient-to-tl text-textColor from-[#116DFF] to-[#23C0B6] justify-between rounded-lg bg-white flex items-center">
       <div className="flex flex-1 items-center gap-4">
@@ -83,13 +144,23 @@ const ActionShow = ({ item }) => {
         />
       </div>
 
-      {/* preview */}
-      <div className="cursor-pointer px-5">
-        <LuEye onClick={() => setShow(!show)} className="w-6 h-6" />
+      {/* Update Action */}
+      <div
+        onClick={() => handleDeleteClick(item?.id)}
+        className="cursor-pointer px-5"
+      >
+        <DeleteSvg />
       </div>
       <div className="cursor-pointer">
-        <TbEdit size={24} />
+        <div onClick={() => handleEdit(item?.type)}>
+          <TbEdit size={24} />
+        </div>
       </div>
+
+      {/* Modal */}
+      <Modal open={open} setOpen={setOpen}>
+        <DeleteModal setOpen={setOpen} onConfirm={handleConfirmDelete} />
+      </Modal>
     </div>
   );
 };

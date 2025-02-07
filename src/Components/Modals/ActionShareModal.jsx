@@ -34,7 +34,7 @@ const ActionShareModal = ({ setOpen, isLoading, isFetching, qrCodeImage }) => {
             </div>
           ) : (
             <div className="w-[200px]">
-              <img
+              <img  
                 src={`${
                   qrCodeImage
                     ? qrCodeImage

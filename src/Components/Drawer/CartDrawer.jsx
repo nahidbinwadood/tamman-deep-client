@@ -9,7 +9,6 @@ import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 import useAuth from '@/Hooks/useAuth';
 import toast from 'react-hot-toast';
-import Loader from '../Loader/Loader';
 import { ImSpinner9 } from 'react-icons/im';
 
 const CartDrawer = ({ showCart, setShowCart }) => {
@@ -98,7 +97,7 @@ const CartDrawer = ({ showCart, setShowCart }) => {
 
           {/* Drawer Content */}
           {isFetching ? (
-            <div className='flex items-center justify-center' style={{ height: 'calc(100vh - 65px)' }}>
+            <div style={{ height: 'calc(100vh - 65px)' }} className='flex items-center justify-center'>
               <ImSpinner9 className="animate-spin size-8" />
             </div>
           ) : (

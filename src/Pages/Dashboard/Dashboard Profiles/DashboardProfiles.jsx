@@ -51,7 +51,7 @@ const DashboardProfiles = () => {
     activeCard?.qr_code
   }`;
 
-  console.log(data);
+   
   return (
     <div className="flex flex-col gap-6">
       {/* header */}
