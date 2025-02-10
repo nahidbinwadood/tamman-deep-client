@@ -61,22 +61,22 @@ const Login = () => {
   return (
     <div className="  font-inter ">
       <div className="flex items-center justify-center h-full min-h-[calc(100vh-72px)]">
-        <div className="bg-white/90 shadow-lg rounded-lg px-8 py-12 min-w-[526px]">
-          <div className="pb-8 w-full flex items-center justify-center -ml-9">
-            <img src={logo} alt="" />
+        <div className="bg-white/90 shadow-lg rounded-lg px-8 py-12 min-w-[320px] md:min-w-[526px]">
+          <div className="pb-4 md:pb-6 lg:pb-8 w-full flex items-center justify-center -ml-9 h-28 md:h-32">
+            <img className="h-full object-cover" src={logo} alt="" />
           </div>
           <div className="w-full text-center space-y-3">
-            <h2 className="font-inter text-3xl font-bold">
+            <h2 className="font-inter text-xl md:text-2xl lg:text-3xl font-bold">
               Log in to your One Tap account
             </h2>
-            <p className="text-lg text-textColor">
+            <p className="md:text-lg text-textColor">
               Haven’t Signed Up yet?{' '}
               <Link to="/register" className="underline pl-[2px]">
                 Sign Up here
               </Link>
             </p>
           </div>
-          <div className="mt-10">
+          <div className="mt-6 md:mt-8 lg:mt-10">
             <form
               onSubmit={handleSubmit(onSubmit)}
               action=""
@@ -134,10 +134,10 @@ const Login = () => {
                   </Link>
                 </div>
               </div>
-              <div className="pt-3">
+              <div className="md:pt-3">
                 <button
                   type="submit"
-                  className={`w-full bg-primaryColor px-12 font-semibold text-lg py-3 rounded-lg text-white  hover:text-primaryColor  border border-primaryColor transition duration-300  ${
+                  className={`w-full bg-primaryColor px-12 font-semibold md:text-lg py-2.5 md:py-3 rounded-lg text-white  hover:text-primaryColor  border border-primaryColor transition duration-300  ${
                     loading ? 'hover:bg-primaryColor' : 'hover:bg-transparent'
                   }`}
                 >

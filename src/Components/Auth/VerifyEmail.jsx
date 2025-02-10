@@ -39,12 +39,14 @@ const VerifyEmail = ({ loading, setLoading, setEmail, setProceed }) => {
   return (
     <div className="w-full flex h-screen font-inter">
       <div className="w-full h-full flex items-center justify-center">
-        <div className="rounded-[24px] border border-[#E5E5E5] w-[573px] py-10">
-          <div className="text-center mt-10 ">
-            <h3 className="font-semibold text-2xl">Reset Your Password</h3>
+        <div className="rounded-xl lg:rounded-[24px] border border-[#E5E5E5] min-w-[320px] md:min-w-[526px] py-10 mx-5 md:mx-8">
+          <div className="text-center mt-6 md:mt-7 lg:mt-10 ">
+            <h3 className="font-semibold text-xl md:text-2xl">
+              Reset Your Password
+            </h3>
           </div>
-          <div className="flex items-center justify-center mt-5">
-            <p className="flex gap-2 items-center py-2 w-2/3 mx-auto text-center text-textLight">
+          <div className="flex items-center justify-center mt-2 md:mt-5">
+            <p className="flex gap-2 items-center py-2 w-4/5 md:w-2/3 mx-auto text-center text-textLight">
               Enter your email or phone number to get back into your account
             </p>
           </div>
@@ -54,7 +56,7 @@ const VerifyEmail = ({ loading, setLoading, setEmail, setProceed }) => {
             <form
               onSubmit={handleSubmit(onSubmit)}
               action=""
-              className="w-3/4 mx-auto flex flex-col gap-5"
+              className="lg:w-3/4 mx-auto flex flex-col gap-5"
             >
               <div>
                 <input
@@ -67,10 +69,10 @@ const VerifyEmail = ({ loading, setLoading, setEmail, setProceed }) => {
               </div>
 
               {/* button */}
-              <div className="flex items-center justify-center mt-4">
+              <div className="flex items-center justify-center lg:mt-4">
                 <button
                   type="submit"
-                  className={`w-full bg-primaryColor px-12 font-semibold text-lg py-3 rounded-lg text-white  hover:text-primaryColor  border border-primaryColor transition duration-300  ${
+                  className={`w-full bg-primaryColor px-12 font-semibold md:text-lg py-2.5 md:py-3 rounded-lg text-white  hover:text-primaryColor  border border-primaryColor transition duration-300  ${
                     loading ? 'hover:bg-primaryColor' : 'hover:bg-transparent'
                   }`}
                 >

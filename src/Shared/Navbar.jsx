@@ -76,7 +76,7 @@ const Navbar = () => {
   return (
     <div className="relative">
       <div
-        className={`fixed px-5 md:px-8 2xl:px-0 h-[80px] 2xl:h-[100px] w-full top-0 left-0 z-40 topbar
+        className={`fixed  h-[80px] 2xl:h-[100px] w-full top-0 left-0 z-40 topbar
     ${
       isScrolled
         ? location.pathname === '/'
@@ -93,7 +93,7 @@ const Navbar = () => {
         <div className="container mx-auto w-full flex items-center justify-between">
           {/* Logo */}
 
-          <Link className="h-20 md:h-24 inline-block -ml-8" to="/">
+          <Link className="h-20 md:h-24 inline-block -ml-4 md:-ml-8" to="/">
             <img
               className="h-full object-cover"
               src={isDarkMode ? logoWhite : logoBlack}
