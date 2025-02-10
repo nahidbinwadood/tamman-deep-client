@@ -40,7 +40,7 @@ const ProductsCard = ({ product }) => {
       queryClient.setQueryData(['allCartItems'], (oldData) => {
         const isExist = oldData?.some(
           (item) =>
-            item?.name === newData?.name && item?.color_id === newData?.color_id
+            item?.product_id === newData?.product_id && item?.color_id === newData?.color_id
         );
 
         if (isExist) {
@@ -74,6 +74,7 @@ const ProductsCard = ({ product }) => {
       } else {
         const productInfo = {
           id: product?.id,
+          product_id:product?.id,
           name: product?.name,
           image: product?.image,
           quantity: 1,

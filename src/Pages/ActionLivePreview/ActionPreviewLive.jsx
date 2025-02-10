@@ -21,12 +21,14 @@ const ActionPreviewLive = () => {
     queryKey: ['getActionData'],
     queryFn: async () => {
       const { data } = await axiosPublic(`/api/action/view/${unique_code}`);
-      setActionType(data?.name);
-      return data?.data;
+      console.log(data);
+      setActionType(data?.data?.name);
+      return data?.data?.data;
     },
   });
 
-  console.log(actionType);
+  console.log(getActionData);
+  // console.log(actionType);
   return (
     <div className="min-h-screen flex items-center justify-center  ">
       {/* <h1>hello from qr code</h1> */}

@@ -43,12 +43,12 @@ const Checkout = () => {
     }
   };
   return (
-    <div className="min-h-screen py-20 font-inter container mx-auto flex items-center justify-center gap-12">
+    <div className="min-h-screen py-20 font-inter container mx-auto flex items-center justify-center gap-12 ">
       {/* cart */}
-      <div className="overflow-y-auto">
+      <div className="overflow-y-auto px-5 md:px-0">
         {/* title */}
         <div>
-          <h4 className="text-2xl font-semibold">My Cart</h4>
+          <h4 className="text-xl md:text-2xl font-semibold">My Cart</h4>
           {/* items */}
           <div className="mt-4 space-y-4">
             {allCartItems?.map((item) => (
@@ -58,10 +58,10 @@ const Checkout = () => {
 
           {/* total price */}
           <div className="mt-6 px-4 space-y-4">
-            <h4 className="text-lg font-semibold">
+            <h4 className="md:text-lg font-semibold">
               Subtotal {allCartItems.length} items
             </h4>
-            <div className="w-full flex items-center justify-between text-xl font-semibold ">
+            <div className="w-full flex items-center justify-between md:text-xl font-semibold ">
               <h4>Total</h4>
               <p>$ {parseFloat(totalPrice).toFixed(2)}</p>
             </div>
@@ -72,7 +72,7 @@ const Checkout = () => {
               disabled={loading}
               onClick={handlePayment}
               type="submit"
-              className={`w-full flex items-center justify-center text-center bg-primaryColor text-white py-3 rounded-md`}
+              className={`w-full flex items-center justify-center text-center bg-primaryColor py-2.5 text-white md:py-3 rounded-md`}
             >
               {loading ? (
                 <CgSpinnerTwo className="size-6 animate-spin" />

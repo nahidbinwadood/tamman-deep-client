@@ -5,7 +5,7 @@ const CheckoutCard = ({ item }) => {
     <div className="flex items-center gap-4 justify-between bg-white rounded-md p-4 border border-black/20">
       {/* image */}
       <div className="flex-shrink-0">
-        <div className="h-32 w-52">
+        <div className="h-20 md:h-32 md:w-52">
           <img
             className="w-full h-full object-cover"
             src={item?.image}
@@ -20,7 +20,7 @@ const CheckoutCard = ({ item }) => {
           <div className="space-y-2">
             <div className="space-y-1">
               <h5>
-                <span className="capitalize"> {item?.name}</span>
+                <span className="capitalize "> {item?.name}</span>
                 <span className="font-semibold"> x {item?.quantity}</span>
               </h5>
               <div className="text-black/40">
