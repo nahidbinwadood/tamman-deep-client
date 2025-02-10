@@ -10,10 +10,10 @@ const CtaSection = () => {
         className="mx-5 md:mx-8 bg-bgSecondary rounded-[20px] h-[60vh]  lg:h-[80vh] bg-cover bg-center bg-no-repeat flex items-center justify-center"
       >
         <div className="text-white text-center px-5">
-          <h3 className="text-3xl lg:text-4xl font-bold pb-3">
+          <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold pb-3">
             Go Green with One Tap
           </h3>
-          <p className="font-semibold text-lg pb-6">
+          <p className="font-semibold md:text-lg pb-6">
             And replace your paper cards
           </p>
           <Link to="/shop">

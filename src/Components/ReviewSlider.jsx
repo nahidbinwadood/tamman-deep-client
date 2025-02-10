@@ -50,7 +50,17 @@ const ReviewSlider = () => {
               <p>{review?.description}</p>
             </div>
             <div className="mt-3 ">
-              <h5 className="font-semibold mb-2">{review?.authorName} </h5>
+              <h5
+                style={{
+                  background:
+                    'linear-gradient(270deg, #116DFF 0%, #23C0B6 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+                className="font-semibold mb-2"
+              >
+                {review?.authorName}{' '}
+              </h5>
               <p>{review?.type}</p>
             </div>
           </SwiperSlide>

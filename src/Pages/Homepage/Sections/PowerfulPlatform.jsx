@@ -47,7 +47,7 @@ const PowerfulPlatform = () => {
     },
   ];
   return (
-    <div className="py-10 md:py-16 lg:py-20 bg-gradient-to-b from-[rgba(17,109,255,0.05)] to-[rgba(35,192,182,0.05)]">
+    <div className="py-10 md:py-16 2xl:py-20 bg-gradient-to-b from-[rgba(17,109,255,0.05)] to-[rgba(35,192,182,0.05)]">
       <div className="container mx-auto px-5 md:px-8 2xl:px-0">
         <TitleSection
           title={'Features'}

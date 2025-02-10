@@ -88,7 +88,7 @@ const ProductsCard = ({ product }) => {
 
   return (
     <div className="bg-[#fbfbfb] border border-black/50 rounded-lg group overflow-hidden">
-      <div className="h-[300px] w-full overflow-hidden">
+      <div className="h-64 md:h-[300px] w-full overflow-hidden">
         <img
           className="h-full w-full object-cover group-hover:scale-105 transition-all duration-300"
           src={image}
@@ -99,10 +99,10 @@ const ProductsCard = ({ product }) => {
       {/* description */}
       <div className="px-5 py-6">
         <div className="space-y-2 h-24">
-          <h4 className="font-semibold text-2xl">{product?.name}</h4>
+          <h4 className="font-semibold text-xl md:text-2xl">{product?.name}</h4>
           <p>The last business card you&lsquo;ll ever need.</p>
         </div>
-        <div className="flex  items-center gap-2 mt-5">
+        <div className="flex items-center gap-2 mt-5">
           <p className="font-medium ">Colors</p>
           <Select
             onValueChange={(value) => {

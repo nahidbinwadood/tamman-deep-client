@@ -7,7 +7,7 @@ const Growth = () => {
       <div className="size-[350px] -z-10 rounded-[348px] bg-gradient-to-l from-[#116DFF] to-[#23C0B6] blur-[350px] absolute bottom-0 right-0 hidden" />
 
       {/* contents */}
-      <div className='container mx-auto px-5 md:px-8 2xl:px-0'>
+      <div className='container mx-auto px-5 md:px-8 lg:px-10 xl:px-12 2xl:px-0'>
         <TextImageSection
           title={'Design that '}
           highlightedTitle={'drives growth'}

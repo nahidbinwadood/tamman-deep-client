@@ -40,20 +40,21 @@ const Footer = () => {
     >
       <div>
         <div className="container mx-auto pt-5">
-          <div className="-ml-8 pb-3">
+          <div className="-ml-8 pb-3 h-20 md:h-24">
             <img
+              className="h-full object-cover"
               src={`${currentLocation == '/' ? logoWhite : logoBlack}`}
               alt=""
             />
           </div>
           <div>
-            <p className="text-xl font-medium">
+            <p className="text-lg md:text-xl font-medium">
               Stay tuned for latest exclusive deals and updates
             </p>
             <p
               className={`${
                 currentLocation == '/' ? 'text-white/90' : 'text-textColor'
-              }  pt-5`}
+              } pt-3 md:pt-5`}
             >
               Join our mailing list today!
             </p>
@@ -84,9 +85,11 @@ const Footer = () => {
           <div className="pt-8 md:pt-12 lg:pt-16 flex lg:items-center justify-between lg:justify-normal lg:gap-72">
             <div>
               <div>
-                <h3 className="text-2xl font-semibold pb-5 md:pb-8">Quick Links</h3>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-semibold pb-4 sm:pb-6 md:pb-8">
+                  Quick Links
+                </h3>
               </div>
-              <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-5 text-sm sm:text-base">
                 <Link to="/">Terms of Services</Link>
                 <Link to="/">Privacy Policy</Link>
                 <Link to="/">Shipping Policy</Link>
@@ -95,9 +98,11 @@ const Footer = () => {
             </div>
             <div>
               <div>
-                <h3 className="text-2xl font-semibold pb-5 md:pb-8">Quick Links</h3>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-semibold pb-4 sm:pb-6 md:pb-8">
+                  Quick Links
+                </h3>
               </div>
-              <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-5 text-sm sm:text-base">
                 <Link to="/">Help Center</Link>
                 <Link to="/">Contact</Link>
                 <Link to="/">APP Download</Link>

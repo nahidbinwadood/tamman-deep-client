@@ -10,7 +10,7 @@ const TextImageSection = ({
 }) => {
   return (
     <section
-      className={`  w-full flex items-center py-7 md:py-10 lg:py-20 ${
+      className={`  w-full flex items-center py-6 md:py-10 lg:py-12 2xl:py-20 ${
         reverse
           ? 'md:flex-row-reverse gap-6 md:gap-8 lg:gap-[136px] flex-col'
           : 'md:flex-row flex-col gap-6 md:gap-8'
@@ -24,15 +24,15 @@ const TextImageSection = ({
               {highlightedTitle}
             </span>
           </h2>
-          <p className="text-textColor text-lg pt-3 lg:w-[85%]">{description}</p>
+          <p className="text-textColor md:text-lg pt-3 lg:w-[85%]">{description}</p>
         </div>
-        <div className="pt-8 space-y-4">
+        <div className="pt-5 md:pt-8 space-y-4">
           <div className="flex gap-3 lg:w-[75%]">
-            <div className="size-6">
+            <div className="size-6 mt-1">
               <RightSvg />
             </div>
             <div>
-              <h5 className="text-lg text-textColor">
+              <h5 className="md:text-lg text-textColor">
                 <span className="font-bold text-black">
                   Fastest loading speed
                 </span>{' '}
@@ -42,11 +42,11 @@ const TextImageSection = ({
             </div>
           </div>
           <div className="flex gap-3 lg:w-[75%]">
-            <div className="size-6">
+            <div className="size-6 mt-1">
               <RightSvg />
             </div>
             <div>
-              <h5 className="text-lg text-textColor">
+              <h5 className="md:text-lg text-textColor">
                 <span className="font-bold text-black">
                   Fastest loading speed
                 </span>{' '}
@@ -56,14 +56,14 @@ const TextImageSection = ({
             </div>
           </div>
           <div className="flex gap-3 lg:w-[75%]">
-            <div className="size-6">
+            <div className="size-6 mt-1">
               <RightSvg />
             </div>
             <div>
-              <h5 className="text-lg text-textColor">
+              <h5 className="md:text-lg text-textColor">
                 <span className="font-bold text-black">
                   Fastest loading speed
-                </span>{' '}
+                </span>
                 - Lorem Ipsum has been the industry&apos;s standard dummy text
                 ever since the 1500s.
               </h5>

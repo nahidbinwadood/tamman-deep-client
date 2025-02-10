@@ -12,7 +12,7 @@ const PricingCard = ({ card }) => {
     >
       <div>
         <h4
-          className={`text-lg font-bold ${
+          className={`md:text-lg font-bold ${
             card.type == 'Premium Plus' ? 'text-white' : 'text-textColor'
           }`}
         >

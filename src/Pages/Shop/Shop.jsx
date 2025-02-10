@@ -1,14 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import {
   AndroidSvg,
-  AppleSvg,
   HammerSvg,
   MobileSvg,
   SmileSvg,
 } from '../../Components/SvgContainer';
 import ProductsCard from './../../Components/Cards/ProductsCard';
 import InfoSection from '@/Components/Shop/InfoSection';
-import ShopFilters from '@/Components/Shop/ShopFilters';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import Loader from '@/Components/Loaders/Loader';
 
@@ -27,7 +25,7 @@ const Shop = () => {
       border: true,
     },
     {
-      img: [{ logo: <AndroidSvg /> }, { logo: <AppleSvg /> }],
+      img: [{ logo: <AndroidSvg /> }],
       title: 'Connect with anyone',
       description: 'Works with all mobile devices.',
       border: true,
@@ -50,15 +48,17 @@ const Shop = () => {
   });
 
   return (
-    <div className="mt-[88px]">
-      <div className="mt-40 container mx-auto">
+    <div className="2xl:mt-[88px]">
+      <div className="mt-28 2xl:mt-40 container mx-auto px-5 md:px-8 lg:px-10 xl:px-12 2xl:px-0">
         {/* title */}
         <div>
-          <h2 className="text-4xl font-bold">All products</h2>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold">
+            All products
+          </h2>
         </div>
 
         {/* filters */}
-        <ShopFilters />
+        {/* <ShopFilters /> */}
 
         {/* products card */}
         {isLoading ? (
@@ -66,7 +66,7 @@ const Shop = () => {
             <Loader />
           </div>
         ) : (
-          <div className="my-10 grid grid-cols-4 gap-6 w-full">
+          <div className="my-5 md:my-8 lg:my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
             {allProducts?.map((product) => (
               <ProductsCard product={product} key={product?.id} />
             ))}

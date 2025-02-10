@@ -9,7 +9,7 @@ const GradientButton = ({ title, prev, prevLight, next, nextLight, card }) => {
       className={`relative rounded-lg overflow-hidden flex items-center justify-center gap-3 ${
         card
           ? 'px-12 py-3 w-fit hover:bg-primaryColor duration-300 transition-all'
-          : 'px-8 py-4 w-full hover:bg-primaryColor duration-300 transition-all'
+          : 'px-8 py-3 md:py-3.5 lg:py-4 w-full hover:bg-primaryColor duration-300 transition-all'
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -37,7 +37,7 @@ const GradientButton = ({ title, prev, prevLight, next, nextLight, card }) => {
       {/* show Text */}
       {!isHovered ? (
         <span
-          className={`relative z-10 font-semibold text-lg transition-all duration-300 ${
+          className={`relative z-10 font-semibold md:text-lg transition-all duration-300 ${
             isHovered ? 'text-white' : 'bg-clip-text text-transparent'
           }`}
           style={{

@@ -2,14 +2,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/images/logo-dark.png';
 import { useEffect } from 'react';
-const Sidebar = ({
-  isOpen,
-  setOpen,
-  token,
-  setShowCart,
-  handleDashboard,
-  handleLogout,
-}) => {
+const Sidebar = ({ isOpen, setOpen, token, handleLogout }) => {
   const navLinks = [
     {
       path: '/',
@@ -54,7 +47,7 @@ const Sidebar = ({
               to={item?.path}
               onClick={() => setOpen(false)}
               className={({ isActive }) =>
-                `text-lg ${isActive ? 'text-primaryColor' : 'text-black'}`
+                `md:text-lg ${isActive ? 'text-primaryColor' : 'text-black'}`
               }
               key={item?.path}
             >
@@ -62,27 +55,16 @@ const Sidebar = ({
             </NavLink>
           ))}
           <div className="space-y-5">
-            <div
-              onClick={() => {
-                setShowCart((prev) => !prev);
-                setOpen(false);
-              }}
-              className="text-lg"
-            >
-              Cart
-            </div>
             {!token ? (
               <div className="flex flex-col gap-5">
-                <Link to="/login" className="text-lg">
+                <Link to="/login" className="md:text-lg">
                   Login
                 </Link>
               </div>
             ) : (
               <div className="flex flex-col gap-5">
-                <div onClick={handleDashboard} className="text-lg">
-                  Dashboard
-                </div>
-                <div onClick={handleLogout} className="text-lg">
+                <div className="md:text-lg">Dashboard</div>
+                <div onClick={handleLogout} className="md:text-lg">
                   Log Out
                 </div>
               </div>

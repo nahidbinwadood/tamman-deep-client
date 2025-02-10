@@ -82,8 +82,7 @@ export function RightSvg() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="25"
+      className="size-5 md:size-6"
       viewBox="0 0 24 25"
       fill="none"
     >
@@ -487,8 +486,7 @@ export function CardListSvg() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="25"
+       className="size-5 md:size-6"
       viewBox="0 0 24 25"
       fill="none"
     >
@@ -519,8 +517,7 @@ export function CardListWhiteSvg() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="28"
-      height="28"
+      className="size-5 md:size-6"
       viewBox="0 0 28 28"
       fill="none"
     >

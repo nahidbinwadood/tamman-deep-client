@@ -72,7 +72,7 @@ const CartDrawer = ({ showCart, setShowCart }) => {
       <div>
         <div
           aria-hidden={!showCart}
-          className={`fixed top-0 right-0 w-[450px] z-50 min-h-[100vh] shadow-lg bg-[#F5F5F7] transform transition-transform duration-500 font-inter ${
+          className={`fixed top-0 right-0 w-full  md:w-[450px] z-50 min-h-[100vh] shadow-lg bg-[#F5F5F7] transform transition-transform duration-500 font-inter ${
             showCart ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
@@ -136,9 +136,9 @@ const CartDrawer = ({ showCart, setShowCart }) => {
                 </div>
               ) : (
                 <div className="flex justify-center flex-col gap-4 h-full items-center text-lg font-medium">
-                  <h2 className="text-2xl">Your cart is empty.</h2>
+                  <h2 className="text-xl md:text-2xl">Your cart is empty.</h2>
                   <div>
-                    <h4 className="text-lg">
+                    <h4 className="text-base md:text-lg">
                       Buy Your Digital Card
                       <Link
                         onClick={() => setShowCart(false)}

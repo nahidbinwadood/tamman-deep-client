@@ -26,9 +26,9 @@ const HowItWorks = () => {
     },
   ];
   return (
-    <div className="container mx-auto py-10 md:py-16 lg:py-20 px-5 md:px-8 2xl:px-0">
+    <div className="container mx-auto pt-5 pb-10 sm:py-7 lg:py-12 2xl:py-20 px-5 md:px-8 2xl:px-0">
       <TitleSection header={'How it '} highlightedHeader={'works'} />
-      <div className="pt-4 md:pt-10 lg:pt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="pt-0 md:pt-6 2xl:pt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {cardsInfo?.map((card) => (
           <HowItWorksCard
             key={card?.image}
