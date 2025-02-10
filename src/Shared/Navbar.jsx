@@ -65,7 +65,7 @@ const Navbar = () => {
     <div className="relative">
       <div
         className={`fixed px-5 md:px-8 2xl:px-0 h-[100px] w-full top-0 left-0 z-40  topbar
-          ${isScrolled && isDarkMode ? 'bg-black shadow-lg' : 'bg-transparent'}
+          ${isScrolled && isDarkMode ? 'bg-black shadow-lg' : 'bg-black lg:bg-transparent'}
           ${
             (isScrolled && location.pathname === '/shop') ||
             location.pathname === '/checkout'

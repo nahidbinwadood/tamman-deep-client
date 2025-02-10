@@ -47,8 +47,8 @@ const PowerfulPlatform = () => {
     },
   ];
   return (
-    <div className="hidden py-20 bg-gradient-to-b from-[rgba(17,109,255,0.05)] to-[rgba(35,192,182,0.05)]">
-      <div className="container mx-auto">
+    <div className="py-10 md:py-16 lg:py-20 bg-gradient-to-b from-[rgba(17,109,255,0.05)] to-[rgba(35,192,182,0.05)]">
+      <div className="container mx-auto px-5 md:px-8 2xl:px-0">
         <TitleSection
           title={'Features'}
           header={'The blocks of a '}
@@ -58,7 +58,7 @@ const PowerfulPlatform = () => {
           }
         />
 
-        <div className="pt-10 grid grid-cols-3 gap-12">
+        <div className="pt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-8 lg:gap-12">
           {platformCardsInfo?.map((info, idx) => (
             <PlatformCard
               key={idx}

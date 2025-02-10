@@ -2,37 +2,37 @@ import { Link, useLocation } from 'react-router-dom';
 import logoWhite from '../assets/images/logo.svg';
 import logoBlack from '../assets/images/logo-black.png';
 import {
-  FooterSponsor1,
-  FooterSponsor2,
-  FooterSponsor3,
-  FooterSponsor4,
-  FooterSponsor5,
-  FooterSponsor6,
-  FooterSponsor7,
-  FooterSponsor8,
-  FooterSponsor9,
-  FooterSponsor10,
-  FooterSponsor11,
+  // FooterSponsor1,
+  // FooterSponsor2,
+  // FooterSponsor3,
+  // FooterSponsor4,
+  // FooterSponsor5,
+  // FooterSponsor6,
+  // FooterSponsor7,
+  // FooterSponsor8,
+  // FooterSponsor9,
+  // FooterSponsor10,
+  // FooterSponsor11,
   SubmitFormSvg,
 } from './../Components/SvgContainer';
 const Footer = () => {
   const currentLocation = useLocation().pathname;
-  const sponsors = [
-    { logo: <FooterSponsor1 /> },
-    { logo: <FooterSponsor2 /> },
-    { logo: <FooterSponsor3 /> },
-    { logo: <FooterSponsor4 /> },
-    { logo: <FooterSponsor5 /> },
-    { logo: <FooterSponsor6 /> },
-    { logo: <FooterSponsor7 /> },
-    { logo: <FooterSponsor8 /> },
-    { logo: <FooterSponsor9 /> },
-    { logo: <FooterSponsor10 /> },
-    { logo: <FooterSponsor11 /> },
-  ];
+  // const sponsors = [
+  //   { logo: <FooterSponsor1 /> },
+  //   { logo: <FooterSponsor2 /> },
+  //   { logo: <FooterSponsor3 /> },
+  //   { logo: <FooterSponsor4 /> },
+  //   { logo: <FooterSponsor5 /> },
+  //   { logo: <FooterSponsor6 /> },
+  //   { logo: <FooterSponsor7 /> },
+  //   { logo: <FooterSponsor8 /> },
+  //   { logo: <FooterSponsor9 /> },
+  //   { logo: <FooterSponsor10 /> },
+  //   { logo: <FooterSponsor11 /> },
+  // ];
   return (
     <div
-      className={`${
+      className={` px-5 md:px-8 2xl:px-0 ${
         currentLocation == '/'
           ? 'bg-[#111518] text-white'
           : 'bg-gradient-to-b from-[rgba(17,109,255,0.05)] to-[rgba(35,192,182,0.05)]'
@@ -60,7 +60,7 @@ const Footer = () => {
           </div>
           <div className="pt-5">
             <form action="">
-              <div className="relative w-[870px]">
+              <div className="relative lg:w-[870px]">
                 <input
                   className={`${
                     currentLocation == '/'
@@ -81,41 +81,41 @@ const Footer = () => {
           </div>
 
           {/* Links */}
-          <div className="pt-16 flex items-center gap-72">
+          <div className="pt-8 md:pt-12 lg:pt-16 flex lg:items-center justify-between lg:justify-normal lg:gap-72">
             <div>
               <div>
-                <h3 className="text-2xl font-semibold pb-8">Quick Links</h3>
+                <h3 className="text-2xl font-semibold pb-5 md:pb-8">Quick Links</h3>
               </div>
               <div className="flex flex-col gap-5">
-                <Link to="/services">Terms of Services</Link>
-                <Link to="/privacy-policy">Privacy Policy</Link>
-                <Link to="/shipping-policy">Shipping Policy</Link>
-                <Link to="/return-policy">Return Policy</Link>
+                <Link to="/">Terms of Services</Link>
+                <Link to="/">Privacy Policy</Link>
+                <Link to="/">Shipping Policy</Link>
+                <Link to="/">Return Policy</Link>
               </div>
             </div>
             <div>
               <div>
-                <h3 className="text-2xl font-semibold pb-8">Quick Links</h3>
+                <h3 className="text-2xl font-semibold pb-5 md:pb-8">Quick Links</h3>
               </div>
               <div className="flex flex-col gap-5">
-                <Link to="/help">Help Center</Link>
-                <Link to="/contact">Contact</Link>
-                <Link to="/app-download">APP Download</Link>
+                <Link to="/">Help Center</Link>
+                <Link to="/">Contact</Link>
+                <Link to="/">APP Download</Link>
               </div>
             </div>
           </div>
         </div>
-        <div className="py-10">
+        <div className="pt-10">
           <div className="border-t border-white/10" />
         </div>
 
-        <div className="w-full flex gap-2 items-center justify-center pb-5">
+        {/* <div className="w-full flex gap-2 items-center justify-center hidden">
           {sponsors?.map((sponsor, idx) => (
             <div key={idx}>{sponsor?.logo}</div>
           ))}
-        </div>
-        <div className="text-center text-sm pb-5">
-          <p>© 2024, Quick Link All Rights Reserved</p>
+        </div> */}
+        <div className="text-center text-sm py-5">
+          <p>© 2025 One Tap All Rights Reserved</p>
         </div>
       </div>
     </div>

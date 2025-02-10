@@ -44,7 +44,7 @@ const PlansSection = () => {
     },
   ];
   return (
-    <div className="hidden bg-gradient-to-b from-[rgba(17,109,255,0.05)] to-[rgba(35,192,182,0.05)] py-20">
+    <div className="bg-gradient-to-b from-[rgba(17,109,255,0.05)] to-[rgba(35,192,182,0.05)] py-10 md:py-16 lg:py-20 px-5 md:px-8 2xl:px-0">
       <TitleSection
         title={'Packages'}
         header={'Perfect Plans for'}
@@ -53,8 +53,8 @@ const PlansSection = () => {
           'Find the ideal Quick Link plan that fits your needs and empowers your business growth.'
         }
       />
-      <div className="pt-16 grid grid-cols-3 gap-8 container mx-auto ">
-        {cardsInfo?.map((card,idx) => (
+      <div className="pt-8 md:pt-12 lg:pt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 container mx-auto ">
+        {cardsInfo?.map((card, idx) => (
           <PricingCard key={idx} card={card} />
         ))}
       </div>

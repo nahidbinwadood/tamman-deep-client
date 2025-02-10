@@ -1,3 +1,4 @@
+import Marquee from 'react-fast-marquee';
 import ReviewSlider from './../../../Components/ReviewSlider';
 import {
   Sponsor1Svg,
@@ -15,11 +16,11 @@ const ReviewSection = () => {
     { logo: <Sponsor5Svg /> },
   ];
   return (
-    <div className="hidden mx-8 bg-bgSecondary rounded-[20px] py-16 px-[380px]">
-      <div className="flex items-center justify-between text-white">
-        <div className="w-1/2">
-          <h2 className="text-4xl font-bold w-[70%]">
-            Our clients are at the heart of{' '}
+    <div className="mx-5 md:mx-8 bg-bgSecondary rounded-[20px] py-8 md:py-12 lg:py-16 lg:px-[380px] px-8">
+      <div className="flex flex-col md:flex-row gap-6 items-center justify-between text-white">
+        <div className="w-full lg:w-1/2">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold lg:w-[70%]">
+            Our clients are at the heart of
             <span
               className="leading-[1.32] tracking-tight bg-clip-text text-transparent"
               style={{
@@ -32,14 +33,20 @@ const ReviewSection = () => {
             </span>
           </h2>
         </div>
-        <div className="w-1/2">
+        <div className="w-full lg:w-1/2">
           <ReviewSlider />
         </div>
       </div>
-      <div className="mt-16 flex items-center justify-between">
-        {sponsors?.map((sponsor, idx) => (
+      <div className="mt-10 md:mt-12 lg:mt-16  ">
+        {/* {sponsors?.map((sponsor, idx) => (
           <div key={idx}>{sponsor?.logo}</div>
-        ))}
+        ))} */}
+
+        <Marquee autoFill={true}>
+          {sponsors?.map((sponsor, idx) => (
+            <div className='mr-12 md:mr-16 lg:mr-20' key={idx}>{sponsor?.logo}</div>
+          ))}
+        </Marquee>
       </div>
     </div>
   );

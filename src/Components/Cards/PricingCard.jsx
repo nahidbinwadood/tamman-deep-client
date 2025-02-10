@@ -21,10 +21,10 @@ const PricingCard = ({ card }) => {
       </div>
       <div className="flex items-center gap-3">
         <div>
-          <p className="text-5xl font-bold">£{card?.price}</p>
+          <p className="text-3xl md:text-5xl font-bold">£{card?.price}</p>
         </div>
         <div>
-          <h4 className="text-lg font-medium">GBP</h4>
+          <h4 className="md:text-lg font-medium">GBP</h4>
           <h5
             className={`${
               card.type == 'Premium Plus' ? 'text-white' : 'text-textColor'
@@ -34,7 +34,7 @@ const PricingCard = ({ card }) => {
           </h5>
         </div>
       </div>
-      <div className="pt-10 w-full">
+      <div className="pt-5 md:pt-8 lg:pt-10 w-full">
         {card.type == 'Premium Plus' ? (
           <PrimaryButton fullWidth={true} title={'Buy this plan'} />
         ) : (
@@ -42,7 +42,7 @@ const PricingCard = ({ card }) => {
         )}
       </div>
       {/* hr */}
-      <div className="my-10 w-full border-t-[1px] border-[#BEC0C0]"></div>
+      <div className="my-6 md:my-8 lg:my-10 w-full border-t-[1px] border-[#BEC0C0]"></div>
       <div className="space-y-5">
         <div>
           <h3 className="text-lg font-bold">What&apos;s included?</h3>
@@ -50,11 +50,15 @@ const PricingCard = ({ card }) => {
         {card?.includes?.map((include) => (
           <div key={include} className="flex items-center gap-3">
             {card.type == 'Premium Plus' ? (
-              <CardListWhiteSvg />
+              <div className="flex-shrink-0">
+                <CardListWhiteSvg />
+              </div>
             ) : (
-              <CardListSvg />
+              <div className='flex-shrink-0'>
+                <CardListSvg />
+              </div>
             )}
-            <p className="text-lg font-medium">{include}</p>
+            <p className="md:text-lg font-medium">{include}</p>
           </div>
         ))}
       </div>

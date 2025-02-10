@@ -35,7 +35,7 @@ const MainLayout = () => {
       <main className="font-inter min-h-[calc(100vh-808px)] ">
         <Outlet />
       </main>
-      <footer className="font-inter hidden">
+      <footer className="font-inter">
         <Footer />
       </footer>
 

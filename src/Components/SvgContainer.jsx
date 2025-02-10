@@ -99,8 +99,6 @@ export function BusinessCardSvg() {
     <svg
       className="size-8"
       xmlns="http://www.w3.org/2000/svg"
-      width="52"
-      height="40"
       viewBox="0 0 52 40"
       fill="none"
     >
@@ -116,8 +114,6 @@ export function NfcSvg() {
     <svg
       className="size-8"
       xmlns="http://www.w3.org/2000/svg"
-      width="35"
-      height="40"
       viewBox="0 0 35 40"
       fill="none"
     >
@@ -133,8 +129,6 @@ export function HandShakeSvg() {
     <svg
       className="size-8"
       xmlns="http://www.w3.org/2000/svg"
-      width="50"
-      height="40"
       viewBox="0 0 50 40"
       fill="none"
     >
@@ -150,8 +144,6 @@ export function PenSvg() {
     <svg
       className="size-8"
       xmlns="http://www.w3.org/2000/svg"
-      width="40"
-      height="40"
       viewBox="0 0 40 40"
       fill="none"
     >
@@ -174,8 +166,6 @@ export function ListProfileSvg() {
     <svg
       className="size-8"
       xmlns="http://www.w3.org/2000/svg"
-      width="100"
-      height="100"
       viewBox="0 0 100 100"
       fill="none"
     >
