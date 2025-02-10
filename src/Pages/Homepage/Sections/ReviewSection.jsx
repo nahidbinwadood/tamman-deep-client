@@ -15,7 +15,7 @@ const ReviewSection = () => {
     { logo: <Sponsor5Svg /> },
   ];
   return (
-    <div className="mx-8 bg-bgSecondary rounded-[20px] py-16 px-[380px]">
+    <div className="hidden mx-8 bg-bgSecondary rounded-[20px] py-16 px-[380px]">
       <div className="flex items-center justify-between text-white">
         <div className="w-1/2">
           <h2 className="text-4xl font-bold w-[70%]">

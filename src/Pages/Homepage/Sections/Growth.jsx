@@ -2,7 +2,7 @@ import TextImageSection from './../../../Components/TextImageSection';
 
 const Growth = () => {
   return (
-    <div className="relative">
+    <div className="relative hidden">
       <div className="size-[350px] -z-10 rounded-[348px] bg-gradient-to-l from-[#116DFF] to-[#23C0B6] blur-[350px] absolute top-0 left-0" />
       <div className="size-[350px] -z-10 rounded-[348px] bg-gradient-to-l from-[#116DFF] to-[#23C0B6] blur-[350px] absolute bottom-0 right-0" />
       <TextImageSection

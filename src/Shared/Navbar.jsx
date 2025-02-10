@@ -7,6 +7,8 @@ import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import useAuth from '@/Hooks/useAuth';
 import CartDrawer from '@/Components/Drawer/CartDrawer';
 import toast from 'react-hot-toast';
+import Hamburger from 'hamburger-react';
+import Sidebar from '@/Components/Common/Sidebar';
 
 const Navbar = () => {
   const token = localStorage.getItem('token');
@@ -16,6 +18,7 @@ const Navbar = () => {
   const axiosPublic = useAxiosPublic();
 
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isOpen, setOpen] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showCart, setShowCart] = useState(false);
 
@@ -59,9 +62,9 @@ const Navbar = () => {
     } else navigate('/dashboard/home');
   };
   return (
-    <div className="">
+    <div className="relative">
       <div
-        className={`fixed h-[100px] w-full top-0 left-0 z-40  topbar
+        className={`fixed px-5 md:px-8 2xl:px-0 h-[100px] w-full top-0 left-0 z-40  topbar
           ${isScrolled && isDarkMode ? 'bg-black shadow-lg' : 'bg-transparent'}
           ${
             (isScrolled && location.pathname === '/shop') ||
@@ -80,14 +83,16 @@ const Navbar = () => {
 
           {/* Navigation Links */}
           <div
-            className={`${isDarkMode ? 'text-white' : 'text-black'} space-x-6`}
+            className={`${
+              isDarkMode ? 'text-white' : 'text-black'
+            } space-x-6 hidden lg:block`}
           >
             <NavLink to="/">Home</NavLink>
             <NavLink to="/shop">Shop</NavLink>
           </div>
 
           {/* Action Icons */}
-          <div className="flex items-center gap-6">
+          <div className="lg:flex items-center gap-6 hidden">
             {/* Cart Icon */}
             <div
               onClick={() => setShowCart((prev) => !prev)}
@@ -141,8 +146,28 @@ const Navbar = () => {
               )}
             </div>
           </div>
+
+          {/* menu hamburger */}
+          <div className="lg:hidden bg-primaryColor rounded-md">
+            <Hamburger
+              color="#ffffff"
+              size={20}
+              toggled={isOpen}
+              toggle={setOpen}
+            />
+          </div>
         </div>
       </div>
+
+      {/* sidebar */}
+      <Sidebar
+        isOpen={isOpen}
+        setOpen={setOpen}
+        handleDashboard={handleDashboard}
+        token={token}
+        setShowCart={setShowCart}
+        handleLogout={handleLogout}
+      />
 
       {/* Cart Drawer */}
       <CartDrawer setShowCart={setShowCart} showCart={showCart} />

@@ -44,7 +44,7 @@ const PlansSection = () => {
     },
   ];
   return (
-    <div className="bg-gradient-to-b from-[rgba(17,109,255,0.05)] to-[rgba(35,192,182,0.05)] py-20">
+    <div className="hidden bg-gradient-to-b from-[rgba(17,109,255,0.05)] to-[rgba(35,192,182,0.05)] py-20">
       <TitleSection
         title={'Packages'}
         header={'Perfect Plans for'}

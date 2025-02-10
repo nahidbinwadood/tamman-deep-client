@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import banner from '../../../assets/images/cta-bg.jpg';
 const CtaSection = () => {
   return (
-    <div className="my-10">
+    <div className="my-10 hidden">
       <div
         style={{
           backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${banner})`,

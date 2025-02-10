@@ -10,9 +10,9 @@ const Hero = () => {
       }}
       className="h-[100vh] bg-black pt-[88px] text-white bg-no-repeat bg-cover bg-center"
     >
-      <div className="flex h-full w-full ">
-        <div className="pl-60 w-1/2 flex flex-col justify-center ">
-          <div className="text-6xl font-bold leading-[80px] tracking-[-0.64px]">
+      <div className="flex h-full w-full flex-col lg:flex-row ">
+        <div className="lg:pl-60 w-1/2 flex flex-col justify-center ">
+          <div className="text-4xl lg:text-6xl font-bold leading-[80px] tracking-[-0.64px]">
             <h1>Digital business cards</h1>
             <h1>
               for{' '}

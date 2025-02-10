@@ -6,6 +6,8 @@ import { MdContentCopy } from 'react-icons/md';
 import Loader from '../Loaders/Loader';
 
 const ActionShareModal = ({ setOpen, isLoading, isFetching, qrCodeImage }) => {
+
+  console.log(qrCodeImage);
   return (
     <DialogContent className={'max-w-2xl font-inter'}>
       <div className="w-full p-8 ">

@@ -26,7 +26,7 @@ const HowItWorks = () => {
     },
   ];
   return (
-    <div className="container mx-auto py-20">
+    <div className="container mx-auto py-20 hidden">
       <TitleSection header={'How it '} highlightedHeader={'works'} />
       <div className="pt-16 grid grid-cols-3 gap-6">
         {cardsInfo?.map((card) => (
