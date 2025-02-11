@@ -3,10 +3,12 @@ import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 import ActionShow from '../ActionShow';
 import useAuth from '@/Hooks/useAuth';
+import { useState } from 'react';
 
 const ActionContents = () => {
   const { activeCard } = useAuth();
   const axiosPublic = useAxiosPublic();
+  const [loading, setLoading] = useState(false);
 
   // fetching data from Db:
   const {
@@ -22,7 +24,7 @@ const ActionContents = () => {
     enabled: !!activeCard?.id,
   });
 
-  if (isLoading || isFetching) {
+  if (isLoading || isFetching || loading) {
     return (
       <div className="min-h-[50vh] col-span-8   flex items-center justify-center">
         <Loader />
@@ -37,7 +39,7 @@ const ActionContents = () => {
 
       <div className="space-y-3">
         {allActions?.map((item) => (
-          <ActionShow key={item.id} item={item} />
+          <ActionShow key={item.id} setLoading={setLoading} item={item} />
         )) || <p>No items found</p>}
       </div>
     </div>

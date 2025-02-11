@@ -25,7 +25,7 @@ const WhatsAppActions = () => {
   const { activeCard, allColors } = useAuth();
   const [activeBg, setActiveBg] = useState(allColors[0]);
   const [formData, setFormData] = useState({
-    type: 'whats-app',
+    type: 'whatsapp',
     name: '',
     image: '',
     number: '',

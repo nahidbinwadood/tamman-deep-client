@@ -3,6 +3,7 @@ import DeleteModal from '@/Components/Modals/DeleteModal';
 import Modal from '@/Components/Modals/Modal';
 import { DeleteSvg } from '@/Components/SvgContainer';
 import { Switch } from '@/Components/ui/switch';
+import { getActionDataFunction } from '@/Hooks/Actions.hook';
 import useAuth from '@/Hooks/useAuth';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -12,12 +13,13 @@ import { TbEdit } from 'react-icons/tb';
 import { TiBusinessCard } from 'react-icons/ti';
 import { useNavigate } from 'react-router-dom';
 
-const ActionShow = ({ item }) => {
+const ActionShow = ({ item, setLoading }) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [selectedId, setSelectedId] = useState();
   const axiosPublic = useAxiosPublic();
   const { activeCard } = useAuth();
+
   const queryClient = useQueryClient();
 
   const updateActionMutation = useMutation({
@@ -68,9 +70,18 @@ const ActionShow = ({ item }) => {
   };
 
   //handler functions:
-  const handleEdit = (type) => {
-    if (type === 'email') {
-      navigate(`/actions/email`);
+  const handleEdit = async (item) => {
+    setLoading(true);
+    const actionData = await getActionDataFunction({
+      action_id: item?.id,
+      order_item_id: activeCard?.id,
+    });
+
+    if (actionData) {
+      setLoading(false);
+      navigate(`/actions/${item?.type}`, {
+        state: { actionData, actionId: item?.id },
+      });
     }
   };
 
@@ -156,7 +167,7 @@ const ActionShow = ({ item }) => {
           <DeleteSvg />
         </div>
         <div className="cursor-pointer">
-          <div onClick={() => handleEdit(item?.type)}>
+          <div onClick={() => handleEdit(item)}>
             <TbEdit size={24} />
           </div>
         </div>
