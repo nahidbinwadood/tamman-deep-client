@@ -2,6 +2,10 @@
 import { Link } from 'react-router-dom';
 import profileImg from '@/assets/images/profile.png';
 import { useEffect, useState } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
+
 const EmailPreview = ({ formData, isEditing, actionInfo }) => {
   console.log(formData?.image);
   // console.log(prevData?.image);
@@ -58,11 +62,11 @@ const EmailPreview = ({ formData, isEditing, actionInfo }) => {
       <div>
         <div className="w-full flex items-center justify-center relative">
           <div className="size-32 z-10 relative">
-            <img
+            <LazyLoadImage
+              effect="blur"
               className="h-full w-full object-cover rounded-full"
-              loading="lazy"
               src={imageUrl}
-              alt="Profile"
+              alt=""
             />
           </div>
         </div>

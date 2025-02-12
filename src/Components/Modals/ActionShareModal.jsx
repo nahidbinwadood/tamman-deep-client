@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
-import { RiLinkM } from 'react-icons/ri';
 import { DialogContent, DialogTitle } from '@/Components/ui/dialog';
 import { MdContentCopy } from 'react-icons/md';
-
+import { RiLinkM } from 'react-icons/ri';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import Loader from '../Loaders/Loader';
 
 const ActionShareModal = ({ setOpen, isLoading, isFetching, qrCodeImage }) => {
@@ -36,7 +37,11 @@ const ActionShareModal = ({ setOpen, isLoading, isFetching, qrCodeImage }) => {
               </div>
             ) : (
               <div className="w-[200px]">
-                <img src={`${qrCodeImage ? qrCodeImage : ''}`} alt="" />
+                <LazyLoadImage
+                  effect="blur"
+                  src={`${qrCodeImage ? qrCodeImage : ''}`}
+                  alt=""
+                />
               </div>
             )}
             <div className="  items-center gap-6 pt-6 hidden">

@@ -14,11 +14,18 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { ImSpinner9 } from 'react-icons/im';
-import { Link, useNavigate } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 
 const SmsActions = () => {
   const { activeCard, allColors } = useAuth();
-  const [activeBg, setActiveBg] = useState(allColors[0]);
+  const prevData = useLocation()?.state?.actionData;
+  const prevDataId = useLocation()?.state?.actionId;
+  const [activeBg, setActiveBg] = useState(
+    prevData ? prevData?.backgroundColor : allColors[0]
+  );
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [active, setActive] = useState(false);
@@ -43,6 +50,32 @@ const SmsActions = () => {
       ...prev,
       backgroundColor: color,
     }));
+  };
+
+  const getImageSource = () => {
+    // For new image uploads (File object)
+    if (formData.image instanceof File) {
+      return URL.createObjectURL(formData.image);
+    }
+
+    // If we have previous data and no new image
+    if (prevData?.image && !(formData.image instanceof File)) {
+      return `${import.meta.env.VITE_API_URL}/storage/${prevData.image}`;
+    }
+
+    // If formData has a string image URL
+    if (typeof formData.image === 'string' && formData.image) {
+      if (
+        formData.image.startsWith('http') ||
+        formData.image.startsWith('blob:')
+      ) {
+        return formData.image;
+      }
+      return `${import.meta.env.VITE_API_URL}/storage/${formData.image}`;
+    }
+
+    // Default fallback
+    return profile; // Use your imported profile image
   };
 
   //submit data on db:
@@ -94,6 +127,7 @@ const SmsActions = () => {
       setActive(false);
     }
   }, [formData]);
+
   const [profilePhoto, setProfilePhoto] = useState('');
   const handleProfilePhotoChange = (e) => {
     const file = e.target.files[0];
@@ -117,9 +151,7 @@ const SmsActions = () => {
             className="flex items-center gap-3 cursor-pointer text-[#212A30]"
           >
             <BackButtonSvg light={true} />
-            <span className="text-lg font-medium text-white">
-              Back
-            </span>
+            <span className="text-lg font-medium text-white">Back</span>
           </Link>
           <div className="flex items-center gap-3">
             <button
@@ -153,14 +185,11 @@ const SmsActions = () => {
           <div>
             <div className="w-full flex items-center justify-center relative">
               <div className="size-40 z-10 relative">
-                <img
+                <LazyLoadImage
+                  effect="blur"
                   className="h-full w-full object-cover rounded-full"
-                  src={
-                    formData?.image
-                      ? URL.createObjectURL(formData.image)
-                      : profilePhoto || profile
-                  }
-                  alt="Profile"
+                  src={getImageSource()}
+                  alt=""
                 />
                 <label
                   htmlFor="profilePicture"

@@ -34,7 +34,7 @@ const ActionPreviewLive = () => {
       {/* <h1>hello from qr code</h1> */}
       {actionType == 'email' ? (
         <EmailPreview actionInfo={getActionData} />
-      ) : actionType == 'whats-app' ? (
+      ) : actionType == 'whatsapp' ? (
         <WhatsAppPreview actionInfo={getActionData} />
       ) : actionType == 'sms' ? (
         <SmsPreview actionInfo={getActionData} />

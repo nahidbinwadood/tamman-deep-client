@@ -15,6 +15,9 @@ import { ImSpinner9 } from 'react-icons/im';
 import profile from '@/assets/images/profile.png';
 import EmailPreview from '@/Components/LivePreview/EmailPreview';
 import useAuth from '@/Hooks/useAuth';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 const EmailActions = () => {
   const { activeCard, allColors } = useAuth();
   const [loading, setLoading] = useState(false);
@@ -40,7 +43,7 @@ const EmailActions = () => {
     backgroundColor: activeBg,
   });
 
-  console.log(formData,prevData);
+  console.log(formData, prevData);
   ///handle form Data:
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -81,7 +84,7 @@ const EmailActions = () => {
   });
 
   const emailActionUpdate = useMutation({
-    mutationKey: ['action', 'email'],
+    mutationKey: ['action', 'whatsapp'],
     mutationFn: async (data) => {
       const response = await axiosPublic.post('/api/action/update', data, {
         headers: {
@@ -139,6 +142,7 @@ const EmailActions = () => {
       setActive(false);
     }
   }, [formData]);
+
   useEffect(() => {
     if (prevData) {
       setFormData({
@@ -151,15 +155,13 @@ const EmailActions = () => {
       });
     }
   }, [allColors, prevData]);
-  // const [profilePhoto, setProfilePhoto] = useState('');
+
   const handleProfilePhotoChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // const objectUrl = URL.createObjectURL(file);
-      // setProfilePhoto(objectUrl);
       setFormData((prev) => ({
         ...prev,
-        image: file, // Store the file directly
+        image: file,
       }));
     }
   };
@@ -244,10 +246,11 @@ const EmailActions = () => {
           <div>
             <div className="w-full flex items-center justify-center relative">
               <div className="size-40 z-10 relative">
-                <img
+                <LazyLoadImage
+                  effect="blur"
                   className="h-full w-full object-cover rounded-full"
                   src={getImageSource()}
-                  alt="Profile"
+                  alt=""
                 />
                 <label
                   htmlFor="profilePicture"
@@ -330,11 +333,7 @@ const EmailActions = () => {
         </div>
 
         {/* preview */}
-        <EmailPreview
-          formData={formData}
-          isEditing={true}
-          // prevData={prevData}
-        />
+        <EmailPreview formData={formData} isEditing={true} />
       </div>
     </>
   );
