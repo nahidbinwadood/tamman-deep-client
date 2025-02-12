@@ -3,7 +3,6 @@ import DeleteModal from '@/Components/Modals/DeleteModal';
 import Modal from '@/Components/Modals/Modal';
 import { DeleteSvg } from '@/Components/SvgContainer';
 import { Switch } from '@/Components/ui/switch';
-import { getActionDataFunction } from '@/Hooks/Actions.hook';
 import useAuth from '@/Hooks/useAuth';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -12,6 +11,7 @@ import toast from 'react-hot-toast';
 import { TbEdit } from 'react-icons/tb';
 import { TiBusinessCard } from 'react-icons/ti';
 import { useNavigate } from 'react-router-dom';
+import { getActionDataFunction } from './../../../Hooks/actions.hook';
 
 const ActionShow = ({ item, setLoading }) => {
   const navigate = useNavigate();

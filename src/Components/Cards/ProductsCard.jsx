@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-
 import useAuth from '@/Hooks/useAuth';
 import toast from 'react-hot-toast';
 import {
@@ -13,57 +12,22 @@ import {
 } from '../ui/select';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useAxiosPublic from '@/Hooks/useAxiosPublic';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  useAddToCart,
+  useAllCartItems,
+  useCartQuantity,
+} from '@/Hooks/Cart.hooks';
 
 const ProductsCard = ({ product }) => {
-  const { user, setCartLength, setPauseAction } = useAuth();
+  const { user, setPauseAction } = useAuth();
   const { image, price } = product;
   const [color, setColor] = useState();
   const navigate = useNavigate();
-  const axiosPublic = useAxiosPublic();
-  const queryClient = useQueryClient();
+  const allCartItems = useAllCartItems();
 
-  // axios function:
-  const addToCart = async (data) => {
-    const response = await axiosPublic.post('/api/cart/create', data);
-    return response?.data;
-  };
-
-  //mutation function:
-  const addToCartMutation = useMutation({
-    mutationFn: addToCart,
-    onMutate: async (newData) => {
-      setPauseAction(true);
-      await queryClient.cancelQueries({ queryKey: ['allCartItems'] });
-      const prevCarts = queryClient.getQueryData(['allCartItems']);
-      queryClient.setQueryData(['allCartItems'], (oldData) => {
-        const isExist = oldData?.some(
-          (item) =>
-            item?.product_id === newData?.product_id && item?.color_id === newData?.color_id
-        );
-
-        if (isExist) {
-          toast.error('Product already added to cart with this color');
-          return oldData;
-        } else {
-          toast.success('Product added to cart');
-          return [...oldData, newData];
-        }
-      });
-      setCartLength(queryClient.getQueryData(['allCartItems'])?.length);
-
-      return { prevCarts };
-    },
-    onError: (err, newData, context) => {
-      queryClient.setQueryData(['allCartItems'], context.prevCarts);
-    },
-    onSettled: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['allCartItems'] });
-      setPauseAction(false);
-    },
-  });
-  const handleCart = (product) => {
+  const { mutate: addToCartMutation } = useAddToCart();
+  const { mutate: updateQuantityMutation } = useCartQuantity();
+  const handleCart =async (product) => {
     // checking if user is logged in
     if (!user) {
       toast.error('Please Login First !');
@@ -72,17 +36,35 @@ const ProductsCard = ({ product }) => {
       if (!color) {
         return toast.error('Select a color first');
       } else {
-        const productInfo = {
-          id: product?.id,
-          product_id:product?.id,
-          name: product?.name,
-          image: product?.image,
-          quantity: 1,
-          product_price: product?.price,
-          color_name: color,
-          color_id: product?.colors.find((c) => c?.name == color)?.id,
-        };
-        addToCartMutation.mutate(productInfo);
+        const colorId = product?.colors.find((c) => c?.name == color)?.id;
+        const prevAddedItem = allCartItems?.find(
+          (item) =>
+            item?.product_id === product?.id && item?.color_id === colorId
+        );
+        if (prevAddedItem) {
+          setPauseAction(true);
+          const data = {
+            id: product?.id,
+            product_id: product?.id,
+            color_id: colorId,
+            item_id: prevAddedItem?.id,
+            quantity: prevAddedItem.quantity + 1,
+          };
+          toast.success('Product added to cart');
+          updateQuantityMutation(data);
+        } else {
+          const productInfo = {
+            id: product?.id,
+            product_id: product?.id,
+            name: product?.name,
+            image: product?.image,
+            quantity: 1,
+            product_price: product?.price,
+            color_name: color,
+            color_id: product?.colors.find((c) => c?.name == color)?.id,
+          };
+          addToCartMutation(productInfo);
+        }
       }
     }
   };

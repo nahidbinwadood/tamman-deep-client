@@ -12,6 +12,8 @@ const CartItem = ({ item }) => {
 
   const handleIncrement = (item) => {
     const data = {
+      product_id: item?.product_id,
+      color_id: item?.color_id,
       item_id: item?.id,
       quantity: item.quantity + 1,
     };
@@ -20,6 +22,8 @@ const CartItem = ({ item }) => {
 
   const handleDecrement = (item) => {
     const data = {
+      product_id: item?.product_id,
+      color_id: item?.color_id,
       item_id: item?.id,
       quantity: item.quantity - 1,
     };

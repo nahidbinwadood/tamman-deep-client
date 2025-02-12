@@ -3,47 +3,34 @@
 import { useEffect, useState } from 'react';
 import { CrossButtonSvg } from '../SvgContainer/SvgContainer';
 import CartItem from '../Cart/CartItem';
-// import useAuth from '@/Hooks/useAuth';
 import { Link, useNavigate } from 'react-router-dom';
-import useAxiosPublic from '@/Hooks/useAxiosPublic';
-import { useQuery } from '@tanstack/react-query';
 import useAuth from '@/Hooks/useAuth';
 import toast from 'react-hot-toast';
+import { useAllCartItems } from '@/Hooks/Cart.hooks';
 // import { ImSpinner9 } from 'react-icons/im';
 
 const CartDrawer = ({ showCart, setShowCart }) => {
   const { user, setCartLength } = useAuth();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const axiosPublic = useAxiosPublic();
+  const allCartItems = useAllCartItems();
 
-  const fetchCartItems = async () => {
-    const response = await axiosPublic('/api/cart');
-    return response?.data?.data;
-  };
-
-  const { data: allCartItems = [] } = useQuery({
-    queryKey: ['allCartItems'],
-    queryFn: fetchCartItems,
-    onSuccess: (data) => {
-      console.log(data?.length);
-      setCartLength(data?.length);
-    },
-  });
-
-  // console.log(allCartItems);
   const totalPrice = allCartItems?.reduce((acc, item) => {
     return acc + parseFloat(item?.product_price) * item?.quantity;
   }, 0);
 
   // console.log(totalPrice);
   useEffect(() => {
+    if (allCartItems) {
+      setCartLength(allCartItems?.length);
+    }
     if (showCart) {
       document.body.style.overflow = 'hidden';
     } else {
+      // console.log('show scrollbar');
       document.body.style.overflow = 'auto';
     }
-  }, [showCart]);
+  }, [allCartItems, setCartLength, showCart]);
 
   // handlers:
 
@@ -106,7 +93,7 @@ const CartDrawer = ({ showCart, setShowCart }) => {
                 {/* Cart Items */}
                 <div className="p-4 overflow-y-auto flex flex-col gap-3">
                   {allCartItems?.map((item) => (
-                    <CartItem key={item?.product_id} item={item} />
+                    <CartItem key={item?.color_id} item={item} />
                   ))}
                 </div>
 
