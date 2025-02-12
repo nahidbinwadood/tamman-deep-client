@@ -17,7 +17,8 @@ import {
   useAllCartItems,
   useCartQuantity,
 } from '@/Hooks/Cart.hooks';
-
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 const ProductsCard = ({ product }) => {
   const { user, setPauseAction } = useAuth();
   const { image, price } = product;
@@ -27,7 +28,7 @@ const ProductsCard = ({ product }) => {
 
   const { mutate: addToCartMutation } = useAddToCart();
   const { mutate: updateQuantityMutation } = useCartQuantity();
-  const handleCart =async (product) => {
+  const handleCart = async (product) => {
     // checking if user is logged in
     if (!user) {
       toast.error('Please Login First !');
@@ -72,7 +73,8 @@ const ProductsCard = ({ product }) => {
   return (
     <div className="bg-[#fbfbfb] border border-black/50 rounded-lg group overflow-hidden">
       <div className="h-64 md:h-[300px] w-full overflow-hidden">
-        <img
+        <LazyLoadImage
+          effect="blur"
           className="h-full w-full object-cover group-hover:scale-105 transition-all duration-300"
           src={image}
           alt=""
