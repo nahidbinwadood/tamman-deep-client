@@ -4,6 +4,7 @@ import {
   BackButtonSvg,
   ColorsSvg,
   PhoneSvg,
+  UserSvg,
 } from '@/Components/SvgContainer';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { TextField } from '@mui/material';
@@ -11,20 +12,27 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { ImSpinner9 } from 'react-icons/im';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import profile from '@/assets/images/profile.png';
 import useAuth from '@/Hooks/useAuth';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const CallActions = () => {
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(false);
   const navigate = useNavigate();
   const { activeCard, allColors } = useAuth();
-  const [activeBg, setActiveBg] = useState(allColors[0]);
+  const prevData = useLocation()?.state?.actionData;
+  const prevDataId = useLocation()?.state?.actionId;
+  const [activeBg, setActiveBg] = useState(
+    prevData ? prevData?.backgroundColor : allColors[0]
+  );
   const queryClient = useQueryClient();
   const axiosPublic = useAxiosPublic();
   const [formData, setFormData] = useState({
     type: 'call',
+    name: '',
     number: '',
     backgroundColor: activeBg,
   });
@@ -58,7 +66,57 @@ const CallActions = () => {
     },
   });
 
+  const callActionUpdate = useMutation({
+    mutationKey: ['action', 'email'],
+    mutationFn: async (data) => {
+      const response = await axiosPublic.post('/api/action/update', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response.data;
+    },
+    onSuccess: (data) => {
+      if (data.status == 'success') {
+        setLoading(false);
+        queryClient.invalidateQueries(['allActions']);
+        navigate('/dashboard/profiles');
+        toast.success('Your action has been updated successfully!');
+      }
+    },
+    onError: (error) => {
+      setLoading(false);
+      toast.error('Failed to create action, please try again!');
+      console.error(error);
+    },
+  });
+
   //functions:
+  const getImageSource = () => {
+    // For new image uploads (File object)
+    if (formData.image instanceof File) {
+      return URL.createObjectURL(formData.image);
+    }
+
+    // If we have previous data and no new image
+    if (prevData?.image && !(formData.image instanceof File)) {
+      return `${import.meta.env.VITE_API_URL}/storage/${prevData.image}`;
+    }
+
+    // If formData has a string image URL
+    if (typeof formData.image === 'string' && formData.image) {
+      if (
+        formData.image.startsWith('http') ||
+        formData.image.startsWith('blob:')
+      ) {
+        return formData.image;
+      }
+      return `${import.meta.env.VITE_API_URL}/storage/${formData.image}`;
+    }
+
+    // Default fallback
+    return profile; // Use your imported profile image
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -74,6 +132,15 @@ const CallActions = () => {
       backgroundColor: color,
     }));
   };
+  const handleProfilePhotoChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFormData((prev) => ({
+        ...prev,
+        image: file,
+      }));
+    }
+  };
 
   const handleSave = () => {
     setLoading(true);
@@ -82,31 +149,56 @@ const CallActions = () => {
       backgroundColor: activeBg,
       order_item_id: activeCard?.id,
     };
-    callMutation.mutate(data);
+
+    const newData = {
+      ...formData,
+      action_id: prevDataId,
+      order_item_id: activeCard?.id,
+      backgroundColor: activeBg,
+    };
+
+    if (prevData) {
+      callActionUpdate.mutate(newData);
+    } else {
+      callMutation.mutate(data);
+    }
   };
 
   //useEffect:
   useEffect(() => {
-    if (formData && formData.number.length > 0 && formData?.image) {
+    if (
+      formData.name.length > 0 &&
+      formData.number.length > 0 &&
+      formData?.image
+    ) {
       setActive(true);
     } else {
       setActive(false);
     }
   }, [formData]);
 
-  const [profilePhoto, setProfilePhoto] = useState('');
-  const handleProfilePhotoChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const objectUrl = URL.createObjectURL(file);
-      setProfilePhoto(objectUrl);
-
-      setFormData((prev) => ({
-        ...prev,
-        image: file, // Store the file directly
-      }));
+  useEffect(() => {
+    if (prevData) {
+      setFormData({
+        type: 'call',
+        name: prevData?.name || '',
+        image: prevData?.image || '',
+        number: prevData?.number || '',
+        status: prevData?.status || 'inactive',
+        backgroundColor: prevData?.backgroundColor || allColors[0],
+      });
     }
-  };
+  }, [allColors, prevData]);
+
+  useEffect(() => {
+    // Cleanup function to revoke object URLs
+    return () => {
+      if (formData.image instanceof File) {
+        const imageUrl = URL.createObjectURL(formData.image);
+        URL.revokeObjectURL(imageUrl);
+      }
+    };
+  }, [formData.image]);
 
   return (
     <>
@@ -152,15 +244,13 @@ const CallActions = () => {
           <div>
             <div className="w-full flex items-center justify-center relative">
               <div className="size-40 z-10 relative">
-                <img
+                <LazyLoadImage
+                  effect="blur"
                   className="h-full w-full object-cover rounded-full"
-                  src={
-                    formData?.image
-                      ? URL.createObjectURL(formData.image)
-                      : profilePhoto || profile
-                  }
-                  alt="Profile"
+                  src={getImageSource()}
+                  alt=""
                 />
+
                 <label
                   htmlFor="profilePicture"
                   className="absolute bottom-5 right-0 cursor-pointer"
@@ -182,6 +272,21 @@ const CallActions = () => {
               <h3 className="text-xl font-medium text-center mt-3">
                 Profile Image
               </h3>
+            </div>
+          </div>
+          <div className="flex gap-4 mt-10 w-full">
+            <div className="flex-shrink-0 flex">
+              <UserSvg />
+            </div>
+            <div className="flex-1 space-y-5">
+              <TextField
+                label="Enter Your Name"
+                variant="outlined"
+                fullWidth
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+              />
             </div>
           </div>
           <div className="flex items-center gap-4 mt-10 w-full">

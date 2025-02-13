@@ -1,9 +1,45 @@
 /* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom';
 import profileImg from '@/assets/images/profile.png';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+import { useEffect, useState } from 'react';
 
 const SmsPreview = ({ formData, isEditing, actionInfo }) => {
-  console.log(isEditing);
+  const [imageUrl, setImageUrl] = useState('');
+
+  // Handle image source logic
+
+  // Update imageUrl when image changes
+  useEffect(() => {
+    const getImageSource = () => {
+      if (formData?.image) {
+        if (formData.image instanceof File) {
+          return URL.createObjectURL(formData.image);
+        } else {
+          return `${import.meta.env.VITE_API_URL}/storage/${formData.image}`;
+        }
+      }
+
+      // Check for actionInfo image
+      if (actionInfo?.image) {
+        return `${import.meta.env.VITE_API_URL}/storage/${actionInfo.image}`;
+      }
+
+      // Default image if no other options are available
+      return profileImg;
+    };
+
+    const newImageUrl = getImageSource();
+    setImageUrl(newImageUrl);
+
+    // Cleanup function
+    return () => {
+      if (newImageUrl?.startsWith('blob:')) {
+        URL.revokeObjectURL(newImageUrl);
+      }
+    };
+  }, [formData?.image, actionInfo?.image]);
   return (
     <div
       style={{
@@ -17,18 +53,11 @@ const SmsPreview = ({ formData, isEditing, actionInfo }) => {
       <div>
         <div className="w-full flex items-center justify-center relative">
           <div className="size-32 z-10 relative">
-            <img
+            <LazyLoadImage
+              effect="blur"
               className="h-full w-full object-cover rounded-full"
-              src={
-                actionInfo
-                  ? `${import.meta.env.VITE_API_URL}/storage/${
-                      actionInfo?.image
-                    }`
-                  : formData?.image
-                  ? URL.createObjectURL(formData.image)
-                  : profileImg
-              }
-              alt="Profile"
+              src={imageUrl}
+              alt=""
             />
           </div>
         </div>

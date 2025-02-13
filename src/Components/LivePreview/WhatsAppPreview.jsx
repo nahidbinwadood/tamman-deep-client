@@ -13,11 +13,6 @@ const WhatsAppPreview = ({ formData, actionInfo, isEditing }) => {
   // Update imageUrl when image changes
   useEffect(() => {
     const getImageSource = () => {
-      // Check if there is a prev image
-      // if (prevData?.image) {
-      //   return `${import.meta.env.VITE_API_URL}/storage/${prevData.image}`;
-      // }
-
       if (formData?.image) {
         if (formData.image instanceof File) {
           return URL.createObjectURL(formData.image);

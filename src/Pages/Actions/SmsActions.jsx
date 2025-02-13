@@ -18,7 +18,6 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-
 const SmsActions = () => {
   const { activeCard, allColors } = useAuth();
   const prevData = useLocation()?.state?.actionData;
@@ -103,6 +102,30 @@ const SmsActions = () => {
       console.error(error);
     },
   });
+  const emailActionUpdate = useMutation({
+    mutationKey: ['action', 'email'],
+    mutationFn: async (data) => {
+      const response = await axiosPublic.post('/api/action/update', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response.data;
+    },
+    onSuccess: (data) => {
+      if (data.status == 'success') {
+        setLoading(false);
+        queryClient.invalidateQueries(['allActions']);
+        navigate('/dashboard/profiles');
+        toast.success('Your action has been updated successfully!');
+      }
+    },
+    onError: (error) => {
+      setLoading(false);
+      toast.error('Failed to create action, please try again!');
+      console.error(error);
+    },
+  });
 
   const handleSave = () => {
     setLoading(true);
@@ -111,11 +134,32 @@ const SmsActions = () => {
       backgroundColor: activeBg,
       order_item_id: activeCard?.id,
     };
-    emailAction.mutate(data);
+    const newData = {
+      ...formData,
+      action_id: prevDataId,
+      order_item_id: activeCard?.id,
+      backgroundColor: activeBg,
+    };
+    if (prevData) {
+      emailActionUpdate.mutate(newData);
+    } else {
+      emailAction.mutate(data);
+    }
+
     // navigate to profile page
   };
 
-  //useEffect:
+  const handleProfilePhotoChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFormData((prev) => ({
+        ...prev,
+        image: file,
+      }));
+    }
+  };
+
+  // useEffect:
   useEffect(() => {
     if (
       formData.name.length > 0 &&
@@ -128,19 +172,28 @@ const SmsActions = () => {
     }
   }, [formData]);
 
-  const [profilePhoto, setProfilePhoto] = useState('');
-  const handleProfilePhotoChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const objectUrl = URL.createObjectURL(file);
-      setProfilePhoto(objectUrl);
-
-      setFormData((prev) => ({
-        ...prev,
-        image: file, // Store the file directly
-      }));
+  useEffect(() => {
+    if (prevData) {
+      setFormData({
+        type: 'sms',
+        image: prevData?.image || '',
+        name: prevData?.name || '',
+        number: prevData?.number || '',
+        status: prevData?.status || 'inactive',
+        backgroundColor: prevData?.backgroundColor || allColors[0],
+      });
     }
-  };
+  }, [allColors, prevData]);
+
+  useEffect(() => {
+    // Cleanup function to revoke object URLs
+    return () => {
+      if (formData.image instanceof File) {
+        const imageUrl = URL.createObjectURL(formData.image);
+        URL.revokeObjectURL(imageUrl);
+      }
+    };
+  }, [formData.image]);
   return (
     <>
       <div className="shadow-md font-inter bg-gradient-to-l from-[#116DFF] to-[#23C0B6]">
