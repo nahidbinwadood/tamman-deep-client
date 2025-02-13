@@ -10,31 +10,27 @@ import {
 } from '@/Components/SvgContainer';
 import profile from '@/assets/images/profile.png';
 import { TextField } from '@mui/material';
-import { useEffect, useState } from 'react';
-
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '@/Components/ui/select';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ImSpinner9 } from 'react-icons/im';
 import ContactPreview from '@/Components/LivePreview/ContactPreview';
 import useAuth from '@/Hooks/useAuth';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const ContactCardAction = () => {
   //states:
   const { activeCard, allColors } = useAuth();
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(false);
-  const [activeBg, setActiveBg] = useState(allColors[0]);
+  const prevData = useLocation()?.state?.actionData;
+  const prevDataId = useLocation()?.state?.actionId;
+  const [activeBg, setActiveBg] = useState(
+    prevData ? prevData?.backgroundColor : allColors[0]
+  );
   const axiosPublic = useAxiosPublic();
   const queryClient = useQueryClient();
   const [formData, setFormData] = useState({
@@ -44,9 +40,6 @@ const ContactCardAction = () => {
     fullName: '',
     companyName: '',
     position: '',
-    // month: '',
-    // day: '',
-    // year: '',
     address: '',
     number: '',
     officeNumber: '',
@@ -56,9 +49,6 @@ const ContactCardAction = () => {
     backgroundColor: activeBg,
   });
 
-  const [coverPhoto, setCoverPhoto] = useState('');
-  const [profilePhoto, setProfilePhoto] = useState('');
-
   const navigate = useNavigate();
 
   //functions:
@@ -67,19 +57,55 @@ const ContactCardAction = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  //calendar:
-  const handleMonthChange = (value) => {
-    setFormData((prev) => ({
-      ...prev,
-      month: value,
-    }));
+  const getImageSource = () => {
+    // For new image uploads (File object)
+    if (formData.image instanceof File) {
+      return URL.createObjectURL(formData.image);
+    }
+
+    // If we have previous data and no new image
+    if (prevData?.image && !(formData.image instanceof File)) {
+      return `${import.meta.env.VITE_API_URL}/storage/${prevData.image}`;
+    }
+
+    // If formData has a string image URL
+    if (typeof formData.image === 'string' && formData.image) {
+      if (
+        formData.image.startsWith('http') ||
+        formData.image.startsWith('blob:')
+      ) {
+        return formData.image;
+      }
+      return `${import.meta.env.VITE_API_URL}/storage/${formData.image}`;
+    }
+
+    // Default fallback
+    return profile; // Use your imported profile image
   };
+
+  //calendar:
+
+  const handleProfilePhotoChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFormData((prev) => ({
+        ...prev,
+        image: file,
+      }));
+    }
+  };
+
+  const coverPhotoUrlRef = useRef(null);
 
   const handleCoverPhotoChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      if (coverPhotoUrlRef.current) {
+        URL.revokeObjectURL(coverPhotoUrlRef.current); // Revoke the previous URL
+      }
+
       const objectUrl = URL.createObjectURL(file);
-      setCoverPhoto(objectUrl);
+      coverPhotoUrlRef.current = objectUrl;
 
       setFormData((prev) => ({
         ...prev,
@@ -88,20 +114,28 @@ const ContactCardAction = () => {
     }
   };
 
-  const handleProfilePhotoChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const objectUrl = URL.createObjectURL(file);
-      setProfilePhoto(objectUrl);
-
-      setFormData((prev) => ({
-        ...prev,
-        image: file, // Store the file directly
-      }));
+  const getCoverImageSource = () => {
+    if (formData?.cover_image instanceof File) {
+      return URL.createObjectURL(formData.cover_image);
     }
+
+    if (prevData?.cover_image && !(formData?.cover_image instanceof File)) {
+      return `${import.meta.env.VITE_API_URL}/storage/${prevData.cover_image}`;
+    }
+
+    if (typeof formData?.cover_image === 'string' && formData?.cover_image) {
+      if (
+        formData.cover_image.startsWith('http') ||
+        formData.cover_image.startsWith('blob:')
+      ) {
+        return formData.cover_image;
+      }
+      return `${import.meta.env.VITE_API_URL}/storage/${formData.cover_image}`;
+    }
+
+    return profile; // Default image
   };
 
-  console.log(formData);
   //save the data on db:
   const contactCardMutation = useMutation({
     mutationKey: ['action', 'contactCard'],
@@ -126,6 +160,31 @@ const ContactCardAction = () => {
       console.error(error);
     },
   });
+
+  const contactCardMutationUpdate = useMutation({
+    mutationKey: ['action', 'email'],
+    mutationFn: async (data) => {
+      const response = await axiosPublic.post('/api/action/update', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response.data;
+    },
+    onSuccess: (data) => {
+      if (data.status == 'success') {
+        setLoading(false);
+        queryClient.invalidateQueries(['allActions']);
+        navigate('/dashboard/profiles');
+        toast.success('Your action has been updated successfully!');
+      }
+    },
+    onError: (error) => {
+      setLoading(false);
+      toast.error('Failed to create action, please try again!');
+      console.error(error);
+    },
+  });
   const handleChangeColor = (color) => {
     setActiveBg(color);
     setFormData((prev) => ({
@@ -140,23 +199,73 @@ const ContactCardAction = () => {
       backgroundColor: activeBg,
       order_item_id: activeCard?.id,
     };
-    contactCardMutation.mutate(data);
+
+    const newData = {
+      ...formData,
+      action_id: prevDataId,
+      order_item_id: activeCard?.id,
+      backgroundColor: activeBg,
+    };
+    if (prevData) {
+      contactCardMutationUpdate.mutate(newData);
+    } else {
+      contactCardMutation.mutate(data);
+    }
     // navigate to profile page
   };
 
   //useEffect:
   useEffect(() => {
-    // if (
-    //   formData.firstName.length > 0 &&
-    //   formData.number.length > 0 &&
-    //   formData.description.length > 0
-    // ) {
-    //   setActive(true);
-    // } else {
-    //   setActive(false);
-    // }
-    setActive(true);
+    if (
+      formData.fullName.length > 0 &&
+      formData.number.length > 0 &&
+      formData.number.mail > 0 &&
+      formData?.image
+    ) {
+      setActive(true);
+    } else {
+      setActive(false);
+    }
   }, [formData]);
+
+  useEffect(() => {
+    if (prevData) {
+      setFormData({
+        type: 'contact-card',
+        fullName: prevData?.fullName || '',
+        image: prevData?.image || '',
+        cover_image: prevData?.cover_image || '',
+        number: prevData?.number || '',
+        status: prevData?.status || 'inactive',
+        backgroundColor: prevData?.backgroundColor || allColors[0],
+        companyName: prevData?.companyName || '',
+        position: prevData?.position || '',
+        address: prevData?.address || '',
+        officeNumber: prevData?.officeNumber || '',
+        mail: prevData?.mail || '',
+        website: prevData?.website || '',
+      });
+    }
+  }, [allColors, prevData]);
+
+  useEffect(() => {
+    // Cleanup function to revoke object URLs
+    return () => {
+      if (formData.image instanceof File) {
+        const imageUrl = URL.createObjectURL(formData.image);
+        URL.revokeObjectURL(imageUrl);
+      }
+    };
+  }, [formData.image]);
+
+  useEffect(() => {
+    return () => {
+      if (coverPhotoUrlRef.current) {
+        URL.revokeObjectURL(coverPhotoUrlRef.current);
+        coverPhotoUrlRef.current = null;
+      }
+    };
+  }, [formData.cover_image]);
 
   return (
     <>
@@ -202,19 +311,14 @@ const ContactCardAction = () => {
           {/* image section */}
           <div>
             <div className="h-56 bg-[#D2E3FC] rounded-xl relative">
-              {coverPhoto && (
-                <div className="h-56 w-full absolute inset-0 top-0 left-0">
-                  <img
-                    className="w-full h-full object-cover rounded-xl"
-                    src={
-                      formData?.cover_image
-                        ? URL.createObjectURL(formData.cover_image)
-                        : profilePhoto || profile
-                    }
-                    alt="Cover"
-                  />
-                </div>
-              )}
+              <div className="h-56 w-full absolute inset-0 top-0 left-0">
+                <img
+                  className="w-full h-full object-cover rounded-xl"
+                  src={getCoverImageSource()}
+                  alt="Cover"
+                />
+              </div>
+
               <label
                 htmlFor="uploadCoverPhoto"
                 className="flex items-center gap-2 absolute bottom-5 right-5 bg-white px-5 py-2 text-sm rounded-full cursor-pointer"
@@ -232,14 +336,11 @@ const ContactCardAction = () => {
             </div>
             <div className="w-full flex items-center justify-center relative">
               <div className="size-40 -mt-20 z-10 relative">
-                <img
+                <LazyLoadImage
+                  effect="blur"
                   className="h-full w-full object-cover rounded-full"
-                  src={
-                    formData?.image
-                      ? URL.createObjectURL(formData.image)
-                      : profilePhoto || profile
-                  }
-                  alt="Profile"
+                  src={getImageSource()}
+                  alt=""
                 />
                 <label
                   htmlFor="profilePicture"
@@ -294,7 +395,7 @@ const ContactCardAction = () => {
             </div>
             <div className="flex-1 space-y-5">
               <TextField
-                label="Full Name"
+                label="Full Name *"
                 variant="outlined"
                 fullWidth
                 name="fullName"
@@ -317,55 +418,6 @@ const ContactCardAction = () => {
                 value={formData?.position}
                 onChange={handleChange}
               />
-              <div className="  items-center gap-4 hidden">
-                <div className="w-[55%]">
-                  <Select
-                    onValueChange={handleMonthChange}
-                    value={formData.month}
-                  >
-                    <SelectTrigger className="w-full h-14 border-black/30 text-base text-textGray">
-                      <SelectValue placeholder="Month" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Months</SelectLabel>
-                        <SelectItem value="January">January</SelectItem>
-                        <SelectItem value="February">February</SelectItem>
-                        <SelectItem value="March">March</SelectItem>
-                        <SelectItem value="April">April</SelectItem>
-                        <SelectItem value="May">May</SelectItem>
-                        <SelectItem value="June">June</SelectItem>
-                        <SelectItem value="July">July</SelectItem>
-                        <SelectItem value="August">August</SelectItem>
-                        <SelectItem value="September">September</SelectItem>
-                        <SelectItem value="October">October</SelectItem>
-                        <SelectItem value="November">November</SelectItem>
-                        <SelectItem value="December">December</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="w-[15%]">
-                  <TextField
-                    label="Day"
-                    variant="outlined"
-                    fullWidth
-                    name="day"
-                    value={formData?.day}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="w-[30%]">
-                  <TextField
-                    label="Year"
-                    variant="outlined"
-                    fullWidth
-                    name="year"
-                    value={formData?.year}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
             </div>
           </div>
           <div className="flex gap-4 mt-5">
@@ -398,7 +450,7 @@ const ContactCardAction = () => {
                 onChange={handleChange}
               />
               <TextField
-                label="Enter Your Number"
+                label="Enter Your Number *"
                 variant="outlined"
                 fullWidth
                 type="number"
@@ -414,7 +466,7 @@ const ContactCardAction = () => {
             </div>
             <div className="flex-1 space-y-4">
               <TextField
-                label="Enter Your Mail"
+                label="Enter Your Mail *"
                 variant="outlined"
                 fullWidth
                 name="mail"
