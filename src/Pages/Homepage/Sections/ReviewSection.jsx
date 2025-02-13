@@ -15,6 +15,8 @@ const ReviewSection = () => {
     { logo: <Sponsor4Svg /> },
     { logo: <Sponsor5Svg /> },
   ];
+
+
   return (
     <div className="mx-5 md:mx-8 bg-bgSecondary rounded-[20px] py-8 md:py-12 lg:py-16  px-8 md:px-12 lg:px-20 xl:px-24 2xl:px-[380px] my-10">
       <div className="flex flex-col md:flex-row gap-6 items-center justify-between text-white">
