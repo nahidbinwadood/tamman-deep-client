@@ -1,23 +1,30 @@
-import Cube from "@/Components/Dashboard/CustomIcon/Cube";
-import Contact from "@/Components/Dashboard/CustomIcon/Contact";
-import BarCode from "@/Components/Dashboard/CustomIcon/BarCode";
-import StatisticsBox from "@/Components/Dashboard/DashboardHome/StatisticsBox";
-import Statistics from "@/Components/Dashboard/CustomIcon/Statistics";
-import CommonBox from "@/Components/Dashboard/DashboardHome/CommonBox";
-import ResoucesLink from "@/Components/Dashboard/DashboardHome/ResoucesLink";
-import Share from "@/Components/Dashboard/CustomIcon/Share";
-import Question from "@/Components/Dashboard/CustomIcon/Question";
-import { Link } from "react-router-dom";
+import Cube from '@/Components/Dashboard/CustomIcon/Cube';
+import Contact from '@/Components/Dashboard/CustomIcon/Contact';
+import BarCode from '@/Components/Dashboard/CustomIcon/BarCode';
+import StatisticsBox from '@/Components/Dashboard/DashboardHome/StatisticsBox';
+import Statistics from '@/Components/Dashboard/CustomIcon/Statistics';
+import CommonBox from '@/Components/Dashboard/DashboardHome/CommonBox';
+import ResoucesLink from '@/Components/Dashboard/DashboardHome/ResoucesLink';
+import Share from '@/Components/Dashboard/CustomIcon/Share';
+import Question from '@/Components/Dashboard/CustomIcon/Question';
+import { Link } from 'react-router-dom';
+import { GetAllCards } from '@/Hooks/Card.hook';
 
 const DashboardHome = () => {
+  const { allCards } = GetAllCards();
+
   return (
     <div>
       {/* Statistics */}
       <div className="grid grid-cols-4 gap-6">
-        <StatisticsBox Icon={Cube} title={"Products Total"} quantity={0} />
-        <StatisticsBox Icon={Contact} title={"Contacts Total"} quantity={8} />
-        <StatisticsBox Icon={BarCode} title={"Taps Total"} quantity={10} />
-        <StatisticsBox Icon={Statistics} title={"Statistics"} quantity={5} />
+        <StatisticsBox
+          Icon={Cube}
+          title={'Products Total'}
+          quantity={allCards.length}
+        />
+        <StatisticsBox Icon={Contact} title={'Contacts Total'} quantity={8} />
+        <StatisticsBox Icon={BarCode} title={'Taps Total'} quantity={10} />
+        <StatisticsBox Icon={Statistics} title={'Statistics'} quantity={5} />
       </div>
 
       {/* grid layout */}
@@ -48,18 +55,20 @@ const DashboardHome = () => {
               ></video>
             </div>
             <div className="space-y-3">
-            <div className="flex items-center  gap-14">
-              <div className="w-full rounded-full overflow-hidden flex-1 flex justify-center items-center">
-                <div className="w-3/12 h-3 bg-primaryColor"></div>
-                <div className="w-9/12 h-3 bg-gray-200"></div>
+              <div className="flex items-center  gap-14">
+                <div className="w-full rounded-full overflow-hidden flex-1 flex justify-center items-center">
+                  <div className="w-3/12 h-3 bg-primaryColor"></div>
+                  <div className="w-9/12 h-3 bg-gray-200"></div>
+                </div>
+                <h4 className="text-textColor font-medium">Step 1 to 6</h4>
               </div>
-              <h4 className="text-textColor font-medium">Step 1 to 6</h4>
-            </div>
 
               <h3 className="text-textDark font-medium text-lg pb-2">
                 Edit Profile Details
               </h3>
-              <Link to={'/'} className="text-lg font-medium text-primaryColor">Visit</Link>
+              <Link to={'/'} className="text-lg font-medium text-primaryColor">
+                Visit
+              </Link>
             </div>
           </div>
         </CommonBox>

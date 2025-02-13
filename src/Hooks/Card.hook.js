@@ -1,6 +1,17 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import useAxiosPublic from './useAxiosPublic';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import useAxiosPublic, { axiosPublic } from './useAxiosPublic';
 import toast from 'react-hot-toast';
+
+export const GetAllCards = () => {
+  const { data: allCards = [], isLoading } = useQuery({
+    queryKey: ['allCards'],
+    queryFn: async () => {
+      const { data } = await axiosPublic('/api/user/card');
+      return data?.data;
+    },
+  });
+  return { allCards, isLoading };
+};
 
 export function useCardActive() {
   const axiosPublic = useAxiosPublic();

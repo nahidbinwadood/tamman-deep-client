@@ -90,10 +90,13 @@ const Navbar = () => {
     }
   `}
       >
-        <div className="container mx-auto w-full flex items-center justify-between">
+        <div className="container mx-auto w-full flex items-center justify-between h-full">
           {/* Logo */}
 
-          <Link className="h-20 md:h-24 inline-block -ml-4 md:-ml-8" to="/">
+          <Link
+            className="h-20 md:h-24 lg:h-20 inline-block -ml-4 md:-ml-8 lg:-ml-0 2xl:-ml-8"
+            to="/"
+          >
             <img
               className="h-full object-cover"
               src={isDarkMode ? logoWhite : logoBlack}
@@ -112,7 +115,7 @@ const Navbar = () => {
           </div>
 
           {/* Action Icons */}
-          <div className="flex items-center gap-3 md:gap-6 ">
+          <div className="flex items-center gap-3 md:gap-6 lg:mr-12 2xl:mr-0">
             {/* Cart Icon */}
             <div
               onClick={() => setShowCart((prev) => !prev)}

@@ -1,17 +1,9 @@
 import Loader from '@/Components/Loaders/Loader';
-import useAxiosPublic from '@/Hooks/useAxiosPublic';
-import { useQuery } from '@tanstack/react-query';
 import Product from '../Product';
+import { GetAllCards } from '@/Hooks/Card.hook';
 
 const CardContents = () => {
-  const axiosPublic = useAxiosPublic();
-  const { data: allCards = [], isLoading } = useQuery({
-    queryKey: ['allCards'],
-    queryFn: async () => {
-      const { data } = await axiosPublic('/api/user/card');
-      return data?.data;
-    },
-  });
+  const { allCards, isLoading } = GetAllCards();
   if (isLoading) {
     return (
       <div className="min-h-[50vh] col-span-8 flex items-center justify-center">

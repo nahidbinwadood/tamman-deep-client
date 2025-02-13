@@ -34,15 +34,6 @@ const DashboardProfiles = () => {
       Icon: MdContentCopy,
     },
   ];
-  // const getQrImage = async () => {
-  //   const { data } = await axiosPublic.get(`/storage/${activeCard?.qr_code}`);
-  //   return data;
-  // };
-  // const { data, isLoading, isFetching } = useQuery({
-  //   queryKey: ['qrCodeImage', activeCard?.qr_code],
-  //   queryFn: getQrImage,
-  //   enabled: !!activeCard?.qr_code,
-  // });
 
   const qrCodeImage = `${import.meta.env.VITE_API_URL}/storage/${
     activeCard?.qr_code
