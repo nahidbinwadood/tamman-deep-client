@@ -12,12 +12,16 @@ const fetchCartItems = async () => {
 
 export const useAllCartItems = () => {
   const { user } = useAuth();
-  const { data: allCartItems = [] } = useQuery({
+  const {
+    data: allCartItems = [],
+    isLoading,
+    isFetching,
+  } = useQuery({
     queryKey: ['allCartItems'],
     queryFn: fetchCartItems,
     enabled: !!user,
   });
-  return allCartItems;
+  return { allCartItems, isLoading, isFetching };
 };
 
 //add to cart:

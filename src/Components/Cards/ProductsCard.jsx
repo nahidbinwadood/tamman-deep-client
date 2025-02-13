@@ -21,11 +21,11 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const ProductsCard = ({ product }) => {
-  const { user, setPauseAction } = useAuth();
+  const { user } = useAuth();
   const { image, price } = product;
   const [color, setColor] = useState();
   const navigate = useNavigate();
-  const allCartItems = useAllCartItems();
+  const { allCartItems } = useAllCartItems();
 
   const { mutate: addToCartMutation } = useAddToCart();
   const { mutate: updateQuantityMutation } = useCartQuantity();
@@ -44,7 +44,7 @@ const ProductsCard = ({ product }) => {
             item?.product_id === product?.id && item?.color_id === colorId
         );
         if (prevAddedItem) {
-          setPauseAction(true);
+          // setPauseAction(true);
           const data = {
             id: product?.id,
             product_id: product?.id,
@@ -54,6 +54,7 @@ const ProductsCard = ({ product }) => {
           };
           toast.success('Product added to cart');
           updateQuantityMutation(data);
+          // setPauseAction(false);
         } else {
           const productInfo = {
             id: product?.id,
