@@ -12,7 +12,8 @@ import Sidebar from '@/Components/Common/Sidebar';
 
 const Navbar = () => {
   const token = localStorage.getItem('token');
-  const { setUser, setLoading, cartLength, hasCard } = useAuth();
+  const { user, guestUserCart, setUser, setLoading, cartLength, hasCard } =
+    useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
@@ -122,9 +123,20 @@ const Navbar = () => {
               className="cursor-pointer relative"
             >
               <CartSvg light={!isDarkMode} />
-              {cartLength > 0 && (
+              {/* {cartLength > 0 && (
                 <div className="absolute -bottom-4 -right-2 bg-primaryColor text-white size-6 flex items-center justify-center rounded-full text-xs">
                   {cartLength}
+                </div>
+              )} */}
+
+              {user && cartLength > 0 && (
+                <div className="absolute -bottom-4 -right-2 bg-primaryColor text-white size-6 flex items-center justify-center rounded-full text-xs">
+                  {cartLength}
+                </div>
+              )}
+              {!user && guestUserCart.length > 0 && (
+                <div className="absolute -bottom-4 -right-2 bg-primaryColor text-white size-6 flex items-center justify-center rounded-full text-xs">
+                  {guestUserCart?.length}
                 </div>
               )}
             </div>

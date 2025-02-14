@@ -75,7 +75,9 @@ const CartDrawer = ({ showCart, setShowCart }) => {
               <div className="size-2 rounded-full bg-black"></div>
 
               {/* count */}
-              <div className="font-medium">{allCartItems?.length}</div>
+              <div className="font-medium">
+                {user ? allCartItems?.length : guestUserCart?.length}
+              </div>
             </div>
 
             {/* Cross Button */}
