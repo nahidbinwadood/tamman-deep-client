@@ -11,7 +11,8 @@ import { ImSpinner9 } from 'react-icons/im';
 // import { ImSpinner9 } from 'react-icons/im';
 
 const CartDrawer = ({ showCart, setShowCart }) => {
-  const { user, setCartLength } = useAuth();
+  const { user, setCartLength, guestUserCart } = useAuth();
+
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { allCartItems, isFetching } = useAllCartItems();
@@ -20,6 +21,8 @@ const CartDrawer = ({ showCart, setShowCart }) => {
   const totalPrice = allCartItems?.reduce((acc, item) => {
     return acc + parseFloat(item?.product_price) * item?.quantity;
   }, 0);
+
+  // console.log(guestUserCart);
 
   // console.log(totalPrice);
   useEffect(() => {
@@ -95,16 +98,24 @@ const CartDrawer = ({ showCart, setShowCart }) => {
             </div>
           ) : (
             <div style={{ height: 'calc(100vh - 65px)' }}>
-              {allCartItems?.length > 0 ? (
+              {allCartItems?.length > 0 || guestUserCart.length > 0 ? (
                 <div
                   style={{ height: 'calc(100vh - 65px)' }}
                   className="flex flex-col justify-between"
                 >
                   {/* Cart Items */}
                   <div className="p-4 overflow-y-auto flex flex-col gap-3">
-                    {allCartItems?.map((item) => (
-                      <CartItem key={item?.color_id} item={item} />
-                    ))}
+                    {allCartItems.length > 0
+                      ? allCartItems.map((item) => (
+                          <CartItem key={item?.color_id} item={item} />
+                        ))
+                      : guestUserCart.map((item) => (
+                          <CartItem
+                            key={item?.color_id}
+                            item={item}
+                            guest={true}
+                          />
+                        ))}
                   </div>
 
                   {/* Checkout Button */}

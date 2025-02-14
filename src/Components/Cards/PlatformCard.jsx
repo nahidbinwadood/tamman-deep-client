@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 const PlatformCard = ({ info }) => {
   return (
-    <div className="shadow-md p-6 rounded-lg">
+    <div className="p-6 rounded-lg hover:shadow-lg transition-all duration-300 border border-black/10">
       <div className="flex items-center justify-center">
         <div className="bg-white p-3 size-16 flex items-center justify-center rounded-full ">
           <img src={info?.image} alt="" />

@@ -4,7 +4,7 @@ import { useFeatureContents } from '@/Hooks/cms.hook';
 
 const PowerfulPlatform = () => {
   const allFeatures = useFeatureContents();
-  console.log(allFeatures);
+
   return (
     <div className="py-10 md:py-16 2xl:py-20 bg-gradient-to-b from-[rgba(17,109,255,0.05)] to-[rgba(35,192,182,0.05)]">
       <div className="container mx-auto px-5 md:px-8 2xl:px-0">
@@ -18,7 +18,7 @@ const PowerfulPlatform = () => {
         />
 
         <div className="pt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-8 lg:gap-12">
-          {[...allFeatures]?.reverse()?.map((info) => (
+          {allFeatures?.map((info) => (
             <PlatformCard key={info?.id} info={info} />
           ))}
         </div>

@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import {  useQuery } from '@tanstack/react-query';
 import { axiosPublic } from './useAxiosPublic';
 
 const FeatureContents = async () => {
@@ -13,3 +13,7 @@ export const useFeatureContents = () => {
   });
   return result?.data?.data;
 };
+
+//landing page data:
+
+

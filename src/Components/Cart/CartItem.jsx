@@ -3,8 +3,9 @@ import useAuth from '@/Hooks/useAuth';
 import { DeleteSvg, MinusSvg, PlusSvg } from '../SvgContainer/SvgContainer';
 import { useCartDelete, useCartQuantity } from '@/Hooks/Cart.hooks';
 
-const CartItem = ({ item }) => {
-  const { pauseAction } = useAuth();
+const CartItem = ({ item, guest }) => {
+  const { pauseAction, setGuestUserCart } = useAuth();
+  // console.log(guestUserCart, item);
 
   //update cart quantity function:
   const { mutate: cartQuantityMutation } = useCartQuantity();
@@ -17,7 +18,19 @@ const CartItem = ({ item }) => {
       item_id: item?.id,
       quantity: item.quantity + 1,
     };
-    cartQuantityMutation(data);
+    if (guest) {
+      // cartQuantityMutation(data);
+      setGuestUserCart((prev) => {
+        return prev?.map((product) =>
+          product?.product_id == item?.product_id &&
+          product?.color_id == item?.color_id
+            ? { ...product, quantity: Number(product.quantity) + 1 }
+            : product
+        );
+      });
+    } else {
+      cartQuantityMutation(data);
+    }
   };
 
   const handleDecrement = (item) => {
@@ -27,14 +40,36 @@ const CartItem = ({ item }) => {
       item_id: item?.id,
       quantity: item.quantity - 1,
     };
-    cartQuantityMutation(data);
+
+    if (guest) {
+      // cartQuantityMutation(data);
+      setGuestUserCart((prev) => {
+        return prev?.map((product) =>
+          product?.product_id == item?.product_id &&
+          product?.color_id == item?.color_id
+            ? { ...product, quantity: Number(product.quantity) - 1 }
+            : product
+        );
+      });
+    } else {
+      cartQuantityMutation(data);
+    }
   };
 
-  const handleDelete = (item_id) => {
+  const handleDelete = (item_id, item) => {
     const data = {
       item_id,
     };
-    cartDeleteMutation(data);
+    if (guest) {
+      setGuestUserCart((prev) => {
+        return prev?.filter(
+          (product) =>
+            !(product?.product_id === item?.product_id && product?.color_id === item?.color_id)
+        );
+      })
+    } else {
+      cartDeleteMutation(data);
+    }
   };
 
   return (
@@ -66,7 +101,7 @@ const CartItem = ({ item }) => {
           </div>
           <button
             disabled={pauseAction}
-            onClick={() => handleDelete(item?.id)}
+            onClick={() => handleDelete(item?.id, item)}
             className={`cursor-pointer ${
               pauseAction
                 ? 'opacity-50 cursor-not-allowed pointer-events-none'

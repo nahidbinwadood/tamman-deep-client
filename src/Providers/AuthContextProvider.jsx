@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 
 import useAxiosPublic from '@/Hooks/useAxiosPublic';
+import useLocalStorage from '@/Hooks/useLocalStorage';
 import { createContext, useEffect, useState } from 'react';
 export const AuthContext = createContext(null);
 
@@ -10,6 +11,7 @@ const AuthContextProvider = ({ children }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [hasCard, setHasCard] = useState(false);
+  const [guestUserCart, setGuestUserCart] = useLocalStorage('cart', []);
   const [pauseAction, setPauseAction] = useState(false);
   const [activeCard, setActiveCard] = useState(null);
   const [cartLength, setCartLength] = useState(null);
@@ -29,6 +31,7 @@ const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     if (token) {
       setLoading(true);
+      console.log(`checking token`);
       const userData = async () => {
         try {
           const { data } = await axiosPublic('/api/check');
@@ -67,7 +70,9 @@ const AuthContextProvider = ({ children }) => {
     setActiveCard,
     hasCard,
     setHasCard,
-    allColors
+    allColors,
+    guestUserCart,
+    setGuestUserCart,
   };
   return (
     <AuthContext.Provider value={allValues}>{children}</AuthContext.Provider>

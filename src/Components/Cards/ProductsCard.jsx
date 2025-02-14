@@ -11,7 +11,6 @@ import {
   SelectValue,
 } from '../ui/select';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   useAddToCart,
   useAllCartItems,
@@ -21,22 +20,48 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const ProductsCard = ({ product }) => {
-  const { user } = useAuth();
+  const { user, setGuestUserCart } = useAuth();
   const { image, price } = product;
   const [color, setColor] = useState();
-  const navigate = useNavigate();
   const { allCartItems } = useAllCartItems();
 
   const { mutate: addToCartMutation } = useAddToCart();
   const { mutate: updateQuantityMutation } = useCartQuantity();
+
+  // console.log(guestUserCart);
   const handleCart = async (product) => {
-    // checking if user is logged in
-    if (!user) {
-      toast.error('Please Login First !');
-      navigate('/login');
+    if (!color) {
+      return toast.error('Select a color first');
     } else {
-      if (!color) {
-        return toast.error('Select a color first');
+      // checking if user is logged in
+      if (!user) {
+        const colorId = product?.colors.find((c) => c?.name == color)?.id;
+        setGuestUserCart((prev) => {
+          const productInfo = {
+            id: product?.id,
+            product_id: product?.id,
+            name: product?.name,
+            image: product?.image,
+            quantity: 1,
+            product_price: product?.price,
+            color_name: color,
+            color_id: colorId,
+          };
+          const alreadyExist = prev?.find(
+            (item) =>
+              item?.product_id === product?.id && item?.color_id === colorId
+          );
+          if (alreadyExist) {
+            toast.success('Product added to cart');
+            return prev?.map((item) =>
+              item?.product_id == product?.id && item?.color_id == colorId
+                ? { ...item, quantity: item?.quantity + 1 }
+                : item
+            );
+          }
+          toast.success('Product added to cart');
+          return [...prev, productInfo];
+        });
       } else {
         const colorId = product?.colors.find((c) => c?.name == color)?.id;
         const prevAddedItem = allCartItems?.find(
