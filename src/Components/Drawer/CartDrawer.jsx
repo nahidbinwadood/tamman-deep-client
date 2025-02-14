@@ -22,20 +22,34 @@ const CartDrawer = ({ showCart, setShowCart }) => {
     return acc + parseFloat(item?.product_price) * item?.quantity;
   }, 0);
 
+  const totalPriceGuest = guestUserCart?.reduce((acc, item) => {
+    return acc + parseFloat(item?.product_price) * item?.quantity;
+  }, 0);
+
   // console.log(guestUserCart);
 
   // console.log(totalPrice);
+  // At the top of your component, add a useEffect for handling body overflow
   useEffect(() => {
-    if (allCartItems) {
-      setCartLength(allCartItems?.length);
-    }
     if (showCart) {
+      // Prevent scrolling on the main body
       document.body.style.overflow = 'hidden';
+      // Store original padding to prevent layout shift
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
     } else {
-      // console.log('show scrollbar');
-      document.body.style.overflow = 'auto';
+      // Restore scrolling when cart is closed
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
     }
-  }, [allCartItems, setCartLength, showCart]);
+
+    // Cleanup function to ensure we restore scrolling if component unmounts
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    };
+  }, [showCart]);
 
   // handlers:
 
@@ -124,7 +138,12 @@ const CartDrawer = ({ showCart, setShowCart }) => {
                   <div className="bg-white px-5 py-8 space-y-4">
                     <div className="w-full flex items-center justify-between font-semibold text-lg font-inter">
                       <h4>Subtotal</h4>
-                      <p>$ {totalPrice.toFixed(2)}</p>
+                      <p>
+                        $
+                        {user
+                          ? totalPrice.toFixed(2)
+                          : totalPriceGuest.toFixed(2)}
+                      </p>
                     </div>
 
                     {/* proceed to checkout button */}
@@ -136,7 +155,12 @@ const CartDrawer = ({ showCart, setShowCart }) => {
                     >
                       Checkout
                       <span className="size-2 rounded-full bg-white inline-block"></span>
-                      <span>${totalPrice.toFixed(2)}</span>
+                      <span>
+                        $
+                        {user
+                          ? totalPrice.toFixed(2)
+                          : totalPriceGuest.toFixed(2)}
+                      </span>
                     </button>
                   </div>
                 </div>
