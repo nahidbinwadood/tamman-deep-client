@@ -152,7 +152,7 @@ const ContactPreview = ({ formData, isEditing, actionInfo }) => {
     >
       {/* img */}
       <div>
-        <div className="h-48 bg-[#D2E3FC] rounded-xl relative">
+        <div className="h-48 bg-[#D2E3FC] rounded-t-xl relative">
           <div className="h-48 w-full absolute inset-0 top-0 left-0">
             <img
               className="w-full h-full object-cover rounded-t-xl"
@@ -164,7 +164,7 @@ const ContactPreview = ({ formData, isEditing, actionInfo }) => {
         <div className="w-full flex items-center justify-center relative">
           <div className="size-32 -mt-16 z-10 relative">
             <img
-              className="h-full w-full object-cover rounded-full"
+              className="size-32 object-cover rounded-full"
               src={imageUrl}
               alt="Profile"
             />

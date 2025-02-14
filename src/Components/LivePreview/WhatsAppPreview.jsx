@@ -55,7 +55,7 @@ const WhatsAppPreview = ({ formData, actionInfo, isEditing }) => {
           <div className="size-32 z-10 relative">
             <LazyLoadImage
               effect="blur"
-              className="h-full w-full object-cover rounded-full"
+              className="size-32 object-cover rounded-full"
               src={imageUrl}
               alt=""
             />

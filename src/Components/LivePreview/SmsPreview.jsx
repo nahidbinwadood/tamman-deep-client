@@ -47,7 +47,7 @@ const SmsPreview = ({ formData, isEditing, actionInfo }) => {
           actionInfo ? actionInfo?.backgroundColor : formData?.backgroundColor
         }`,
       }}
-      className="min-w-[350px] max-w-[450px] font-inter rounded-xl overflow-hidden shadow-xl h-fit py-10"
+      className="min-w-[350px] max-w-[350px] md:max-w-[450px] font-inter rounded-xl overflow-hidden shadow-xl h-fit py-10"
     >
       {/* img */}
       <div>
@@ -55,7 +55,7 @@ const SmsPreview = ({ formData, isEditing, actionInfo }) => {
           <div className="size-32 z-10 relative">
             <LazyLoadImage
               effect="blur"
-              className="h-full w-full object-cover rounded-full"
+              className="size-32 object-cover rounded-full"
               src={imageUrl}
               alt=""
             />

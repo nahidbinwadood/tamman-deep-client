@@ -11,7 +11,7 @@ import { ImSpinner9 } from 'react-icons/im';
 // import { ImSpinner9 } from 'react-icons/im';
 
 const CartDrawer = ({ showCart, setShowCart }) => {
-  const { user, setCartLength, guestUserCart } = useAuth();
+  const { user, guestUserCart } = useAuth();
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -60,6 +60,7 @@ const CartDrawer = ({ showCart, setShowCart }) => {
       setShowCart(false);
     } else {
       toast.error('Please Login First');
+      navigate('/login');
       setShowCart(false);
     }
   };

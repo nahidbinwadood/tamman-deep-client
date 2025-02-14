@@ -219,7 +219,7 @@ const ContactCardAction = () => {
     if (
       formData.fullName.length > 0 &&
       formData.number.length > 0 &&
-      formData.number.mail > 0 &&
+      formData.mail.length > 0 &&
       formData?.image
     ) {
       setActive(true);
@@ -338,7 +338,7 @@ const ContactCardAction = () => {
               <div className="size-40 -mt-20 z-10 relative">
                 <LazyLoadImage
                   effect="blur"
-                  className="h-full w-full object-cover rounded-full"
+                  className="size-40 object-cover rounded-full"
                   src={getImageSource()}
                   alt=""
                 />

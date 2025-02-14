@@ -1,12 +1,16 @@
 /* eslint-disable react/prop-types */
+import useAuth from '@/Hooks/useAuth';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 function ActionTab({ setOpen }) {
+  const { activeCard } = useAuth();
   const [category, setCategory] = useState('communication');
   const [data, setData] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const navigate = useNavigate();
 
   const actions = [
     {
@@ -30,6 +34,18 @@ function ActionTab({ setOpen }) {
       category: 'utilities',
     },
   ];
+
+  //handlers:
+
+  const handleCreateAction = (path) => {
+    if (activeCard) {
+      setOpen(false);
+      navigate(`${path}`);
+    } else {
+      setOpen(false);
+      toast.error('You need to active a card before create any action');
+    }
+  };
 
   useEffect(() => {
     const getCreationData = async () => {
@@ -86,13 +102,12 @@ function ActionTab({ setOpen }) {
               <p className="text-sm font-medium h-24">{actions.description}</p>
 
               <div className="pt-4 flex justify-end">
-                <Link
-                  onClick={() => setOpen(false)}
-                  to={actions?.path}
+                <div
+                  onClick={() => handleCreateAction(actions?.path)}
                   className="px-4 py-2 rounded-md  bg-primaryColor text-white border border-primaryColor hover:text-primaryColor hover:bg-transparent transition duration-300"
                 >
                   + Create
-                </Link>
+                </div>
               </div>
             </div>
           </div>

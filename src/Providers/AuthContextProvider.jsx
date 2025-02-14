@@ -31,7 +31,7 @@ const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     if (token) {
       setLoading(true);
-      console.log(`checking token`);
+
       const userData = async () => {
         try {
           const { data } = await axiosPublic('/api/check');

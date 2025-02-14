@@ -248,7 +248,7 @@ const EmailActions = () => {
               <div className="size-40 z-10 relative">
                 <LazyLoadImage
                   effect="blur"
-                  className="h-full w-full object-cover rounded-full"
+                  className="size-40 object-cover rounded-full"
                   src={getImageSource()}
                   alt=""
                 />
