@@ -11,7 +11,10 @@ const AuthContextProvider = ({ children }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [hasCard, setHasCard] = useState(false);
-  const [guestUserCart, setGuestUserCart] = useLocalStorage('cart', []);
+  const [guestUserCart, setGuestUserCart, clearGuestUserCart] = useLocalStorage(
+    'cart',
+    []
+  );
   const [pauseAction, setPauseAction] = useState(false);
   const [activeCard, setActiveCard] = useState(null);
   const [cartLength, setCartLength] = useState(null);
@@ -73,6 +76,7 @@ const AuthContextProvider = ({ children }) => {
     allColors,
     guestUserCart,
     setGuestUserCart,
+    clearGuestUserCart,
   };
   return (
     <AuthContext.Provider value={allValues}>{children}</AuthContext.Provider>

@@ -15,7 +15,7 @@ import { BeatLoader } from 'react-spinners';
 const Register = () => {
   const [show, setShow] = useState(false);
   const axiosPublic = useAxiosPublic();
-  const { loading, setLoading } = useAuth();
+  const { loading, setLoading, guestUserCart, clearGuestUserCart } = useAuth();
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const registerMutation = useMutation({
@@ -27,6 +27,7 @@ const Register = () => {
       setLoading(false);
       console.log(data);
       if (data.status == 'success') {
+        clearGuestUserCart();
         toast.success('Account Created Successfully');
         navigate('/login');
       }
@@ -44,6 +45,16 @@ const Register = () => {
       toast.error('Password Length Must be more than 8 characters');
     } else {
       setLoading(true);
+      const updatedCart = guestUserCart?.map(({ product_id, ...rest }) => ({
+        ...rest,
+        card_id: product_id,
+      }));
+
+      const updatedData = {
+        ...data,
+        cart: updatedCart,
+      };
+      console.log(updatedData);
       registerMutation.mutate(data);
     }
   };
