@@ -15,7 +15,7 @@ import { BeatLoader } from 'react-spinners';
 const Register = () => {
   const [show, setShow] = useState(false);
   const axiosPublic = useAxiosPublic();
-  const { loading, setLoading, guestUserCart, clearGuestUserCart } = useAuth();
+  const { loading, setLoading, guestUserCart } = useAuth();
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const registerMutation = useMutation({
@@ -27,7 +27,7 @@ const Register = () => {
       setLoading(false);
       console.log(data);
       if (data.status == 'success') {
-        clearGuestUserCart();
+        // clearGuestUserCart();
         toast.success('Account Created Successfully');
         navigate('/login');
       }
@@ -55,7 +55,7 @@ const Register = () => {
         cart: updatedCart,
       };
       console.log(updatedData);
-      registerMutation.mutate(data);
+      registerMutation.mutate(updatedData);
     }
   };
   return (

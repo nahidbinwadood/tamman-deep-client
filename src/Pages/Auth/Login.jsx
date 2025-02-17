@@ -10,7 +10,7 @@ import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 const Login = () => {
-  const { loading, setLoading } = useAuth();
+  const { loading, setLoading, guestUserCart, clearGuestUserCart } = useAuth();
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
@@ -29,6 +29,7 @@ const Login = () => {
 
         const res = await axiosPublic('/api/check');
         if (res.status === 200) {
+          clearGuestUserCart();
           console.log(res?.data?.user?.name);
           localStorage.setItem('username', res?.data?.user?.name);
           navigate('/');
@@ -47,8 +48,16 @@ const Login = () => {
   //send the login post request:
   const onSubmit = (data) => {
     setLoading(true);
-
-    mutation.mutate(data);
+    const updatedCart = guestUserCart?.map(({ product_id, ...rest }) => ({
+      ...rest,
+      card_id: product_id,
+    }));
+    const updatedData = {
+      ...data,
+      cart: updatedCart,
+    };
+    // console.log(updatedData);
+    mutation.mutate(updatedData);
   };
 
   useEffect(() => {
@@ -59,7 +68,7 @@ const Login = () => {
   }, [user, navigate]);
 
   return (
-    <div className="  font-inter ">
+    <div className="font-inter">
       <div className="flex items-center justify-center h-full min-h-[calc(100vh-72px)]">
         <div className="bg-white/90 shadow-lg rounded-lg px-8 py-12 min-w-[320px] md:min-w-[526px]">
           <div className="pb-4 md:pb-6 lg:pb-8 w-full flex items-center justify-center -ml-9 h-28 md:h-32">

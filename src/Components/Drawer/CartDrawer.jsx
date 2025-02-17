@@ -91,7 +91,9 @@ const CartDrawer = ({ showCart, setShowCart }) => {
 
               {/* count */}
               <div className="font-medium">
-                {user ? allCartItems?.length : guestUserCart?.length}
+                {user
+                  ? allCartItems?.length
+                  : guestUserCart && guestUserCart?.length}
               </div>
             </div>
 
@@ -115,7 +117,8 @@ const CartDrawer = ({ showCart, setShowCart }) => {
             </div>
           ) : (
             <div style={{ height: 'calc(100vh - 65px)' }}>
-              {allCartItems?.length > 0 || guestUserCart.length > 0 ? (
+              {allCartItems?.length > 0 ||
+              (guestUserCart && guestUserCart.length > 0) ? (
                 <div
                   style={{ height: 'calc(100vh - 65px)' }}
                   className="flex flex-col justify-between"
