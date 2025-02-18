@@ -1,12 +1,21 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
+import { ImSpinner9 } from 'react-icons/im';
 
-// eslint-disable-next-line react/prop-types
-const GradientButton = ({ title, prev, prevLight, next, nextLight, card }) => {
+const GradientButton = ({
+  title,
+  prev,
+  prevLight,
+  next,
+  nextLight,
+  card,
+  loading,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <button
-      className={`relative rounded-lg overflow-hidden flex items-center justify-center gap-3 ${
+      className={`relative rounded-lg group overflow-hidden flex items-center justify-center gap-3 ${
         card
           ? 'px-12 py-3 w-fit hover:bg-primaryColor duration-300 transition-all'
           : 'px-8 py-3 md:py-3.5 lg:py-4 w-full hover:bg-primaryColor duration-300 transition-all'
@@ -35,7 +44,11 @@ const GradientButton = ({ title, prev, prevLight, next, nextLight, card }) => {
       {isHovered ? prevLight : prev}
 
       {/* show Text */}
-      {!isHovered ? (
+      {loading ? (
+        <ImSpinner9
+          className={`animate-spin group-hover:text-white text-primaryColor size-7`}
+        />
+      ) : !isHovered ? (
         <span
           className={`relative z-10 font-semibold md:text-lg transition-all duration-300 ${
             isHovered ? 'text-white' : 'bg-clip-text text-transparent'

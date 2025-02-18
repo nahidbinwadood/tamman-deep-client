@@ -155,7 +155,7 @@ const ContactPreview = ({ formData, isEditing, actionInfo }) => {
         <div className="h-48 bg-[#D2E3FC] rounded-t-xl relative">
           <div className="h-48 w-full absolute inset-0 top-0 left-0">
             <img
-              className="w-full h-full object-cover rounded-t-xl"
+              className="w-full aspect-w-16 aspect-h-9 h-full object-cover rounded-t-xl"
               src={coverPhotoUrl}
               alt="Cover"
             />

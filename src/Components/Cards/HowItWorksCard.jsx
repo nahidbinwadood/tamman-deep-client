@@ -8,8 +8,8 @@ const HowItWorksCard = ({ image, highlightedTitle, title, description }) => {
       <div className="pt-6 p-6">
         <div>
           <h4 className="text-xl font-bold">
-            <span className="bg-gradient-to-l from-[#116DFF] to-[#23C0B6] text-transparent bg-clip-text">
-              {highlightedTitle}:
+            <span className="bg-gradient-to-l mr-2 from-[#116DFF] to-[#23C0B6] text-transparent bg-clip-text">
+              {highlightedTitle} :
             </span>
             {title}
           </h4>

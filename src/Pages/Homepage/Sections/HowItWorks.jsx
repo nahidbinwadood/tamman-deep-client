@@ -8,19 +8,19 @@ const HowItWorks = () => {
       highlightedTitle: 'Step 1',
       title: 'Grab a product',
       description:
-        'Forget about Google doc or typing down phone number manually. All it takes is a tap or scan.',
+        'Ditch the hassle of manually entering phone numbers or using Google Docs. Simply tap or scan to share your details instantly.',
     },
     {
       image: 'https://i.postimg.cc/fy0XyTWm/card-2.png',
-      highlightedTitle: 'Step 1',
-      title: 'Grab a product',
+      highlightedTitle: 'Step 2',
+      title: 'Instant Access',
       description:
-        'Others don’t need a QL device or the APP to receive your info. Your profile opens in browser.',
+        'No special apps or devices are required! Your profile opens directly in the browser, making it easy for anyone to connect with you.',
     },
     {
       image: 'https://i.postimg.cc/NMFRhkWN/card-3.png',
-      highlightedTitle: 'Step 1',
-      title: 'Grab a product',
+      highlightedTitle: 'Step 3',
+      title: 'Share Seamlessly',
       description:
         'With one tap on a smart phone, your connection has access to all the information you want to share.',
     },

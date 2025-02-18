@@ -1,9 +1,38 @@
+import { axiosPublic } from '@/Hooks/useAxiosPublic';
 import GradientButton from '../Buttons/GradientButton';
 import PrimaryButton from '../Buttons/PrimaryButton';
 import { CardListSvg, CardListWhiteSvg } from '../SvgContainer';
+import { useMutation } from '@tanstack/react-query';
+import { useState } from 'react';
 
 /* eslint-disable react/prop-types */
 const PricingCard = ({ card }) => {
+  const [loading, setLoading] = useState(false);
+  const buyPlanFunc = async (type) => {
+    const { data } = await axiosPublic.post(`/api/subscription/${type}`);
+    return data;
+  };
+  const buyPlanMutation = useMutation({
+    mutationKey: ['buyPlan', card.type.toLowerCase()],
+    mutationFn: buyPlanFunc,
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSuccess: (data) => {
+      setLoading(false);
+      window.location.href = data.url;
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+  const handleBuyPlan = () => {
+    if (card?.type == 'Basic') {
+      return;
+    } else {
+      buyPlanMutation.mutate(card?.type.toLowerCase());
+    }
+  };
   return (
     <div
       className={`px-6 py-8 shadow-lg rounded-xl ${
@@ -34,11 +63,16 @@ const PricingCard = ({ card }) => {
           </h5>
         </div>
       </div>
-      <div className="pt-5 md:pt-8 lg:pt-10 w-full">
+      <div onClick={handleBuyPlan} className="pt-5 md:pt-8 lg:pt-10 w-full">
         {card.type == 'Premium Plus' ? (
-          <PrimaryButton fullWidth={true} title={'Buy this plan'} />
+          <PrimaryButton
+            loading={loading}
+            plan={true}
+            fullWidth={true}
+            title={'Buy this plan'}
+          />
         ) : (
-          <GradientButton title={'Buy this plan'} />
+          <GradientButton loading={loading} title={'Buy this plan'} />
         )}
       </div>
       {/* hr */}
@@ -54,7 +88,7 @@ const PricingCard = ({ card }) => {
                 <CardListWhiteSvg />
               </div>
             ) : (
-              <div className='flex-shrink-0'>
+              <div className="flex-shrink-0">
                 <CardListSvg />
               </div>
             )}

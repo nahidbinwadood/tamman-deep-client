@@ -2,7 +2,10 @@ import heroBg from '../../../assets/images/Hero-Bg.png';
 import heroBanner from '../../../assets/images/homepage-hero.png';
 import { Link } from 'react-router-dom';
 import PrimaryButton from './../../../Components/Buttons/PrimaryButton';
+import useAuth from '@/Hooks/useAuth';
 const Hero = () => {
+  const { user } = useAuth();
+  console.log(user);
   return (
     <section
       style={{
