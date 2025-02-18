@@ -8,7 +8,7 @@ const PlansSection = () => {
       price: 0,
       includes: [
         'Basic Online Profile',
-        'SMS, Call, WhatsApp, Link & Email',
+        'Email, WhatsApp,SMS & Call ',
         'Linktree',
         'Unlimited Actions',
       ],

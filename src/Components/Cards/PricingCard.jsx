@@ -4,9 +4,13 @@ import PrimaryButton from '../Buttons/PrimaryButton';
 import { CardListSvg, CardListWhiteSvg } from '../SvgContainer';
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
+import useAuth from '@/Hooks/useAuth';
+import toast from 'react-hot-toast';
 
 /* eslint-disable react/prop-types */
 const PricingCard = ({ card }) => {
+  const { user, subscription } = useAuth();
+  console.log(user);
   const [loading, setLoading] = useState(false);
   const buyPlanFunc = async (type) => {
     const { data } = await axiosPublic.post(`/api/subscription/${type}`);
@@ -27,10 +31,18 @@ const PricingCard = ({ card }) => {
     },
   });
   const handleBuyPlan = () => {
-    if (card?.type == 'Basic') {
-      return;
+    if (user) {
+      if (card?.type == 'Basic') {
+        return;
+      } else {
+        if (subscription?.plan !== card?.type.toLowerCase()) {
+          buyPlanMutation.mutate(card?.type.toLowerCase());
+        } else {
+          toast.error('You are already subscribed to this plan.');
+        }
+      }
     } else {
-      buyPlanMutation.mutate(card?.type.toLowerCase());
+      toast.error('Please Login first to purchase.');
     }
   };
   return (

@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 function ActionTab({ setOpen }) {
-  const { activeCard } = useAuth();
+  const { activeCard, subscription } = useAuth();
   const [category, setCategory] = useState('communication');
   const [data, setData] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -37,10 +37,25 @@ function ActionTab({ setOpen }) {
 
   //handlers:
 
-  const handleCreateAction = (path) => {
+  const handleCreateAction = (action) => {
+    console.log(action);
     if (activeCard) {
       setOpen(false);
-      navigate(`${path}`);
+      if (subscription) {
+        navigate(`${action?.path}`);
+      } else {
+        if (
+          action?.title == 'Email' ||
+          action?.title == 'WhatsApp' ||
+          action?.title == 'SMS' ||
+          action?.title == 'Call' ||
+          action?.title == 'Link Tree'
+        ) {
+          navigate(`${action?.path}`);
+        } else {
+          toast.error('You need Premium subscription to access this action');
+        }
+      }
     } else {
       setOpen(false);
       toast.error('You need to active a card before create any action');
@@ -103,7 +118,7 @@ function ActionTab({ setOpen }) {
 
               <div className="pt-4 flex justify-end">
                 <div
-                  onClick={() => handleCreateAction(actions?.path)}
+                  onClick={() => handleCreateAction(actions)}
                   className="px-4 py-2 rounded-md  bg-primaryColor text-white border border-primaryColor hover:text-primaryColor hover:bg-transparent transition duration-300"
                 >
                   + Create
