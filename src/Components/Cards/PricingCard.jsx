@@ -36,6 +36,7 @@ const PricingCard = ({ card }) => {
         return;
       } else {
         if (subscription?.plan !== card?.type.toLowerCase()) {
+          console.log(subscription);
           buyPlanMutation.mutate(card?.type.toLowerCase());
         } else {
           toast.error('You are already subscribed to this plan.');

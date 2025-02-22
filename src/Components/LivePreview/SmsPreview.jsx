@@ -17,13 +17,13 @@ const SmsPreview = ({ formData, isEditing, actionInfo }) => {
         if (formData.image instanceof File) {
           return URL.createObjectURL(formData.image);
         } else {
-          return `${import.meta.env.VITE_API_URL}/storage/${formData.image}`;
+          return `${import.meta.env.VITE_API_URL}/storage/app/public/${formData.image}`;
         }
       }
 
       // Check for actionInfo image
       if (actionInfo?.image) {
-        return `${import.meta.env.VITE_API_URL}/storage/${actionInfo.image}`;
+        return `${import.meta.env.VITE_API_URL}/storage/app/public/${actionInfo.image}`;
       }
 
       // Default image if no other options are available

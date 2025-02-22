@@ -42,6 +42,7 @@ const AuthContextProvider = ({ children }) => {
           if (data?.has_order) {
             setHasCard(true);
           }
+
           if (data?.user?.subscription) {
             setSubscription(data?.user?.subscription);
           }

@@ -35,7 +35,7 @@ const DashboardProfiles = () => {
     },
   ];
 
-  const qrCodeImage = `${import.meta.env.VITE_API_URL}/storage/${
+  const qrCodeImage = `${import.meta.env.VITE_API_URL}/storage/app/public/${
     activeCard?.qr_code
   }`;
 
