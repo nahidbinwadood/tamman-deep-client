@@ -32,7 +32,7 @@ const ActionContents = () => {
     );
   }
   return (
-    <div className="col-span-8 p-5 rounded-xl border bg-white h-fit">
+    <div className="xl:col-span-8 p-5 rounded-xl border bg-white h-fit">
       <h4 className="font-normal text-textDark pb-4 ">
         List of Actions {allActions.length}
       </h4>
