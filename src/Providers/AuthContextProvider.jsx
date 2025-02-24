@@ -42,9 +42,9 @@ const AuthContextProvider = ({ children }) => {
           if (data?.has_order) {
             setHasCard(true);
           }
-
-          if (data?.user?.subscription) {
-            setSubscription(data?.user?.subscription);
+          console.log(data);
+          if (data?.subscription) {
+            setSubscription(data?.subscription);
           }
           const response = await axiosPublic('/api/cart');
           const allCardsData = await axiosPublic('/api/user/card');
