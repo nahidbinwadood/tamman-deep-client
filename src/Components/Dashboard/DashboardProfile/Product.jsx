@@ -44,9 +44,9 @@ function Product({ item }) {
         queryClient.setQueryData(['allCards'], context.previousCards);
       }
     },
-    onSuccess: async() => {
+    onSuccess: async () => {
       setActiveCard(item);
-     await queryClient.invalidateQueries(['allCards']); // Ensure fresh data after mutation
+      await queryClient.invalidateQueries(['allCards']); // Ensure fresh data after mutation
       await queryClient.invalidateQueries(['allActions']);
       // Ensure fresh data after mutation
     },
@@ -59,16 +59,16 @@ function Product({ item }) {
     activeCardMutation.mutate(data);
   };
   return (
-    <div className="border  p-4 group  font-inter hover:text-white transition duration-200 hover:bg-gradient-to-tl text-textColor from-[#116DFF] to-[#23C0B6] justify-between rounded-lg bg-white flex items-center ">
-      <div className="flex flex-1 items-center gap-4">
-        <div className="w-16 h-8 rounded-md bg-textGray/50 group-hover:bg-white  "></div>
+    <div className="border p-3 md:p-4 group font-inter hover:text-white transition duration-200 hover:bg-gradient-to-tl text-textColor from-[#116DFF] to-[#23C0B6] justify-between rounded-lg bg-white flex items-center">
+      <div className="flex md:flex-1 items-center gap-2 md:gap-4">
+        <div className="w-12 h-8 md:w-16 md:h-8 rounded-md bg-textGray/50 group-hover:bg-white  "></div>
         <h4 className="">{item?.userType}</h4>
       </div>
-      <div className="flex flex-1 tex-sm items-center gap-2">
-        <TiBusinessCard size={24} />
-        <h4>{item?.card_name}</h4>
+      <div className="flex md:flex-1 tex-sm items-center gap-2">
+        <TiBusinessCard className="size-6 md:size-8 flex-shrink-0" />
+        <h4 className='flex-shrink-0 text-sm'>{item?.card_name}</h4>
       </div>
-      <div className="flex-1">
+      <div className="md:flex-1">
         <Switch
           checked={item?.status == 1}
           onCheckedChange={() => handleUpdateActiveCard(item)}

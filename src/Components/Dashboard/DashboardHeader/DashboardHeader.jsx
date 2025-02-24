@@ -9,7 +9,7 @@ const DashboardHeader = ({ isOpen, setOpen }) => {
   const { userName } = useAuth();
 
   return (
-    <div className="xl:min-h-[100px] xl:max-h-[100px] w-full flex md:items-center justify-between xl:py-8 xl:px-10 px-5 py-5">
+    <div className="xl:min-h-[100px] xl:max-h-[100px] max-h-[152px] w-full flex md:items-center justify-between xl:py-8 xl:px-10 px-5 py-5 md:px-7 md:py-7 lg:px-8 lg:py-8">
       <div className="flex flex-col md:flex-row md:items-center gap-4">
         <div className="size-12 rounded-full overflow-hidden flex-shrink-0">
           <img
@@ -20,7 +20,7 @@ const DashboardHeader = ({ isOpen, setOpen }) => {
         </div>
         <div>
           <h3 className="md:text-lg text-[#3D464F]">
-            Welcome back,{' '}
+            Welcome back,
             <span className="font-medium text-[#111518]">{userName}</span>
           </h3>
           <p className="text-sm text-[#3D464F] md:block hidden">

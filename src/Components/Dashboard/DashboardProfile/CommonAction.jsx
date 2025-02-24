@@ -11,7 +11,7 @@ function CommonAction({ tab, activeTab, setActiveTab, setOpen }) {
   return (
     <div
       onClick={() => handleClick(title)}
-      className={`flex cursor-pointer font-inter hover:text-white transition-all duration-300 hover:bg-gradient-to-tl from-[#116DFF] to-[#23C0B6] items-center gap-3 p-4 group text-textDark rounded-xl  border ${
+      className={`flex cursor-pointer font-inter hover:text-white transition-all duration-300 hover:bg-gradient-to-tl from-[#116DFF] to-[#23C0B6] items-center gap-3 p-3 md:p-4 group text-textDark rounded-xl  border ${
         isActiveTab && title !== 'Create Action' && title !== 'Share'
           ? 'bg-gradient-to-tl from-[#116DFF] to-[#23C0B6] text-white'
           : ''

@@ -47,9 +47,9 @@ const DashboardProfiles = () => {
       {/* <DashboardProfileHeader /> */}
 
       {/* body */}
-      <div className="grid grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-6">
         {/* Left Section */}
-        <div className="col-span-4 p-5 h-fit rounded-xl flex flex-col gap-4 border bg-white">
+        <div className="xl:col-span-4 p-3 md:p-5 h-fit rounded-xl flex flex-col gap-4 border bg-white">
           {allTabs?.map((tab) => (
             <CommonAction
               key={tab?.title}

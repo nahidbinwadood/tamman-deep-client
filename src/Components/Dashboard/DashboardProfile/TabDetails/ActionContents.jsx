@@ -26,7 +26,7 @@ const ActionContents = () => {
 
   if (isLoading || isFetching || loading) {
     return (
-      <div className="min-h-[50vh] col-span-8   flex items-center justify-center">
+      <div className="min-h-[50vh] xl:col-span-8 flex items-center justify-center">
         <Loader />
       </div>
     );
