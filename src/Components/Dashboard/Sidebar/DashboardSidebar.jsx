@@ -69,7 +69,7 @@ const DashboardSidebar = () => {
   };
 
   return (
-    <div className="min-h-screen max-h-screen w-[350px] p-8 flex flex-col justify-between">
+    <div className="min-h-screen max-h-screen w-[350px] p-8 hidden xl:flex flex-col justify-between">
       <div>
         {/* Logo Section */}
         <div className="w-full flex items-center justify-center -ml-9 mb-6">
