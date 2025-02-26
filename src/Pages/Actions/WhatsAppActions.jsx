@@ -197,27 +197,27 @@ const WhatsAppActions = () => {
     <>
       <div className="shadow-md font-inter bg-gradient-to-l from-[#116DFF] to-[#23C0B6]">
         {/* navbar */}
-        <div className="py-6 flex items-center justify-between container mx-auto ">
+        <div className="py-4 md:py-5 xl:py-6 flex items-center justify-between container mx-auto px-5 md:px-8 2xl:px-0">
           <Link
             to="/dashboard/profiles"
             className="flex items-center gap-3 cursor-pointer text-[#212A30]"
           >
             <BackButtonSvg light={true} />
-            <span className="text-lg font-medium text-white">Back</span>
+            <span className="md:text-lg font-medium text-white">Back</span>
           </Link>
           <div className="flex items-center gap-3">
             <button
               onClick={() => {
                 navigate('/dashboard/profiles');
               }}
-              className="px-10 py-3 rounded-lg bg-transparent text-white border border-white font-semibold text-lg transition-all duration-500"
+              className="px-10 py-3 rounded-lg bg-transparent text-white border border-white font-semibold text-lg transition-all duration-500 hidden md:block"
             >
               Cancel
             </button>
             <button
               disabled={!active}
               onClick={handleSave}
-              className={`px-10 py-3 h-14 w-36 flex items-center justify-center bg-white text-primaryColor border-2 border-primaryColor rounded-lg  font-semibold text-lg ${
+              className={`px-10 py-3 h-14 w-28 md:w-32 lg:w-36 flex items-center justify-center bg-white text-primaryColor border-2 border-primaryColor rounded-lg  font-semibold md:text-lg ${
                 !active ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'
               }`}
             >
@@ -232,20 +232,20 @@ const WhatsAppActions = () => {
       </div>
 
       {/* outlet */}
-      <div className="font-inter bg-[#f3f8fe] min-h-[calc(100vh-104px)] flex gap-12 justify-center mx-auto w-full py-20">
-        <div className="flex flex-col h-fit w-[600px] p-8 rounded-2xl bg-white shadow-lg">
+      <div className="font-inter bg-[#f3f8fe] min-h-[calc(100vh-104px)] flex gap-8 md:gap-10 xl:gap-12 md:justify-center mx-auto w-full py-8 md:py-12 lg:py-16 2xl:py-20 flex-col md:flex-row px-5 md:px-8">
+        <div className="flex flex-col h-fit md:w-[600px] p-6 md:p-7 lg:p-8 rounded-2xl bg-white shadow-lg">
           <div>
             <div className="w-full flex items-center justify-center relative">
-              <div className="size-40 z-10 relative">
+              <div className="size-24 md:size-28 lg:size-40 z-10 relative">
                 <LazyLoadImage
                   effect="blur"
-                  className="size-40 object-cover rounded-full"
+                  className="size-24 md:size-28 lg:size-40 object-cover rounded-full"
                   src={getImageSource()}
                   alt=""
                 />
                 <label
                   htmlFor="profilePicture"
-                  className="absolute bottom-5 right-0 cursor-pointer"
+                 className="absolute bottom-2 md:bottom-5 right-0 cursor-pointer"
                 >
                   <input
                     onChange={handleProfilePhotoChange}
@@ -254,19 +254,19 @@ const WhatsAppActions = () => {
                     name="profilePicture"
                     id="profilePicture"
                   />
-                  <div className="bg-primaryColor rounded-full size-8 flex items-center justify-center">
+                  <div className="bg-primaryColor rounded-full size-6 md:size-7 lg:size-8 flex items-center justify-center">
                     <AddImagePlusSvg />
                   </div>
                 </label>
               </div>
             </div>
             <div>
-              <h3 className="text-xl font-medium text-center mt-3">
+              <h3 className="text-lg md:text-xl font-medium text-center mt-3">
                 Profile Image
               </h3>
             </div>
           </div>
-          <div className="flex gap-4 mt-10 w-full">
+          <div className="flex gap-4 mt-5 md:mt-7 lg:mt-8 xl:mt-10 w-full">
             <div className="flex-shrink-0 flex">
               <UserSvg />
             </div>
@@ -282,7 +282,7 @@ const WhatsAppActions = () => {
               />
             </div>
           </div>
-          <div className="flex gap-4 mt-10 w-full">
+          <div className="flex gap-4 mt-5 md:mt-7 lg:mt-8 xl:mt-10 w-full">
             <div className="flex-shrink-0 flex">
               <PhoneSvg />
             </div>
@@ -299,8 +299,8 @@ const WhatsAppActions = () => {
             </div>
           </div>
           {/* colors */}
-          <div className="mt-10">
-            <h3 className="text-lg font-semibold flex items-center gap-2">
+          <div className="mt-5 md:mt-7 lg:mt-8 xl:mt-10 ">
+            <h3 className="md:text-lg font-semibold flex items-center gap-2">
               Colors
               <span>
                 <ColorsSvg />
@@ -314,7 +314,7 @@ const WhatsAppActions = () => {
                   key={color}
                   onClick={() => handleChangeColor(color)}
                   style={{ backgroundColor: `${color}` }}
-                  className={`size-6 hover:scale-125 transition-all duration-300 rounded-full cursor-pointer ${
+                  className={`size-5 md:size-6 hover:scale-125 transition-all duration-300 rounded-full cursor-pointer ${
                     activeBg == color ? 'scale-125 border' : 'scale-100'
                   } `}
                 ></div>

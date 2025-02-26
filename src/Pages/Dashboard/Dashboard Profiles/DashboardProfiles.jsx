@@ -14,6 +14,7 @@ import { RiListUnordered } from 'react-icons/ri';
 const DashboardProfiles = () => {
   const [open, setOpen] = useState(false);
   const { activeCard } = useAuth();
+
   const [activeTab, setActiveTab] = useState('My Cards');
 
   const allTabs = [

@@ -1,12 +1,23 @@
 /* eslint-disable react/prop-types */
 
+import useAuth from '@/Hooks/useAuth';
+import toast from 'react-hot-toast';
+
 function CommonAction({ tab, activeTab, setActiveTab, setOpen }) {
   const { title, Icon } = tab;
   const isActiveTab = title == activeTab;
-
+  const { activeCard } = useAuth();
   const handleClick = (title) => {
     setOpen(true);
-    setActiveTab(title);
+    if (title == 'Share') {
+      if (activeCard) {
+        setActiveTab(title);
+      } else {
+        toast.error('You must active your card');
+      }
+    } else {
+      setActiveTab(title);
+    }
   };
   return (
     <div

@@ -48,15 +48,15 @@ const CallPreview = ({ formData, isEditing, actionInfo }) => {
           actionInfo ? actionInfo?.backgroundColor : formData?.backgroundColor
         }`,
       }}
-      className="min-w-[350px] max-w-[350px] md:max-w-[450px] font-inter rounded-xl overflow-hidden shadow-xl h-fit py-10"
+      className="min-w-[320px] max-w-[350px] md:max-w-[450px] font-inter rounded-xl overflow-hidden shadow-xl h-fit py-10"
     >
       {/* img */}
       <div>
         <div className="w-full flex items-center justify-center relative">
-          <div className="size-32 z-10 relative">
+          <div className="size-24 md:size-28 lg:size-32 z-10 relative">
             <LazyLoadImage
               effect="blur"
-              className="size-32 object-cover rounded-full"
+              className="size-24 md:size-28 lg:size-32 object-cover rounded-full"
               src={imageUrl}
               alt=""
             />
@@ -68,7 +68,7 @@ const CallPreview = ({ formData, isEditing, actionInfo }) => {
       <div className="space-y-5 mt-5 mb-10 px-6">
         {/* title */}
         <div className="text-center space-y-2">
-          <h4 className=" text-2xl font-semibold text-[#fff]">
+          <h4 className="text-xl md:text-2xl font-semibold text-[#fff]">
             {actionInfo
               ? actionInfo?.name
               : formData?.name
