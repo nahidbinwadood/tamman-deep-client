@@ -12,7 +12,7 @@ const DashboardLayout = () => {
         <DashboardSidebar />
 
         {/* Dashboard Wrapper */}
-        <div className="xl:w-[calc(100%-350px)] min-h-screen max-h-screen w-full">
+        <div className="xl:w-[calc(100%-300px)] 2xl:w-[calc(100%-350px)] min-h-screen max-h-screen w-full">
           {/* dashboard header */}
           <DashboardHeader isOpen={isOpen} setOpen={setOpen} />
 

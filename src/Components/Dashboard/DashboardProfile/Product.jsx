@@ -66,7 +66,7 @@ function Product({ item }) {
       </div>
       <div className="flex md:flex-1 tex-sm items-center gap-2">
         <TiBusinessCard className="size-6 md:size-8 flex-shrink-0" />
-        <h4 className='flex-shrink-0 text-sm'>{item?.card_name}</h4>
+        <h4 className='flex-shrink-0 text-sm md:text-base'>{item?.card_name}</h4>
       </div>
       <div className="md:flex-1">
         <Switch

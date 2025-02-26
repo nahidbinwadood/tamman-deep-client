@@ -10,7 +10,7 @@ const CreateActionModal = ({ setOpen }) => {
   return (
     <DialogContent
       className={
-        'max-w-5xl font-inter p-8 rounded-md h-[80%] overflow-hidden '
+        'max-w-5xl font-inter p-8 rounded-md 2xl:h-[80%] overflow-hidden '
       }
     >
       <DialogHeader>
