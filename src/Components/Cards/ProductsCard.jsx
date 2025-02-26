@@ -21,7 +21,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const ProductsCard = ({ product }) => {
   const { user, setGuestUserCart } = useAuth();
-  const { image, price } = product;
+  const { image_url, price } = product;
   const [color, setColor] = useState();
   const { allCartItems } = useAllCartItems();
 
@@ -41,7 +41,7 @@ const ProductsCard = ({ product }) => {
             id: product?.id,
             product_id: product?.id,
             name: product?.name,
-            image: product?.image,
+            image_url: product?.image,
             quantity: 1,
             product_price: product?.price,
             color_name: color,
@@ -103,7 +103,7 @@ const ProductsCard = ({ product }) => {
         <LazyLoadImage
           effect="blur"
           className="h-full w-full object-cover group-hover:scale-105 transition-all duration-300"
-          src={image}
+          src={image_url}
           alt=""
         />
       </div>

@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 
 const CheckoutCard = ({ item }) => {
+  console.log(item);
   return (
     <div className="flex items-center gap-4 justify-between bg-white rounded-md p-4 border border-black/20">
       {/* image */}
@@ -8,7 +9,7 @@ const CheckoutCard = ({ item }) => {
         <div className="h-20 md:h-32 md:w-52">
           <img
             className="w-full h-full object-cover"
-            src={item?.image}
+            src={`${import.meta.env.VITE_API_URL}/${item?.image}`}
             alt=""
           />
         </div>

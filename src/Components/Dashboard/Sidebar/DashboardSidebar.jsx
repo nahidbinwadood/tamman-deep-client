@@ -32,18 +32,18 @@ const DashboardSidebar = () => {
       svg: <DashboardProfileSvg />,
       svgLight: <DashboardProfileLightSvg />,
     },
-    {
-      title: 'Contacts',
-      path: '/dashboard/contacts',
-      svg: <DashboardContactSvg />,
-      svgLight: <DashboardContactLightSvg />,
-    },
-    {
-      title: 'Setting',
-      path: '/dashboard/setting',
-      svg: <DashboardSettingsSvg />,
-      svgLight: <DashboardSettingsLightSvg />,
-    },
+    // {
+    //   title: 'Contacts',
+    //   path: '/dashboard/contacts',
+    //   svg: <DashboardContactSvg />,
+    //   svgLight: <DashboardContactLightSvg />,
+    // },
+    // {
+    //   title: 'Setting',
+    //   path: '/dashboard/setting',
+    //   svg: <DashboardSettingsSvg />,
+    //   svgLight: <DashboardSettingsLightSvg />,
+    // },
   ];
 
   // functions:

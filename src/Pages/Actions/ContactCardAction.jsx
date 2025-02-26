@@ -65,7 +65,9 @@ const ContactCardAction = () => {
 
     // If we have previous data and no new image
     if (prevData?.image && !(formData.image instanceof File)) {
-      return `${import.meta.env.VITE_API_URL}/storage/${prevData.image}`;
+      return `${import.meta.env.VITE_API_URL}/storage/app/public/${
+        prevData.image
+      }`;
     }
 
     // If formData has a string image URL
@@ -76,7 +78,9 @@ const ContactCardAction = () => {
       ) {
         return formData.image;
       }
-      return `${import.meta.env.VITE_API_URL}/storage/${formData.image}`;
+      return `${import.meta.env.VITE_API_URL}/storage/app/public/${
+        formData.image
+      }`;
     }
 
     // Default fallback

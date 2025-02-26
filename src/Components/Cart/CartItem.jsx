@@ -4,6 +4,7 @@ import { DeleteSvg, MinusSvg, PlusSvg } from '../SvgContainer/SvgContainer';
 import { useCartDelete, useCartQuantity } from '@/Hooks/Cart.hooks';
 
 const CartItem = ({ item, guest }) => {
+
   const { pauseAction, setGuestUserCart } = useAuth();
   // console.log(guestUserCart, item);
 
@@ -79,7 +80,7 @@ const CartItem = ({ item, guest }) => {
         <div className="h-24 w-24">
           <img
             className="w-full h-full object-cover"
-            src={item?.image}
+            src={`${import.meta.env.VITE_API_URL}/${item?.image}`}
             alt=""
           />
         </div>

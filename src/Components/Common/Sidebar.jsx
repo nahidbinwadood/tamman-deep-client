@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo-dark.png';
 import { useEffect } from 'react';
-const Sidebar = ({ isOpen, setOpen, token, handleLogout }) => {
+import toast from 'react-hot-toast';
+const Sidebar = ({ isOpen, setOpen, token, handleLogout, hasCard }) => {
+  const navigate = useNavigate();
   const navLinks = [
     {
       path: '/',
@@ -21,6 +23,16 @@ const Sidebar = ({ isOpen, setOpen, token, handleLogout }) => {
       document.body.style.overflow = 'auto';
     }
   }, [isOpen]);
+
+  const handleDashboard = () => {
+    if (!hasCard) {
+      setOpen(false);
+      toast.error('You must have a card to access your dashboard');
+    } else {
+      setOpen(false);
+      navigate('/dashboard/home');
+    }
+  };
   return (
     <div>
       {/* layer */}
@@ -63,7 +75,9 @@ const Sidebar = ({ isOpen, setOpen, token, handleLogout }) => {
               </div>
             ) : (
               <div className="flex flex-col gap-5">
-                <div className="md:text-lg">Dashboard</div>
+                <div onClick={handleDashboard} className="md:text-lg">
+                  Dashboard
+                </div>
                 <div onClick={handleLogout} className="md:text-lg">
                   Log Out
                 </div>

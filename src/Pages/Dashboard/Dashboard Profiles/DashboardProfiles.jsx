@@ -75,12 +75,7 @@ const DashboardProfiles = () => {
       )}
       {activeTab == 'Share' && (
         <Modal open={open} setOpen={setOpen} setActiveTab={setActiveTab}>
-          <ActionShareModal
-            setOpen={setOpen}
-            // isLoading={isLoading}
-            // isFetching={isFetching}
-            qrCodeImage={qrCodeImage}
-          />
+          <ActionShareModal setOpen={setOpen} qrCodeImage={qrCodeImage} />
         </Modal>
       )}
     </div>

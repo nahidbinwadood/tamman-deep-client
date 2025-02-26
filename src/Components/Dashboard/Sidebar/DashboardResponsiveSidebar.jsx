@@ -11,7 +11,7 @@ import {
   DashboardSettingsSvg,
   LogoutSvg,
 } from '@/Components/SvgContainer';
-import { NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 
 const DashboardResponsiveSidebar = ({ isOpen, setOpen }) => {
   const dashboardNavLinks = [
@@ -27,18 +27,18 @@ const DashboardResponsiveSidebar = ({ isOpen, setOpen }) => {
       svg: <DashboardProfileSvg />,
       svgLight: <DashboardProfileLightSvg />,
     },
-    {
-      title: 'Contacts',
-      path: '/dashboard/contacts',
-      svg: <DashboardContactSvg />,
-      svgLight: <DashboardContactLightSvg />,
-    },
-    {
-      title: 'Setting',
-      path: '/dashboard/setting',
-      svg: <DashboardSettingsSvg />,
-      svgLight: <DashboardSettingsLightSvg />,
-    },
+    // {
+    //   title: 'Contacts',
+    //   path: '/dashboard/contacts',
+    //   svg: <DashboardContactSvg />,
+    //   svgLight: <DashboardContactLightSvg />,
+    // },
+    // {
+    //   title: 'Setting',
+    //   path: '/dashboard/setting',
+    //   svg: <DashboardSettingsSvg />,
+    //   svgLight: <DashboardSettingsLightSvg />,
+    // },
   ];
   const currentPath = useLocation().pathname;
   return (
@@ -58,9 +58,9 @@ const DashboardResponsiveSidebar = ({ isOpen, setOpen }) => {
         }`}
       >
         {/* logo */}
-        <div>
+        <Link to="/">
           <img className="-ml-6" src={logo} alt="" />
-        </div>
+        </Link>
 
         {/* navLinks */}
         <div className="mt-8 flex flex-col gap-2 md:gap-5  ">

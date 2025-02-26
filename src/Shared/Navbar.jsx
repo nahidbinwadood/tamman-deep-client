@@ -17,7 +17,6 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
-
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setOpen] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
@@ -198,6 +197,7 @@ const Navbar = () => {
       <Sidebar
         isOpen={isOpen}
         setOpen={setOpen}
+        hasCard={hasCard}
         handleDashboard={handleDashboard}
         token={token}
         setShowCart={setShowCart}
