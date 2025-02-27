@@ -5,8 +5,12 @@ import { RiLinkM } from 'react-icons/ri';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import Loader from '../Loaders/Loader';
+import useAuth from '@/Hooks/useAuth';
+import { Link } from 'react-router-dom';
 
 const ActionShareModal = ({ setOpen, isLoading, isFetching, qrCodeImage }) => {
+  const { activeCard } = useAuth();
+  console.log(activeCard);
   // console.log(qrCodeImage);
   return (
     <DialogContent className={'max-w-2xl font-inter'}>
@@ -62,6 +66,18 @@ const ActionShareModal = ({ setOpen, isLoading, isFetching, qrCodeImage }) => {
             <h4 className=" px-4 font-medium text-primaryColor py-2 absolute top-10 left-20  rounded-md bg-backgroundLight">
               Pro
             </h4>
+          </div>
+
+          {/* link */}
+
+          <div className="mt-5 w-full flex items-center justify-center">
+            <Link
+            target='_blank'
+              className="text-primaryColor"
+              to={`http://localhost:5173/${activeCard?.unique_code}`}
+            >
+              Live Link
+            </Link>
           </div>
         </div>
       </DialogTitle>

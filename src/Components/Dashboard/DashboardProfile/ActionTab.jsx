@@ -50,7 +50,8 @@ function ActionTab({ setOpen }) {
           action?.title == 'WhatsApp' ||
           action?.title == 'SMS' ||
           action?.title == 'Call' ||
-          action?.title == 'Link Tree'
+          action?.title == 'Link Tree' ||
+          action?.title == 'Contact Card'
         ) {
           navigate(`${action?.path}`);
         } else {
