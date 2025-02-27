@@ -26,7 +26,6 @@ const Login = () => {
     onSuccess: async (data) => {
       if (data.status === 'success') {
         localStorage.setItem('token', data?.token);
-
         const res = await axiosPublic('/api/check');
         if (res.status === 200) {
           clearGuestUserCart();

@@ -21,7 +21,7 @@ const AuthContextProvider = ({ children }) => {
   const [subscription, setSubscription] = useState(null);
   const userName = localStorage.getItem('username');
   const axiosPublic = useAxiosPublic();
-
+  // const navigate = useNavigate();
   const allColors = [
     '#7554c0',
     '#23C0B6',
@@ -31,11 +31,16 @@ const AuthContextProvider = ({ children }) => {
     '#74b12f',
   ];
 
+  // Clear token utility function
+  const clearToken = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+  };
+
   const token = localStorage.getItem('token');
   useEffect(() => {
     if (token) {
       setLoading(true);
-
       const userData = async () => {
         try {
           const { data } = await axiosPublic('/api/check');
@@ -56,6 +61,8 @@ const AuthContextProvider = ({ children }) => {
           setLoading(false);
         } catch (err) {
           console.log(err);
+          setLoading(false);
+          clearToken();
         }
       };
       userData();

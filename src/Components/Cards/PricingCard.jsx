@@ -10,7 +10,7 @@ import toast from 'react-hot-toast';
 /* eslint-disable react/prop-types */
 const PricingCard = ({ card }) => {
   const { user, subscription } = useAuth();
-  console.log(user);
+
   const [loading, setLoading] = useState(false);
   const buyPlanFunc = async (type) => {
     const { data } = await axiosPublic.post(`/api/subscription/${type}`);

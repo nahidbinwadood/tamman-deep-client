@@ -38,12 +38,12 @@ const DashboardSidebar = () => {
     //   svg: <DashboardContactSvg />,
     //   svgLight: <DashboardContactLightSvg />,
     // },
-    // {
-    //   title: 'Setting',
-    //   path: '/dashboard/setting',
-    //   svg: <DashboardSettingsSvg />,
-    //   svgLight: <DashboardSettingsLightSvg />,
-    // },
+    {
+      title: 'Setting',
+      path: '/dashboard/setting',
+      svg: <DashboardSettingsSvg />,
+      svgLight: <DashboardSettingsLightSvg />,
+    },
   ];
 
   // functions:

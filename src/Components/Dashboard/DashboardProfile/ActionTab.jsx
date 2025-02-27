@@ -89,8 +89,11 @@ function ActionTab({ setOpen }) {
   };
 
   return (
-    <div className="grid xl:grid-cols-12 font-inter h-full md:divide-gray-100 md:divide-x-2 gap-6" style={{ maxHeight: '80vh' }}>
-      <div className="xl:col-span-4 md:space-y-2 gap-2 flex md:block overflow-x-auto md:overflow-x-hidden pb-2 md:pb-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+    <div className="grid xl:grid-cols-12 max-h-[80vh] 2xl:max-h-[600px] font-inter h-full md:divide-gray-100 md:divide-x-2 gap-6">
+      <div
+        className="xl:col-span-4 md:space-y-2 gap-2 flex md:block overflow-x-auto md:overflow-x-hidden pb-2 md:pb-0"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      >
         <div className="flex md:block md:space-y-2 flex-nowrap whitespace-nowrap md:whitespace-normal">
           {actions?.map((category, index) => (
             <h4
@@ -110,7 +113,6 @@ function ActionTab({ setOpen }) {
       <div
         ref={contentRef}
         className="xl:col-span-8 md:px-6 space-y-6 overflow-y-auto scrollbar-hidden  "
-
       >
         {data.map((actions) => (
           <div
