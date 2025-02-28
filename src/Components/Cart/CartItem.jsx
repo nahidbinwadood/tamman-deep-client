@@ -6,6 +6,7 @@ import { useCartDelete, useCartQuantity } from '@/Hooks/Cart.hooks';
 const CartItem = ({ item, guest }) => {
 
   const { pauseAction, setGuestUserCart } = useAuth();
+
   // console.log(guestUserCart, item);
 
   //update cart quantity function:
