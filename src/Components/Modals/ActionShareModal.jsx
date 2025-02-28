@@ -72,9 +72,9 @@ const ActionShareModal = ({ setOpen, isLoading, isFetching, qrCodeImage }) => {
 
           <div className="mt-5 w-full flex items-center justify-center">
             <Link
-            target='_blank'
+              target="_blank"
               className="text-primaryColor"
-              to={`http://localhost:5173/${activeCard?.unique_code}`}
+              to={`${`https://onetapcard.uk`}/${activeCard?.unique_code}`}
             >
               Live Link
             </Link>
